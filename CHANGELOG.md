@@ -1,3 +1,9 @@
+## [1.14.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2026-10-11)
+
+### ✨ New Features
+
+* **shazam:** add Open in Morphe YouTube apps patch ([#48](https://github.com/heval99/Heval-Morphe-Patches/issues/48)) ([1d84449](https://github.com/heval99/Heval-Morphe-Patches/commit/1d84449ecf6db84742ac6544354f3f870a1df2f3))
+
 ## [1.14.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2026-10-11)
 
 ### ✨ New Features

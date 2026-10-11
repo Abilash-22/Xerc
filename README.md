@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**43** apps&nbsp;&nbsp;•&nbsp;&nbsp;**60** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-11
+> **[v1.14.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**43** apps&nbsp;&nbsp;•&nbsp;&nbsp;**61** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-11
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -79,7 +79,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-3F51B5?style=flat-square" height="14" alt=""> | **Pi Music Player** | 🚫 💎 2 | `3.2.0.0_release_2` | APK |
 | <img src="https://img.shields.io/badge/-%20-9C27B0?style=flat-square" height="14" alt=""> | **Pocket Color Wheel** | 🚫 1 | `3.26` | APK |
 | <img src="https://img.shields.io/badge/-%20-FF5722?style=flat-square" height="14" alt=""> | **Podcast Republic** | 🚫 1 | `9.17.0` | APK |
-| <img src="https://img.shields.io/badge/-%20-0088FF?style=flat-square" height="14" alt=""> | **Shazam** | 🛡️ 1 | `16.62.0` | APK |
+| <img src="https://img.shields.io/badge/-%20-0088FF?style=flat-square" height="14" alt=""> | **Shazam** | 🛡️ 🧩 2 | `16.62.1-261006` <sub>+1 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **Simple Radio** | 🚫 💎 2 | `6.2.0` | APK |
 | <img src="https://img.shields.io/badge/-%20-384CF4?style=flat-square" height="14" alt=""> | **Sofascore** | 🚫 🛡️ 💎 🔕 5 | `26.09.28` <sub>+4 older</sub> | APK |
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
@@ -434,13 +434,14 @@ Verified on: `9.17.0`
 
 </details>
 <details>
-<summary><b>Shazam</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.shazam.android</code></summary>
+<summary><b>Shazam</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.shazam.android</code></summary>
 
-Verified on: `16.62.0`
+Verified on: `16.62.1-261006`, `16.62.0-261001`
 
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🛡️ **Disable telemetry** | Disables Firebase Analytics event logging and Crashlytics crash reporting. | ✅ |
+| 🧩 **Open in Morphe YouTube apps** | Makes "Open in YouTube Music" and "Open in YouTube" open the Morphe-patched apps when they are installed, falling back to the stock apps otherwise. | ✅ |
 
 </details>
 <details>
