@@ -74,6 +74,18 @@ Addict, Windy, Hermit, Calimoto, Nova Launcher, Sleep as Android, MiXplorer.
   - online-server games: training/economy state is server-authoritative (the same wall
   the UFM 27 mod hit; see `apks/games/UFM 27/MODDING-NOTES.md`). Skip the whole category.
 
+## Queued by owner (2026-10-11)
+
+Not triaged yet. Work through these after the current Shazam work.
+
+| App | Package | Notes |
+|---|---|---|
+| AZ Screen Recorder | `com.hecorat.screenrecorder.free` | Blocked 2026-09-19 (full PairIP, see Status below); re-check whether the current build still ships it |
+| Spark Mail | `com.readdle.spark` | Readdle account-based subscription, so check for server-side entitlement first |
+| BlueMail | `me.bluemail.mail` | |
+| PDF Reader (pdf.pdfreader.viewer.editor.free) | `pdf.pdfreader.viewer.editor.free` | |
+| SmartWOD Timer | `net.smartwod.timer` | |
+
 ## Recommended first batch
 
 Shazam + Simple Radio + Device Info HW + Pi Music Player: two trivial ad kills and two
