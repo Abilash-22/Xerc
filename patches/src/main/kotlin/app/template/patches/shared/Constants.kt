@@ -783,13 +783,30 @@ object Constants {
     // the only patchable surface is telemetry: FirebaseAnalytics.logEvent(String,
     // Bundle) is public and concrete, and FirebaseCrashlytics is fully public
     // (isCrashlyticsCollectionEnabled/recordException/log). No premium gate exists
-    // (Apple-owned free app), so telemetry-only.
+    // (Apple-owned free app).
+    // Verified 2026-10-11 against the same build: "Open in YouTube (Music)" rows come
+    // from server config (streamingproviders[]: packagename + intent:// song/artist/album
+    // URIs with package=<stock>;). Every consumer reads the StreamingProvider data class
+    // (R8 Hn.u), found by its unique toString string "StreamingProvider(streamingProviderId=";
+    // its only constructor (obj, String x5, Z) is hooked so p3..p6 pass through the shazam
+    // extension's remap(). Cross-checked against the config parser (List-returning, strings
+    // "packageName(...)"/"songUri(...)"/"albumUri(...)") constructing that class. The
+    // manifest's <queries> lists only the stock packages (targetSdk 36), so the patch adds
+    // the Morphe packages there too. Version names carry a build suffix ("16.62.0-261001");
+    // the old bare "16.62.0" target made Manager/CLI skip Shazam patches (fixed 2026-10-11).
+    // 16.62.1-261006 (APKMirror bundle, merged) verified 2026-10-11: both patches' smoke
+    // test + CLI without -f, and on the emulator with Morphe YouTube 21.20.405 / YT Music
+    // 9.18.50 + MicroG RE the rows open the Morphe apps (START pkg=app.morphe.android.*).
+    // Shazam ships as a bundle only (requiredSplitTypes base__abi,base__density).
     val COMPATIBILITY_SHAZAM = Compatibility(
         name = "Shazam",
         packageName = "com.shazam.android",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x0088FF,
-        targets = listOf(AppTarget(version = "16.62.0", versionCode = 1606200))
+        targets = listOf(
+            AppTarget(version = "16.62.1-261006", versionCode = 1606210),
+            AppTarget(version = "16.62.0-261001", versionCode = 1606200),
+        )
     )
 
     // Verified 2026-10-05 against com.podcast.podcasts 9.17.0 (versionCode 260909124,
