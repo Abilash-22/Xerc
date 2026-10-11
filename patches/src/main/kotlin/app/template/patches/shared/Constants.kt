@@ -715,6 +715,19 @@ object Constants {
         targets = listOf(AppTarget(version = "2.55.5", versionCode = 255501))
     )
 
+    // Verified 2026-10-11 against app.expert.player 11.2.0 (versionCode 306) from APKPure's XAPK
+    // (base + arm64 and locale splits, merged with APKEditor). Flutter app: its logic and premium
+    // checks are native Dart (libapp.so), which bytecode patches cannot change. The ads are the
+    // Flutter google_mobile_ads plugin: FlutterMobileAdsWrapper.initialize starts a thread whose
+    // run() calls MobileAds.initialize, so that run() is the single Java-side ad startup. No PairIP.
+    val COMPATIBILITY_EXPERTPLAYER = Compatibility(
+        name = "TV Smarters Player Expert",
+        packageName = "app.expert.player",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x1565C0,
+        targets = listOf(AppTarget(version = "11.2.0", versionCode = 306))
+    )
+
     // Verified 2026-09-29 against com.streema.simpleradio 6.2.0 (versionCode 872,
 
     // APKPure universal). App code is not obfuscated. Premium state is entirely local:
