@@ -53,6 +53,7 @@ not the story.
 | Zedge | `net.zedge.android` | 9.40.1 (APKPure XAPK, full split set). PairIP with `LicenseClient`, `StartupLauncher` → `VMRunner`, `SignatureCheck.verifyIntegrity` (signing-cert hash check) and 67 encrypted VM assets. Public bypasses either cover only the license layer (`pairip-disabler` exits on `VMRunner`) or need the `libpairipcore` tamper check and the zip-CRC step, which a bytecode patch can't emit. Same blocker as AZ Screen Recorder. |
 | Xplore File Manager | `com.lonelycatgames.Xplore` | 4.49.10. PairIP `VMRunner` + `libpairipcore.so` + 183 encrypted assets. App and Pro-gate names are obfuscated and the gate was not located. Same blocker as Zedge. |
 | Lose It! | `com.fitnow.loseit` | 18.5.401 (APKPure, split base). Full PairIP stack: `LicenseClient`, `StartupLauncher` → `VMRunner`, `SignatureCheck`, `VmDecryptor`, 1,069 encrypted assets. RevenueCat entitlements on top. Same blocker as Zedge. |
+| DartCounter | `com.dartcounter.mobile` | 9.7.5 (versionCode 907050, arm64 only, APKM merged). Full PairIP stack: `LicenseClient`, `StartupLauncher` → `VMRunner` (calls woven into androidx/Adjust classes), `SignatureCheck`, `VmDecryptor`, `libpairipcore.so`, 21 encrypted VM assets. Same blocker as Zedge. Also a Capacitor/Ionic hybrid (logic in assets/public JS). Ultimate is bought through cordova-plugin-purchase (Play Billing), but the entitlement is managed server-side (Stripe/Iaptic, account-based, also sold on the web), and Ultimate features (unlimited online matches, ranked, tournaments) are server-side. |
 
 ## Removed at the owner's request
 
@@ -87,6 +88,7 @@ Re-anchored and bytecode-verified on 2026-10-07:
 - WiFi Analyzer: APKMirror's "3.11.1-L" is a different package, `com.farproc.wifi.analyzer.classic`.
   The supported `com.farproc.wifi.analyzer` line's newer 3.11.x builds have a lower versionCode
   (138) than 3.10.5-L (999), so 3.10.5-L is still the current build of the supported package.
+- DartCounter is `com.dartcounter.mobile`, **not** `de.flame.dartcounter` (FLAME Apps' "Darts Counter: Scoreboard").
 
 ## Patch limitations worth remembering
 
