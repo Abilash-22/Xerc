@@ -5,10 +5,12 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 
 object Constants {
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_SOFASCORE = Compatibility(
         name = "Sofascore", // App name as it appears in the Android launcher.
         packageName = "com.sofascore.results",
-        apkFileType = ApkFileType.APK, // Preferred or recommended file type.
+        apkFileType = ApkFileType.APKM, // Preferred or recommended file type.
         appIconColor = 0x384CF4, // Icon color in Morphe Manager.
         targets = listOf(
             // "version = null" means the patch works with the latest app target
@@ -92,10 +94,12 @@ object Constants {
     // SharedPreferencesRepository.get(Z), 237 goes through a settings holder), so the getter
     // search is now storage-agnostic: the manager's only non-constant no-arg boolean method
     // that does not hold the staff email. Both old 236 targets were re-checked and still pass.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_FOTMOB = Compatibility(
         name = "FotMob",
         packageName = "com.mobilefootie.wc2010",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x00985F,
         targets = listOf(
             // Verified 2026-10-07 against 238.17666.20260928 (versionCode 17666, APKMirror
@@ -129,10 +133,12 @@ object Constants {
     // companion parsers still match and the patched output returns Entitled/PremiumPlus.
     // Verified 2026-10-07 against 26.39.0 (versionCode 51509, APKPure base split): all
     // patches apply unchanged; MyFitnessPalSmokeTest passes.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_MYFITNESSPAL = Compatibility(
         name = "MyFitnessPal",
         packageName = "com.myfitnesspal.android",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x0072BC,
         targets = listOf(
             AppTarget(version = "26.37.0", versionCode = 51401),
@@ -220,10 +226,12 @@ object Constants {
     // Re-verified 2026-09-17 on 11.0.101 with morphe-cli -f: Enable Premium still applies.
     // Verified 2026-10-07 against 11.0.125 (versionCode 110125, APKPure): Enable Premium
     // applies unchanged; FishBuddySmokeTest passes.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_FISHBUDDY = Compatibility(
         name = "FishBuddy",
         packageName = "no.fishbuddy_playground.app",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x0288D1,
         targets = listOf(
             AppTarget(version = "11.0.101", versionCode = 110101),
@@ -452,10 +460,12 @@ object Constants {
     // snapshot's R8-renamed fields are discovered structurally from the licensed checks
     // themselves). Re-verified against the same APK on 2026-10-06 - AquaMailSmokeTest
     // asserts the snapshot prefix in the emitted bytecode.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_AQUAMAIL = Compatibility(
         name = "Aqua Mail",
         packageName = "org.kman.AquaMail",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x00B0FF,
         targets = listOf(AppTarget(version = "2.7.0", versionCode = 200700061))
     )
@@ -479,10 +489,12 @@ object Constants {
     // ClearCashApplication.o() is the master pro check (pro-app package id or cached IAP flag),
     // GeneralSettingsProvider.F() reads the cached "MONEFY_PRO_IN_APP_BOUGHT" pref that the
     // RevenueCat callback writes, and zt.p() reports the subscription-expired state.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_MONEFY = Compatibility(
         name = "Monefy",
         packageName = "com.monefy.app.lite",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x8BC34A,
         targets = listOf(AppTarget(version = "1.22.11", versionCode = 2229))
     )
@@ -520,10 +532,12 @@ object Constants {
     // names are stable library API; the "Disable ads" patch hooks that surface. There is no
     // Play Billing client at all - the subscription is validated server-side
     // (/api/v2/android/validate_subscription_v2), so premium cannot be unlocked client-side.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_FLASHSCORE = Compatibility(
         name = "Flashscore",
         packageName = "eu.livesport.FlashScore_com",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x1E88E5,
         targets = listOf(AppTarget(version = "26.9.2", versionCode = 517))
     )
@@ -535,10 +549,12 @@ object Constants {
     // was found in the readable code - the patch targets ads only.
     // Verified 2026-10-07 against 15.145.0 (versionCode 1044999406, APKMirror): Disable ads
     // applies unchanged; OneFootballSmokeTest passes.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_ONEFOOTBALL = Compatibility(
         name = "OneFootball",
         packageName = "de.motain.iliga",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x00C853,
         targets = listOf(
             AppTarget(version = "15.142.0", versionCode = 1044958885),
@@ -591,10 +607,12 @@ object Constants {
     // located by its unique inline literal (IAB: QueryInventory info: ...) instead of its rotating
     // name. Leaf boolean getters (no args or a Context) are forced true; the compound
     // getters and the inverted upsell check OR those leaves and flip by themselves.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_JETAUDIO = Compatibility(
         name = "jetAudio",
         packageName = "com.jetappfactory.jetaudio",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0xFF6D00,
         targets = listOf(AppTarget(version = "13.1.2", versionCode = 261320))
     )
@@ -643,10 +661,12 @@ object Constants {
     // load/loadAd and the app-open preloader). The Pro app
     // (com.pocketcolorwheelpro.pro) is a standalone paid listing that mirrors do not
     // serve, so there is nothing to verify against it.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_PCW = Compatibility(
         name = "Pocket Color Wheel",
         packageName = "com.pocketcolorwheel.PCW",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x9C27B0,
         targets = listOf(AppTarget(version = "3.26", versionCode = 57))
     )
@@ -667,10 +687,12 @@ object Constants {
     // disables banner, interstitial, exit and native ads. isProVersion only
     // distinguishes the separate paid Pro listing (backup suffixes .mrpro/.mrstd),
     // so there is no in-app premium gate; ads-only.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_MOONREADER = Compatibility(
         name = "Moon+ Reader",
         packageName = "com.flyersoft.moonreader",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x283593,
         targets = listOf(AppTarget(version = "10.7", versionCode = 1007000))
     )
@@ -707,10 +729,12 @@ object Constants {
     // AdsUtil.showAdsForUser(Context) is the one user-level ad gate: it guards the mediation SDK
     // start (StoreUtil.initializeMobileAds, Fyber/Chartboost/AppLovin/Vungle/Facebook/InMobi/Unity)
     // and the interstitial preload and show path. Pro (ProUtil) is untouched: ads only.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_BUSINESSCALENDAR = Compatibility(
         name = "Business Calendar 2",
         packageName = "com.appgenix.bizcal",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x009688,
         targets = listOf(AppTarget(version = "2.55.5", versionCode = 255501))
     )
@@ -737,10 +761,12 @@ object Constants {
     // Ads run through AppLovin MAX mediation (the SDK init key is inline) plus Google
     // Mobile Ads (AdMob native/interstitial), so "Disable ads" hooks those stable
     // library surfaces (MobileAds.initialize overloads, MaxInterstitialAd loadAd/showAd).
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_SIMPLERADIO = Compatibility(
         name = "Simple Radio",
         packageName = "com.streema.simpleradio",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0xFF6D00,
         targets = listOf(AppTarget(version = "6.2.0", versionCode = 872))
     )
@@ -770,10 +796,12 @@ object Constants {
     // Ads run through AppLovin MAX mediation plus Google Mobile Ads, so "Disable ads"
     // hooks those stable library surfaces (MobileAds.initialize overloads, GMA loads,
     // MaxInterstitialAd loadAd/showAd).
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
     val COMPATIBILITY_PIMUSICPLAYER = Compatibility(
         name = "Pi Music Player",
         packageName = "com.Project100Pi.themusicplayer",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0x3F51B5,
         targets = listOf(AppTarget(version = "3.2.0.0_release_2", versionCode = 32001))
     )
@@ -817,12 +845,14 @@ object Constants {
     // No premium patch: the only ad-free path is Firebase invite referral state
     // (server-driven); no local purchase gate was found (no queryPurchases /
     // onPurchasesUpdated in app code).
+    // 2026-10-12: the real versionName carries a build suffix; the bare version made
+    // Manager/CLI treat the patches as incompatible.
     val COMPATIBILITY_PODCASTREPUBLIC = Compatibility(
         name = "Podcast Republic",
         packageName = "com.podcast.podcasts",
         apkFileType = ApkFileType.APK,
         appIconColor = 0xFF5722,
-        targets = listOf(AppTarget(version = "9.17.0", versionCode = 260909124))
+        targets = listOf(AppTarget(version = "9.17.0-260909124", versionCode = 260909124))
     )
 
     // Verified 2026-10-05 against fm.castbox.audiobook.radio.podcast 11.26.1
@@ -834,12 +864,16 @@ object Constants {
     // No premium patch: premium reads server-synced vip lists (UserProperties filled
     // from the account backend) and local purchases are RSA-verified in
     // BillingRepository, so there is no client-side gate to force.
+    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // 2026-10-12: the real versionName carries a build suffix; the bare version made
+    // Manager/CLI treat the patches as incompatible.
     val COMPATIBILITY_CASTBOX = Compatibility(
         name = "Castbox",
         packageName = "fm.castbox.audiobook.radio.podcast",
-        apkFileType = ApkFileType.APK,
+        apkFileType = ApkFileType.APKM,
         appIconColor = 0xF44336,
-        targets = listOf(AppTarget(version = "11.26.1", versionCode = 260915290))
+        targets = listOf(AppTarget(version = "11.26.1-260915290", versionCode = 260915290))
     )
 
     // Verified 2026-10-07 against com.melodis.midomiMusicIdentifier.freemium 10.5.8
@@ -958,4 +992,5 @@ object Constants {
         appIconColor = 0xFFC107,
         targets = listOf(AppTarget(version = "5.4.3.19019", versionCode = 19019))
     )
+
 }
