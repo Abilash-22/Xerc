@@ -43,6 +43,7 @@ test + decompile-verify.
 | Device Info HW | `ru.andr7e.deviceinfohw` | 5.27.1 | **Blocked 2026-09-29** - no Pro boolean exists in this build; see blocklist |
 | Xplore File Manager | `com.lonelycatgames.Xplore` | 4.49.10 | **Blocked 2026-10-10** - PairIP VM + native tamper check; see blocklist |
 | DartCounter | `com.dartcounter.mobile` | 9.7.5 | **Blocked 2026-10-11** - PairIP VM + native tamper check; Ultimate entitlement is server-side; see blocklist |
+| spacedesk | `ph.spacedesk.beta` | 2.1.38 | **Blocked 2026-10-11** - free licence has the same features as paid; paid tier is a commercial business licence, and forcing it would spoof one to the PC driver (owner decision); see blocklist |
 
 ## Also covered by other bundles (informational, not a blocker)
 

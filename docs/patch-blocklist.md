@@ -28,6 +28,7 @@ not the story.
 | Infinity for Reddit (free) | `ml.docilealligator.infinityforreddit` | Checked 2026-10-11 on 7.4.1 (split base). No PairIP and no ad SDK in the dex (no GMA, AppLovin, Unity, Vungle, Facebook or InMobi). The "Subscribe" classes are Reddit subreddit subscriptions. Only 9 Play Billing references and no readable Plus gate. Paid Infinity+ is the separate `.plus` listing, which another bundle covers. |
 | Brave (Playlist, News, Wallet, Search, Talk) | `com.brave.browser` | Checked 2026-10-07 on 1.96.61: no paywall code in the app; Search and Talk premium are web-account features. Brave Origin is the only premium-style Brave patch; ads, telemetry and promo prompts ship as experimental patches. |
 | Device Info HW | `ru.andr7e.deviceinfohw` | 5.27.1 free has no ad SDK (zero ad strings in the dex), no billing client and no pro gate: no license checker, no pro preference, no pro-package presence check. Pro is a separate paid listing (`ru.andr7e.deviceinfohw.pro`) with its own build; the free build's only "pro" surfaces are an upsell menu item (Play Store link) and a stubbed report button. |
+| spacedesk (USB Display for PC) | `ph.spacedesk.beta` | Checked 2026-10-11 on 2.1.38 (versionCode 179, merged APKM, no native libs). No PairIP, packer or ad SDK; Play Billing 7.0.0 only. The free private licence has the same features as paid; its expiry lives in the Windows driver (Driver Console), not the viewer. The paid tier is a per-device commercial-use business licence; the viewer only reports a protocol licence type (`NONCOMMERCIAL_BASIC` vs `BUSINESS_ANDROID`) to the PC driver. Nothing to unlock for personal use. Forcing the business type would spoof a commercial licence to the driver; owner decided not to. |
 
 ## Parked — possible but needs an app-specific deep dive
 
@@ -89,6 +90,8 @@ Re-anchored and bytecode-verified on 2026-10-07:
   The supported `com.farproc.wifi.analyzer` line's newer 3.11.x builds have a lower versionCode
   (138) than 3.10.5-L (999), so 3.10.5-L is still the current build of the supported package.
 - DartCounter is `com.dartcounter.mobile`, **not** `de.flame.dartcounter` (FLAME Apps' "Darts Counter: Scoreboard").
+
+- spacedesk is `ph.spacedesk.beta`, **not** the Windows viewer's winget ID `Datronicsoft.SpacedeskViewer.Client.Beta` (a PC app).
 
 ## Patch limitations worth remembering
 
