@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.13.0](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.13.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**42** apps&nbsp;&nbsp;•&nbsp;&nbsp;**58** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-11
+> **[v1.14.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**43** apps&nbsp;&nbsp;•&nbsp;&nbsp;**59** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-11
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -85,6 +85,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
 | <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.18` | APK |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` <sub>+1 older</sub> | APKM |
+| <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 1 | `11.2.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Weather Underground** | 🚫 1 | `6.20.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-00ACC1?style=flat-square" height="14" alt=""> | **WiFi Analyzer** | 🚫 1 | `3.10.5-L` | APK |
@@ -495,6 +496,16 @@ Verified on: `4.87`, `4.85`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 💎 **Enable Pro** | Unlocks Textra Pro: removes ads and unlocks the paid features. | ✅ |
+
+</details>
+<details>
+<summary><b>TV Smarters Player Expert</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>app.expert.player</code></summary>
+
+Verified on: `11.2.0`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Stops the Google Mobile Ads SDK and its mediation networks from starting, so the app's banner and interstitial ads never load, and skips PairIP's Play license check that otherwise kills the app when it is not installed from Play. Playback and playlists are unchanged. | ✅ |
 
 </details>
 <details>

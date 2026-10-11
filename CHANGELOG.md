@@ -1,3 +1,9 @@
+## [1.14.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.13.0...v1.14.0-dev.1) (2026-10-11)
+
+### ✨ New Features
+
+* **expertplayer:** add Disable ads patch for TV Smarters Player Expert ([63d53b8](https://github.com/heval99/Heval-Morphe-Patches/commit/63d53b881eee78dc4c95d817ef3f22740108a2a6))
+
 ## [1.13.0](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.12.0...v1.13.0) (2026-10-11)
 
 ### 🐛 Bug Fixes
