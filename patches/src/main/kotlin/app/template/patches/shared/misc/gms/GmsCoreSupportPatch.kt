@@ -158,6 +158,14 @@ fun gmsCoreSupportPatch(
         packageNameOption()
 
         execute {
+            // The two library fingerprints are shared by every app's "GmsCore support" patch.
+            // morphe-patcher 1.8.0 clears cached matches only for registered fingerprints and
+            // drops all registrations after a run, so from their third use in one process (a third
+            // GmsCore app patched by Manager or the smoke test suite) they would return the previous
+            // app's method and the edit would silently miss this app. Drop any stale match first.
+            GooglePlayUtilityFingerprint.clearMatch()
+            ServiceCheckFingerprint.clearMatch()
+
             // Resolve every fingerprint first: several match on the GMS strings rewritten below.
             val mainActivityOnCreate = mainActivityOnCreateFingerprint.method
             val earlyReturnMethods = earlyReturnFingerprints.map { it.method }
