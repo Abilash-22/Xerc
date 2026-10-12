@@ -1059,4 +1059,61 @@ object Constants {
         appIconColor = 0x006CEF,
         targets = listOf(AppTarget(version = "2.2.408", versionCode = 47587))
     )
+
+    // Verified 2026-10-12 against com.truecaller 26.39.6 (versionCode 2639006, APKMirror bundle
+    // merged; APKPure also ships a standalone APK). Fully R8-obfuscated outside kept model/worker
+    // classes, so every anchor is a pref key, a kept type in the signature, or method shape:
+    //   - Enable Premium: the "premiumLevel" tier getter (returns PremiumTierType) -> GOLD; the
+    //     plain "isPremiumExpired" getter in the same class (not the "isInGracePeriod" one) ->
+    //     true; the static (PremiumFeatureStatus)Z gate that compares with INCLUDED -> true; the
+    //     (PremiumFeature, Z)Z feature check that reads "disabledPremiumFeatures" -> true (it is
+    //     the server kill-switch list *and* the availableFeatures INCLUDED lookup in one method);
+    //     PremiumState's constructor (kept types ZLPremiumTierType;LProductKind;LPremiumScope;
+    //     LInsuranceState;) gets isPremium = true and tier = GOLD; and the kept
+    //     PremiumSubscriptionStatusNotificationWorker.doWork returns a work Result at once (Success
+    //     has no no-arg constructor in this build, so the obfuscated Failure class, found by its
+    //     "Failure {mOutputData=" toString, is used; doWork already returns it on its own paths).
+    //   - Disable telemetry: AppStartTracker.enableTracking (kept), push(String) and
+    //     push(String, Map) on the CleverTapManager implementation (kept interface), and every
+    //     concrete start(Context, ...) on the AppsFlyerLib subclass.
+    //   - Hide Assistant tab / Hide Scam feed: the feature toggles read by exact key
+    //     "featureCallAssistant" / "featureScamFeed" (exact-match filters; the keys are prefixes
+    //     of other toggles). featureScamFeed is the master switch for the Scam Feed tab, menu
+    //     entry, deep link and its notification worker.
+    //   - Use SMS for verification codes: the OtpSmsApi selection branch (GOOGLE vs SMS) of an
+    //     R8-merged Function0 lambda; only that branch is changed, the other 28 cases are not.
+    //   - Disable ads: the ads module never reads Premium or NO_ADS (Enable Premium's NO_ADS is
+    //     at most partial for ads). Banner/native: every void bind method of the kept
+    //     ads.ui.AdsContainer / AdsContainerLight / AdsSwitchView that takes the banner holder,
+    //     a native holder or AdLayoutTypeX sets the view GONE and returns; the holder types are
+    //     read at patch time from AdsSwitchView's (holder, AdLayoutTypeX) method and the shared
+    //     layout-config parameter. Full-screen: AdInterstitialActivity, AdAppOpeningActivity and
+    //     adsrouter AdRouterInterstitialActivity finish right after super.onCreate. Rewarded ads
+    //     (WhoViewedMeAdActivity) are left alone: they gate a feature.
+    //   - Disable update prompts: the in-app update manager's suspend (Activity, UpdateTrigger,
+    //     continuation) entry, scoped by its (Activity, UpdateTrigger)CompletableFuture sibling,
+    //     returns Boolean.FALSE; every soft and HardUpgrade Play Core flow starts there. Also the
+    //     app's own forced-update state getter (strings "forcedUpdate_updateType" and
+    //     "forcedUpdate_appVersion", eak.a() here) returns UpdateType.NONE, so
+    //     forcedupdate.ui.ForcedUpdateActivity never shows a REQUIRED or DISCONTINUED page.
+    //     SimpleForceUpdateActivity is left alone: WizardActivity only starts it when a drawable
+    //     is missing (broken install), not from the server state.
+    //   - GmsCore support / Spoof signature: shared builders, launch activity
+    //     ui.TruecallerInit.onCreate, original cert CN=truecaller (SHA-1 0ac1169a...1f25e31);
+    //     androidx.credentials routing applies (onGetCredential tests isAvailableOnDevice(int)).
+    // Server-side and not unlocked: Who viewed / searched for me data, Identify AI, cloud call
+    // recording, fraud insurance, the verified badge, and phone verification (server-side Play
+    // Integrity attestation; nothing here targets Play Integrity).
+    // Ideas taken from the GPLv3 Paresh and bufferk Truecaller patches (anchors there were for
+    // older builds and pinned obfuscated names). Rejected: pinning a6x/pol/myw/x5x/hqa/co70/es7/
+    // nk00 names; AttributesDTO.<init>(Z) (Gson-built, nothing outside the DTO reads isPremium in
+    // this build); the reference "SavePremiumState" hook (no confirmed 26.39.6 equivalent);
+    // returning SMS at offset 0 of the OtpSmsApi lambda (it would break every other merged case).
+    val COMPATIBILITY_TRUECALLER = Compatibility(
+        name = "Truecaller",
+        packageName = "com.truecaller",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x0087FF,
+        targets = listOf(AppTarget(version = "26.39.6", versionCode = 2639006))
+    )
 }
