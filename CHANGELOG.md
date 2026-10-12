@@ -1,3 +1,14 @@
+## [1.14.0-dev.4](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2026-10-12)
+
+### 🐛 Bug Fixes
+
+* correct APK file types and version strings for Morphe's APK finder ([69542d3](https://github.com/heval99/Heval-Morphe-Patches/commit/69542d3cd1060c8c2b0ac0722dd993dc125226b4))
+
+### ✨ New Features
+
+* **bluemail:** add Disable ads patch for BlueMail ([01e67dc](https://github.com/heval99/Heval-Morphe-Patches/commit/01e67dc402e3d932e0e9e12e356787c16c176678))
+* **smartwod:** add Disable ads and Enable Premium patches for SmartWOD Timer ([489f002](https://github.com/heval99/Heval-Morphe-Patches/commit/489f0024771daad298b62309371a922dbd063644))
+
 ## [1.14.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2026-10-11)
 
 ### ✨ New Features
