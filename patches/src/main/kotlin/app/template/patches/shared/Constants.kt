@@ -6,7 +6,7 @@ import app.morphe.patcher.patch.Compatibility
 
 object Constants {
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_SOFASCORE = Compatibility(
         name = "Sofascore", // App name as it appears in the Android launcher.
         packageName = "com.sofascore.results",
@@ -18,17 +18,12 @@ object Constants {
             //
             // It is highly recommended to always include the exact app version you developed your patches for
             // or the last version you have confirmed as 100% working.
-            AppTarget(
-                version = "26.07.27"
-            ),
+            // History (26.07.27 to 26.09.14 were supported until 2026-10-12, see the last note):
             // Verified 2026-09-17: 26.08.24 (the build users reported failing with a
             // NullPointerException in Disable telemetry - issue #7) patches cleanly with all
             // 5 patches. The crash came from returnEarly() being applied to an abstract
             // AppsFlyerLib.logEvent declaration; the fingerprint now requires an actual
             // method body, and the emitted bytecode was checked on this version.
-            AppTarget(
-                version = "26.08.24"
-            ),
             // Verified 2026-09-17 against com.sofascore.results 26.09.07 (versionCode 260907002,
             // universal, Android 12L+). This build shuffled a lot: the app-level premium gates
             // the old "Enable Premium" fingerprints targeted (aiInsights/removeAds/PremiumToken/
@@ -48,8 +43,8 @@ object Constants {
             //     fixed 2026-09-30; verified on 26.09.14).
             // The "Block marketing notifications" patch dismisses two in-app promo
             // sheets only; it cannot affect push. Missing match alerts on re-signed
-            // builds traced to push delivery itself (issue #25): without Play Services,
-            // FCM registration needs MicroG integration + signature spoofing.
+            // builds traced to push delivery itself (issue #25); "GmsCore support" and
+            // "Spoof signature" (added 2026-10-12) cover that.
             //   - Block marketing notifications: PromotionModal / tennis promo bottom sheet
             //     onViewCreated dismiss the sheet before it renders.
             // The "Disable Play Integrity" patch was dropped: this build does not bundle the
@@ -59,14 +54,6 @@ object Constants {
             // Re-verified 2026-09-28 against 26.09.14 (versionCode 260914002, from
             // APKMirror): all 5 patches apply unchanged and the decompiled output shows
             // the same forced values (getHasPremium -> TRUE, ad flags false).
-            AppTarget(
-                version = "26.09.07",
-                versionCode = 260907002
-            ),
-            AppTarget(
-                version = "26.09.14",
-                versionCode = 260914002
-            ),
             // Verified 2026-10-07 against 26.09.28 (versionCode 260928002, APKPure bundle
             // merged). The tennis AI-insights promo sheet was removed in this build, so Block
             // marketing notifications treats it as optional (PromotionModal stays required)
@@ -74,6 +61,18 @@ object Constants {
             // promotion banners GONE. The other four patches apply unchanged. Enable Premium's
             // description now states that server-served premium content (AI insights) is
             // not unlocked (issue #32).
+            // 2026-10-12, 26.09.28 (still the latest on APKMirror): added "GmsCore support"
+            // (shared builder, off by default; FCM push via FCMListenerService and Google login
+            // via androidx.credentials GetGoogleIdOption, launch activity main.start.StartActivity;
+            // here R8 inlined isGooglePlayServicesAvailable into GoogleApiAvailabilityLight.b, so
+            // the shared fingerprint now anchors on its signature warning) and "Spoof signature"
+            // (CN=Sofa Score cert, SHA-1 e235776b...4d23, from the APKMirror base APK; Firebase
+            // checks it, issues #24/#25). Block marketing notifications now also no-ops every
+            // FirebaseInAppMessagingDisplay.displayMessage, so FIAM campaign popups never show.
+            // Assessed and rejected: forcing UserAccount.isLoggedIn (predictions, sync, chat all
+            // need a real server token), update/review prompts (no Play Core, no custom update
+            // screen), odds/betting, paywall and survey/popup surfaces (server-driven). The older
+            // targets were dropped: the new patches were only verified on 26.09.28.
             AppTarget(
                 version = "26.09.28",
                 versionCode = 260928002
@@ -95,7 +94,7 @@ object Constants {
     // search is now storage-agnostic: the manager's only non-constant no-arg boolean method
     // that does not hold the staff email. Both old 236 targets were re-checked and still pass.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_FOTMOB = Compatibility(
         name = "FotMob",
         packageName = "com.mobilefootie.wc2010",
@@ -134,7 +133,7 @@ object Constants {
     // Verified 2026-10-07 against 26.39.0 (versionCode 51509, APKPure base split): all
     // patches apply unchanged; MyFitnessPalSmokeTest passes.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_MYFITNESSPAL = Compatibility(
         name = "MyFitnessPal",
         packageName = "com.myfitnesspal.android",
@@ -245,7 +244,7 @@ object Constants {
     // Verified 2026-10-07 against 11.0.125 (versionCode 110125, APKPure): Enable Premium
     // applies unchanged; FishBuddySmokeTest passes.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_FISHBUDDY = Compatibility(
         name = "FishBuddy",
         packageName = "no.fishbuddy_playground.app",
@@ -479,7 +478,7 @@ object Constants {
     // themselves). Re-verified against the same APK on 2026-10-06 - AquaMailSmokeTest
     // asserts the snapshot prefix in the emitted bytecode.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_AQUAMAIL = Compatibility(
         name = "Aqua Mail",
         packageName = "org.kman.AquaMail",
@@ -508,7 +507,7 @@ object Constants {
     // GeneralSettingsProvider.F() reads the cached "MONEFY_PRO_IN_APP_BOUGHT" pref that the
     // RevenueCat callback writes, and zt.p() reports the subscription-expired state.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_MONEFY = Compatibility(
         name = "Monefy",
         packageName = "com.monefy.app.lite",
@@ -551,7 +550,7 @@ object Constants {
     // Play Billing client at all - the subscription is validated server-side
     // (/api/v2/android/validate_subscription_v2), so premium cannot be unlocked client-side.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_FLASHSCORE = Compatibility(
         name = "Flashscore",
         packageName = "eu.livesport.FlashScore_com",
@@ -568,7 +567,7 @@ object Constants {
     // Verified 2026-10-07 against 15.145.0 (versionCode 1044999406, APKMirror): Disable ads
     // applies unchanged; OneFootballSmokeTest passes.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_ONEFOOTBALL = Compatibility(
         name = "OneFootball",
         packageName = "de.motain.iliga",
@@ -626,7 +625,7 @@ object Constants {
     // name. Leaf boolean getters (no args or a Context) are forced true; the compound
     // getters and the inverted upsell check OR those leaves and flip by themselves.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_JETAUDIO = Compatibility(
         name = "jetAudio",
         packageName = "com.jetappfactory.jetaudio",
@@ -680,7 +679,7 @@ object Constants {
     // (com.pocketcolorwheelpro.pro) is a standalone paid listing that mirrors do not
     // serve, so there is nothing to verify against it.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_PCW = Compatibility(
         name = "Pocket Color Wheel",
         packageName = "com.pocketcolorwheel.PCW",
@@ -706,7 +705,7 @@ object Constants {
     // distinguishes the separate paid Pro listing (backup suffixes .mrpro/.mrstd),
     // so there is no in-app premium gate; ads-only.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_MOONREADER = Compatibility(
         name = "Moon+ Reader",
         packageName = "com.flyersoft.moonreader",
@@ -748,7 +747,7 @@ object Constants {
     // start (StoreUtil.initializeMobileAds, Fyber/Chartboost/AppLovin/Vungle/Facebook/InMobi/Unity)
     // and the interstitial preload and show path. Pro (ProUtil) is untouched: ads only.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_BUSINESSCALENDAR = Compatibility(
         name = "Business Calendar 2",
         packageName = "com.appgenix.bizcal",
@@ -780,7 +779,7 @@ object Constants {
     // Mobile Ads (AdMob native/interstitial), so "Disable ads" hooks those stable
     // library surfaces (MobileAds.initialize overloads, MaxInterstitialAd loadAd/showAd).
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_SIMPLERADIO = Compatibility(
         name = "Simple Radio",
         packageName = "com.streema.simpleradio",
@@ -815,7 +814,7 @@ object Constants {
     // hooks those stable library surfaces (MobileAds.initialize overloads, GMA loads,
     // MaxInterstitialAd loadAd/showAd).
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_PIMUSICPLAYER = Compatibility(
         name = "Pi Music Player",
         packageName = "com.Project100Pi.themusicplayer",
@@ -883,7 +882,7 @@ object Constants {
     // from the account backend) and local purchases are RSA-verified in
     // BillingRepository, so there is no client-side gate to force.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note above is outdated.
+    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     // 2026-10-12: the real versionName carries a build suffix; the bare version made
     // Manager/CLI treat the patches as incompatible.
     val COMPATIBILITY_CASTBOX = Compatibility(
