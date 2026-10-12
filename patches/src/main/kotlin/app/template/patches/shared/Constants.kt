@@ -187,14 +187,32 @@ object Constants {
     // overloads are empty in the decompiled output.
     // Verified 2026-10-07 against 14.9.6 (versionCode 1496, APKPure XAPK merged): Disable
     // ads applies unchanged; Scores365SmokeTest passes.
+    // 2026-10-12, 14.9.6 (still the latest on APKMirror and APKPure): Disable ads also forces
+    // every concrete showAdsForContext()/isBannerNeedToBeShown() app ad gate to false. Added
+    // "Enable Premium" (EntitlementState constructor forces adsFree/tipster/plus/
+    // delayedNotifications/notificationSounds true and its feature getters return true, since
+    // the startup cache is read with Gson and skips the constructor; entitlements come from the
+    // 365 purchase gateway and are only mapped locally; the Remove ads screen reads its grace
+    // start key "iabc_fnrts" under another name, because the forced state starts a grace period
+    // that would make it show the purchase screen), "Disable update prompts" (BaseActivity and
+    // BaseActionBarActivity onCreate no longer find the ForceUpdateDialog/NewVersionPopup
+    // extras) and "GmsCore support" (shared builder, off by default; social login uses
+    // play-services-auth GoogleSignIn, push uses FCM; signing cert SHA-1 47f994bd...f1a1 read
+    // from the APKMirror bundle's v2/v3 block; launch activity com.scores365.ui.Splash; pulls in
+    // "Spoof signature", which routes every getPackageInfo call through the signature extension
+    // so Firebase's X-Android-Cert carries the original certificate and its API key stops
+    // answering 403 API_KEY_ANDROID_APP_BLOCKED). Ideas
+    // from github.com/0xtalos/365score-patches; its FirebaseAnalytics.logEvent hook has no
+    // target in 14.9.6 (R8 removed the method), so no telemetry patch here. 14.9.4 and 14.9.5
+    // were dropped from the targets: the new patches were only verified on 14.9.6. The GmsCore
+    // "Clone" option renames the package, which Spoof signature does not follow (it spoofs
+    // com.scores365 only), so keep Clone off when notifications matter.
     val COMPATIBILITY_365SCORES = Compatibility(
         name = "365Scores",
         packageName = "com.scores365",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xFFC107,
         targets = listOf(
-            AppTarget(version = "14.9.4", versionCode = 1494),
-            AppTarget(version = "14.9.5", versionCode = 1495),
             AppTarget(version = "14.9.6", versionCode = 1496)
         )
     )
