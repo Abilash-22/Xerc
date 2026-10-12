@@ -15,7 +15,6 @@
 package app.template.patches.shared.misc.gms
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.string
 
 // Both fingerprints anchor on play-services-basement library code (stable strings + shape), not
 // on app code. They are optional in the builder because an app only contains them when it
@@ -28,15 +27,16 @@ import app.morphe.patcher.string
 // No access flags (upstream requires public static): R8 may inline the static helper into the
 // instance method GoogleApiAvailabilityLight.isGooglePlayServicesAvailable(Context, int), as in
 // Bluecoins 13.1.149 ("public c(Context, int)"). R8 may also reorder the parameters, as in
-// 365Scores 14.9.6 ("public static c(int, Context)"), so either order matches. Shape plus the
-// three strings stay unique.
+// 365Scores 14.9.6 ("public static c(int, Context)"), so either order matches. Upstream anchors on
+// "MetadataValueReader" and "This should never happen." as well, but R8 can drop those: in
+// Sofascore 26.09.28 the method is inlined into GoogleApiAvailabilityLight.b(Context, int) without
+// them. The signature warning it logs is kept in every build seen, and shape plus these strings
+// stay unique.
+internal const val GOOGLE_SIGNATURE_INVALID_WARNING = " requires Google Play services, but their signature is invalid."
+
 internal object GooglePlayUtilityFingerprint : Fingerprint(
     returnType = "I",
-    filters = listOf(
-        string("MetadataValueReader"),
-        string("This should never happen."),
-        string("com.google.android.gms"),
-    ),
+    strings = listOf(GOOGLE_SIGNATURE_INVALID_WARNING, "com.google.android.gms"),
     custom = { method, _ ->
         method.parameterTypes.map { if (it.startsWith("L")) "L" else it.toString() }.sorted() == listOf("I", "L")
     },

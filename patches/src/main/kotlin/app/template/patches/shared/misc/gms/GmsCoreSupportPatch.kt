@@ -17,7 +17,9 @@
 // standalone extensions/gmscore module. The
 // string rewrite rules and the PERMISSIONS / AUTHORITIES tables are unchanged; ACTIONS gains
 // one entry (marked below). Added: androidx.credentials' framework provider is reported as
-// unavailable so Credential Manager uses its Play services provider (and so MicroG RE).
+// unavailable so Credential Manager uses its Play services provider (and so MicroG RE), and
+// (2026-10-12) its Google ID requests take the BeginSignIn flow instead of the Identity
+// Credentials API, which MicroG RE 7.2.1 does not serve.
 
 package app.template.patches.shared.misc.gms
 
@@ -48,6 +50,7 @@ import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableStringReference
 import org.w3c.dom.Document
@@ -74,7 +77,7 @@ private val SIGNATURE_SHA1_REGEX = Regex("^[0-9a-f]{40}$")
  * 2. point every Google Play services package, permission, intent action and provider authority
  *    string in the dex at MicroG RE, and report Google Play services as available;
  * 3. keep androidx.credentials (Credential Manager) off the Android 14+ framework path, which
- *    goes to the real Google Play services;
+ *    goes to the real Google Play services, and on the BeginSignIn flow MicroG RE implements;
  * 4. call the extension at the start of the main activity to tell the user when MicroG RE is
  *    missing or battery-optimised.
  *
@@ -164,7 +167,7 @@ fun gmsCoreSupportPatch(
             // library is present and the fingerprint misses, every GMS API would report
             // SERVICE_INVALID under MicroG, so that case fails loudly instead.
             val googlePlayUtility = GooglePlayUtilityFingerprint.methodOrNull
-            if (googlePlayUtility == null && classDefByStrings("MetadataValueReader").isNotEmpty()) {
+            if (googlePlayUtility == null && classDefByStrings(GOOGLE_SIGNATURE_INVALID_WARNING).isNotEmpty()) {
                 throw PatchException(
                     "play-services-basement is present but isGooglePlayServicesAvailable(Context, int) was not found",
                 )
@@ -173,6 +176,7 @@ fun gmsCoreSupportPatch(
             ServiceCheckFingerprint.methodOrNull?.returnEarly()
 
             disableFrameworkCredentialProvider()
+            routeGoogleIdRequestsToBeginSignIn()
 
             earlyReturnMethods.forEach { method ->
                 if (method.returnType == "Z") method.returnEarly(false) else method.returnEarly()
@@ -256,6 +260,36 @@ private fun BytecodePatchContext.disableFrameworkCredentialProvider() {
         it.isIsAvailableOnDevice() && it.implementation != null
     } ?: throw PatchException("${provider.type} has no concrete isAvailableOnDevice()Z")
     isAvailable.returnEarly(false)
+}
+
+/**
+ * androidx.credentials 1.6+ sends GetCredential requests (GetGoogleIdOption) through the Play
+ * services Identity Credentials API when `isAvailableOnDevice(minVersion)` says Google Play
+ * services is new enough (25.24+), and through the older BeginSignIn (One Tap) or GetSignInIntent
+ * flow otherwise. The forced availability check makes every version test pass, and MicroG RE's
+ * Identity Credentials chooser (7.2.1) answers Google ID requests with an error at once, so no
+ * account picker appears (Sofascore 26.09.28). Reading those version tests as false keeps
+ * onGetCredential on the BeginSignIn / GetSignInIntent flow, which MicroG RE implements. Nothing
+ * to do for older androidx versions, which have no such test. Every such test in onGetCredential
+ * is affected: in builds that keep androidx's digital-credential or restore-credential branches
+ * (R8 removed them in Sofascore), those report "Google Play Services update required" instead.
+ * onClearCredential (sign-out) is left alone; it has its own fallback flow.
+ */
+private fun BytecodePatchContext.routeGoogleIdRequestsToBeginSignIn() {
+    if (classDefByOrNull(PLAY_SERVICES_CREDENTIAL_PROVIDER) == null) return
+    for (method in mutableClassDefBy(PLAY_SERVICES_CREDENTIAL_PROVIDER).methods) {
+        if (method.name != "onGetCredential") continue
+        val instructions = method.implementation?.instructions?.toList() ?: continue
+        instructions.forEachIndexed { index, instruction ->
+            val call = (instruction as? ReferenceInstruction)?.reference as? MethodReference ?: return@forEachIndexed
+            if (call.definingClass != PLAY_SERVICES_CREDENTIAL_PROVIDER || call.name != "isAvailableOnDevice" ||
+                call.parameterTypes.size != 1
+            ) return@forEachIndexed
+            val result = instructions.getOrNull(index + 1)
+            if (result?.opcode != Opcode.MOVE_RESULT) return@forEachIndexed
+            method.replaceInstruction(index + 1, "const/16 v${(result as OneRegisterInstruction).registerA}, 0x0")
+        }
+    }
 }
 
 /**
