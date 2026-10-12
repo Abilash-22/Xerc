@@ -993,4 +993,32 @@ object Constants {
         targets = listOf(AppTarget(version = "5.4.3.19019", versionCode = 19019))
     )
 
+    // Verified 2026-10-12 against net.smartwod.timer 1.46.9 (versionCode 10000399, APKMirror
+    // bundle merged, all four ABIs). React Native + Hermes; no PairIP or packer. Ads are Google
+    // Mobile Ads 23.6.0 only, driven from JS through react-native-google-mobile-ads. "Disable
+    // ads" hooks stable library API: MobileAds.initialize (both overloads), startPreload and the
+    // setAppMuted/setAppVolume/openDebugMenu calls that throw without init; every concrete
+    // load/loadAd/loadAds on BaseAdView, AdLoader, Interstitial/Rewarded/RewardedInterstitial/
+    // AppOpen and the AdManager variants; and the RN module's initialize(Promise)
+    // (io.invertase.googlemobileads, kept for RN reflection) resolves an empty adapter list.
+    // UMP consent is untouched. Premium (2026-10-12): the Hermes JS decides it from
+    // react-native-iap's getAvailableItemsByType("inapp"/"subs") results and only checks each
+    // entry's productId (no state/signature/token/server check), revoking premium whenever the
+    // product is missing. "Enable Premium" hooks RNIapModule.getAvailableItemsByType (class and
+    // @ReactMethod name kept for RN reflection) to call the smartwod extension, which resolves
+    // net.smartwod.timer.premium.lifetime (Premium+) and inapp.adfree as acknowledged purchases
+    // ("subs" stays empty) without touching Play Billing. The JS only runs that check after
+    // initConnection succeeds, which needs Play Services and a reachable Play Store; that path
+    // is left unpatched.
+    // Runtime 2026-10-12 (Play-certified API 35 emulator): patched app starts cleanly, drawer
+    // shows "Premium+ / Lifetime", MIX unlocked, no banner on the AMRAP screen (stock shows a
+    // filled banner + paywall); no crashes or JS errors.
+    val COMPATIBILITY_SMARTWOD = Compatibility(
+        name = "SmartWOD Timer",
+        packageName = "net.smartwod.timer",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x333333,
+        targets = listOf(AppTarget(version = "1.46.9", versionCode = 10000399))
+    )
+
 }
