@@ -76,15 +76,15 @@ Addict, Windy, Hermit, Calimoto, Nova Launcher, Sleep as Android, MiXplorer.
 
 ## Queued by owner (2026-10-11)
 
-Not triaged yet. Work through these after the current Shazam work.
+Triaged 2026-10-12; status per row.
 
 | App | Package | Notes |
 |---|---|---|
-| AZ Screen Recorder | `com.hecorat.screenrecorder.free` | Blocked 2026-09-19 (full PairIP, see Status below); re-check whether the current build still ships it |
-| Spark Mail | `com.readdle.spark` | Readdle account-based subscription, so check for server-side entitlement first |
-| BlueMail | `me.bluemail.mail` | |
-| PDF Reader (pdf.pdfreader.viewer.editor.free) | `pdf.pdfreader.viewer.editor.free` | |
-| SmartWOD Timer | `net.smartwod.timer` | |
+| AZ Screen Recorder | `com.hecorat.screenrecorder.free` | **Blocked 2026-10-12** - full PairIP still ships on 6.9.9 (VMRunner, libpairipcore.so); see blocklist |
+| Spark Mail | `com.readdle.spark` | **Blocked 2026-10-12** - Premium/Plus/Pro are server-side (Readdle backend returns BillingInfo); see blocklist |
+| BlueMail | `me.bluemail.mail` | **Shipped 2026-10-12** - "Disable ads" (2.2.408; ads via react-native-google-mobile-ads). Premium/ad-free entitlement is server-side and not patched. Not runtime-tested (ARM-only libs, extractNativeLibs=false; stock also fails on the x86_64 emulator) |
+| PDF Reader | `pdf.pdfreader.viewer.editor.free` | **Pending 2026-10-12** - only APK found is an unverified Aptoide 2.1.6 (Play shows 2.1.5), signed by a self-signed "Jx Clarynx" cert that does not match the Play developer ("QR Code Scanner."). APKMirror and APKPure do not carry it. Waiting for the genuine Play build from the owner's phone |
+| SmartWOD Timer | `net.smartwod.timer` | **Shipped 2026-10-12** - "Enable Premium" (RNIapModule.getAvailableItemsByType @ReactMethod hooked via `extensions/smartwod` to report lifetime (Premium+) and ad-free as owned; premium is decided in JS from react-native-iap results checking only productId) and "Disable ads" (1.46.9). Runtime-verified on a Play-certified emulator (Premium+ / Lifetime, no ads) |
 
 ## Recommended first batch
 
