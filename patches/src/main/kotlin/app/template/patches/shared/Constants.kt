@@ -1021,4 +1021,25 @@ object Constants {
         targets = listOf(AppTarget(version = "1.46.9", versionCode = 10000399))
     )
 
+    // Verified 2026-10-12 against me.bluemail.mail 2.2.408 (versionCode 47587, APKMirror bundle
+    // merged, arm64-v8a + armeabi-v7a). Native K-9-based mail app (com.trtf.blue) with a React
+    // Native + Hermes layer. Ads are Google Mobile Ads only, driven from JS through
+    // react-native-google-mobile-ads; the native app code never calls GMA directly. "Disable ads"
+    // hooks stable library API: MobileAds.initialize (the only overload R8 kept) and the
+    // setAppMuted/setAppVolume/openDebugMenu calls that throw without init; every concrete
+    // load/loadAd on BaseAdView, AdLoader, Interstitial/Rewarded/RewardedInterstitial/AppOpen and
+    // AdManagerInterstitialAd; and the RN module's initialize(Promise)
+    // (io.invertase.googlemobileads, kept for RN reflection) resolves an empty adapter list.
+    // UMP consent is untouched. The premium/ad-free entitlement is server-side
+    // (hasServerAdFreeEntitlement, verifyPurchaseWithProvider), not patched.
+    // Not runtime-tested: the APK ships only ARM libs with extractNativeLibs=false, so even the
+    // stock app dies at startup on the x86_64 emulator (libreactnative.so not found). Bytecode
+    // verified only; the same GMA/RN design was runtime-checked on SmartWOD.
+    val COMPATIBILITY_BLUEMAIL = Compatibility(
+        name = "BlueMail",
+        packageName = "me.bluemail.mail",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x006CEF,
+        targets = listOf(AppTarget(version = "2.2.408", versionCode = 47587))
+    )
 }
