@@ -5,6 +5,8 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 
 object Constants {
+    private const val FLASHSCORE_SOURCE_NOTE = "Download the .apks from apkcube.com"
+
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     val COMPATIBILITY_SOFASCORE = Compatibility(
@@ -551,12 +553,21 @@ object Constants {
     // (/api/v2/android/validate_subscription_v2), so premium cannot be unlocked client-side.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // Verified 2026-10-13 against 26.10.2 (versionCode 520, owner-supplied apkcube .apks; same
+    // CN=Pavel Cvetler / LiveSport signer as 26.9.2, v3 verifies on every split): Disable ads
+    // applies unchanged and FlashscoreSmokeTest passes on its base APK.
     val COMPATIBILITY_FLASHSCORE = Compatibility(
         name = "Flashscore",
         packageName = "eu.livesport.FlashScore_com",
-        apkFileType = ApkFileType.APKM,
+        // The owner gets Flashscore from apkcube.com, which serves .apks split archives. The
+        // bundle cannot choose Manager's download site (Morphe's API picks it); the preferred
+        // format and the per-version note point users there instead. APKM still works.
+        apkFileType = ApkFileType.APKS,
         appIconColor = 0x1E88E5,
-        targets = listOf(AppTarget(version = "26.9.2", versionCode = 517))
+        targets = listOf(
+            AppTarget(version = "26.9.2", versionCode = 517, description = FLASHSCORE_SOURCE_NOTE),
+            AppTarget(version = "26.10.2", versionCode = 520, description = FLASHSCORE_SOURCE_NOTE),
+        )
     )
 
     // Verified 2026-09-18 against OneFootball 15.142.0 (versionCode 1044958885) from APKMirror.
