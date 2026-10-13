@@ -89,8 +89,9 @@ Re-anchored and bytecode-verified on 2026-10-07:
 - The FotMob Wear OS build shares `com.mobilefootie.wc2010`; its versions end in `w`
   (e.g. `236.253021660w.20260827`). Check `android.hardware.type.watch` on any download.
 - WiFi Analyzer: APKMirror's "3.11.1-L" is a different package, `com.farproc.wifi.analyzer.classic`.
-  The supported `com.farproc.wifi.analyzer` line's newer 3.11.x builds have a lower versionCode
-  (138) than 3.10.5-L (999), so 3.10.5-L is still the current build of the supported package.
+  The supported `com.farproc.wifi.analyzer` line's 3.11.x builds have a lower versionCode
+  (3.11.2 = 139) than 3.10.5-L (999). Both are supported targets (3.11.2 since 2026-10-13), but
+  moving from 3.10.5-L to 3.11.x needs an uninstall first.
 - DartCounter is `com.dartcounter.mobile`, **not** `de.flame.dartcounter` (FLAME Apps' "Darts Counter: Scoreboard").
 
 - spacedesk is `ph.spacedesk.beta`, **not** the Windows viewer's winget ID `Datronicsoft.SpacedeskViewer.Client.Beta` (a PC app).

@@ -864,12 +864,23 @@ object Constants {
     // returns true once the hide-until date passes; MainScreen.N() shows the legacy
     // AdMob banner (com.google.android.gms.ads.e) only when the gate is true. Forcing
     // the gate false hides the banner everywhere.
+    // 2026-10-13, 3.11.2 (versionCode 139): patch unchanged, the CLI applies it without -f.
+    // MainScreen's ad methods were renamed (gate wrapper E(), banner H(), interstitial D());
+    // the gate Settings.a(Context) still has exactly two callers, MainScreen.E and
+    // LanNeighborsScreen.j, so the main banner, the interstitial and the LAN banner all reach
+    // the forced-false gate (checked in the patched bytecode). The LeadBolt web ad that
+    // 3.10.5-L carried is gone from 3.11.2; on 3.10.5-L it is not blocked, and only the banner
+    // was checked there. 3.11.2 has a lower versionCode (139) than 3.10.5-L (999), so moving
+    // from 3.10.5-L needs an uninstall first.
     val COMPATIBILITY_WIFIANALYZER = Compatibility(
         name = "WiFi Analyzer",
         packageName = "com.farproc.wifi.analyzer",
         apkFileType = ApkFileType.APK,
         appIconColor = 0x00ACC1,
-        targets = listOf(AppTarget(version = "3.10.5-L", versionCode = 999))
+        targets = listOf(
+            AppTarget(version = "3.10.5-L", versionCode = 999),
+            AppTarget(version = "3.11.2", versionCode = 139)
+        )
     )
 
     // Verified 2026-09-29 against com.Project100Pi.themusicplayer 3.2.0.0_release_2
