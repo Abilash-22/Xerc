@@ -398,6 +398,9 @@ object Constants {
     // provider also ships in this build. In-app product:
     // "librepods.advanced_features.v2". No license server (upstream GPL-3.0,
     // github.com/librepods-org/librepods).
+    // 2026-10-13, 1.0.1-rc1-play (versionCode 64): premium logic unchanged; the CLI applies
+    // Enable Premium without -f and the patched processPurchases() (uo.e(List)) loads true
+    // before Boolean.valueOf feeds the premium state on every path, including the empty list.
     val COMPATIBILITY_LIBREPODS = Compatibility(
         name = "LibrePods",
         packageName = "me.kavishdevar.librepods",
@@ -407,6 +410,10 @@ object Constants {
             AppTarget(
                 version = "1.0.0-rc1-play",
                 versionCode = 63
+            ),
+            AppTarget(
+                version = "1.0.1-rc1-play",
+                versionCode = 64
             )
         )
     )
