@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.6)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**121** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-13
+> **[v1.14.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**122** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-13
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -63,7 +63,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-2196F3?style=flat-square" height="14" alt=""> | **FairEmail** | 💎 1 | `1.2338` <sub>+1 older</sub> | APK |
 | <img src="https://img.shields.io/badge/-%20-0288D1?style=flat-square" height="14" alt=""> | **FishBuddy** | 💎 1 | `11.0.125` <sub>+1 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Fishing Points** | 💎 1 | `4.7.3` | APK |
-| <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Flashscore** | 🚫 🛡️ 🔕 🧩 5 | `26.10.2` <sub>+1 older</sub> | APKS |
+| <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Flashscore** | 🚫 🛡️ 🔕 🧩 6 | `26.10.2` | APKS |
 | <img src="https://img.shields.io/badge/-%20-00985F?style=flat-square" height="14" alt=""> | **FotMob** | 💎 1 | `238.17794.20261012` <sub>+4 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-26A69A?style=flat-square" height="14" alt=""> | **Futbin** | 🚫 1 | `27.02` | APK |
 | <img src="https://img.shields.io/badge/-%20-101012?style=flat-square" height="14" alt=""> | **Hevy** | 🛡️ 💎 2 | `3.1.16` | APKM |
@@ -288,17 +288,18 @@ Verified on: `4.7.3`
 
 </details>
 <details>
-<summary><b>Flashscore</b> &nbsp;·&nbsp; 5 patches &nbsp;·&nbsp; <code>eu.livesport.FlashScore_com</code></summary>
+<summary><b>Flashscore</b> &nbsp;·&nbsp; 6 patches &nbsp;·&nbsp; <code>eu.livesport.FlashScore_com</code></summary>
 
-Verified on: `26.10.2`, `26.9.2`
+Verified on: `26.10.2`
 
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🧩 **Block marketing popups** | Blocks the server-configured promo dialog, Firebase In-App Messaging popups and in-app promo strips. Push notifications are not affected. | ✅ |
-| 🚫 **Disable ads** | Disables Google ads, bookmaker banners and video ads. | ✅ |
+| 🚫 **Disable ads** | Disables Google ads, in-app ad slots and video ads. Bookmaker strips and odds are hidden by Hide betting content. | ✅ |
 | 🔕 **Disable rating prompts** | Hides the rating banner and the in-app rating dialog. | ✅ |
 | 🛡️ **Disable telemetry** | Disables AppsFlyer, Apptentive, Crashlytics, Firebase Analytics and Performance collection, and Facebook automatic event logging. Facebook Login and push notifications keep working. | ✅ |
 | 🔕 **Disable update prompts** | Hides the "update available" and "update required" dialogs. An old version may still stop working if Flashscore's servers drop support for it. | ✅ |
+| 🧩 **Hide betting content** | Hides odds in match lists and match summaries, the match and league Odds tabs, the league Winner Odds block, bet buttons, the bookmaker strip, betting bonuses and the gift icon, bookmakers next to TV channels and gambling notices. | ➖ |
 
 </details>
 <details>

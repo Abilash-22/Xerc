@@ -1,3 +1,9 @@
+## [1.14.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2026-10-13)
+
+### ✨ New Features
+
+* **flashscore:** add Hide betting content patch ([ecd8985](https://github.com/heval99/Heval-Morphe-Patches/commit/ecd89850f29ddbb7f44d5254897c5e2fc67c94a2))
+
 ## [1.14.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2026-10-13)
 
 ### ✨ New Features
