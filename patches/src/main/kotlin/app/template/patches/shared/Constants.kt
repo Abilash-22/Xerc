@@ -1016,12 +1016,22 @@ object Constants {
     // them unlocks the VIP UI and removes ads (ad fragments hide for VIP). Premium data the
     // server delivers (predictions, dropping odds) is validated server-side and stays gated.
     // Also covered by rushiranpise/morphe-patches (coverage is informational only).
+    // 2026-10-13: 4.3.2 (versionCode 297, merged arm64) verified, patch unchanged; AiScoreSmokeTest
+    // passes. 4.3.2 adds direct AdMob units (an AdMob/MAX network switch) next to AppLovin MAX
+    // in the match-detail banner, stats-detail banner and match-list native row, but each sits
+    // in the same VIP-gated block as the MAX path: the match-detail runnable checks a field set
+    // from UserPreference's VIP gate in onCreate, the stats activity checks the gate before
+    // posting its banner runnable, and the list builder inserts native-ad rows only when the
+    // gate (passed as a "no ads" flag) is false. No GMA hooks are needed.
     val COMPATIBILITY_AISCORE = Compatibility(
         name = "AiScore",
         packageName = "com.onesports.score",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x00C853,
-        targets = listOf(AppTarget(version = "4.3.1", versionCode = 296))
+        targets = listOf(
+            AppTarget(version = "4.3.1", versionCode = 296),
+            AppTarget(version = "4.3.2", versionCode = 297)
+        )
     )
 
     // Verified 2026-10-07 against com.resultadosfutbol.mobile 6.6.0 (versionCode 23005536,

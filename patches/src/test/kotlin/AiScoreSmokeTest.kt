@@ -50,7 +50,7 @@ class AiScoreSmokeTest {
         val levelName = gate.sameClassNoArgCalls("I").single().name
 
         val patched = applyPatches(
-            apk = apk, workDir = workDir, pkg = PKG, version = "4.3.1",
+            apk = apk, workDir = workDir, pkg = PKG, version = "4.3.2",
             patchNames = setOf("Enable Premium"), allPatches = loadAllPatches(newestPatchBundle(root)),
         ).single { it.type == USER_PREFERENCE }
 
