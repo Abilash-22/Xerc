@@ -115,3 +115,4 @@ Re-anchored and bytecode-verified on 2026-10-07:
 - **FotMob+** (238.17794): Enable FotMob+ also unlocks the exclusive app icons. The membership screen still says "No active subscriptions"; active membership display and early access are server-side or nonexistent.
 - **CREX** (26.10.06): FanCode streams are server-side.
 - **Hevy** (3.1.16): Unlock Pro does not reach the server-side limits (cloud-backed Pro features, Hevy Coach).
+- **LINE** (26.15.1): there is no "hide typing" patch because LINE sends no typing state to other people. 26.15.1 has no outgoing typing Thrift call; `onTypingStatusChanged` is a local UI callback and `NOTIFIED_TYPING` only appears as a legacy operation-type enum. Read without receipt covers 1:1, group and room chats only: OpenChat (Square) uses a different read path. A no-receipt session lives in memory, so if the process is killed while that chat is open, the chat is read normally when it reopens.

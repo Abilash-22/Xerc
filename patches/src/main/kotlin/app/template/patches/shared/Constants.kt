@@ -1287,6 +1287,67 @@ object Constants {
     )
 
 
+    // Verified 2026-10-13 against jp.naver.line.android 26.15.1 (versionCode 261510192, APKMirror
+    // bundle merged with APKEditor, minSdk 32). Ported from andrewliang25/morphe-patches (built for
+    // 26.14.0) without its settings extension; R8 renames LINE's classes, androidx and even the
+    // Thrift and DebugMetadata types every release, and the references' resource ids are stale
+    // (andrew's bottom-bar badge id is now bnb_button_badge_live), so nothing is pinned to those:
+    //   - Disable ads: the getBanners / getPrefetchableBanners Thrift receive branches (found by
+    //     their "<op> failed: unknown result" strings, inside shared packed-switch lambdas) return
+    //     null after the op-name string; the Smart Channel controller (FrameLayout constructor that
+    //     casts to SmartChannelViewLayout) hides its host; LadAdView / LyadAdView collapse in
+    //     onAttachedToWindow.
+    //   - Fix push notifications (on by default): Firebase Installations' (URL, String) request
+    //     builder sends LINE's original certificate SHA-1 in X-Android-Cert.
+    //   - Hide LINE TODAY / Shopping / VOOM / Wallet tab: the ()List tab builder (HOME, CHAT, SQUARE,
+    //     CALL reads) loses the NEWS+NEWS_ROW, COMMERCE+COMMERCE_TW, TIMELINE, MINI+WALLET pairs.
+    //   - Hide community / calendar button: the Chats tab header builder (the <init> referencing
+    //     "createEndButtons") loses its OPEN_CHAT / CALENDAR pair; the icon enum is derived from its
+    //     PLUS_MENU read.
+    //   - Hide AI friends button / Disable Agent i: the accessors behind the server flags
+    //     function.ai.character.display_button, function.ai.agenti.enabled and
+    //     function.search.line_ai_entry.enabled return false (agenti is Agent i's master switch).
+    //   - Hide new badges: HeaderButton's (I, Z) dot setter, the chat header "N" badge, the settings
+    //     row setters, the Home service badge enum's isVisible, the friend row GREEN_DOT_BADGE dot
+    //     and the Chats tab green dot set (coroutine metadata c/m). Chat menu rows, the attach button
+    //     dot and the bottom-bar "new" badge are not covered (only resource ids tell them apart).
+    //   - Disable VOOM: the line://home/ handler ("hashtaglist" + "deleteCache") returns its
+    //     Error(...) result; LineVoomActivity finishes after super.onCreate.
+    //   - Keep unsent messages: the unsend lambda's already-unsent guard is forced after
+    //     extensions/line KeepUnsentMessages inserts LINE's UNSENT notice row.
+    //   - Keep chats unread: the read manager's (String, String) open-on-view wrapper returns; its
+    //     worker is cross-checked against the "sendChatChecked" lambda's EnclosingMethod.
+    //   - Open links in external browser: OpenUriActivity's intent builder (its extra keys) gets
+    //     EXTERNAL_WITHOUT_CUSTOMTABS as its browser mode.
+    // LineSmokeTest asserts every hook; a CLI run without -f applies all 15 patches and the
+    // disassembled methods match. Runtime: launch and login only (see below).
+    // 2026-10-13: "Read without receipt" (chat-list long-press row) and "Read notifications without
+    // receipt", after linimal's viewing session (no typing-indicator patch: LINE sends no typing
+    // state, only a local onTypingStatusChanged UI callback). ChatHistoryActivity.onCreate (string
+    // "chatDataComponentProvider") claims a reserved chat; the read worker and the sendChatChecked
+    // implementation return early for it. 26.15's menu is a list of ChatRowMenuItem (toString
+    // "ChatRowMenuItem(labelRes=") built by a static (ChatPreviewItemData)ArrayList method that the
+    // chat preview screen's menu shares; that menu returns its action through an Intent and an
+    // exhaustive when, so it must never get the row. Only the bottom-sheet composable in the
+    // builder's own class calls a generated menuRows helper (builder + the row). The row's action is
+    // an extension class re-parented onto the sealed action type, the bottom sheet's dispatcher
+    // (check-cast to that type, then the menu close) hands it to the extension, and both label
+    // lambdas that read labelRes go through a generated labelText helper (the sentinel label id is
+    // not a resource). Notification launches are reserved in the (Intent, Z) launch dispatcher
+    // ("shouldLaunchChatHistoryActivityOnly") from BackNavigationArgs.isFromNotification.
+    // LineSmokeTest and the CLI disassembly cover every hook; a CLI run without -f applies all 17
+    // patches. Emulator (all 17 patches): dex2oat verify accepts every patched and extension class,
+    // and a new account logs in and reaches the chat list with no errors. The menu row,
+    // notification opens and receipt suppression are not runtime-tested (no second account to send
+    // messages or to watch for "Read").
+    val COMPATIBILITY_LINE = Compatibility(
+        name = "LINE",
+        packageName = "jp.naver.line.android",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x06C755,
+        targets = listOf(AppTarget(version = "26.15.1", versionCode = 261510192))
+    )
+
     // Verified 2026-10-13 against com.hevy 3.1.16 (versionCode 3325935, XAPK base + arm64 + en +
     // mdpi splits merged with APKEditor). Hevy is React Native on Hermes: the Pro logic is Hermes
     // bytecode (HBC v96) in assets/index.android.bundle, which ships in the base split, so patch a
