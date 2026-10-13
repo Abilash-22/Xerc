@@ -97,12 +97,35 @@ object Constants {
     // that does not hold the staff email. Both old 236 targets were re-checked and still pass.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // 2026-10-13, 238.17794.20261012 (versionCode 17794): "Enable FotMob+" forces the
+    // subscription manager's valid_subscription getter true and the staff check false, which
+    // removes ads and sends More > FotMob+ to MembershipActivity instead of PaywallActivity (both
+    // seen on the emulator). That screen still said "No active subscriptions found" and the old
+    // patch never exposed the "Exclusive app icons" picker: MembershipActivity reads the
+    // RevenueCat entitlements from the server, so it cannot honestly show an active plan, and
+    // the picker was drawn only in its entitlement branches. A new step calls the picker in the
+    // NoEntitlement branch too: the screen lambda is the only method with that literal; the
+    // picker is the MembershipActivity (I, composer)V method its entitlement branches already
+    // call (T, 3 calls, reads string/app_icons 0x7f1300c3), on the same activity register; the
+    // composer type comes from the branch's end-group (Z)V call. The step is skipped (logged)
+    // when the literal is absent, and skipped with a warning (steps 1-2 still apply) when the
+    // screen code has another shape. RevenueCat records and the valid_subscription pref are not
+    // faked. "Early access" is marketing text only, with no client gate to unlock.
+    // FotMobSmokeTest passes on 238.17794 and 238.17666 (same lambda, composer dj5); 237/236
+    // not re-checked for this step (no APK at hand). Emulator (238.17794): no paywall, the
+    // membership screen shows the 12-icon picker, switching to Barcelona changed the launcher
+    // alias and switching back restored it, no crashes. The staff check is not runtime-testable.
     val COMPATIBILITY_FOTMOB = Compatibility(
         name = "FotMob",
         packageName = "com.mobilefootie.wc2010",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x00985F,
         targets = listOf(
+            // Verified 2026-10-13 (see the comment above), including the emulator run.
+            AppTarget(
+                version = "238.17794.20261012",
+                versionCode = 17794
+            ),
             // Verified 2026-10-07 against 238.17666.20260928 (versionCode 17666, APKMirror
             // phone build): all patches apply unchanged; FotMobSmokeTest passes.
             AppTarget(
