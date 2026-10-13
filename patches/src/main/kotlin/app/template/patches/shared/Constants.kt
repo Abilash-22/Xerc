@@ -1211,4 +1211,52 @@ object Constants {
         appIconColor = 0xFEE500,
         targets = listOf(AppTarget(version = "26.8.3", versionCode = 29260830))
     )
+
+    // Verified 2026-10-13 against easy.launcher 1.10.28 (versionCode 11028, the owner's APKMirror
+    // bundle merged, 4 ABIs, minSdk 32). Play title "Easy Launcher"; the launcher label
+    // (string/app_name) is "Easy Homescreen". App code is R8-renamed, but the com.eet.* packages,
+    // kept model/worker/service classes, log lines and preference keys anchor every patch:
+    //   - Disable ads: the static (Context)Z gate reading "ads.enabled" + "INSIDE_WALDO" -> false;
+    //     in com.eet.core.ads.consent the "initializeMobileAdsSdk: " (GMA next-gen + CloudX start)
+    //     and "requestConsentInfoUpdate: activity=" (UMP form) methods return at once; in
+    //     com.eet.core.ads.activity the app-open loadAd ("loadAd: new ad wrapper created for key, ")
+    //     returns and showAd ("showAd: failed to show ad, ") only runs its Function0 callback; the
+    //     native cache's "replenishAds: size=" step returns; AdFreeViewModel.isAdsEnabled -> false.
+    //   - Disable telemetry: every concrete logEvent/logException/setUserId/setUserProperties/
+    //     setUserProperty/setCustomKey/dropBreadcrumb/sendScreenshot on all 8 AnalyticsService
+    //     subclasses; AmplitudeAnalyticsService.initializeAmplitude; the Rudderstack constructor's
+    //     write-key length reads 0 (its own "key empty" guard skips init); Singular.init (both
+    //     overloads) -> false; BrazePushService.initialize returns Unit; Firebase
+    //     setCrashCollectionEnabled always passes false; manifest switches for Crashlytics,
+    //     Analytics, ad ID, deferred deep links and Facebook auto-init / advertiser ID. Remote
+    //     Config, FCM, Firebase Installations and com.eet.core.push are untouched.
+    //   - Disable rating prompts: the review observer's onResume ("app_launch_count_for_review" +
+    //     "getDaysSinceInstall: error") returns; the "isUserPrimedForReview -> true" and
+    //     "shouldRequestAppReview -> true" checks -> false.
+    //   - Disable promotions: getEnabled/getActionCardEnabled/getSuggestEnabled of the GetJar and
+    //     SportsPass Banner/Icon/Tile/Search remote configs -> false; CpaOffersActionCardProvider
+    //     .isEnabled -> false; ImePromoHandler.pitchIme returns.
+    //   - Disable default launcher reminder (off by default): in HomeRoleReminderWorker's work
+    //     method the role-held check (the helper method that calls RoleManager.isRoleHeld) reads
+    //     true, so the worker takes its "already held" path.
+    //   - Hide sponsored content (off by default): SponsoredLinksResponse.getData,
+    //     SponsoredSites.getSponsoredSites, SponsoredPostsResponse.getArticles and
+    //     SponsoredLinkSuggestionProvider.getSuggestions return emptyList().
+    // No premium patch: the paywall is dead code in this build. PremiumActivity is abstract with
+    // no subclass and is not in the manifest; the declared PremiumBottomSheetDialog is never
+    // started; BillingViewModel is only registered with Koin and never injected, and
+    // BillingWorker / PurchasesBillingWorker are never enqueued. App Check / Play Integrity and
+    // RootBeer are deliberately not touched. EasyLauncherSmokeTest asserts every hook, and a CLI
+    // decompile (no -f) shows exactly 30 changed classes, none in the push stack. On the emulator
+    // the patched launcher starts with no crash, the ad consent form and the news-feed native ad
+    // are gone, the feed still shows articles with "Hide sponsored content" on, and the app-open
+    // path still opens its destination. Known limit: the Braze SDK still initialises and registers
+    // for push through another path; its event logging is blocked by the AnalyticsService no-ops.
+    val COMPATIBILITY_EASYLAUNCHER = Compatibility(
+        name = "Easy Homescreen",
+        packageName = "easy.launcher",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x212121,
+        targets = listOf(AppTarget(version = "1.10.28", versionCode = 11028))
+    )
 }
