@@ -190,6 +190,25 @@ object Constants {
     // Runtime check 2026-10-08 (emulator, 5.4.16): app runs without crashes, but "Get Pro"
     // upsells still show and RevenueCat logs "Entitlement missing; keeping existing plan" -
     // Enable Premium is NOT confirmed working at runtime (bytecode change only).
+    // Re-anchored 2026-10-13 for 5.4.17 (versionCode 261, merged universal), which replaced
+    // AppLovin with Google Mobile Ads. Disable ads now forces AppConfigModel.isAdsEnabled to
+    // false in its constructor (class found by its data-class toString "AppConfigModel(" +
+    // ", isAdsEnabled="; Boolean from 5.4.16, primitive boolean in 5.4.9) - every placement
+    // checks "plan == Free && isAdsEnabled" - plus optional GMA hooks (MobileAds init, the
+    // static full-screen load with "AdRequest cannot be null.", BaseAdView.loadAd with "#008")
+    // and the optional AppLovin MaxInterstitialAd no-op. Enable Premium never worked for
+    // never-subscribed accounts: the app reads entitlements["Pro_Android"], which is null (not
+    // inactive) for them, so forcing EntitlementInfo.isActive() left the plan on Free. It now
+    // forces the plan enum (enum <clinit> "Free"/"Pro") to Pro where PlanDataStore (<clinit>
+    // "plans_data_store"/"plan_type") decodes the cached ordinal via entries.get(I) (all three
+    // versions), and in 5.4.17's static plan-returning store methods (live RevenueCat check and
+    // cache read). BoxBoxSmokeTest passes on 5.4.9 (APKMirror bundle, re-downloaded),
+    // 5.4.16 and 5.4.17; CLI-patched and decompile-checked on 5.4.16 and 5.4.17. Emulator
+    // (5.4.17, logged out): the "AD" promo card and the Standings ad slot are gone with no
+    // gap and AdMob never initializes; "Get Pro" and the paywall are gone, a Pro-locked widget
+    // shows "Add" instead of "Unlock" and the app logs plan Pro; no crashes. The "PRO" labels
+    // in the widget list stay. Signed-in features were not tried; server-side
+    // UserProfiles.isPro is untouched.
     val COMPATIBILITY_BOXBOX = Compatibility(
         name = "BoxBox",
         packageName = "club.boxbox.android",
@@ -197,7 +216,8 @@ object Constants {
         appIconColor = 0xFF0000,
         targets = listOf(
             AppTarget(version = "5.4.9", versionCode = 251),
-            AppTarget(version = "5.4.16", versionCode = 260)
+            AppTarget(version = "5.4.16", versionCode = 260),
+            AppTarget(version = "5.4.17", versionCode = 261)
         )
     )
 
