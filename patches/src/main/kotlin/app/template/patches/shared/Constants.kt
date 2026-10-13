@@ -744,16 +744,19 @@ object Constants {
     // stable library surface (initialize, every load/loadAd and the app-open
     // preloader). Futbin+ premium is account-linked (Play purchase is linked to the
     // Futbin account server-side), so premium is out of reach - ads only.
-    // Verified 2026-10-07 against 27.5 (versionCode 7005, Aptoide, md5 verified): Disable
-    // ads applies unchanged; FutbinSmokeTest passes.
+    // 2026-10-13: the "27.5" (versionCode 7005) target added 2026-10-07 was REMOVED. That APK
+    // (Aptoide user store "superpocket") is a rebuilt repack, not a Futbin release: signed by
+    // CN=Jx Clarynx (cert SHA-256 bd6515d3...fc6b) instead of FUTBIN (1cf7ff75...e904), with
+    // an injected classes7.dex whose exported launcher activity fetches remote JSON, collects
+    // device/carrier info and shows WebView overlays (adware). Genuine releases are numbered
+    // 27.05, 27.06; check the FUTBIN signer before using any Futbin APK.
     val COMPATIBILITY_FUTBIN = Compatibility(
         name = "Futbin",
         packageName = "com.futbin",
         apkFileType = ApkFileType.APK,
         appIconColor = 0x26A69A,
         targets = listOf(
-            AppTarget(version = "27.02", versionCode = 7002),
-            AppTarget(version = "27.5", versionCode = 7005)
+            AppTarget(version = "27.02", versionCode = 7002)
         )
     )
 
