@@ -18,8 +18,9 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 //   - the ad classes' load()/loadAd() entry points become no-ops;
 //   - pollAd() yields nothing for anything that still tries to fetch a preloaded ad.
 // Two app-side hooks cover what does not go through the SDK:
-//   - AdvertZone (every ad slot, including the bookmaker WebView banners) collapses itself
-//     instead of loading, so no empty placeholder is left behind;
+//   - AdvertZone (every ad slot, including its bookmaker WebView provider) collapses itself
+//     instead of loading, so no empty placeholder is left behind. The sponsored bookmaker
+//     strip, bonus strip and odds are not ad slots; Hide betting content covers them;
 //   - the video player never receives a VMAP response, so IMA video ads are never requested.
 private const val SDK = "Lcom/google/android/libraries/ads/mobile/sdk/"
 
@@ -52,7 +53,8 @@ private fun BytecodePatchContext.methods(relative: String): Set<MutableMethod> =
 @Suppress("unused")
 val disableAdsPatch = bytecodePatch(
     name = "Disable ads",
-    description = "Disables Google ads, bookmaker banners and video ads."
+    description = "Disables Google ads, in-app ad slots and video ads. " +
+        "Bookmaker strips and odds are hidden by Hide betting content."
 ) {
     compatibleWith(COMPATIBILITY_FLASHSCORE)
 

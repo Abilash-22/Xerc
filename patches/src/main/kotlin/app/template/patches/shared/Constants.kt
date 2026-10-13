@@ -631,6 +631,36 @@ object Constants {
     // (26.10.2) the push token registers with Livesport's token service as in stock, following a
     // match and the per-match/global notification settings work, and list ads are gone. A
     // "NotificationsSettingsSportRepository 401" before token registration also occurs on stock.
+    // 2026-10-13: "Hide betting content" (default off) added and FlashscoreSmokeTest passes on
+    // 26.10.2. The app's own paid "Hide betting content" setting is dead code
+    // (its HIDE_BETTING_CONTENT / HAS_ACTIVE_SUBSCRIPTION prefs are never written, the toggle has
+    // no click handler, and its predicate only hides list odds), so the patch drives the
+    // remote-config odds kill switch the app already uses for geo blocks and underage users:
+    // the config value class (ctor "USER_PREFS_CONFIG_KEY-") routes get() through a new static
+    // helper that answers ODDS_ENABLE, the DETAIL_ODDS_* switches and
+    // DETAIL_SUMMARY_GAMBLING_TEXT_ENABLED with false, DETAIL_BROADCASTING_BOOKMAKERS_DISABLE and
+    // DETAIL_ODDS_SUMMARY_IMAGES_DISABLED with true, BONUS_PROMO_GIFT_ICON_URL with "" and
+    // LEAGUE_DETAIL_HEADER_STRIP_SPORTS_ENABLED with an empty list. The keys are the key enum's
+    // constants (the ctor's 2nd parameter type), resolved by name from its <clinit>; all 15 exist
+    // in both versions. The sponsored strip DTO (toString "SponsoredStripWidgetDTO(sponsoredItems=")
+    // and the bonus strip DTO (toString prefix "BonusStripWidgetDTO(": "(bonuses=" in 26.9.2,
+    // "(summaryBonuses=" in 26.10.2) get empty lists in their constructors. Bookmaker
+    // AdvertZone banners stay with Disable ads; the age-verification flow itself is not touched
+    // (only the league summary params' copy of isAgeVerified is forced false, see below).
+    // 2026-10-13, extended after the emulator still showed the league ODDS tab and the "Winner
+    // Odds" (outright) block: neither is behind a remote-config key. The league tab bar comes from
+    // the tab set the API sends, so the league header model (toString
+    // "LeagueDetailHeaderModel(tournamentId=" + ", detailTabs=") routes its constructor's Set
+    // through a new helper that drops the tab-id enum constant named ODDS. The summary only
+    // creates the outright widget when its params' isAgeVerified is true, so the params class
+    // (toString "LeagueDetailSummaryScreenParams(tournamentId=" + ", isAgeVerified=") stores
+    // false there and the widget stays in its Hidden state (renders nothing). FlashscoreSmokeTest
+    // passes on 26.10.2; the CLI-patched 26.10.2 disassembly shows both hooks.
+    // 2026-10-13: the 26.9.2 target was dropped at the owner's request; only 26.10.2 is supported.
+    // 2026-10-13 emulator run (26.10.2 full-bundle merge, all six patches, stock control): the
+    // league ODDS tab, the match-detail odds section, the bookmaker bonus strip with its 18+ line,
+    // the gift icon and the ad slots are gone; no crashes. List-row odds and bookmaker broadcasting
+    // info were not shown by stock in that region, so they are untested.
     val COMPATIBILITY_FLASHSCORE = Compatibility(
         name = "Flashscore",
         packageName = "eu.livesport.FlashScore_com",
@@ -640,7 +670,6 @@ object Constants {
         apkFileType = ApkFileType.APKS,
         appIconColor = 0x1E88E5,
         targets = listOf(
-            AppTarget(version = "26.9.2", versionCode = 517, description = FLASHSCORE_SOURCE_NOTE),
             AppTarget(version = "26.10.2", versionCode = 520, description = FLASHSCORE_SOURCE_NOTE),
         )
     )
