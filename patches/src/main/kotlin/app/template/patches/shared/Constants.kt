@@ -1362,4 +1362,32 @@ object Constants {
         appIconColor = 0x212121,
         targets = listOf(AppTarget(version = "1.10.28", versionCode = 11028))
     )
+
+    // Verified 2026-10-13 against in.cricketexchange.app.cricketexchange 26.10.06 (versionCode
+    // 667, APKMirror bundle merged with APKEditor: BNDLTOOL-signed, all four ABIs). App classes
+    // keep their names, methods are R8-renamed. Premium (ad-free) is client-side: the server's
+    // plan is cached as "expiry_date" in the "payment" prefs, and two checks compare it with
+    // today, both meaning "expired, show ads": MyApplication's no-arg boolean getter (found by
+    // "expiry_date" + "0000-00-00" + Date.after; ~160 call sites incl. the ad managers, app-open,
+    // floating score and the adsVisibility flags passed between screens) and HomeActivity's
+    // static copy (the "payment" + "expiry_date" + Date.after method that stores it; default true
+    // in <clinit>). Enable Premium forces both to false. The purchase screen reads the prefs
+    // itself and still shows no plan; FanCode stream entitlements are server-side. Disable ads
+    // is a library-level backstop: GMA next-gen load entry points (kept classes, matched by
+    // load-callback parameter), Parth Ads AdRequest (CREX's own exchange) public loads and Meta
+    // AdView.loadAd. No PairIP, no signature check (libnative-lib.so only returns config
+    // strings); Play Integrity is only used by Cashfree, AppsFlyer, Firebase Auth and reCAPTCHA.
+    // Emulator (logged out, both patches): stock showed test-fill ads (in-feed native, bottom
+    // banner, an interstitial while switching tabs); the patched app showed none on Home, the
+    // live match screen, Series, stats/points table, Social and Videos, with no gaps, and no
+    // interstitial over 12 tab switches. The pinned floating score starts the Premium service
+    // with no ad; no crashes. The menu's "CREX PREMIUM" row opens a login sheet. Live/Upcoming
+    // tabs and the quiz were not reached.
+    val COMPATIBILITY_CREX = Compatibility(
+        name = "CREX",
+        packageName = "in.cricketexchange.app.cricketexchange",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x262626,
+        targets = listOf(AppTarget(version = "26.10.06", versionCode = 667))
+    )
 }
