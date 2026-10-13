@@ -1116,4 +1116,55 @@ object Constants {
         appIconColor = 0x0087FF,
         targets = listOf(AppTarget(version = "26.39.6", versionCode = 2639006))
     )
+
+    // Verified 2026-10-13 against com.kakao.talk 26.8.3 (versionCode 29260830, APKMirror bundle
+    // merged, ~212k classes). App classes are R8-renamed but keep their Kotlin .source names and
+    // coroutine @DebugMetadata/EnclosingMethod annotations; the AdFit SDK keeps its public API.
+    // Ads, unread limits, mobile-only messages, the tab patches, Strip image metadata and the
+    // Sentry / S2Event / TalkShareLog parts of Disable telemetry are ported from
+    // AmpleReVanced/revanced-patches (GPL-3.0, written for 26.7.2) with the Settings toggles
+    // dropped; Ghost typing, Ghost read and the Tiara / Crashlytics hooks are new. Anchors:
+    //   - Disable ads: NativeAdLoader.load (both overloads) and the FocusAdLoader implementation's
+    //     loadAd return true; by .source + shape: OpenLinkChatAdController (BizBoardAdView.loadAd),
+    //     ChatListAdHelper (portrait check, global suspend check), OpenChatTabFeedAdViewHolder,
+    //     PayAdPlatformBannerState/AdFit, SftAdFragment load/render, the birthday BizBoard binder and
+    //     the FriendTabGlobalAdViewModel model lambda; BizBoardFrameLayout.onMeasure and FeedAdLayout
+    //     (constructor, setFeedAd, added onMeasure) by kept class name. The reference's
+    //     FriendListChipBizBoard anchor does not match 26.8.3 and is not ported.
+    //   - Show messages restricted to mobile: AlimtalkType$Companion and LeverageType cover state
+    //     -> NONE; the Universal check right before "new MobileOnlyCover" (found by its toString)
+    //     -> false (the first UniversalPublicData check in 26.8.3 is the lock cover, untouched).
+    //   - Remove 300+ / 99+ unread limit: the "300+" if-lt in BaseChatRoomItemViewHolder and
+    //     OpenLinkChatsItem, the Math.min(count, 300) in UnreadCountInfo; the 99 clamps in
+    //     ChatLogRecyclerItem and WatermarksManager.
+    //   - Remove shop tab: MainTabConfig's tab list nulls a SHOPPING_TAB result in slot 3 (that
+    //     slot is CALL_TAB without shopping, which the reference's slot delete would remove).
+    //   - Disable community tab: OpenChatTabFragment's ConcatAdapter keeps only the chat list.
+    //   - Disable friend feed tab: TabConfig(isFriendFeedTabEnabled=...) constructor clears the
+    //     flag; the FriendTab gate called by FriendSettingsViewModel and its identical twin return
+    //     false. The reference's third edit hits isCheckedDisplayUpdatedFriends here; dropped.
+    //   - Disable telemetry: TiaraTracker.java enqueue(TiaraLog)/flush by log strings; SentryAndroid
+    //     init by its two error strings; FirebaseCrashlytics send/record/log/user/key methods; the
+    //     Available2 flag resolver returns false for USE_S2_EVENTS and USE_TALK_SHARE_LOG.
+    //   - Ghost typing / Ghost read: ChatRoomApiHelper$Companion requestAction and
+    //     requestChatOnRoom, resolved through @DebugMetadata + EnclosingMethod and cross-checked
+    //     against a .source + shape fallback; MsgJob's "notiRead" value forced to FALSE. Ghost read
+    //     is inferred from the client code and not verified against the server.
+    //   - Strip image metadata: every return of ImageItemSendHelper's (File, I, J)File resize step
+    //     goes through extensions/kakaotalk StripImageMetadata.sanitize (framework ExifInterface).
+    // A re-signed build, unpatched, with the 3 default patches and with all 11, launches to the
+    // login screen on the emulator with no crash or verifier error (the all-patches build hit 2
+    // slow-startup ANRs in 4 cold launches under ARM translation, stacks in app code, not patches);
+    // login and the patched features were not runtime-tested. Deliberately not ported from the
+    // reference: the integrity, signature, attestation/abuse-detection, Moat, packet-handler and
+    // package-rename patches (they defeat Kakao's security controls, and the packet server opens
+    // an unauthenticated network port), and "Disable AdFit environment detection" (only spoofs the
+    // ad SDK's root/emulator check, pointless with Disable ads).
+    val COMPATIBILITY_KAKAOTALK = Compatibility(
+        name = "KakaoTalk",
+        packageName = "com.kakao.talk",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0xFEE500,
+        targets = listOf(AppTarget(version = "26.8.3", versionCode = 29260830))
+    )
 }
