@@ -558,6 +558,29 @@ object Constants {
     // Verified 2026-10-13 against 26.10.2 (versionCode 520, owner-supplied apkcube .apks; same
     // CN=Pavel Cvetler / LiveSport signer as 26.9.2, v3 verifies on every split): Disable ads
     // applies unchanged and FlashscoreSmokeTest passes on its base APK.
+    // Verified 2026-10-13 on both 26.9.2 (517) and 26.10.2 (520): FlashscoreSmokeTest applies all
+    // five patches and asserts every hook. Anchors are kept names, stable strings and shape only:
+    //   - Disable ads, extended: the kept AdvertZone's load method ("Unsupported ad provider: ")
+    //     goes GONE and calls the (I)V setMinHeight helper (bookmaker WebView banners too); the
+    //     video media item (toString ", vmapResponse=", ctor (ArrayList, MediaProvider$DrmData,
+    //     String)) gets a null VMAP, so IMA video ads never load.
+    //   - Disable telemetry: AppsFlyerLib subclass start/logEvent/logSession/logAdRevenue;
+    //     Crashlytics via "firebase_crashlytics_collection_enabled" (app wrapper + arbiter) and
+    //     the wrapper ("FirebaseCrashlytics component is not present.") enable method; Apptentive
+    //     register/engage; manifest switches for Firebase Analytics/Performance, ad ID and
+    //     Facebook auto-logging (the Facebook SDK stays initialised for Facebook Login).
+    //   - Disable rating prompts: the settings getBool (" using getBool!") returns false for
+    //     CAN_SHOW_RATING_BANNER / CAN_SHOW_INAPP_RATING.
+    //   - Block marketing popups: remote dialog (ctor "dialogSupport", show "btnGoUrl" over
+    //     EventListActivity), FirebaseInAppMessagingDisplay.displayMessage, InAppStrip parser.
+    //   - Disable update prompts: the SOFT/HARD dialog ("unssupported_version_reporter" class,
+    //     "last_notify_" + Dialog.show()).
+    // Push is untouched: no Firebase Messaging/Installations, notification or OneTrust code is
+    // patched, and the test checks the MESSAGING_EVENT service against the stock APK.
+    // CLI decompile (no -f) shows exactly 45 changed classes, none push-related. On the emulator
+    // (26.10.2) the push token registers with Livesport's token service as in stock, following a
+    // match and the per-match/global notification settings work, and list ads are gone. A
+    // "NotificationsSettingsSportRepository 401" before token registration also occurs on stock.
     val COMPATIBILITY_FLASHSCORE = Compatibility(
         name = "Flashscore",
         packageName = "eu.livesport.FlashScore_com",
