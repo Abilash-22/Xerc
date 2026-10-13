@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**50** apps&nbsp;&nbsp;•&nbsp;&nbsp;**104** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-13
+> **[v1.14.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.6)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**121** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-13
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -72,6 +72,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-FEE500?style=flat-square" height="14" alt=""> | **KakaoTalk** | 🚫 🛡️ 💎 🧩 11 | `26.8.3` | APKM |
 | <img src="https://img.shields.io/badge/-%20-406C5C?style=flat-square" height="14" alt=""> | **LibrePods** | 💎 1 | `1.0.1-rc1-play` <sub>+1 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Librera** | 🚫 1 | `9.4.20` | APK |
+| <img src="https://img.shields.io/badge/-%20-06C755?style=flat-square" height="14" alt=""> | **LINE** | 🚫 🔕 🧩 17 | `26.15.1` | APKM |
 | <img src="https://img.shields.io/badge/-%20-C8102E?style=flat-square" height="14" alt=""> | **Livescore** | 🚫 1 | `10.3` <sub>+2 older</sub> | APK |
 | <img src="https://img.shields.io/badge/-%20-8BC34A?style=flat-square" height="14" alt=""> | **Monefy** | 💎 1 | `1.22.11` | APKM |
 | <img src="https://img.shields.io/badge/-%20-283593?style=flat-square" height="14" alt=""> | **Moon+ Reader** | 🚫 1 | `10.7` | APKM |
@@ -390,6 +391,32 @@ Verified on: `9.4.20`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🚫 **Disable ads** | Disables Librera's banner, interstitial and rewarded ads by reporting ads as switched off and the reward window as open, so the Google Mobile Ads SDK never starts. | ✅ |
+
+</details>
+<details>
+<summary><b>LINE</b> &nbsp;·&nbsp; 17 patches &nbsp;·&nbsp; <code>jp.naver.line.android</code></summary>
+
+Verified on: `26.15.1`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🧩 **Disable Agent i** | Turns off Agent i, LINE's AI assistant, which removes its buttons from the Home header and the search bar. | ➖ |
+| 🧩 **Disable VOOM** | VOOM links, shares and notifications do nothing, and the standalone VOOM feed closes at once. Use with Hide VOOM tab to remove the tab as well. | ➖ |
+| 🚫 **Disable ads** | Removes the Smart Channel banner above the chat list and hides LINE Ads banners on Home, Wallet and other tabs. | ✅ |
+| 🔕 **Fix push notifications** | Makes push notifications work on a re-signed build while LINE is closed, by reporting LINE's original signing certificate to Firebase. | ✅ |
+| 🧩 **Hide AI friends button** | Removes the AI friends button from the Chats tab header. The Album button shows in its place. | ➖ |
+| 🧩 **Hide LINE TODAY tab** | Removes the LINE TODAY (News) tab from the bottom navigation bar. | ➖ |
+| 🧩 **Hide Shopping tab** | Removes the Shopping tab (Discover in Taiwan) from the bottom navigation bar. | ➖ |
+| 🧩 **Hide VOOM tab** | Removes the VOOM tab from the bottom navigation bar. | ➖ |
+| 🧩 **Hide Wallet tab** | Removes the Wallet (LINE Pay) tab from the bottom navigation bar. | ➖ |
+| 🧩 **Hide calendar button** | Removes the calendar button from the Chats tab header. | ➖ |
+| 🧩 **Hide community button** | Removes the OpenChat (community) button from the Chats tab header. | ➖ |
+| 🧩 **Hide new badges** | Hides the green dots and N badges that mark new items on header buttons, the Chats tab header, settings rows, Home services and friend rows. Unread counts stay. | ➖ |
+| 🧩 **Keep chats unread** | Opening a 1:1 or group chat no longer marks it read or sends read receipts. Mark as read still works. | ➖ |
+| 🧩 **Keep unsent messages** | Keeps messages that others unsend in 1:1 and group chats, with LINE's "unsent a message" notice below each one. OpenChat is not covered. | ➖ |
+| 🧩 **Open links in external browser** | Opens web links in your default browser instead of LINE's in-app browser. LINE links and LIFF mini apps stay in LINE. | ➖ |
+| 🔕 **Read notifications without receipt** | Opening a 1:1 or group chat from a message notification no longer marks it read or sends a read receipt while it is open, and the chat stays unread. | ➖ |
+| 🧩 **Read without receipt** | Adds "Read without receipt" to the long-press menu of 1:1 and group chats in the chat list. The chat opens without marking it read or sending a read receipt while it is open, and stays unread. | ➖ |
 
 </details>
 <details>

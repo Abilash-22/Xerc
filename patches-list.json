@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.14.0-dev.5",
+  "version": "1.14.0-dev.6",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -152,6 +152,37 @@
       "options": []
     },
     {
+      "name": "Disable Agent i",
+      "description": "Turns off Agent i, LINE's AI assistant, which removes its buttons from the Home header and the search bar.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Disable Facebook SDK",
       "description": "Blocks Facebook Audience Network ads and disables Facebook event tracking while keeping Facebook Login working.",
       "default": true,
@@ -174,6 +205,37 @@
                 "ARMEABI_V7A": 260928002,
                 "X86_64": 260928002,
                 "X86": 260928002
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable VOOM",
+      "description": "VOOM links, shares and notifications do nothing, and the standalone VOOM feed closes at once. Use with Hide VOOM tab to remove the tab as well.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
               },
               "isExperimental": false,
               "minSdk": null,
@@ -722,6 +784,37 @@
                 "ARMEABI_V7A": 7175,
                 "X86_64": 7175,
                 "X86": 7175
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable ads",
+      "description": "Removes the Smart Channel banner above the chat list and hides LINE Ads banners on Home, Wallet and other tabs.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3061,6 +3154,37 @@
       "options": []
     },
     {
+      "name": "Fix push notifications",
+      "description": "Makes push notifications work on a re-signed build while LINE is closed, by reporting LINE's original signing certificate to Firebase.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Ghost read",
       "description": "Experimental: others won't see that you read their messages while you only view chats. Sending a message or reacting should still mark the chat read, read counts on your own messages may update late, and secret chats or open chats may behave differently. Not verified on a real account.",
       "default": false,
@@ -3264,6 +3388,37 @@
       ]
     },
     {
+      "name": "Hide AI friends button",
+      "description": "Removes the AI friends button from the Chats tab header. The Album button shows in its place.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Hide Assistant tab",
       "description": "Turns off the Call Assistant feature, which removes the Assistant tab.",
       "default": false,
@@ -3295,6 +3450,37 @@
       "options": []
     },
     {
+      "name": "Hide LINE TODAY tab",
+      "description": "Removes the LINE TODAY (News) tab from the bottom navigation bar.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Hide Scam feed",
       "description": "Turns off the Scam Feed, which removes its tab and menu entry and stops its notifications.",
       "default": false,
@@ -3315,6 +3501,192 @@
                 "ARMEABI_V7A": 2639006,
                 "X86_64": 2639006,
                 "X86": 2639006
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide Shopping tab",
+      "description": "Removes the Shopping tab (Discover in Taiwan) from the bottom navigation bar.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide VOOM tab",
+      "description": "Removes the VOOM tab from the bottom navigation bar.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide Wallet tab",
+      "description": "Removes the Wallet (LINE Pay) tab from the bottom navigation bar.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide calendar button",
+      "description": "Removes the calendar button from the Chats tab header.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide community button",
+      "description": "Removes the OpenChat (community) button from the Chats tab header.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide new badges",
+      "description": "Hides the green dots and N badges that mark new items on header buttons, the Chats tab header, settings rows, Home services and friend rows. Unread counts stay.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3379,6 +3751,68 @@
                 "ARMEABI_V7A": 11028,
                 "X86_64": 11028,
                 "X86": 11028
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Keep chats unread",
+      "description": "Opening a 1:1 or group chat no longer marks it read or sends read receipts. Mark as read still works.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Keep unsent messages",
+      "description": "Keeps messages that others unsend in 1:1 and group chats, with LINE's \"unsent a message\" notice below each one. OpenChat is not covered.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3468,6 +3902,103 @@
           }
         }
       ]
+    },
+    {
+      "name": "Open links in external browser",
+      "description": "Opens web links in your default browser instead of LINE's in-app browser. LINE links and LIFF mini apps stay in LINE.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Read notifications without receipt",
+      "description": "Opening a 1:1 or group chat from a message notification no longer marks it read or sends a read receipt while it is open, and the chat stays unread.",
+      "default": false,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Read without receipt",
+      "description": "Adds \"Read without receipt\" to the long-press menu of 1:1 and group chats in the chat list. The chat opens without marking it read or sending a read receipt while it is open, and stays unread.",
+      "default": false,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "jp.naver.line.android",
+          "name": "LINE",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#06C755",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.15.1",
+              "versionCodes": {
+                "ARM64_V8A": 261510192,
+                "ARMEABI_V7A": 261510192,
+                "X86_64": 261510192,
+                "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
     },
     {
       "name": "Remove 300+ unread limit",

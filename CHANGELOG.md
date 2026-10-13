@@ -1,3 +1,9 @@
+## [1.14.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2026-10-13)
+
+### ✨ New Features
+
+* **line:** add LINE 26.15.1 patches ([74d40fc](https://github.com/heval99/Heval-Morphe-Patches/commit/74d40fc0e3ccb16007fbbc10814f2d72cee8cdcd))
+
 ## [1.14.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2026-10-13)
 
 ### 🐛 Bug Fixes
