@@ -11,7 +11,7 @@ not the story.
 
 | App | Package | Why |
 |---|---|---|
-| Flashscore (premium) | `eu.livesport.FlashScore_com` | No Play Billing client at all. The app carries an `ENTITLEMENT_TOKEN` validated server-side (`/api/v2/android/validate_subscription_v2`); premium content comes from their API. The "Disable ads" patch is the only meaningful one and ships. |
+| Flashscore (premium) | `eu.livesport.FlashScore_com` | No Play Billing client at all. The app carries an `ENTITLEMENT_TOKEN` validated server-side (`/api/v2/android/validate_subscription_v2`); premium content comes from their API. The "Disable ads", telemetry, rating, marketing popup and update prompt patches ship; premium stays server-side. |
 | Carrot Weather | `com.grailr.carrotweather` | Subscription validated by `verifySubscriptionWithGoogle` before entitlements apply. |
 | EasyExpense | `com.easyexpense` | React Native + Hermes bytecode; RevenueCat with trusted entitlements. Research-grade, not worth it. |
 | TOD TV | `com.todtv.tod` | Irdeto OTT DRM + Widevine and IP-based region locking; React Native + Hermes. Content decrypts only when the server issues a license; nothing client-side to flip. |
@@ -47,6 +47,7 @@ not the story.
 | Flipboard | `flipboard.app` | Checked 2026-10-10 on 4.3.65 (split base). No PairIP. Ads arrive inside the server feed (`FeedItem.isNativeAd`, `isPromoted`, and similar), not behind one client gate. Needs feed filtering. |
 | FC Pro 2 | `com.undergroundcreative.footballchairmanpro2` | Attempt failed (v1.2.2, 2026-09-19). Commercial app shield: game logic is encrypted web assets (`www/js/min-122.js`) decrypted by a native loader the shield extracts at runtime, strings are natively encrypted, a re-signed build dies in the native integrity check before any dex patch runs, and live updates can replace local code. Unpacking the shield is a research project. |
 | YouCut | `com.camerasideas.trimmer` | Issue #44, 2026-10-09. The Pro gate IS client-side and forceable (`store/billing/d.d(Context)Z`, holds "SubscribePro"/"com.camerasideas.trimmer.vip" → `returnEarly(true)`), but any re-signed build self-kills: `libisvideoengine.so` `JNI_OnLoad` (@arm64 `0x633f8`) calls a gate (`0x6f744`) that runs `kill(getpid(), 9)` unless a native signing-cert verify (`0x70d1c`, uses `android/content/pm/Signature`, `CertificateFactory`) and an anti-debug check (`0x714f8`, `xposed.isDebug`/`VMDebug`) both pass. Fires at library load on any main-page action that loads the video engine (gear/new project/templates/AI) — SIGKILL, no Java exception, confirmed on the re-signed STOCK (unpatched) build too. Decoys: `check_package_name` returns 1 (dead code), and `com.cer.CerChecker`/`libcer` is unrelated (forcing its wrappers to 0 did nothing). Only fix is a native `.so` patch (NOP the single `bl kill@plt` @arm64 `0x6f79c` in both arm64-v8a and armeabi-v7a), which Morphe's bytecodePatch/resourcePatch model can't emit. Revisit if the engine gains native-lib patching. The prior shipped "Enable Pro" patch was bytecode-verified only, never runtime-tested, so it crashed from the start. |
+| Gym Workout | `gymworkout.gym.gymlog.gymtrainer` | Parked by the owner 2026-10-13; work stopped for now. A native signature check in `liblpcore` breaks string decoding on re-signed builds. |
 
 ## Blocked by PairIP VM and native tamper check (2026-10-10)
 
@@ -57,6 +58,7 @@ not the story.
 | Lose It! | `com.fitnow.loseit` | 18.5.401 (APKPure, split base). Full PairIP stack: `LicenseClient`, `StartupLauncher` → `VMRunner`, `SignatureCheck`, `VmDecryptor`, 1,069 encrypted assets. RevenueCat entitlements on top. Same blocker as Zedge. |
 | DartCounter | `com.dartcounter.mobile` | 9.7.5 (versionCode 907050, arm64 only, APKM merged). Full PairIP stack: `LicenseClient`, `StartupLauncher` → `VMRunner` (calls woven into androidx/Adjust classes), `SignatureCheck`, `VmDecryptor`, `libpairipcore.so`, 21 encrypted VM assets. Same blocker as Zedge. Also a Capacitor/Ionic hybrid (logic in assets/public JS). Ultimate is bought through cordova-plugin-purchase (Play Billing), but the entitlement is managed server-side (Stripe/Iaptic, account-based, also sold on the web), and Ultimate features (unlimited online matches, ranked, tournaments) are server-side. |
 | AZ Screen Recorder | `com.hecorat.screenrecorder.free` | Checked 2026-10-12 on 6.9.9 (versionCode 70387, APKMirror bundle). Still full PairIP: `VMRunner`, `StartupLauncher`, `SignatureCheck`, `VmDecryptor`, `libpairipcore.so` in all 4 ABIs, 29 encrypted VM assets. Same blocker as Zedge. |
+| Gymverse | `com.fitness22.workout` | Checked 2026-10-13. Full PairIP stack: `VMRunner`, `SignatureCheck`, `VmDecryptor`, `libpairipcore.so` and encrypted VM assets. Same blocker as Zedge. |
 
 ## Removed at the owner's request
 
@@ -95,6 +97,12 @@ Re-anchored and bytecode-verified on 2026-10-07:
 - DartCounter is `com.dartcounter.mobile`, **not** `de.flame.dartcounter` (FLAME Apps' "Darts Counter: Scoreboard").
 
 - spacedesk is `ph.spacedesk.beta`, **not** the Windows viewer's winget ID `Datronicsoft.SpacedeskViewer.Client.Beta` (a PC app).
+- Futbin `com.futbin` "27.5" (versionCode 7005) from the Aptoide user store "superpocket" is an
+  **adware repack**, not a Futbin release. It is signed by CN=Jx Clarynx (RSA-1024, cert SHA-256
+  `bd6515d3…fc6b`) and has an injected `classes7.dex` launcher activity with remote JSON,
+  device fingerprinting and WebView overlays. Genuine builds (27.05, 27.06) are signed by
+  O=FUTBIN (`1cf7ff75…e904`). The 27.5 target was removed on 2026-10-13. Always compare the
+  signer of a downloaded APK with the developer's before verifying a target.
 
 ## Patch limitations worth remembering
 
@@ -102,3 +110,8 @@ Re-anchored and bytecode-verified on 2026-10-07:
   to packages signed with the OAuth client's registered certificates. A re-signed patched build
   cannot get them — use an app password for Gmail accounts. The pro patch itself works.
 - **Flashscore premium**: server-side entitlement (see above).
+- **BoxBox** (5.4.17): the widget "PRO" labels still show with the ads and premium patches applied.
+- **Easy Launcher** (`easy.launcher`, 1.10.28): the Braze SDK still initialises. There is no premium patch because the paywall is dead code.
+- **FotMob+** (238.17794): Enable FotMob+ also unlocks the exclusive app icons. The membership screen still says "No active subscriptions"; active membership display and early access are server-side or nonexistent.
+- **CREX** (26.10.06): FanCode streams are server-side.
+- **Hevy** (3.1.16): Unlock Pro does not reach the server-side limits (cloud-backed Pro features, Hevy Coach).
