@@ -1212,6 +1212,38 @@ object Constants {
         targets = listOf(AppTarget(version = "26.8.3", versionCode = 29260830))
     )
 
+
+    // Verified 2026-10-13 against com.hevy 3.1.16 (versionCode 3325935, XAPK base + arm64 + en +
+    // mdpi splits merged with APKEditor). Hevy is React Native on Hermes: the Pro logic is Hermes
+    // bytecode (HBC v96) in assets/index.android.bundle, which ships in the base split, so patch a
+    // merged APK. No expo-updates or CodePush, so no OTA bundle replaces the patched one.
+    //   - Unlock Pro (rawResourcePatch): hevy/pro/HermesBytecode parses the HBC header, function
+    //     headers and string table; the locator resolves the string ids of
+    //     "isProStatusOverrideEnabled", "is_pro" and "isWithinProOfflineGracePeriod" and requires
+    //     exactly one function whose bytecode holds all three as operands: HevyProStore's isPro
+    //     getter (#32111 at 0x11b9d9c in this build, cross-checked with hermes-dec 0.1.7). Its first
+    //     4 bytes become LoadConstTrue r0; Ret r0 (length-preserving; the footer SHA-1 is not checked
+    //     at runtime). arandomhooman's fixed byte signature (isWithinProOfflineGracePeriod prologue, 3.1.0)
+    //     no longer matches. Server-side limits (cloud-backed Pro features, Hevy Coach) stay locked.
+    //   - Block telemetry & trackers (ported from kveld9): RNSentryModuleImpl.initNativeSdk
+    //     resolves true without SentryAndroid.init; Adjust PackageHandler addPackage/
+    //     sendFirstPackage, Facebook AppEventQueue.flush and Amplitude AndroidContextProvider.prefetch
+    //     return at once; isLimitAdTrackingEnabled and Branch.isTrackingDisabled -> true; Amplitude
+    //     getLegacyEvents resolves an empty array; SentryInitProvider/SentryPerformanceProvider are
+    //     disabled in the manifest. Firebase Messaging, push and RevenueCat are untouched.
+    // The bundle's trailing 20-byte SHA-1 is recomputed after the edit. HevySmokeTest asserts the
+    // rewritten getter, the footer and every telemetry hook; a CLI decompile (no -f) shows only the
+    // getter's first bytes and the 6 telemetry classes changed. On the emulator the patched bundle
+    // loads through Hermes and the app reaches its welcome screen like stock (no crash or JS
+    // error); Pro screens need an account and were not reached.
+    val COMPATIBILITY_HEVY = Compatibility(
+        name = "Hevy",
+        packageName = "com.hevy",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x101012,
+        targets = listOf(AppTarget(version = "3.1.16", versionCode = 3325935))
+    )
+
     // Verified 2026-10-13 against easy.launcher 1.10.28 (versionCode 11028, the owner's APKMirror
     // bundle merged, 4 ABIs, minSdk 32). Play title "Easy Launcher"; the launcher label
     // (string/app_name) is "Easy Homescreen". App code is R8-renamed, but the com.eet.* packages,
