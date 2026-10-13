@@ -33,7 +33,7 @@ class SimpleRadioSmokeTest {
             apk = apk,
             workDir = workDir,
             pkg = PKG,
-            version = "6.2.0",
+            version = "6.2.4",
             patchNames = patchNames,
             allPatches = loadAllPatches(newestPatchBundle(root)),
         )

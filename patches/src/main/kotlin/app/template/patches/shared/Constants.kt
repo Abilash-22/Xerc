@@ -144,7 +144,8 @@ object Constants {
         targets = listOf(
             AppTarget(version = "26.37.0", versionCode = 51401),
             AppTarget(version = "26.38.0", versionCode = 51448),
-            AppTarget(version = "26.39.0", versionCode = 51509)
+            AppTarget(version = "26.39.0", versionCode = 51509),
+            AppTarget(version = "26.40.0", versionCode = 51555)
         )
     )
 
@@ -233,7 +234,8 @@ object Constants {
         appIconColor = 0xC8102E,
         targets = listOf(
             AppTarget(version = "10.1", versionCode = 2144),
-            AppTarget(version = "10.2.1", versionCode = 2188)
+            AppTarget(version = "10.2.1", versionCode = 2188),
+            AppTarget(version = "10.3", versionCode = 2204)
         )
     )
 
@@ -604,7 +606,8 @@ object Constants {
         appIconColor = 0x7CB342,
         targets = listOf(
             AppTarget(version = "5.4.5", versionCode = 5405),
-            AppTarget(version = "5.4.9", versionCode = 5409)
+            AppTarget(version = "5.4.9", versionCode = 5409),
+            AppTarget(version = "5.4.10", versionCode = 5410)
         )
     )
 
@@ -796,7 +799,10 @@ object Constants {
         packageName = "com.streema.simpleradio",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xFF6D00,
-        targets = listOf(AppTarget(version = "6.2.0", versionCode = 872))
+        targets = listOf(
+            AppTarget(version = "6.2.0", versionCode = 872),
+            AppTarget(version = "6.2.4", versionCode = 895)
+        )
     )
 
     // Verified 2026-09-29 against com.farproc.wifi.analyzer 3.10.5-L (versionCode 999,
@@ -860,6 +866,7 @@ object Constants {
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x0088FF,
         targets = listOf(
+            AppTarget(version = "16.63.0-261008", versionCode = 1606300),
             AppTarget(version = "16.62.1-261006", versionCode = 1606210),
             AppTarget(version = "16.62.0-261001", versionCode = 1606200),
         )
@@ -1003,7 +1010,10 @@ object Constants {
         packageName = "com.rawcam.app",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xD0BCFF,
-        targets = listOf(AppTarget(version = "1.4.3", versionCode = 55))
+        targets = listOf(
+            AppTarget(version = "1.4.3", versionCode = 55),
+            AppTarget(version = "1.4.4", versionCode = 56)
+        )
     )
 
     // Verified 2026-10-07 against com.ztnstudio.notepad 5.4.3.19019 (versionCode 19019,
