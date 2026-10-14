@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.14.0-dev.10",
+  "version": "1.14.0-dev.11",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -1211,7 +1211,7 @@
     },
     {
       "name": "Disable ads",
-      "description": "Hides banner and native ads and closes interstitial and app-open ads as soon as they open.",
+      "description": "Hides banner and native ads and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -2782,7 +2782,7 @@
     },
     {
       "name": "Enable Premium",
-      "description": "Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are not unlocked.",
+      "description": "Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Call Assistant, family sharing, Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are not unlocked.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -3354,6 +3354,37 @@
       "options": []
     },
     {
+      "name": "Hide Blocking tab",
+      "description": "Removes the Blocking tab from the bottom bar. Spam blocking keeps working.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#0087FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.39.6",
+              "versionCodes": {
+                "ARM64_V8A": 2639006,
+                "ARMEABI_V7A": 2639006,
+                "X86_64": 2639006,
+                "X86": 2639006
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Hide LINE TODAY tab",
       "description": "Removes the LINE TODAY (News) tab from the bottom navigation bar.",
       "default": false,
@@ -3374,6 +3405,37 @@
                 "ARMEABI_V7A": 261510192,
                 "X86_64": 261510192,
                 "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide Premium tab",
+      "description": "Removes the Premium tab from the bottom bar.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#0087FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.39.6",
+              "versionCodes": {
+                "ARM64_V8A": 2639006,
+                "ARMEABI_V7A": 2639006,
+                "X86_64": 2639006,
+                "X86": 2639006
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3591,6 +3653,37 @@
                 "ARMEABI_V7A": 261510192,
                 "X86_64": 261510192,
                 "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide family button",
+      "description": "Turns off Family Protect, which removes the family button at the top of the home screen and its onboarding and notifications.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#0087FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.39.6",
+              "versionCodes": {
+                "ARM64_V8A": 2639006,
+                "ARMEABI_V7A": 2639006,
+                "X86_64": 2639006,
+                "X86": 2639006
               },
               "isExperimental": false,
               "minSdk": null,
@@ -4057,6 +4150,37 @@
                 "ARMEABI_V7A": 29260830,
                 "X86_64": 29260830,
                 "X86": 29260830
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Restore classic call log",
+      "description": "Experimental: turns off the redesigned call log, which brings back the classic call log and its \"Frequently called\" setting.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#0087FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.39.6",
+              "versionCodes": {
+                "ARM64_V8A": 2639006,
+                "ARMEABI_V7A": 2639006,
+                "X86_64": 2639006,
+                "X86": 2639006
               },
               "isExperimental": false,
               "minSdk": null,

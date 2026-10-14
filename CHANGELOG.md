@@ -1,3 +1,9 @@
+## [1.14.0-dev.11](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.10...v1.14.0-dev.11) (2026-10-14)
+
+### 🐛 Bug Fixes
+
+* **truecaller:** stop "premium expired" notices and Max resets; add tab hiding ([3dfc968](https://github.com/heval99/Heval-Morphe-Patches/commit/3dfc968c7cb55e1795a9740a3ff57009df24762e)), closes [#54](https://github.com/heval99/Heval-Morphe-Patches/issues/54) [#52](https://github.com/heval99/Heval-Morphe-Patches/issues/52) [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53)
+
 ## [1.14.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.9...v1.14.0-dev.10) (2026-10-14)
 
 ### 🐛 Bug Fixes

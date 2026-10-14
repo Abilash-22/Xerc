@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.10)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**124** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.14.0-dev.11](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.11)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**128** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -92,7 +92,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
 | <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.20` | APK |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` <sub>+1 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 9 | `26.39.6` | APKM |
+| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 13 | `26.39.6` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 💎 2 | `11.2.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Weather Underground** | 🚫 1 | `6.20.1` | APK |
@@ -624,19 +624,23 @@ Verified on: `4.87`, `4.85`
 
 </details>
 <details>
-<summary><b>Truecaller</b> &nbsp;·&nbsp; 9 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
+<summary><b>Truecaller</b> &nbsp;·&nbsp; 13 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
 
 Verified on: `26.39.6`
 
 | Patch | What it does | Default |
 |---|---|:-:|
-| 🚫 **Disable ads** | Hides banner and native ads and closes interstitial and app-open ads as soon as they open. | ✅ |
+| 🚫 **Disable ads** | Hides banner and native ads and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once. | ✅ |
 | 🛡️ **Disable telemetry** | Turns off the app start tracker, CleverTap event tracking and AppsFlyer attribution. | ✅ |
 | 🔕 **Disable update prompts** | Stops the Google Play in-app update prompts and the app's own "update required" page, so the app does not block you from using the patched version. | ✅ |
-| 💎 **Enable Premium** | Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are not unlocked. | ✅ |
+| 💎 **Enable Premium** | Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Call Assistant, family sharing, Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are not unlocked. | ✅ |
 | 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. | ➖ |
 | 🧩 **Hide Assistant tab** | Turns off the Call Assistant feature, which removes the Assistant tab. | ➖ |
+| 🧩 **Hide Blocking tab** | Removes the Blocking tab from the bottom bar. Spam blocking keeps working. | ➖ |
+| 💎 **Hide Premium tab** | Removes the Premium tab from the bottom bar. | ➖ |
 | 🧩 **Hide Scam feed** | Turns off the Scam Feed, which removes its tab and menu entry and stops its notifications. | ➖ |
+| 🧩 **Hide family button** | Turns off Family Protect, which removes the family button at the top of the home screen and its onboarding and notifications. | ➖ |
+| 🧩 **Restore classic call log** | Experimental: turns off the redesigned call log, which brings back the classic call log and its "Frequently called" setting. | ➖ |
 | 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. | ➖ |
 | 🧩 **Use SMS for verification codes** | Reads the phone verification code from the SMS inbox instead of Google's SMS Retriever, for devices without Google Play services or with MicroG. Phone verification can still fail on modified builds, because Truecaller's servers check the app. | ➖ |
 

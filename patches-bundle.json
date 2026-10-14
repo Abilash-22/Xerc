@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-14T09:49:41",
-  "description": "## [1.14.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.9...v1.14.0-dev.10) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* **futbin:** block Nimbus and Anzu ads and remove empty ad slots; updated to version 27.06 ([9f8a9fd](https://github.com/heval99/Heval-Morphe-Patches/commit/9f8a9fd08a52377d30f3be61969b7df12822465c))\n\n### ✨ New Features\n\n* add universal Remove screenshot restriction patch ([199fe45](https://github.com/heval99/Heval-Morphe-Patches/commit/199fe45dd7a3a64b3ad8725efe0d84cae55083ec))",
-  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.14.0-dev.10/patches-1.14.0-dev.10.mpp",
+  "created_at": "2026-10-14T10:06:48",
+  "description": "## [1.14.0-dev.11](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.10...v1.14.0-dev.11) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* **truecaller:** stop \"premium expired\" notices and Max resets; add tab hiding ([3dfc968](https://github.com/heval99/Heval-Morphe-Patches/commit/3dfc968c7cb55e1795a9740a3ff57009df24762e)), closes [#54](https://github.com/heval99/Heval-Morphe-Patches/issues/54) [#52](https://github.com/heval99/Heval-Morphe-Patches/issues/52) [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53)",
+  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.14.0-dev.11/patches-1.14.0-dev.11.mpp",
   "signature_download_url": "",
-  "version": "1.14.0-dev.10"
+  "version": "1.14.0-dev.11"
 }
