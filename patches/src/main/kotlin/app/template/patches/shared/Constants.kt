@@ -1584,4 +1584,25 @@ object Constants {
         appIconColor = 0x262626,
         targets = listOf(AppTarget(version = "26.10.06", versionCode = 667))
     )
+
+    // Added 2026-10-14 from the Reddit request queue ("the ads mess with the UI"). Verified
+    // against cc.dreamspark.intervaltimer 2.3.30 (versionCode 239030, single APK, no native code,
+    // signer CN=Su-Au Hwang O=dreamspark.cc). The only entitlement is "ad-free" (adbuster), synced
+    // from the server into two R8-renamed JSON models, AppInstallation and User. Disable ads forces
+    // both ad-state ()I getters to 3 (ad-free). They are found by the models' JSON field names
+    // ("config_ads", "local_ads_time", "local_ads_off" plus "device" or "token") and the 3/2/1
+    // returns. Every ad path reads them: the native-ad slot map and the only MobileAds.initialize
+    // call, the workout-finished banner and the toolbar's "Remove ads" item (its dialog's only
+    // entry point). Disable telemetry sets the Firebase Analytics, ad ID and Crashlytics manifest
+    // switches. IntervalTimerSmokeTest asserts both getters and the manifest. Emulator 2026-10-14:
+    // 3 fresh-install cold starts with no crash, no ad row or gap and no "Remove ads" toolbar item;
+    // a workout runs and counts down. Pause, the finish screen, sounds and an explicit config
+    // re-sync were not checked.
+    val COMPATIBILITY_INTERVALTIMER = Compatibility(
+        name = "Interval Timer",
+        packageName = "cc.dreamspark.intervaltimer",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x607D8B,
+        targets = listOf(AppTarget(version = "2.3.30", versionCode = 239030))
+    )
 }
