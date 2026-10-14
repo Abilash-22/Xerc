@@ -1,3 +1,10 @@
+## [1.15.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.6...v1.15.0-dev.7) (2026-10-14)
+
+### ✨ New Features
+
+* **truecaller:** remove the call-list Premium promo row; add Hide Messages tab ([06aaddb](https://github.com/heval99/Heval-Morphe-Patches/commit/06aaddbd6b1395cd75bdccbb2a32bba415f2bfb7)), closes [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53) [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53)
+* **wsj:** add The Wall Street Journal ad removal ([7e83ebb](https://github.com/heval99/Heval-Morphe-Patches/commit/7e83ebb2335d6136e913a59af93b6e2116677bae))
+
 ## [1.15.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.5...v1.15.0-dev.6) (2026-10-14)
 
 ### ✨ New Features

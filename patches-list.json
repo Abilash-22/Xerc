@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.15.0-dev.6",
+  "version": "1.15.0-dev.7",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -1315,7 +1315,7 @@
     },
     {
       "name": "Disable ads",
-      "description": "Hides banner and native ads and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once.",
+      "description": "Hides banner and native ads and the ad slots in the call log and inbox, and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -1410,6 +1410,37 @@
                 "ARMEABI_V7A": 139,
                 "X86_64": 139,
                 "X86": 139
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable ads",
+      "description": "Removes the display and native ads from section fronts, articles and market pages, without leaving empty ad slots, and the pre-roll ads before videos.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "wsj.reader_sp",
+          "name": "The Wall Street Journal",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#000000",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "6.43.0.33886",
+              "versionCodes": {
+                "ARM64_V8A": 643003886,
+                "ARMEABI_V7A": 643003886,
+                "X86_64": 643003886,
+                "X86": 643003886
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3683,6 +3714,37 @@
                 "ARMEABI_V7A": 261510192,
                 "X86_64": 261510192,
                 "X86": 261510192
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide Messages tab",
+      "description": "Removes the Messages tab from the bottom bar and always opens Calls. SMS notifications still open their conversation. When Calls is the only tab left, the bottom bar is hidden.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#0087FF",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.40.5",
+              "versionCodes": {
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,

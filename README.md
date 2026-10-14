@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.6)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**55** apps&nbsp;&nbsp;•&nbsp;&nbsp;**140** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.15.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**56** apps&nbsp;&nbsp;•&nbsp;&nbsp;**142** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -95,7 +95,8 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
 | <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.20` | APK |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` <sub>+1 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 13 | `26.40.5` | APKM |
+| <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **The Wall Street Journal** | 🚫 1 | `6.43.0.33886` | APK |
+| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 14 | `26.40.5` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 💎 2 | `11.2.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-112D5A?style=flat-square" height="14" alt=""> | **VesselFinder** | 🚫 🔑 2 | `6.7.8` | APKM |
@@ -665,19 +666,30 @@ Verified on: `4.87`, `4.85`
 
 </details>
 <details>
-<summary><b>Truecaller</b> &nbsp;·&nbsp; 13 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
+<summary><b>The Wall Street Journal</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>wsj.reader_sp</code></summary>
+
+Verified on: `6.43.0.33886`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the display and native ads from section fronts, articles and market pages, without leaving empty ad slots, and the pre-roll ads before videos. | ✅ |
+
+</details>
+<details>
+<summary><b>Truecaller</b> &nbsp;·&nbsp; 14 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
 
 Verified on: `26.40.5`
 
 | Patch | What it does | Default |
 |---|---|:-:|
-| 🚫 **Disable ads** | Hides banner and native ads and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once. | ✅ |
+| 🚫 **Disable ads** | Hides banner and native ads and the ad slots in the call log and inbox, and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once. | ✅ |
 | 🛡️ **Disable telemetry** | Turns off the app start tracker, CleverTap event tracking and AppsFlyer attribution. | ✅ |
 | 🔕 **Disable update prompts** | Stops the Google Play in-app update prompts and the app's own "update required" page, so the app does not block you from using the patched version. | ✅ |
 | 💎 **Enable Premium** | Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Call Assistant, family sharing, Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are not unlocked. | ✅ |
 | 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. | ➖ |
 | 🧩 **Hide Assistant tab** | Turns off the Call Assistant feature, which removes the Assistant tab. | ➖ |
 | 🧩 **Hide Blocking tab** | Removes the Blocking tab from the bottom bar. Spam blocking keeps working. | ➖ |
+| 🧩 **Hide Messages tab** | Removes the Messages tab from the bottom bar and always opens Calls. SMS notifications still open their conversation. When Calls is the only tab left, the bottom bar is hidden. | ➖ |
 | 💎 **Hide Premium tab** | Removes the Premium tab from the bottom bar. | ➖ |
 | 🧩 **Hide Scam feed** | Turns off the Scam Feed, which removes its tab and menu entry and stops its notifications. | ➖ |
 | 🧩 **Hide family button** | Turns off Family Protect, which removes the family button at the top of the home screen and its onboarding and notifications. | ➖ |
