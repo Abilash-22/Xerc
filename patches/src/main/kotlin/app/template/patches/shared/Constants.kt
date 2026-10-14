@@ -209,6 +209,7 @@ object Constants {
     // shows "Add" instead of "Unlock" and the app logs plan Pro; no crashes. The "PRO" labels
     // in the widget list stay. Signed-in features were not tried; server-side
     // UserProfiles.isPro is untouched.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_BOXBOX = Compatibility(
         name = "BoxBox",
         packageName = "club.boxbox.android",
@@ -252,6 +253,7 @@ object Constants {
     // were dropped from the targets: the new patches were only verified on 14.9.6. The GmsCore
     // "Clone" option renames the package, which Spoof signature does not follow (it spoofs
     // com.scores365 only), so keep Clone off when notifications matter.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_365SCORES = Compatibility(
         name = "365Scores",
         packageName = "com.scores365",
@@ -672,6 +674,8 @@ object Constants {
     // league ODDS tab, the match-detail odds section, the bookmaker bonus strip with its 18+ line,
     // the gift icon and the ad slots are gone; no crashes. List-row odds and bookmaker broadcasting
     // info were not shown by stock in that region, so they are untested.
+    // 2026-10-14: Disable ads also no-ops the next-gen MobileAds (and Companion) setRequestConfiguration,
+    // setUserMutedApp and setUserControlledAppVolume, which throw without init (rule 9).
     val COMPATIBILITY_FLASHSCORE = Compatibility(
         name = "Flashscore",
         packageName = "eu.livesport.FlashScore_com",
@@ -694,6 +698,7 @@ object Constants {
     // applies unchanged; OneFootballSmokeTest passes.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_ONEFOOTBALL = Compatibility(
         name = "OneFootball",
         packageName = "de.motain.iliga",
@@ -806,6 +811,7 @@ object Constants {
     // app starts no ad SDK. Neither stock nor patched gets past the first GlobalActivity screen on
     // this emulator (pause timeout on stock too), so the screens with ads, the squad-builder panel
     // and interstitials were NOT checked at runtime. Only 27.06 is supported now (owner request).
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_FUTBIN = Compatibility(
         name = "Futbin",
         packageName = "com.futbin",
@@ -824,6 +830,7 @@ object Constants {
     // serve, so there is nothing to verify against it.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_PCW = Compatibility(
         name = "Pocket Color Wheel",
         packageName = "com.pocketcolorwheel.PCW",
@@ -995,6 +1002,7 @@ object Constants {
     // MaxInterstitialAd loadAd/showAd).
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_PIMUSICPLAYER = Compatibility(
         name = "Pi Music Player",
         packageName = "com.Project100Pi.themusicplayer",
@@ -1045,6 +1053,7 @@ object Constants {
     // onPurchasesUpdated in app code).
     // 2026-10-12: the real versionName carries a build suffix; the bare version made
     // Manager/CLI treat the patches as incompatible.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_PODCASTREPUBLIC = Compatibility(
         name = "Podcast Republic",
         packageName = "com.podcast.podcasts",
@@ -1066,6 +1075,7 @@ object Constants {
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     // 2026-10-12: the real versionName carries a build suffix; the bare version made
     // Manager/CLI treat the patches as incompatible.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_CASTBOX = Compatibility(
         name = "Castbox",
         packageName = "fm.castbox.audiobook.radio.podcast",
@@ -1086,6 +1096,7 @@ object Constants {
     // No PairIP or other shields in the dex. Play Billing is present for the Pro
     // subscription but the premium gates are obfuscated; premium deep-dive parked -
     // ads only.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_SOUNDHOUND = Compatibility(
         name = "SoundHound",
         packageName = "com.melodis.midomiMusicIdentifier.freemium",
@@ -1103,6 +1114,7 @@ object Constants {
     // other bundled networks (Mintegral, IronSource, Vungle, ...) are only reached via
     // AdMob mediation, so the AdMob loads are the backstop. No premium tier exists (no
     // billing code). No PairIP.
+    // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
     val COMPATIBILITY_ONECRICKET = Compatibility(
         name = "OneCricket",
         packageName = "one.cricket.app",
