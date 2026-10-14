@@ -898,19 +898,30 @@ object Constants {
         targets = listOf(AppTarget(version = "26.06.0", versionCode = 70004221))
     )
 
-    // Verified 2026-10-11 against com.appgenix.bizcal 2.55.5 (versionCode 255501) from the
-    // existing apks/bizcal/base.apk. Single APK, no PairIP. The app's own code is readable.
-    // AdsUtil.showAdsForUser(Context) is the one user-level ad gate: it guards the mediation SDK
-    // start (StoreUtil.initializeMobileAds, Fyber/Chartboost/AppLovin/Vungle/Facebook/InMobi/Unity)
-    // and the interstitial preload and show path. Pro (ProUtil) is untouched: ads only.
-    // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
-    // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // Verified 2026-10-14 against com.appgenix.bizcal 2.55.7 (versionCode 255702): owner-supplied
+    // apkcube bundle, base and every split signed by the developer (CN=Michael Kopplin, O=Mikado
+    // Software, SHA-256 53d3dc3f...) with a Google Play source stamp, merged with APKEditor. Only
+    // distributed as a split bundle, so APKM. No PairIP, LVL or Play Integrity; app code readable.
+    // Disable ads: AdsUtil.showAdsForUser(Context) and showAdsAccordingToFirebase(Context) (the
+    // "ads or Pro" dialog flag) forced false, plus the FairBid backstop in StoreUtil
+    // (initializeMobileAds / preloadInterstitialAd / showInterstitialAd, pinned by their FairBid and
+    // Interstitial calls) and the Facebook AudienceNetworkContentProvider.onCreate.
+    // Disable telemetry: Fyber's crash-handler provider, the two PushNotificationsUtil promo-push
+    // methods, FirebaseAnalytics.logEvent/setUserId/setUserProperty, AppMeasurementSdk.logEvent, the
+    // Crashlytics reporting API plus its collection arbiter (found by its pref key), and the
+    // firebase_analytics_collection_deactivated manifest switch; Firebase init and Remote Config
+    // are left running. Unlock Pro (owner-supplied reference
+    // o0b/morphe-patches): SettingsHelper$ProStatus.getCompleteProStatus / getForceProStatus
+    // forced true, which every ProUtil feature gate reads first; billing is untouched.
+    // Emulator 2026-10-14 (2.55.7, all three patches): no crash, no ads or ads-or-Pro dialog, no Go
+    // Pro drawer item, location autocomplete unlocked, events persist across views/rotation/restart;
+    // Firebase logs "App measurement deactivated via the manifest".
     val COMPATIBILITY_BUSINESSCALENDAR = Compatibility(
         name = "Business Calendar 2",
         packageName = "com.appgenix.bizcal",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x009688,
-        targets = listOf(AppTarget(version = "2.55.5", versionCode = 255501))
+        targets = listOf(AppTarget(version = "2.55.7", versionCode = 255702))
     )
 
     // Verified 2026-10-11 against app.expert.player 11.2.0 (versionCode 306) from APKPure's XAPK
