@@ -1312,8 +1312,41 @@ object Constants {
     // Ideas taken from the GPLv3 Paresh and bufferk Truecaller patches (anchors there were for
     // older builds and pinned obfuscated names). Rejected: pinning a6x/pol/myw/x5x/hqa/co70/es7/
     // nk00 names; AttributesDTO.<init>(Z) (Gson-built, nothing outside the DTO reads isPremium in
-    // this build); the reference "SavePremiumState" hook (no confirmed 26.39.6 equivalent);
-    // returning SMS at offset 0 of the OtpSmsApi lambda (it would break every other merged case).
+    // this build); returning SMS at offset 0 of the OtpSmsApi lambda (it would break every other
+    // merged case).
+    // Re-verified 2026-10-14 against 26.39.6 (smoke test + jadx/smali review, not runtime-tested)
+    // for user reports #52/#54 and request #53:
+    //   - Enable Premium: (PremiumFeature, Z)Z now falls through to the stock check for
+    //     CALL_ASSISTANT and FAMILY_SHARING (kept enum constants; both server-backed, and a
+    //     forced Call Assistant let "Assistant"-handled spam calls ring through). The premium
+    //     status sync writer (Object return, 2 params, strings "premiumHadPremiumBefore" +
+    //     "entitledCatalogItemIds", only i3x.e here) returns kotlin.Unit (singleton field found by
+    //     type) at once, the equivalent of the reference "SavePremiumState": its
+    //     PremiumStatusUpdate event treated the forced isPremium plus the server's "expired" as a
+    //     lost subscription, which reset Max spam protection to Basic, the premium blocking
+    //     options and the call blocking method, re-enabled ads and posted "subscription expired".
+    //   - Disable ads: interstitials are gated at the source, the ()Z check that reads exactly
+    //     "featureInterstitialAd" (krk.e here) -> false, so placements run the user's action at
+    //     once; finishing AdInterstitialActivity / AdRouterInterstitialActivity dropped Click to
+    //     WhatsApp, block, details, pay and rewarded callbacks and was removed. Only
+    //     AdAppOpeningActivity (a loading screen without a pending action, reached only from the
+    //     gated flow) still finishes after super.onCreate.
+    //   - Hide Premium tab / Hide Blocking tab (opt-in): the bottom bar builder ((SparseIntArray)V
+    //     reading BottomBarButtonType.CALLS / MESSAGES, then a static ([Object)List filterNotNull
+    //     and CollectionsKt (Iterable, I)List take) calls a new static helper per patch on the tab
+    //     array right before filterNotNull; it nulls PREMIUM, or BLOCKING and
+    //     FAMILY_PROTECTION_CONFIG (both labelled "Blocking"), read through the tab base class's
+    //     BottomBarButtonType getter. Calls and Messages always stay; selecting a hidden tab
+    //     (deep links, upsells) is a no-op in NavigationBarView.setSelectedItemId.
+    //   - Hide family button / Restore classic call log (opt-in; the latter experimental): the
+    //     central toggle resolver (String, FeatureState)Z that calls SharedPreferences.getBoolean
+    //     (twins with the same signature do not) returns false for "featureFamilyProtect" /
+    //     "featureCallLogRevamp", via a shared key -> value override helper.
+    //   Emulator 2026-10-14 (logged out): stock, the default patches, and the default patches plus
+    //   the four new opt-in ones all install, run onboarding and survive 3 cold starts with no
+    //   crash. Everything past onboarding needs SMS registration, so the premium-sync fix, the
+    //   interstitial change, the hidden tabs, the family button and the classic call log were NOT
+    //   checked at runtime (smoke test + CLI disassembly only).
     val COMPATIBILITY_TRUECALLER = Compatibility(
         name = "Truecaller",
         packageName = "com.truecaller",

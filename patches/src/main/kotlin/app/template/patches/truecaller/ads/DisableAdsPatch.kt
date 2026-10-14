@@ -4,6 +4,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.morphe.util.returnEarly
 import app.template.patches.shared.Constants.COMPATIBILITY_TRUECALLER
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
@@ -15,8 +16,8 @@ private val MutableMethod.parameterList get() = parameterTypes.map(CharSequence:
 @Suppress("unused")
 val disableAdsPatch = bytecodePatch(
     name = "Disable ads",
-    description = "Hides banner and native ads and closes interstitial and app-open ads as soon " +
-        "as they open.",
+    description = "Hides banner and native ads and turns off interstitial and app-open ads, so " +
+        "actions such as Click to WhatsApp run at once.",
 ) {
     compatibleWith(COMPATIBILITY_TRUECALLER)
 
@@ -66,25 +67,30 @@ val disableAdsPatch = bytecodePatch(
             }
         }
 
-        // 2. Interstitial and app-open ads: finish the activity right after super.onCreate, the
-        // point where the framework expects onCreate to have run.
-        for (type in FULL_SCREEN_AD_ACTIVITIES) {
-            val onCreate = mutableClassDefBy(type).methods.firstOrNull {
-                it.name == "onCreate" && it.parameterList == listOf("Landroid/os/Bundle;") && it.implementation != null
-            } ?: throw PatchException("$type has no onCreate(Bundle)")
-            val superCall = onCreate.implementation!!.instructions.indexOfFirst { instruction ->
-                val call = (instruction as? ReferenceInstruction)?.reference as? MethodReference
-                (instruction.opcode == Opcode.INVOKE_SUPER || instruction.opcode == Opcode.INVOKE_SUPER_RANGE) &&
-                    call?.name == "onCreate"
-            }
-            if (superCall < 0) throw PatchException("$type.onCreate does not call super.onCreate")
-            onCreate.addInstructions(
-                superCall + 1,
-                """
-                    invoke-virtual/range {p0 .. p0}, Landroid/app/Activity;->finish()V
-                    return-void
-                """,
-            )
+        // 2. Interstitial ads: the manager reports them as off, so each placement runs the user's
+        // action (open WhatsApp, call details, block, pay, ...) at once. Closing the ad activities
+        // instead dropped that action, which only runs when the ad is dismissed. The ads-router
+        // interstitial and app-open flows start only from this gated flow. Rewarded ads, which
+        // share AdInterstitialActivity, are left alone: they gate a feature.
+        InterstitialAdsEnabledFingerprint.method.returnEarly(false)
+
+        // 3. App-open loading screen: finish it right after super.onCreate, the point where the
+        // framework expects onCreate to have run. It is only reached from the flow gated above.
+        val onCreate = mutableClassDefBy(AD_APP_OPENING_ACTIVITY).methods.firstOrNull {
+            it.name == "onCreate" && it.parameterList == listOf("Landroid/os/Bundle;") && it.implementation != null
+        } ?: throw PatchException("$AD_APP_OPENING_ACTIVITY has no onCreate(Bundle)")
+        val superCall = onCreate.implementation!!.instructions.indexOfFirst { instruction ->
+            val call = (instruction as? ReferenceInstruction)?.reference as? MethodReference
+            (instruction.opcode == Opcode.INVOKE_SUPER || instruction.opcode == Opcode.INVOKE_SUPER_RANGE) &&
+                call?.name == "onCreate"
         }
+        if (superCall < 0) throw PatchException("$AD_APP_OPENING_ACTIVITY.onCreate does not call super.onCreate")
+        onCreate.addInstructions(
+            superCall + 1,
+            """
+                invoke-virtual/range {p0 .. p0}, Landroid/app/Activity;->finish()V
+                return-void
+            """,
+        )
     }
 }

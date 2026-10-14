@@ -10,7 +10,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
 
 internal const val PREMIUM_TIER_TYPE = "Lcom/truecaller/premium/data/tier/PremiumTierType;"
-private const val PREMIUM_FEATURE = "Lcom/truecaller/premium/data/feature/PremiumFeature;"
+internal const val PREMIUM_FEATURE = "Lcom/truecaller/premium/data/feature/PremiumFeature;"
 private const val PREMIUM_FEATURE_STATUS = "Lcom/truecaller/premium/data/feature/PremiumFeatureStatus;"
 
 // Truecaller is R8-obfuscated apart from its model, enum and worker classes, so the anchors are
@@ -56,6 +56,15 @@ internal object FeatureAvailableFingerprint : Fingerprint(
     returnType = "Z",
     parameters = listOf(PREMIUM_FEATURE, "Z"),
     filters = listOf(string("disabledPremiumFeatures")),
+)
+
+// The premium status sync writer (i3x.e(status, continuation) in 26.39.6): stores the server's
+// premium status in the premium prefs, then sends a PremiumStatusUpdate(oldState, newPremium)
+// event to its listeners. Only this method writes both keys.
+internal object PremiumStatusWriterFingerprint : Fingerprint(
+    returnType = "Ljava/lang/Object;",
+    parameters = listOf("L", "L"),
+    strings = listOf("premiumHadPremiumBefore", "entitledCatalogItemIds"),
 )
 
 // PremiumState(isPremium, tier, productKind, scope, insuranceState), the state object the premium

@@ -1,6 +1,7 @@
 package app.template.patches.truecaller.ads
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.string
 
 // The three ad views every banner and native placement binds through. Their class names are kept
 // (they are inflated from layouts); their bind methods are R8-renamed, so the patch selects them
@@ -19,10 +20,18 @@ internal object AdsSwitchViewBindFingerprint : Fingerprint(
     custom = { method, _ -> method.parameterTypes.size == 2 },
 )
 
-// Full-screen interstitial and app-open ads are shown in their own activities (kept: declared in
-// the manifest).
-internal val FULL_SCREEN_AD_ACTIVITIES = listOf(
-    "Lcom/truecaller/ads/interstitial/AdInterstitialActivity;",
-    "Lcom/truecaller/ads/interstitial/AdAppOpeningActivity;",
-    "Lcom/truecaller/ads/adsrouter/ui/interstitial/AdRouterInterstitialActivity;",
+// The interstitial manager's "can show interstitials" check (krk.e() in 26.39.6):
+// isEnabled("featureInterstitialAd") && shouldShowAds. Every interstitial placement (Click to
+// WhatsApp, call details, block, pay, ...) asks it first and runs the user's action at once when
+// it is false; otherwise the action waits until the ad closes. The key is exact-matched; the only
+// other readers are the toggle registries, which return lists.
+internal object InterstitialAdsEnabledFingerprint : Fingerprint(
+    returnType = "Z",
+    parameters = listOf(),
+    filters = listOf(string("featureInterstitialAd")),
 )
+
+// The "Opening WhatsApp / the app" screen shown before an app-open ad (kept: declared in the
+// manifest). It holds no pending action: the coroutine that starts it runs the action itself after
+// a one-second delay.
+internal const val AD_APP_OPENING_ACTIVITY = "Lcom/truecaller/ads/interstitial/AdAppOpeningActivity;"
