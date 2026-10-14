@@ -508,14 +508,25 @@ object Constants {
 
     // Verified 2026-09-17 against net.dinglisch.android.taskerm 6.6.18 (versionCode 5443)
     // from APKPure. Paid app: the Play purchase is validated with Google Play LVL plus a
-    // licence server (Patreon keys). The licensing code is R8-obfuscated (rf.a0, rf.w$a),
-    // so the fingerprints pin those names for this version.
+    // licence server (Patreon keys). The licensing code is R8-obfuscated (rf.a0, rf.w$a);
+    // the 2026-09-17 fingerprints pinned those names.
+    // 2026-10-13: fingerprints no longer pin obfuscated names. Anchors: the LVL response
+    // mapper's <init>(I) with the "Licensed"/"Retrying"/"Unlicensed" labels (its no-arg
+    // LicenseStatus getters return Licensed); the (Context, long)Z cached check by its
+    // "Checking cached only" log prefix; in that class the public (Context)Z overload and the
+    // private static (?, boolean, Context)Z result helper reading LicenseStatus.Retry/Licensed
+    // (new hook: covers the Unlicensed fallback when Play cannot be reached); and the public
+    // static (Context)Z facade that calls the overload. Smoke test and CLI disassembly pass on
+    // 6.6.18 (5443) and 6.6.20 (5445). Emulator 2026-10-14 (6.6.20, Play Store image, no Google
+    // account, so LVL answers with a server error): stock shows "Trial Over - Tasker can't be
+    // used until you purchase it"; patched shows no licence dialog or notification and runs a
+    // Flash task; no crashes. A real NOT_LICENSED response and the timeout path were not reachable.
     val COMPATIBILITY_TASKER = Compatibility(
         name = "Tasker",
         packageName = "net.dinglisch.android.taskerm",
         apkFileType = ApkFileType.APK,
         appIconColor = 0x4CAF50,
-        targets = listOf(AppTarget(version = "6.6.18", versionCode = 5443))
+        targets = listOf(AppTarget(version = "6.6.20", versionCode = 5445))
     )
 
     // Verified 2026-09-17 against org.kman.AquaMail 2.7.0 (versionCode 200700061) from
