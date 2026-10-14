@@ -1,3 +1,9 @@
+## [1.15.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.9...v1.15.0-dev.10) (2026-10-14)
+
+### ✨ New Features
+
+* **linkedin:** add Heval Controls with a nav panel entry and Hide Puzzle Games ([7f69a25](https://github.com/heval99/Heval-Morphe-Patches/commit/7f69a25ada6ab858ecad774e782fd45f3f113a69))
+
 ## [1.15.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.8...v1.15.0-dev.9) (2026-10-14)
 
 ### ✨ New Features

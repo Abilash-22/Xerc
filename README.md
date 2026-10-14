@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**57** apps&nbsp;&nbsp;•&nbsp;&nbsp;**143** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.15.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.10)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**58** apps&nbsp;&nbsp;•&nbsp;&nbsp;**145** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -76,6 +76,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-406C5C?style=flat-square" height="14" alt=""> | **LibrePods** | 💎 1 | `1.0.1-rc1-play` <sub>+1 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Librera** | 🚫 1 | `9.4.20` | APK |
 | <img src="https://img.shields.io/badge/-%20-06C755?style=flat-square" height="14" alt=""> | **LINE** | 🚫 🔕 🧩 17 | `26.15.1` | APKM |
+| <img src="https://img.shields.io/badge/-%20-0A66C2?style=flat-square" height="14" alt=""> | **LinkedIn** | 🧩 2 | `4.1.1261` | APKM |
 | <img src="https://img.shields.io/badge/-%20-C8102E?style=flat-square" height="14" alt=""> | **Livescore** | 🚫 1 | `10.3.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-3A362F?style=flat-square" height="14" alt=""> | **LuckyClick** | 🚫 🔑 2 | `3.28` | APKM |
 | <img src="https://img.shields.io/badge/-%20-8BC34A?style=flat-square" height="14" alt=""> | **Monefy** | 💎 1 | `1.22.11` | APKM |
@@ -460,6 +461,17 @@ Verified on: `26.15.1`
 | 🧩 **Open links in external browser** | Opens web links in your default browser instead of LINE's in-app browser. LINE links and LIFF mini apps stay in LINE. | ➖ |
 | 🔕 **Read notifications without receipt** | Opening a 1:1 or group chat from a message notification no longer marks it read or sends a read receipt while it is open, and the chat stays unread. | ➖ |
 | 🧩 **Read without receipt** | Adds "Read without receipt" to the long-press menu of 1:1 and group chats in the chat list. The chat opens without marking it read or sending a read receipt while it is open, and stays unread. | ➖ |
+
+</details>
+<details>
+<summary><b>LinkedIn</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.linkedin.android</code></summary>
+
+Verified on: `4.1.1261`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🧩 **Heval Controls** | Adds the Heval Controls screen, where supported features of this patch bundle can be turned on or off at runtime, with a global pause and a crash safe mode. | ✅ |
+| 🧩 **Hide Puzzle Games** | Removes the Puzzle Games entry from the panel that opens from your profile photo. | ✅ |
 
 </details>
 <details>
