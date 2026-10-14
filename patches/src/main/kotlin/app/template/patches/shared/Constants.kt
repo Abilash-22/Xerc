@@ -910,15 +910,37 @@ object Constants {
     // library surfaces (MobileAds.initialize overloads, MaxInterstitialAd loadAd/showAd).
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // 2026-10-13 "Disable ads" fix, smoke-tested on 6.2.0 (872) and 6.2.4 (895, split base).
+    // Before: the banner hook targeted AdView, which has no loadAd, so it matched nothing and
+    // banners kept loading while the patch reported Applied; AdManager interstitials (the
+    // path every non-"admob" AdsExperiment bucket takes), rewarded, rewarded-interstitial,
+    // app-open and MAX banner/rewarded/app-open/native loads were not hooked at all. Now every
+    // listed entry point is mandatory (missing class or method = patch failure): GMA
+    // BaseAdView.loadAd, AdManagerAdView.loadAd, AdLoader.loadAd/loadAds, static load() on
+    // InterstitialAd, AdManagerInterstitialAd, RewardedAd, RewardedInterstitialAd, AppOpenAd;
+    // MAX loadAd on MaxInterstitialAd/MaxAdView/MaxRewardedAd/MaxAppOpenAd/MaxNativeAdLoader
+    // plus every MaxInterstitialAd.showAd. GMA/MAX names are unobfuscated in both versions.
+    // Prebid (6.2.4 only, obfuscated) is not hooked: the app blocks on its demand future with
+    // an untimed get(), and the AdManagerInterstitialAd.load no-op already stops the ad.
+    // 2026-10-14 crash fix: with MobileAds.initialize a no-op (released patch too), the ads
+    // manager's MobileAds.setAppVolume(0f) threw IllegalStateException on every cold start while
+    // Remote Config "android_ump_enabled" was not active (fresh install), with or without Enable
+    // Premium. Every concrete static void on MobileAds now returns early and
+    // putPublisherFirstPartyIdEnabled answers false. New anchor for the empty native "Ad" row in
+    // the station lists: the AdsExperiment Boolean stored after "android_search_nativeads_show"
+    // (getter s2() on 6.2.0, x2() on 6.2.4) answers false. Smoke test (both patches, one run)
+    // passes on 6.2.0 (872) and 6.2.4 (895); 6.2.4 CLI-patched without -f and disassembly
+    // checked. Emulator 2026-10-14 (6.2.4, fresh installs, Disable ads alone and with Enable
+    // Premium, 3-4 cold starts each incl. after UMP consent): no crash and no "must be called
+    // prior" exception; no "Ad" card (stock shows it at the top of Recommended); audio plays and
+    // survives background/return; no interstitial; Enable Premium hides the paywall and the
+    // Premium tab. 6.2.0 dropped: only the latest verified version is supported.
     val COMPATIBILITY_SIMPLERADIO = Compatibility(
         name = "Simple Radio",
         packageName = "com.streema.simpleradio",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xFF6D00,
-        targets = listOf(
-            AppTarget(version = "6.2.0", versionCode = 872),
-            AppTarget(version = "6.2.4", versionCode = 895)
-        )
+        targets = listOf(AppTarget(version = "6.2.4", versionCode = 895))
     )
 
     // Verified 2026-09-29 against com.farproc.wifi.analyzer 3.10.5-L (versionCode 999,
