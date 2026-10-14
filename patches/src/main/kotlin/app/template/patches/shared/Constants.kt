@@ -790,14 +790,28 @@ object Constants {
     // an injected classes7.dex whose exported launcher activity fetches remote JSON, collects
     // device/carrier info and shows WebView overlays (adware). Genuine releases are numbered
     // 27.05, 27.06; check the FUTBIN signer before using any Futbin APK.
+    // 2026-10-14 re-verified on genuine builds (signer O=FUTBIN, 1cf7ff75...e904): 27.02 (7002),
+    // 27.05 (7005), 27.06 (7006). The "only GMA" claim above was wrong. Nimbus also renders through
+    // its own Moloco/Mintegral/Vungle demand: the GAM controller falls back to a Nimbus interstitial
+    // when it has no GAM one. The squad builder shows an Anzu video panel that only premium hides.
+    // GMA-only hooks also left in-list ad slots visible (empty). "Disable ads" now forces the app's
+    // isAdAllowed preference ("preferences.ad.allowed.key") to false, so every placement hides
+    // itself and the SDKs are never started. It also no-ops, by log-line prefix (R8 names rotate:
+    // x.cv3 -> x.nk4), the FbApplication GAM/Nimbus init ("Ad Log -> int GAM"), the GAM
+    // interstitial show, Nimbus init and its interstitial/bottom/in-feed requests. It forces the
+    // premium branch of the Anzu init ("Ad Log -> init Anzu") and keeps the GMA hooks. Every hook is
+    // mandatory. The app calls no MobileAds static besides initialize. Smoke test and CLI
+    // disassembly pass on all three. Emulator 2026-10-14 (27.06, 2 GB and 4 GB AVDs): the patched
+    // app starts and stays up with no crash; the stock app logs "Initialized AdMob" and the patched
+    // app starts no ad SDK. Neither stock nor patched gets past the first GlobalActivity screen on
+    // this emulator (pause timeout on stock too), so the screens with ads, the squad-builder panel
+    // and interstitials were NOT checked at runtime. Only 27.06 is supported now (owner request).
     val COMPATIBILITY_FUTBIN = Compatibility(
         name = "Futbin",
         packageName = "com.futbin",
         apkFileType = ApkFileType.APK,
         appIconColor = 0x26A69A,
-        targets = listOf(
-            AppTarget(version = "27.02", versionCode = 7002)
-        )
+        targets = listOf(AppTarget(version = "27.06", versionCode = 7006))
     )
 
     // Verified 2026-09-27 against com.pocketcolorwheel.PCW 3.26 (versionCode 57,
