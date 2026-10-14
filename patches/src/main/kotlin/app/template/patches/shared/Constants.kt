@@ -1526,12 +1526,20 @@ object Constants {
     // getter's first bytes and the 6 telemetry classes changed. On the emulator the patched bundle
     // loads through Hermes and the app reaches its welcome screen like stock (no crash or JS
     // error); Pro screens need an account and were not reached.
+    // Verified 2026-10-14 against 3.2.0 (versionCode 3364731, XAPK merged, arm64; the owner keeps
+    // only the latest verified version). The bundle is still HBC v96; the three strings still
+    // pick exactly one function, the isPro getter (#33380 at 0x122b846, same 99-byte body as
+    // 3.1.16), and no new function reads is_pro or bypasses it. The bigger RevenueCat SDK is
+    // only reached from JS (no app-side native entitlement check). All telemetry hooks and both
+    // Sentry providers are unchanged; HevySmokeTest passes.
+    // Emulator 2026-10-14 (3.2.0): not runtime-tested; the merged APK fails to load libreactnative.so on the
+    // x86_64 emulator for stock and patched alike. Smoke test and CLI (bundle bytes + SHA-1 footer) pass.
     val COMPATIBILITY_HEVY = Compatibility(
         name = "Hevy",
         packageName = "com.hevy",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x101012,
-        targets = listOf(AppTarget(version = "3.1.16", versionCode = 3325935))
+        targets = listOf(AppTarget(version = "3.2.0", versionCode = 3364731))
     )
 
     // Verified 2026-10-13 against easy.launcher 1.10.28 (versionCode 11028, the owner's APKMirror
