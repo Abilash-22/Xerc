@@ -5,9 +5,10 @@ patch features on or off at runtime without patching again. A choice is a saved 
 the patched code reads, so a change takes effect at once, or after a restart for features read
 only at startup.
 
-Status (2026-10-14): the core framework is built and tested, but no app uses it yet. LinkedIn is
-the first planned target. The design study, with alternatives and the HushMessenger analysis, is
-kept outside the repo; this page is the developer guide.
+Status (2026-10-14): the core framework is built and tested. LinkedIn 4.1.1261 is the first app:
+an in-app entry row in the home nav panel and one runtime feature, "Hide Puzzle Games"
+(`patches/.../linkedin/`, `extensions/linkedin/`). The design study, with alternatives and the
+HushMessenger analysis, is kept outside the repo; this page is the developer guide.
 
 ## Contents
 
@@ -92,7 +93,7 @@ Writes use `commit()`, so a restart or a crash cannot lose them. Crash-guard rec
 ## Adding Heval Controls to an app
 
 1. **Create the host**, once per app, in `patches/.../<app>/controls/<App>Controls.kt`. The
-   example uses LinkedIn names; `COMPATIBILITY_LINKEDIN` does not exist yet.
+   example uses LinkedIn names (the real file also passes its entry-point patch, see step 3).
 
    ```kotlin
    package app.template.patches.linkedin.controls
@@ -134,10 +135,15 @@ Writes use `commit()`, so a restart or a crash cannot lose them. Crash-guard rec
    Patches that cannot be switched at runtime can still be listed. Register them with
    `buildTimeOnly = true`, and they show as "Applied at patch time".
 
-3. **Add an entry point.** This is per app and not built yet. A menu-row hook calls
+3. **Add an entry point.** This is per app. A menu-row hook calls
    `HevalControlsActivity.open(Context)` through
-   `invoke-static {pX}, Lapp/template/extension/hevalcontrols/ui/HevalControlsActivity;->open(Landroid/content/Context;)V`.
-   The activity is `exported="false"`, so only the app itself can open it.
+   `invoke-static {pX}, Lapp/template/extension/hevalcontrols/ui/HevalControlsActivity;->open(Landroid/content/Context;)V`
+   (or starts the activity by class name). The activity is `exported="false"`, so only the app
+   itself can open it. Pass the unnamed entry-point patch to the host,
+   `hevalControlsPatch(COMPATIBILITY_X, dependencies = setOf(entryPatch))`, so the entry is always
+   part of "Heval Controls". LinkedIn's entry (`linkedin/controls/LinkedInControls.kt`) appends a
+   stock footer row to the nav panel list and gives it a click listener that skips LinkedIn's
+   tracking.
 
 4. **Smoke test.** Assert that the extension classes are in the emitted dex, that the
    `Registry.encoded()` string equals `HevalRegistryCodec.encode(...)` of the expected features,
@@ -204,10 +210,12 @@ The usual rules still apply (AGENTS.md):
 ## App-specific Java helpers
 
 When a feature needs logic (list filtering, URL rewriting, reflection), put it in a per-app
-extension that compiles against the core:
+extension. Read switches through `HevalSettings` with `compileOnly` access to the core. (The
+LinkedIn extension so far only needs `compileOnly(project(":extensions:linkedin:stub"))` for
+LinkedIn's own classes.) For example:
 
 ```kotlin
-// extensions/linkedin/build.gradle.kts
+// extensions/<app>/build.gradle.kts
 dependencies { compileOnly(project(":extensions:hevalcontrols:core")) }
 ```
 
@@ -363,8 +371,10 @@ CI (`release.yml`) runs no tests. Consider adding the core unit-test task there.
 - **Restart-required features are informational.** `isEnabled` returns the current choice. The
   screen counts differences from the process start.
 - **Hook failures** are kept in memory only, for the current process.
-- **Not built yet:** in-app entry points, a launcher shortcut, search, import and export,
-  profiles, translations and an `extensions/linkedin` helper module.
+- **Not built yet:** a launcher shortcut (LinkedIn replaces its own dynamic shortcuts, so one
+  added by us would be removed), search, import and export, profiles and translations.
+- **RTL:** in an RTL layout, LTR values such as "4.1.1261 (216900)" in the information card are
+  reordered by bidi ("(216900) 4.1.1261"); they should be forced LTR.
 
 ## Credits
 

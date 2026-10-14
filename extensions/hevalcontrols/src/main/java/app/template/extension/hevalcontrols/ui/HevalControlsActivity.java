@@ -393,6 +393,9 @@ public final class HevalControlsActivity extends Activity {
         buttons.addView(reset, wrap(0));
         buttons.addView(cancel, wrap(8));
         views.add(card, buttons, 12);
+        // Closed until "Reset all to defaults" is tapped; otherwise it shows from the start and
+        // the first back press only closes it.
+        card.setVisibility(View.GONE);
         return card;
     }
 

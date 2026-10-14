@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,8 +30,12 @@ public final class InitProvider extends ContentProvider {
         try {
             final Context context = getContext();
             if (context == null || !AppContext.isMainProcess(context)) return true;
+            final long start = SystemClock.uptimeMillis();
             HevalSettings.init(context);
             CrashGuard.onProcessStart(context);
+            Log.i(TAG, "Heval Controls started in " + (SystemClock.uptimeMillis() - start) + " ms (paused="
+                    + HevalSettings.isPaused() + ", safeMode=" + HevalSettings.isSafeMode()
+                    + ", engineFailed=" + HevalSettings.isEngineFailed() + ")");
             if (CrashGuard.enteredSafeModeThisStart()) {
                 final Context app = context.getApplicationContext() != null ? context.getApplicationContext() : context;
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
