@@ -1737,4 +1737,28 @@ object Constants {
         appIconColor = 0x112D5A,
         targets = listOf(AppTarget(version = "6.7.8", versionCode = 678))
     )
+
+    // Added 2026-10-14 from a Reddit request (ads only: subscribers see ads too, and the paywall
+    // is decided server-side, so it is out of scope). Verified against wsj.reader_sp 6.43.0.33886
+    // (versionCode 643003886, universal APK, signer CN=Wall Street Journal Digital Network, no
+    // packer or PairIP). Disable ads anchors on kept class names and method shape only, never on
+    // the hashed Compose / value-class suffixes: every SectionAdPlacementStrategy implementation
+    // returns no ad indices (section, markets, For You, Magazine feeds), ArticleAdPlacementStrategy's
+    // (II)Z answers false (inline article ads), AdManagerAdViewStore only ever publishes Unit so
+    // any other slot (stock quote page) composes nothing and never requests, AdPaddingDefaults'
+    // vertical padding is 0, UACModule keeps its empty ad title lambda (its static setter is a
+    // no-op, so no "ADVERTISEMENT" caption over the emptied quote-page slot; found by emulator
+    // run 2026-10-14), the native-ads-in-sections/articles and Ozone flags are false,
+    // DJMobileAds.initialize plus every MobileAds static void are no-ops (rule 9), GMA
+    // BaseAdView / AdManagerAdView / AdLoader loads are no-ops, and video pre-rolls are gone
+    // (VideoPlayerAdsHandler returns a null IMA ad tag and loader, MediaItem.Builder drops ad
+    // configurations). Megaphone podcast ads are server-side and not covered. WsjSmokeTest
+    // asserts every hook. Not yet run on an emulator.
+    val COMPATIBILITY_WSJ = Compatibility(
+        name = "The Wall Street Journal",
+        packageName = "wsj.reader_sp",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x000000, // Black WSJ logotype on a #F7F7F7 adaptive-icon background.
+        targets = listOf(AppTarget(version = "6.43.0.33886", versionCode = 643003886))
+    )
 }
