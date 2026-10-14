@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.15.0-dev.4",
+  "version": "1.15.0-dev.5",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -1328,12 +1328,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -2057,12 +2057,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -2150,12 +2150,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3025,12 +3025,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3456,12 +3456,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3470,20 +3470,7 @@
           ]
         }
       ],
-      "options": [
-        {
-          "key": "packageName",
-          "title": "Package name",
-          "description": "Package name of the patched app. Keep the original to install over the existing app. A different name installs next to it, but can break features that are tied to the original package name.",
-          "required": true,
-          "type": "kotlin.String",
-          "default": "com.truecaller",
-          "values": {
-            "Original (recommended)": "com.truecaller",
-            "Clone": "com.truecaller.morphe"
-          }
-        }
-      ]
+      "options": []
     },
     {
       "name": "Hide AI friends button",
@@ -3531,12 +3518,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3562,12 +3549,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3624,12 +3611,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3655,12 +3642,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -3872,12 +3859,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -4369,12 +4356,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -4524,12 +4511,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,
@@ -4617,12 +4604,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "26.39.6",
+              "version": "26.40.5",
               "versionCodes": {
-                "ARM64_V8A": 2639006,
-                "ARMEABI_V7A": 2639006,
-                "X86_64": 2639006,
-                "X86": 2639006
+                "ARM64_V8A": 2640005,
+                "ARMEABI_V7A": 2640005,
+                "X86_64": 2640005,
+                "X86": 2640005
               },
               "isExperimental": false,
               "minSdk": null,

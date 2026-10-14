@@ -1,3 +1,9 @@
+## [1.15.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.4...v1.15.0-dev.5) (2026-10-14)
+
+### 🐛 Bug Fixes
+
+* **truecaller:** updated to version 26.40.5; remove the Clone package option ([49cb619](https://github.com/heval99/Heval-Morphe-Patches/commit/49cb6193f7474f5237495b55b82fd99be401c145)), closes [#50](https://github.com/heval99/Heval-Morphe-Patches/issues/50)
+
 ## [1.15.0-dev.4](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.3...v1.15.0-dev.4) (2026-10-14)
 
 ### 🐛 Bug Fixes

@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0-dev.4](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.4)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**54** apps&nbsp;&nbsp;•&nbsp;&nbsp;**136** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.15.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**54** apps&nbsp;&nbsp;•&nbsp;&nbsp;**136** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -95,7 +95,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
 | <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.20` | APK |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` <sub>+1 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 13 | `26.39.6` | APKM |
+| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 13 | `26.40.5` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 💎 2 | `11.2.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Weather Underground** | 🚫 1 | `6.20.1` | APK |
@@ -664,7 +664,7 @@ Verified on: `4.87`, `4.85`
 <details>
 <summary><b>Truecaller</b> &nbsp;·&nbsp; 13 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
 
-Verified on: `26.39.6`
+Verified on: `26.40.5`
 
 | Patch | What it does | Default |
 |---|---|:-:|
