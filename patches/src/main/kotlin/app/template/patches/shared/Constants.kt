@@ -1715,4 +1715,26 @@ object Constants {
         appIconColor = 0x3A362F,
         targets = listOf(AppTarget(version = "3.28", versionCode = 68))
     )
+
+    // Added 2026-10-14 from the Reddit request queue (ads only: premium is an account role from
+    // the server's /api/mv4, so it cannot be unlocked locally). Verified against
+    // com.astrapaging.vff 6.7.8 (versionCode 678, APKPure XAPK merged, arm64-v8a only, signer
+    // CN=Astra Paging Ltd.). Capacitor/Angular hybrid; PairIP license check only (no VMRunner /
+    // libpairipcore): Disable license check no-ops LicenseClient.checkLicense(Context). Disable
+    // ads works on the kept Capacitor plugin com.izosa.advert.AdvertPlugin (its classpath is in
+    // capacitor.plugins.json): every @PluginMethod(PluginCall) handler (show, hide, resize,
+    // fullscreen) resolves the call and returns, so no consent form, no SDK start, no WebView
+    // wrap and no banner; the method calling MobileAds.initialize returns at once; and every
+    // MobileAds static void is a no-op (rule 9). The web layer reserves no banner space.
+    // VesselFinderSmokeTest asserts every hook. Not yet run on an emulator.
+    // Emulator 2026-10-14 (6.7.8): stock re-signed shows the PairIP licence error; patched launches to
+    // the map with no paywall, no consent form, no banner or bottom strip; panning, a vessel page and
+    // the login form work; 3 cold starts, no crash.
+    val COMPATIBILITY_VESSELFINDER = Compatibility(
+        name = "VesselFinder",
+        packageName = "com.astrapaging.vff",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x112D5A,
+        targets = listOf(AppTarget(version = "6.7.8", versionCode = 678))
+    )
 }
