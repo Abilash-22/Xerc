@@ -122,8 +122,8 @@ In queue order. Verdicts are first impressions; nothing has been triaged yet.
 | # | App | Package | Requested | Notes |
 |---|---|---|---|---|
 | 1 | Brevent | `me.piebridge.brevent` | Unlock all features / premium | Most upvoted request (7); owner replied "i will try" |
-| 2 | WeMuslim (Athan & Qibla) | `com.fyxtech.muslim` | Ads + analytics, premium, hide Premium tab and upgrade banners | Detailed request; promising if the entitlement check is local |
-| 3 | Interval Timer | `cc.dreamspark.intervaltimer` | Remove ads ("ads mess with the UI") | Simple ad app, likely an easy Tier 1 win |
+| 2 | WeMuslim (Athan & Qibla) | `com.fyxtech.muslim` | Ads + analytics, premium, hide Premium tab and upgrade banners | **Triaged 2026-10-14 (3.5.0, vc 141, APKMirror, developer signer CN=athan O=yalla):** premium is server-side (membership comes from the server over protobuf; purchases confirmed server-side). Ads-only is possible but large: Pangle, AppLovin MAX, Unity, GMA, Meta AN, Amazon behind obfuscated gating. No Premium bottom tab in 3.5.0 (nav: Home, Prayer, Discover, Messages, Me); upgrade banners are anchorable by layout id. Deferred |
+| 3 | Interval Timer | `cc.dreamspark.intervaltimer` | Remove ads ("ads mess with the UI") | **Shipped 2026-10-14 (2.3.30)** - Disable ads + Disable telemetry; emulator: no ads or gaps, workouts run |
 | 4 | Camera (Ocean Galaxy) | `com.oceangalaxy.camera.new` | Not specified | Probably ads + premium; triage |
 | 5 | Tennis app | `com.tennisrn` | Not specified | Triage |
 | 6 | `com.astrapaging.vff` | `com.astrapaging.vff` | Not specified | Triage; identify the app first |
@@ -138,7 +138,7 @@ In queue order. Verdicts are first impressions; nothing has been triaged yet.
 | 15 | Cronometer | `com.cronometer.android` | Not specified | Already on the blocklist (APKMirror 403, likely server-side) |
 | 16 | UniTV | not on Google Play | Full version | Off-Play IPTV service from a download site; skip |
 
-| 17 | LuckyClick (auto clicker) | `com.peter890331.luckyclick.app` | Remove ads ("really long and unskippable") | Likely a simple ads patch; triage |
+| 17 | LuckyClick (auto clicker) | `com.peter890331.luckyclick.app` | Remove ads ("really long and unskippable") | **Triaged 2026-10-14 (3.28, vc 68):** **Shipped 2026-10-14** - Disable ads (app's own AD_FREE_PERMANENT flag + GMA backstop) and Disable license check (PairIP licence check only). Emulator: no ads, Start goes straight to capture |
 | 18 | Car Scanner ELM OBD2 | `com.ovz.carscanner` | Unlock premium | Already parked (fully obfuscated, billing path not located; see "Also covered" list). Genuine APK in apks/carscanner |
 | 19 | Cherrygram (Telegram fork) | github.com/arslan4k1390/Cherrygram | Premium | Open source; "premium" is Telegram Premium, which is server-side. Likely skip |
 | 20 | Lovora | unknown | Not specified | Find the package first |
@@ -157,4 +157,4 @@ From [the issue tracker](https://github.com/heval99/Heval-Morphe-Patches/issues)
 | [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53) | Truecaller | Request | Hide the Blocking, Family invite and Premium tabs; block the tracking that flags the app as modified ("install from Play Store"). Owner replied "Looking into it" |
 | [#50](https://github.com/heval99/Heval-Morphe-Patches/issues/50) | Truecaller | Request | "Clone" option: a different package name so the patched app installs next to stock Truecaller (dual SIM). Check whether Morphe's universal "Change package name" patch works with our GmsCore/Spoof signature patches |
 | [#55](https://github.com/heval99/Heval-Morphe-Patches/issues/55) | BoxBox | Bug | "Neither Disable ads nor Enable Premium works" after a clean install. Matches the 5.4.17 breakage fixed in 71bb868 (dev pre-release v1.14.0-dev.5 and later; emulator-verified); stable v1.13.0 still ships the old patches. Confirm the reporter's bundle and BoxBox versions |
-| [#51](https://github.com/heval99/Heval-Morphe-Patches/issues/51) | Duplila - Mirror Screen | Request | `com.duplila.screenshare`, unlock premium (screen casting); triage |
+| [#51](https://github.com/heval99/Heval-Morphe-Patches/issues/51) | Duplila - Mirror Screen | Request | **Shipped 2026-10-14 (5.1)** - Enable Premium, Disable ads, Disable license check. Not runtime-tested (armeabi-v7a only) |
