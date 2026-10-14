@@ -1726,7 +1726,7 @@ object Constants {
     // fullscreen) resolves the call and returns, so no consent form, no SDK start, no WebView
     // wrap and no banner; the method calling MobileAds.initialize returns at once; and every
     // MobileAds static void is a no-op (rule 9). The web layer reserves no banner space.
-    // VesselFinderSmokeTest asserts every hook. Not yet run on an emulator.
+    // VesselFinderSmokeTest asserts every hook.
     // Emulator 2026-10-14 (6.7.8): stock re-signed shows the PairIP licence error; patched launches to
     // the map with no paywall, no consent form, no banner or bottom strip; panning, a vessel page and
     // the login form work; 3 cold starts, no crash.
