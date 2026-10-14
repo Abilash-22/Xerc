@@ -1640,4 +1640,29 @@ object Constants {
         appIconColor = 0x009FE3,
         targets = listOf(AppTarget(version = "5.1", versionCode = 68))
     )
+
+    // Added 2026-10-14 from the Reddit request queue ("the ads are really long and unskippable").
+    // Verified against com.peter890331.luckyclick.app 3.28 (versionCode 68, single APK, no native
+    // code, Play-signed). PairIP license check only (no VMRunner / libpairipcore): Disable license
+    // check no-ops LicenseClient.checkLicense(Context). Ad-free is local: Play purchases are
+    // stored as AD_FREE_PERMANENT / AD_FREE_EXPIRE_TIME in SharedPreferences and mirrored into one
+    // state that gates the banner, the interstitial preloads and the full-screen interstitial
+    // shown before Start. Disable ads forces every getBoolean("AD_FREE_PERMANENT") read true
+    // (MainActivity.onCreate is mandatory), makes the onQueryPurchasesResponse restore store
+    // Boolean.TRUE (found by its Boolean.valueOf + "AD_FREE_PERMANENT" putBoolean), and no-ops
+    // every MobileAds static void, InterstitialAd.load and BaseAdView.loadAd. No rewarded ads in
+    // the app. LuckyClickSmokeTest asserts every hook.
+    // The APK is the base of a split bundle (requiredSplitTypes base__abi,base__density), so it
+    // will not install alone; apkFileType is APKM. Emulator 2026-10-14 (base with the split
+    // requirement removed for the test only): stock shows PairIP's licence error; patched starts
+    // with no paywall, no banner or gap, "Ads removed (Permanent)", and Start goes straight to
+    // screen capture, also after background/resume; the accessibility service binds; no crashes.
+    // The TRADE/EVOLVE modes and the overlay window were not reached.
+    val COMPATIBILITY_LUCKYCLICK = Compatibility(
+        name = "LuckyClick",
+        packageName = "com.peter890331.luckyclick.app",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x3A362F,
+        targets = listOf(AppTarget(version = "3.28", versionCode = 68))
+    )
 }
