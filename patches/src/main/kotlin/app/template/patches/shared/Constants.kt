@@ -1345,7 +1345,17 @@ object Constants {
         packageName = "com.kakao.talk",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xFEE500,
-        targets = listOf(AppTarget(version = "26.8.3", versionCode = 29260830))
+        // A patched build is re-signed, so features that check KakaoTalk's signature or device
+        // integrity (Kakao Pay, Kakao certificates, some bank and identity logins) may not work.
+        // Raised by a Korean user on Reddit, 2026-10-14.
+        targets = listOf(
+            AppTarget(
+                version = "26.8.3",
+                versionCode = 29260830,
+                description = "Patched builds are re-signed: Kakao Pay, Kakao certificates and " +
+                    "bank logins may not work"
+            )
+        )
     )
 
 
