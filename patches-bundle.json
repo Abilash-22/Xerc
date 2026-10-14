@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-14T09:01:22",
-  "description": "## [1.14.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.7...v1.14.0-dev.8) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* **simpleradio:** stop the crash on first launch; updated to version 6.2.4 ([d884624](https://github.com/heval99/Heval-Morphe-Patches/commit/d88462447164fa92bcc8b12414247f4c22c5a66a))\n* **tasker:** updated to version 6.6.20 ([3884316](https://github.com/heval99/Heval-Morphe-Patches/commit/38843164f7c8435aa63647d3730535b657d78955))",
-  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.14.0-dev.8/patches-1.14.0-dev.8.mpp",
+  "created_at": "2026-10-14T09:29:21",
+  "description": "## [1.14.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.8...v1.14.0-dev.9) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* **aiscore:** restore goal alerts on patched builds ([a0151aa](https://github.com/heval99/Heval-Morphe-Patches/commit/a0151aa6f6c4161bdd5e623bcaa9429fa6204296))\n* **kakaotalk:** warn that Kakao Pay and certificates may not work ([36dfacb](https://github.com/heval99/Heval-Morphe-Patches/commit/36dfacba8c3562c056c853d432181eb991379cd8))",
+  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.14.0-dev.9/patches-1.14.0-dev.9.mpp",
   "signature_download_url": "",
-  "version": "1.14.0-dev.8"
+  "version": "1.14.0-dev.9"
 }

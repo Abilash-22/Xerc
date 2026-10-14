@@ -1,3 +1,10 @@
+## [1.14.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.8...v1.14.0-dev.9) (2026-10-14)
+
+### 🐛 Bug Fixes
+
+* **aiscore:** restore goal alerts on patched builds ([a0151aa](https://github.com/heval99/Heval-Morphe-Patches/commit/a0151aa6f6c4161bdd5e623bcaa9429fa6204296))
+* **kakaotalk:** warn that Kakao Pay and certificates may not work ([36dfacb](https://github.com/heval99/Heval-Morphe-Patches/commit/36dfacba8c3562c056c853d432181eb991379cd8))
+
 ## [1.14.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.7...v1.14.0-dev.8) (2026-10-14)
 
 ### 🐛 Bug Fixes

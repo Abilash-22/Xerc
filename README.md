@@ -40,14 +40,14 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**122** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.14.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**123** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
 | | App | Patches | Latest verified | Type |
 |:-:|---|---|---|:-:|
 | <img src="https://img.shields.io/badge/-%20-FFC107?style=flat-square" height="14" alt=""> | **365Scores** | 🚫 💎 🔕 🧩 5 | `14.9.6` | APKM |
-| <img src="https://img.shields.io/badge/-%20-00C853?style=flat-square" height="14" alt=""> | **AiScore** | 💎 1 | `4.3.2` <sub>+1 older</sub> | APKM |
+| <img src="https://img.shields.io/badge/-%20-00C853?style=flat-square" height="14" alt=""> | **AiScore** | 💎 🧩 2 | `4.3.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-F44336?style=flat-square" height="14" alt=""> | **Alarm Clock Xtreme** | 🚫 1 | `26.06.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-00B0FF?style=flat-square" height="14" alt=""> | **Aqua Mail** | 💎 1 | `2.7.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2E7D32?style=flat-square" height="14" alt=""> | **BeSoccer** | 🚫 🔑 2 | `6.6.0` | APKM |
@@ -115,13 +115,14 @@ Verified on: `14.9.6`
 
 </details>
 <details>
-<summary><b>AiScore</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.onesports.score</code></summary>
+<summary><b>AiScore</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.onesports.score</code></summary>
 
-Verified on: `4.3.2`, `4.3.1`
+Verified on: `4.3.2`
 
 | Patch | What it does | Default |
 |---|---|:-:|
 | 💎 **Enable Premium** | Unlocks the VIP interface and removes ads. Premium data the AiScore server delivers (e.g. predictions, dropping odds) is validated server-side and is not unlocked. | ✅ |
+| 🧩 **Spoof signature** | Fixes push notifications (goal alerts) on patched builds by reporting AiScore's original signing certificate to Firebase. | ✅ |
 
 </details>
 <details>

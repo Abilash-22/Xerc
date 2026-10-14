@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.14.0-dev.8",
+  "version": "1.14.0-dev.9",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -2094,18 +2094,6 @@
           "signatures": null,
           "targets": [
             {
-              "version": "4.3.1",
-              "versionCodes": {
-                "ARM64_V8A": 296,
-                "ARMEABI_V7A": 296,
-                "X86_64": 296,
-                "X86": 296
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
               "version": "4.3.2",
               "versionCodes": {
                 "ARM64_V8A": 297,
@@ -4092,6 +4080,37 @@
                 "ARMEABI_V7A": 29260830,
                 "X86_64": 29260830,
                 "X86": 29260830
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Spoof signature",
+      "description": "Fixes push notifications (goal alerts) on patched builds by reporting AiScore's original signing certificate to Firebase.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.onesports.score",
+          "name": "AiScore",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#00C853",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.3.2",
+              "versionCodes": {
+                "ARM64_V8A": 297,
+                "ARMEABI_V7A": 297,
+                "X86_64": 297,
+                "X86": 297
               },
               "isExperimental": false,
               "minSdk": null,
