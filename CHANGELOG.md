@@ -1,3 +1,9 @@
+## [1.15.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.2...v1.15.0-dev.3) (2026-10-14)
+
+### ✨ New Features
+
+* **luckyclick:** add LuckyClick 3.28 patches ([1cc29e3](https://github.com/heval99/Heval-Morphe-Patches/commit/1cc29e357f5810795b1428368c3332aa19bf856e))
+
 ## [1.15.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-10-14)
 
 ### 🐛 Bug Fixes

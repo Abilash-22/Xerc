@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**53** apps&nbsp;&nbsp;•&nbsp;&nbsp;**133** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.15.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**54** apps&nbsp;&nbsp;•&nbsp;&nbsp;**135** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -76,6 +76,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Librera** | 🚫 1 | `9.4.20` | APK |
 | <img src="https://img.shields.io/badge/-%20-06C755?style=flat-square" height="14" alt=""> | **LINE** | 🚫 🔕 🧩 17 | `26.15.1` | APKM |
 | <img src="https://img.shields.io/badge/-%20-C8102E?style=flat-square" height="14" alt=""> | **Livescore** | 🚫 1 | `10.3` <sub>+2 older</sub> | APK |
+| <img src="https://img.shields.io/badge/-%20-3A362F?style=flat-square" height="14" alt=""> | **LuckyClick** | 🚫 🔑 2 | `3.28` | APKM |
 | <img src="https://img.shields.io/badge/-%20-8BC34A?style=flat-square" height="14" alt=""> | **Monefy** | 💎 1 | `1.22.11` | APKM |
 | <img src="https://img.shields.io/badge/-%20-283593?style=flat-square" height="14" alt=""> | **Moon+ Reader** | 🚫 1 | `10.7` | APKM |
 | <img src="https://img.shields.io/badge/-%20-0072BC?style=flat-square" height="14" alt=""> | **MyFitnessPal** | 💎 1 | `26.40.0` <sub>+3 older</sub> | APKM |
@@ -454,6 +455,17 @@ Verified on: `10.3`, `10.2.1`, `10.1`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🚫 **Disable ads** | Forces AdsRemovalSettings.areAdsDisabled() to return true, disabling banner, interstitial, MPU, hero placement, coverage sponsorship and announcement ads. | ✅ |
+
+</details>
+<details>
+<summary><b>LuckyClick</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.peter890331.luckyclick.app</code></summary>
+
+Verified on: `3.28`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Turns on the app's own ad-free mode, which removes the banner and the full-screen video ad shown before the auto clicker starts. | ✅ |
+| 🔑 **Disable license check** | Skips the Play Store license check so the patched app starts. | ✅ |
 
 </details>
 <details>

@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-14T10:33:48",
-  "description": "## [1.15.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* harden Disable ads against ad SDK crashes in 11 apps ([d6e17bb](https://github.com/heval99/Heval-Morphe-Patches/commit/d6e17bb9f6146211069cd69566bbb1375f67fddb))",
-  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.2/patches-1.15.0-dev.2.mpp",
+  "created_at": "2026-10-14T10:45:02",
+  "description": "## [1.15.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.2...v1.15.0-dev.3) (2026-10-14)\n\n### ✨ New Features\n\n* **luckyclick:** add LuckyClick 3.28 patches ([1cc29e3](https://github.com/heval99/Heval-Morphe-Patches/commit/1cc29e357f5810795b1428368c3332aa19bf856e))",
+  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.3/patches-1.15.0-dev.3.mpp",
   "signature_download_url": "",
-  "version": "1.15.0-dev.2"
+  "version": "1.15.0-dev.3"
 }
