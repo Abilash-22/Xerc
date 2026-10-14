@@ -272,16 +272,17 @@ object Constants {
     // Re-verified 2026-09-17 on 10.1 with morphe-cli -f: Disable ads still applies.
     // Verified 2026-10-07 against 10.2.1 (versionCode 2188, APKPure): Disable ads applies
     // unchanged; LivescoreSmokeTest passes.
+    // 2026-10-14: updated to 10.3.1 (versionCode 2226, single APK, signer CN=Sebastian/O=Cloeme
+    // as on 10.3); anchors unchanged: AdsRemovalSettings.areAdsDisabled()Z keeps its name, body and
+    // the same six callers. Only the latest verified version is supported.
+    // Emulator 2026-10-14 (10.3.1): no banner, interstitial or gap (stock shows a test banner and an
+    // interstitial); no crash. The bookmaker "Match odds" sponsor card (AD tag) is an app widget and stays.
     val COMPATIBILITY_LIVESCORE = Compatibility(
         name = "Livescore",
         packageName = "com.livescore",
         apkFileType = ApkFileType.APK,
         appIconColor = 0xC8102E,
-        targets = listOf(
-            AppTarget(version = "10.1", versionCode = 2144),
-            AppTarget(version = "10.2.1", versionCode = 2188),
-            AppTarget(version = "10.3", versionCode = 2204)
-        )
+        targets = listOf(AppTarget(version = "10.3.1", versionCode = 2226))
     )
 
     // Verified 2026-08-20 against FishBuddy v11.0.84 (universal, Android 7.0+).
