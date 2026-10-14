@@ -159,17 +159,22 @@ object Constants {
     // patches apply unchanged; MyFitnessPalSmokeTest passes.
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
+    // Verified 2026-10-14 against 26.41.0 (versionCode 51589, APKPure XAPK merged, arm64; the
+    // owner keeps only the latest verified version). Enable Premium+ now finds both parsers by
+    // shape (static (String) -> Entitlement/Tier on the enum's companion, reading its Unknown
+    // fallback) instead of the R8 names `$a`/`a`; the entitlement enums are unchanged. 26.41.0 adds
+    // the Datadog SDK (RUM, crash/ANR, network tracing): the new Disable Datadog telemetry makes
+    // the app's DatadogRumStartDecision function (kept return type + SkipReason.FLAG_DISABLED
+    // branch) always return Skip(FLAG_DISABLED), so the SDK core is never initialized.
+    // MyFitnessPalSmokeTest passes.
+    // Emulator 2026-10-14 (26.41.0, logged out): no crash. The app never logs Datadog start-up, so the
+    // Datadog skip is verified in bytecode only.
     val COMPATIBILITY_MYFITNESSPAL = Compatibility(
         name = "MyFitnessPal",
         packageName = "com.myfitnesspal.android",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x0072BC,
-        targets = listOf(
-            AppTarget(version = "26.37.0", versionCode = 51401),
-            AppTarget(version = "26.38.0", versionCode = 51448),
-            AppTarget(version = "26.39.0", versionCode = 51509),
-            AppTarget(version = "26.40.0", versionCode = 51555)
-        )
+        targets = listOf(AppTarget(version = "26.41.0", versionCode = 51589))
     )
 
     // Verified 2026-09-18 against club.boxbox.android 5.4.9 (versionCode 251, the current
