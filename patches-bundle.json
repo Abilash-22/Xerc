@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-14T10:21:34",
-  "description": "## [1.15.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0...v1.15.0-dev.1) (2026-10-14)\n\n### ✨ New Features\n\n* **duplila:** add Duplila - Mirror Screen 5.1 patches ([219078a](https://github.com/heval99/Heval-Morphe-Patches/commit/219078a6ec1a7a8326a0fce1609da515dbf59a79))\n* **intervaltimer:** add Interval Timer 2.3.30 patches ([a55847e](https://github.com/heval99/Heval-Morphe-Patches/commit/a55847e57943c41b562416eaf1b72875bb9f13bf))",
-  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.1/patches-1.15.0-dev.1.mpp",
+  "created_at": "2026-10-14T10:33:48",
+  "description": "## [1.15.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* harden Disable ads against ad SDK crashes in 11 apps ([d6e17bb](https://github.com/heval99/Heval-Morphe-Patches/commit/d6e17bb9f6146211069cd69566bbb1375f67fddb))",
+  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.2/patches-1.15.0-dev.2.mpp",
   "signature_download_url": "",
-  "version": "1.15.0-dev.1"
+  "version": "1.15.0-dev.2"
 }

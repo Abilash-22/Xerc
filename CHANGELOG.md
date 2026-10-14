@@ -1,3 +1,9 @@
+## [1.15.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.1...v1.15.0-dev.2) (2026-10-14)
+
+### 🐛 Bug Fixes
+
+* harden Disable ads against ad SDK crashes in 11 apps ([d6e17bb](https://github.com/heval99/Heval-Morphe-Patches/commit/d6e17bb9f6146211069cd69566bbb1375f67fddb))
+
 ## [1.15.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0...v1.15.0-dev.1) (2026-10-14)
 
 ### ✨ New Features
