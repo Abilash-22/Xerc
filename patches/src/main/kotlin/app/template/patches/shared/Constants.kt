@@ -1800,6 +1800,35 @@ object Constants {
         targets = listOf(AppTarget(version = "4.2.31.1", versionCode = 539))
     )
 
+    // Added 2026-10-14 from the Reddit request queue: ads only. Pro and paywalled content are
+    // server-side (entitlements and isPremium arrive from the server). Verified against
+    // com.divum.MoneyControl 14.6.2 (versionCode 637, APKMirror bundle merged, arm64-v8a only,
+    // signer CN=Ganapathy, O=Divum Corporate Services). App classes keep their names, members
+    // are R8-renamed. No single local ad-free gate exists: the "ad_free" entitlement only hides
+    // the app wall and a few Pro rows, the interstitial checks the Pro flag, and ad-free users
+    // simply get a menu ad config without slots. Disable ads therefore makes every lookup on the
+    // ad repository return null (the class the menu's ad-config parser, found by its slot-key
+    // strings "native_ad"/"splash_top"/"splash_bottom"/"dfp_custom", hands its HashMap to;
+    // lookups = instance-of + Map.get shape), redirects Utility's sticky-ad "show" to "hide"
+    // (log prefixes "Utility hideAndShowAds Visibility VISIBLE/GONE"), nulls the BannerAd
+    // video_preroll_url/tv_preroll_url getters (every video screen then skips the IMA preroll),
+    // no-ops the GMA loads (AdLoader, Interstitial/AdManagerInterstitial/Rewarded/
+    // RewardedInterstitial/AppOpen load), hides BaseAdView/AdManagerAdView on loadAd, and hides
+    // Taboola's TBLClassicUnit on fetchContent. MobileAds.initialize is kept (the Flutter
+    // google_mobile_ads plugin and the JJT SDK wait on its listener), so rule 9 does not apply.
+    // MoneycontrolSmokeTest asserts every hook. Not yet run on an emulator; the Akamai BAP SDK
+    // reports the signing-cert hash in its sensor data, so check that the re-signed build still
+    // loads the news feed.
+    val COMPATIBILITY_MONEYCONTROL = Compatibility(
+        name = "Moneycontrol",
+        packageName = "com.divum.MoneyControl",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x0066A1,
+        // Experimental (owner decision 2026-10-14): shipped without a device test because the
+        // emulator is blocked by Akamai even on the original app.
+        targets = listOf(AppTarget(version = "14.6.2", versionCode = 637, isExperimental = true))
+    )
+
     // Added 2026-10-14 as the first Heval Controls app (runtime switches, see
     // docs/heval-controls.md). Verified against com.linkedin.android 4.1.1261 (versionCode
     // 216900, APKMirror bundle merged, arm64-v8a only; developer signer CN=Jaikumar Ramanathan,
