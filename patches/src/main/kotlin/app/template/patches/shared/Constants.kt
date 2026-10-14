@@ -1605,4 +1605,27 @@ object Constants {
         appIconColor = 0x607D8B,
         targets = listOf(AppTarget(version = "2.3.30", versionCode = 239030))
     )
+
+    // Verified 2026-10-14 against com.duplila.screenshare 5.1 (versionCode 68, APKPure XAPK merged
+    // with APKEditor, armeabi-v7a only, Play source stamp) for GitHub issue #51 ("unlock premium").
+    // App classes are not obfuscated. PairIP license check only (Application wrapper, no VM
+    // shield): "Disable license check" no-ops LicenseClient.checkLicense(Context). Premium is local:
+    // every gate (main screen, banner, consent branch, preferences, checkout, the mirror screen's
+    // watermark and unlockedVideoSize) awaits BillingManager.userPaid(), which runs Play
+    // queryPurchasesAsync under a 10 s timeout; Enable Premium makes it return Boolean.TRUE at once
+    // (anchor: name + suspend shape + BuildersKt.withContext). Disable ads: the UMP consent flow
+    // (the (Z)V method calling ConsentInformation.requestConsentInfoUpdate) returns early, the
+    // banner composable (static (Modifier, Z, Composer, I, I)V in the class whose AdView factory
+    // calls setAdUnitId + loadAd) emits nothing, and every MobileAds static void plus
+    // BaseAdView.loadAd is a no-op. No signature check in the app, its scrcpy-based
+    // duplila_screen_server.apk or its native adb libs. DuplilaSmokeTest asserts every hook and the
+    // CLI (no -f) applies all three. NOT runtime-tested: the app ships armeabi-v7a libs only and the
+    // x86_64 test emulator refuses it (INSTALL_FAILED_NO_MATCHING_ABIS).
+    val COMPATIBILITY_DUPLILA = Compatibility(
+        name = "Duplila",
+        packageName = "com.duplila.screenshare",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x009FE3,
+        targets = listOf(AppTarget(version = "5.1", versionCode = 68))
+    )
 }
