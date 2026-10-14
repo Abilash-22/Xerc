@@ -138,6 +138,12 @@ In queue order. Verdicts are first impressions; nothing has been triaged yet.
 | 15 | Cronometer | `com.cronometer.android` | Not specified | Already on the blocklist (APKMirror 403, likely server-side) |
 | 16 | UniTV | not on Google Play | Full version | Off-Play IPTV service from a download site; skip |
 
+| 17 | LuckyClick (auto clicker) | `com.peter890331.luckyclick.app` | Remove ads ("really long and unskippable") | Likely a simple ads patch; triage |
+| 18 | Car Scanner ELM OBD2 | `com.ovz.carscanner` | Unlock premium | Already parked (fully obfuscated, billing path not located; see "Also covered" list). Genuine APK in apks/carscanner |
+| 19 | Cherrygram (Telegram fork) | github.com/arslan4k1390/Cherrygram | Premium | Open source; "premium" is Telegram Premium, which is server-side. Likely skip |
+| 20 | Lovora | unknown | Not specified | Find the package first |
+| 21 | VidMate | not on Google Play | Not specified | Off-Play downloader from download sites (repack risk); skip |
+
 **Community note:** a Korean user worries about patching KakaoTalk, which handles payments and certificates in Korea. A re-signed KakaoTalk may break Kakao Pay and certificate features; consider a warning in the patch description or the README.
 
 ## Open GitHub issues (2026-10-14)
@@ -150,4 +156,5 @@ From [the issue tracker](https://github.com/heval99/Heval-Morphe-Patches/issues)
 | [#52](https://github.com/heval99/Heval-Morphe-Patches/issues/52) | Truecaller | Bug | Spam Protection falls back from Max to Basic; "Servers can't be reached" toasts; Premium tab stuck loading; Frequently called contacts enabled with its setting hidden (`isFrequentlyCalledVisible` false, per a commenter); **T9 dialer search finds no saved contacts**; unasked contact-UI, fraud-protection and SMS-tab changes. Likely the server treating the patched app as non-premium or modified (shared cause with #54) plus separate client bugs (T9, frequently called) |
 | [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53) | Truecaller | Request | Hide the Blocking, Family invite and Premium tabs; block the tracking that flags the app as modified ("install from Play Store"). Owner replied "Looking into it" |
 | [#50](https://github.com/heval99/Heval-Morphe-Patches/issues/50) | Truecaller | Request | "Clone" option: a different package name so the patched app installs next to stock Truecaller (dual SIM). Check whether Morphe's universal "Change package name" patch works with our GmsCore/Spoof signature patches |
+| [#55](https://github.com/heval99/Heval-Morphe-Patches/issues/55) | BoxBox | Bug | "Neither Disable ads nor Enable Premium works" after a clean install. Matches the 5.4.17 breakage fixed in 71bb868 (dev pre-release v1.14.0-dev.5 and later; emulator-verified); stable v1.13.0 still ships the old patches. Confirm the reporter's bundle and BoxBox versions |
 | [#51](https://github.com/heval99/Heval-Morphe-Patches/issues/51) | Duplila - Mirror Screen | Request | `com.duplila.screenshare`, unlock premium (screen casting); triage |
