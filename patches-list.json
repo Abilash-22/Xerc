@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.15.0-dev.8",
+  "version": "1.15.0-dev.9",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -2554,6 +2554,37 @@
                 "ARMEABI_V7A": 261,
                 "X86_64": 261,
                 "X86": 261
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Enable Premium",
+      "description": "Unlocks all donation-gated settings, including dynamic GMS and suspend. Note: patched builds cannot validate genuine donation tokens, so the Brefoil count is forced; use the official build to have a real donation recognized.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "me.piebridge.brevent",
+          "name": "Brevent",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#0288D1",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.2.31.1",
+              "versionCodes": {
+                "ARM64_V8A": 539,
+                "ARMEABI_V7A": 539,
+                "X86_64": 539,
+                "X86": 539
               },
               "isExperimental": false,
               "minSdk": null,

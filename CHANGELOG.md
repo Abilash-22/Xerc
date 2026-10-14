@@ -1,3 +1,9 @@
+## [1.15.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.8...v1.15.0-dev.9) (2026-10-14)
+
+### ✨ New Features
+
+* add Brevent Enable Premium patch ([f5a0ea0](https://github.com/heval99/Heval-Morphe-Patches/commit/f5a0ea07bbe069bfd375edc4c08e604d8c1f79c1))
+
 ## [1.15.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.7...v1.15.0-dev.8) (2026-10-14)
 
 ### ✨ New Features
