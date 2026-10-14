@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.9)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**123** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.14.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.10)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**124** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -65,7 +65,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Fishing Points** | 💎 1 | `4.7.3` | APK |
 | <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Flashscore** | 🚫 🛡️ 🔕 🧩 6 | `26.10.2` | APKS |
 | <img src="https://img.shields.io/badge/-%20-00985F?style=flat-square" height="14" alt=""> | **FotMob** | 💎 1 | `238.17794.20261012` <sub>+4 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-26A69A?style=flat-square" height="14" alt=""> | **Futbin** | 🚫 1 | `27.02` | APK |
+| <img src="https://img.shields.io/badge/-%20-26A69A?style=flat-square" height="14" alt=""> | **Futbin** | 🚫 1 | `27.06` | APK |
 | <img src="https://img.shields.io/badge/-%20-101012?style=flat-square" height="14" alt=""> | **Hevy** | 🛡️ 💎 2 | `3.1.16` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1976D2?style=flat-square" height="14" alt=""> | **IPTV** | 🚫 💎 2 | `9.1.25` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **jetAudio** | 💎 1 | `13.1.2` | APKM |
@@ -316,11 +316,11 @@ Verified on: `238.17794.20261012`, `238.17666.20260928`, `237.17536.20260911`, `
 <details>
 <summary><b>Futbin</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.futbin</code></summary>
 
-Verified on: `27.02`
+Verified on: `27.06`
 
 | Patch | What it does | Default |
 |---|---|:-:|
-| 🚫 **Disable ads** | Disables banner, interstitial, native, app-open and rewarded ads. | ✅ |
+| 🚫 **Disable ads** | Disables banner, interstitial, native, app-open and rewarded ads, and the squad builder's video ad panel. | ✅ |
 
 </details>
 <details>
@@ -680,6 +680,15 @@ Verified on: `3.11.2`, `3.10.5-L`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🚫 **Disable ads** | Disables the banner and full-screen ads. | ✅ |
+
+</details>
+
+<details>
+<summary><b>🌐 Universal</b> &nbsp;·&nbsp; 1 patches</summary>
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| **Remove screenshot restriction** | Allows screenshots and screen recording in apps that block them, by never setting the FLAG_SECURE window flag or a secure SurfaceView. Does not unprotect DRM-protected video. | ➖ |
 
 </details>
 

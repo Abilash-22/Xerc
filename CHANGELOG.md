@@ -1,3 +1,13 @@
+## [1.14.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.9...v1.14.0-dev.10) (2026-10-14)
+
+### 🐛 Bug Fixes
+
+* **futbin:** block Nimbus and Anzu ads and remove empty ad slots; updated to version 27.06 ([9f8a9fd](https://github.com/heval99/Heval-Morphe-Patches/commit/9f8a9fd08a52377d30f3be61969b7df12822465c))
+
+### ✨ New Features
+
+* add universal Remove screenshot restriction patch ([199fe45](https://github.com/heval99/Heval-Morphe-Patches/commit/199fe45dd7a3a64b3ad8725efe0d84cae55083ec))
+
 ## [1.14.0-dev.9](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.8...v1.14.0-dev.9) (2026-10-14)
 
 ### 🐛 Bug Fixes

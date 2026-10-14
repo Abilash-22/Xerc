@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.14.0-dev.9",
+  "version": "1.14.0-dev.10",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -648,7 +648,7 @@
     },
     {
       "name": "Disable ads",
-      "description": "Disables banner, interstitial, native, app-open and rewarded ads.",
+      "description": "Disables banner, interstitial, native, app-open and rewarded ads, and the squad builder's video ad panel.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -661,12 +661,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "27.02",
+              "version": "27.06",
               "versionCodes": {
-                "ARM64_V8A": 7002,
-                "ARMEABI_V7A": 7002,
-                "X86_64": 7002,
-                "X86": 7002
+                "ARM64_V8A": 7006,
+                "ARMEABI_V7A": 7006,
+                "X86_64": 7006,
+                "X86": 7006
               },
               "isExperimental": false,
               "minSdk": null,
@@ -4026,6 +4026,14 @@
           ]
         }
       ],
+      "options": []
+    },
+    {
+      "name": "Remove screenshot restriction",
+      "description": "Allows screenshots and screen recording in apps that block them, by never setting the FLAG_SECURE window flag or a secure SurfaceView. Does not unprotect DRM-protected video.",
+      "default": false,
+      "dependencies": [],
+      "compatiblePackages": null,
       "options": []
     },
     {
