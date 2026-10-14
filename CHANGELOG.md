@@ -1,3 +1,10 @@
+## [1.15.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.5...v1.15.0-dev.6) (2026-10-14)
+
+### ✨ New Features
+
+* **bizcal:** add Unlock Pro and Disable telemetry; updated to version 2.55.7 ([72fb2e3](https://github.com/heval99/Heval-Morphe-Patches/commit/72fb2e3a9dca14a94e43f0d80dfac2dbd6fef03d))
+* **vesselfinder:** add VesselFinder 6.7.8 ad removal ([e4ed131](https://github.com/heval99/Heval-Morphe-Patches/commit/e4ed13137256b75c12311357dbe1cb2a003f3954))
+
 ## [1.15.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.4...v1.15.0-dev.5) (2026-10-14)
 
 ### 🐛 Bug Fixes

@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-14T14:26:01",
-  "description": "## [1.15.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.4...v1.15.0-dev.5) (2026-10-14)\n\n### 🐛 Bug Fixes\n\n* **truecaller:** updated to version 26.40.5; remove the Clone package option ([49cb619](https://github.com/heval99/Heval-Morphe-Patches/commit/49cb6193f7474f5237495b55b82fd99be401c145)), closes [#50](https://github.com/heval99/Heval-Morphe-Patches/issues/50)",
-  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.5/patches-1.15.0-dev.5.mpp",
+  "created_at": "2026-10-14T14:35:24",
+  "description": "## [1.15.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.5...v1.15.0-dev.6) (2026-10-14)\n\n### ✨ New Features\n\n* **bizcal:** add Unlock Pro and Disable telemetry; updated to version 2.55.7 ([72fb2e3](https://github.com/heval99/Heval-Morphe-Patches/commit/72fb2e3a9dca14a94e43f0d80dfac2dbd6fef03d))\n* **vesselfinder:** add VesselFinder 6.7.8 ad removal ([e4ed131](https://github.com/heval99/Heval-Morphe-Patches/commit/e4ed13137256b75c12311357dbe1cb2a003f3954))",
+  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.6/patches-1.15.0-dev.6.mpp",
   "signature_download_url": "",
-  "version": "1.15.0-dev.5"
+  "version": "1.15.0-dev.6"
 }

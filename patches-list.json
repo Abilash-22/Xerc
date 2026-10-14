@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.15.0-dev.5",
+  "version": "1.15.0-dev.6",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -331,7 +331,7 @@
     },
     {
       "name": "Disable ads",
-      "description": "Turns off Business Calendar 2's ad-serving gate, so the mediation SDKs never start and no interstitial is shown. Pro features are not changed.",
+      "description": "Turns off Business Calendar 2's ad-serving gate and the \"ads or Pro\" dialog, stops FairBid from starting, preloading or showing interstitials, and disables Facebook Audience Network's auto-initialization.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -344,12 +344,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "2.55.5",
+              "version": "2.55.7",
               "versionCodes": {
-                "ARM64_V8A": 255501,
-                "ARMEABI_V7A": 255501,
-                "X86_64": 255501,
-                "X86": 255501
+                "ARM64_V8A": 255702,
+                "ARMEABI_V7A": 255702,
+                "X86_64": 255702,
+                "X86": 255702
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1346,6 +1346,39 @@
     },
     {
       "name": "Disable ads",
+      "description": "Removes the banner ad at the bottom of the map and stops the ad SDK from starting.",
+      "default": true,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.astrapaging.vff",
+          "name": "VesselFinder",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#112D5A",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "6.7.8",
+              "versionCodes": {
+                "ARM64_V8A": 678,
+                "ARMEABI_V7A": 678,
+                "X86_64": 678,
+                "X86": 678
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable ads",
       "description": "Disables the banner and full-screen ads.",
       "default": true,
       "dependencies": [],
@@ -1648,6 +1681,37 @@
       "options": []
     },
     {
+      "name": "Disable license check",
+      "description": "Skips the Play Store license check so the patched app starts.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.astrapaging.vff",
+          "name": "VesselFinder",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#112D5A",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "6.7.8",
+              "versionCodes": {
+                "ARM64_V8A": 678,
+                "ARMEABI_V7A": 678,
+                "X86_64": 678,
+                "X86": 678
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Disable promotions",
       "description": "Hides the GetJar and SportsPass partner banners, tiles, search cards and suggestions, the \"Discover\" app offers card and the keyboard promotion notification.",
       "default": true,
@@ -1730,6 +1794,39 @@
                 "ARMEABI_V7A": 520,
                 "X86_64": 520,
                 "X86": 520
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable telemetry",
+      "description": "Disables Firebase Analytics (including automatic events), Crashlytics crash reporting, Fyber's crash handler and the sale promo push notifications. Remote Config keeps working.",
+      "default": true,
+      "dependencies": [
+        "ResourcePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.appgenix.bizcal",
+          "name": "Business Calendar 2",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#009688",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2.55.7",
+              "versionCodes": {
+                "ARM64_V8A": 255702,
+                "ARMEABI_V7A": 255702,
+                "X86_64": 255702,
+                "X86": 255702
               },
               "isExperimental": false,
               "minSdk": null,
@@ -4548,6 +4645,37 @@
                 "ARMEABI_V7A": 29260830,
                 "X86_64": 29260830,
                 "X86": 29260830
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Unlock Pro",
+      "description": "Unlocks Business Calendar 2 Pro by forcing the app's own complete-pro and force-pro status to true. Billing is not touched.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.appgenix.bizcal",
+          "name": "Business Calendar 2",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#009688",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2.55.7",
+              "versionCodes": {
+                "ARM64_V8A": 255702,
+                "ARMEABI_V7A": 255702,
+                "X86_64": 255702,
+                "X86": 255702
               },
               "isExperimental": false,
               "minSdk": null,

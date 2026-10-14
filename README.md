@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0-dev.5](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**54** apps&nbsp;&nbsp;•&nbsp;&nbsp;**136** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.15.0-dev.6](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.6)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**55** apps&nbsp;&nbsp;•&nbsp;&nbsp;**140** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -55,7 +55,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-006CEF?style=flat-square" height="14" alt=""> | **BlueMail** | 🚫 1 | `2.2.408` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF0000?style=flat-square" height="14" alt=""> | **BoxBox** | 🚫 🛡️ 💎 3 | `5.4.17` <sub>+2 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF4500?style=flat-square" height="14" alt=""> | **Brave Browser** | 🚫 🛡️ 💎 🔕 🧪 4 | `1.97.56` <sub>+2 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-009688?style=flat-square" height="14" alt=""> | **Business Calendar 2** | 🚫 1 | `2.55.5` | APKM |
+| <img src="https://img.shields.io/badge/-%20-009688?style=flat-square" height="14" alt=""> | **Business Calendar 2** | 🚫 🛡️ 💎 3 | `2.55.7` | APKM |
 | <img src="https://img.shields.io/badge/-%20-F44336?style=flat-square" height="14" alt=""> | **Castbox** | 🚫 1 | `11.26.1-260915290` | APKM |
 | <img src="https://img.shields.io/badge/-%20-262626?style=flat-square" height="14" alt=""> | **CREX** | 🚫 💎 2 | `26.10.06` | APKM |
 | <img src="https://img.shields.io/badge/-%20-009FE3?style=flat-square" height="14" alt=""> | **Duplila** | 🚫 💎 🔑 3 | `5.1` | APKM |
@@ -98,6 +98,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 13 | `26.40.5` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 💎 2 | `11.2.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
+| <img src="https://img.shields.io/badge/-%20-112D5A?style=flat-square" height="14" alt=""> | **VesselFinder** | 🚫 🔑 2 | `6.7.8` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Weather Underground** | 🚫 1 | `6.20.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-00ACC1?style=flat-square" height="14" alt=""> | **WiFi Analyzer** | 🚫 1 | `3.11.2` <sub>+1 older</sub> | APK |
 
@@ -205,13 +206,15 @@ Verified on: `1.97.56`, `1.96.61`, `1.95.104`
 
 </details>
 <details>
-<summary><b>Business Calendar 2</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.appgenix.bizcal</code></summary>
+<summary><b>Business Calendar 2</b> &nbsp;·&nbsp; 3 patches &nbsp;·&nbsp; <code>com.appgenix.bizcal</code></summary>
 
-Verified on: `2.55.5`
+Verified on: `2.55.7`
 
 | Patch | What it does | Default |
 |---|---|:-:|
-| 🚫 **Disable ads** | Turns off Business Calendar 2's ad-serving gate, so the mediation SDKs never start and no interstitial is shown. Pro features are not changed. | ✅ |
+| 🚫 **Disable ads** | Turns off Business Calendar 2's ad-serving gate and the "ads or Pro" dialog, stops FairBid from starting, preloading or showing interstitials, and disables Facebook Audience Network's auto-initialization. | ✅ |
+| 🛡️ **Disable telemetry** | Disables Firebase Analytics (including automatic events), Crashlytics crash reporting, Fyber's crash handler and the sale promo push notifications. Remote Config keeps working. | ✅ |
+| 💎 **Unlock Pro** | Unlocks Business Calendar 2 Pro by forcing the app's own complete-pro and force-pro status to true. Billing is not touched. | ✅ |
 
 </details>
 <details>
@@ -702,6 +705,17 @@ Verified on: `3.25.1`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 💎 **Enable Pro** | Unlocks Unified Remote Full by forcing the local license status check. | ✅ |
+
+</details>
+<details>
+<summary><b>VesselFinder</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.astrapaging.vff</code></summary>
+
+Verified on: `6.7.8`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the banner ad at the bottom of the map and stops the ad SDK from starting. | ✅ |
+| 🔑 **Disable license check** | Skips the Play Store license check so the patched app starts. | ✅ |
 
 </details>
 <details>
