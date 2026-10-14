@@ -1,3 +1,9 @@
+## [1.15.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.7...v1.15.0-dev.8) (2026-10-14)
+
+### ✨ New Features
+
+* add the Heval Controls in-app settings framework ([7975a99](https://github.com/heval99/Heval-Morphe-Patches/commit/7975a9955acef130cc3a3a01928a9a07ea875ada))
+
 ## [1.15.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.6...v1.15.0-dev.7) (2026-10-14)
 
 ### ✨ New Features

@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-14T15:15:07",
-  "description": "## [1.15.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.6...v1.15.0-dev.7) (2026-10-14)\n\n### ✨ New Features\n\n* **truecaller:** remove the call-list Premium promo row; add Hide Messages tab ([06aaddb](https://github.com/heval99/Heval-Morphe-Patches/commit/06aaddbd6b1395cd75bdccbb2a32bba415f2bfb7)), closes [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53) [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53)\n* **wsj:** add The Wall Street Journal ad removal ([7e83ebb](https://github.com/heval99/Heval-Morphe-Patches/commit/7e83ebb2335d6136e913a59af93b6e2116677bae))",
-  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.7/patches-1.15.0-dev.7.mpp",
+  "created_at": "2026-10-14T16:05:25",
+  "description": "## [1.15.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.7...v1.15.0-dev.8) (2026-10-14)\n\n### ✨ New Features\n\n* add the Heval Controls in-app settings framework ([7975a99](https://github.com/heval99/Heval-Morphe-Patches/commit/7975a9955acef130cc3a3a01928a9a07ea875ada))",
+  "download_url": "https://github.com/heval99/Heval-Morphe-Patches/releases/download/v1.15.0-dev.8/patches-1.15.0-dev.8.mpp",
   "signature_download_url": "",
-  "version": "1.15.0-dev.7"
+  "version": "1.15.0-dev.8"
 }
