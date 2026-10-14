@@ -46,12 +46,15 @@ private const val EXTENSION_PACKAGE_PREFIX = "Lapp/template/extension/"
  *        breaks (from the APK's v2/v3 signing block or `apksigner verify --print-certs-pem`).
  * @param compatibility The app this patch applies to.
  * @param default Whether the patch is enabled by default.
+ * @param description The patch description, for apps where a specific symptom is worth naming.
  */
 fun spoofSignaturePatch(
     fromPackageName: String,
     certificateBase64: String,
     compatibility: Compatibility,
     default: Boolean = false,
+    description: String = "Makes the app report its original signing certificate to itself, so " +
+        "Firebase and Google APIs restricted to the original app keep working.",
 ): BytecodePatch {
     // Fail at bundle load, not on the user's device, when the certificate is not a certificate.
     runCatching {
@@ -61,8 +64,7 @@ fun spoofSignaturePatch(
 
     return bytecodePatch(
         name = "Spoof signature",
-        description = "Makes the app report its original signing certificate to itself, so " +
-            "Firebase and Google APIs restricted to the original app keep working.",
+        description = description,
         default = default,
     ) {
         compatibleWith(compatibility)

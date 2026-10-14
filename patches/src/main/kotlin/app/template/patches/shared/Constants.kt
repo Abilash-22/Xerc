@@ -1126,15 +1126,26 @@ object Constants {
     // from UserPreference's VIP gate in onCreate, the stats activity checks the gate before
     // posting its banner runnable, and the list builder inserts native-ad rows only when the
     // gate (passed as a "no ads" flag) is false. No GMA hooks are needed.
+    // 2026-10-14, 4.3.2: added "Spoof signature" (shared builder, on by default) for the reported
+    // "goal alerts never arrive". AiScore's Firebase API key (project aiscore-abb71) is restricted
+    // to the original signing cert (CN=onescore, SHA-1 d34738b4...a84c, read from the bundle's
+    // v2/v3 block), so a re-signed build gets 403 API_KEY_ANDROID_APP_BLOCKED from Firebase
+    // Installations, FCM never gets a token and AppFcmTokenWorker never reports one (POST
+    // v1/app/device/report/fcm). FIS builds X-Android-Cert through AndroidUtilsLight and the
+    // R8-renamed PackageManagerWrapper's getPackageInfo(String, 0x40); the patch routes every
+    // PackageManager.getPackageInfo call through the signature extension. Push is plain FCM and
+    // the VIP patch is unrelated. FotMob's key is unrestricted, which is why it needs no spoof.
+    // No GmsCore patch (works with Play services). Spoof signature was only verified on 4.3.2.
+    // Emulator 2026-10-14 (Play services, fresh installs): Enable Premium alone -> FIS 403
+    // API_KEY_ANDROID_APP_BLOCKED, PersistedInstallation Status 4, no FCM token; with Spoof
+    // signature -> Status 3 with an auth token, "Token successfully retrieved", an FCM token in
+    // appid.xml and AppFcmTokenWorker SUCCEEDED. VIP badge unlocked in both; no crashes.
     val COMPATIBILITY_AISCORE = Compatibility(
         name = "AiScore",
         packageName = "com.onesports.score",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x00C853,
-        targets = listOf(
-            AppTarget(version = "4.3.1", versionCode = 296),
-            AppTarget(version = "4.3.2", versionCode = 297)
-        )
+        targets = listOf(AppTarget(version = "4.3.2", versionCode = 297))
     )
 
     // Verified 2026-10-07 against com.resultadosfutbol.mobile 6.6.0 (versionCode 23005536,
