@@ -35,3 +35,16 @@ internal object InterstitialAdsEnabledFingerprint : Fingerprint(
 // manifest). It holds no pending action: the coroutine that starts it runs the action itself after
 // a one-second delay.
 internal const val AD_APP_OPENING_ACTIVITY = "Lcom/truecaller/ads/interstitial/AdAppOpeningActivity;"
+
+// The Ads V2 placement check isEnabled(placement, continuation) (ar0.a in 26.40.5): a global Ads V2
+// switch, then one feature toggle per AdPlacement (kept sealed class), e.g. "featureAdsV2OnClList"
+// for the call log list. Every Ads V2 (Compose) placement asks it before loading or showing
+// anything: the call log list ad slot and its ad positions, the call log promo slot, the message
+// list, details view, caller ID, in-call and PACS screens. The call log list slot falls back to
+// a "Truecaller Premium / Upgrade for an ad-free experience" row (AdPlaceholderType.Premium) when
+// no ad fills it. The key is exact-matched; the other readers are the toggle registries.
+internal object AdsV2PlacementEnabledFingerprint : Fingerprint(
+    returnType = "Ljava/lang/Object;",
+    parameters = listOf("Lcom/truecaller/ads/api/model/ad/AdPlacement;", "L"),
+    filters = listOf(string("featureAdsV2OnClList")),
+)

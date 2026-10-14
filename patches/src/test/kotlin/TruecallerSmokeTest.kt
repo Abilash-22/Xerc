@@ -33,6 +33,8 @@ private const val ADS_CONTAINER_LIGHT = "Lcom/truecaller/ads/ui/AdsContainerLigh
 private const val ADS_SWITCH_VIEW = "Lcom/truecaller/ads/ui/AdsSwitchView;"
 private const val AD_LAYOUT_TYPE = "Lcom/truecaller/ads/AdLayoutTypeX;"
 private const val BOTTOM_BAR_BUTTON_TYPE = "Lcom/truecaller/bottombar/BottomBarButtonType;"
+private const val BOTTOM_BAR_VIEW = "Lcom/truecaller/bottombar/BottomBarView;"
+private const val AD_PLACEMENT = "Lcom/truecaller/ads/api/model/ad/AdPlacement;"
 private const val FEATURE_STATE = "Lcom/truecaller/featuretoggles/FeatureState;"
 
 class TruecallerSmokeTest {
@@ -103,6 +105,7 @@ class TruecallerSmokeTest {
                 "Hide Scam feed",
                 "Hide Premium tab",
                 "Hide Blocking tab",
+                "Hide Messages tab",
                 "Hide family button",
                 "Restore classic call log",
                 "Use SMS for verification codes",
@@ -119,6 +122,7 @@ class TruecallerSmokeTest {
         assertDisableUpdatePrompts(classes)
         assertFeatureToggles(classes)
         assertHiddenTabs(classes)
+        assertHideMessagesTab(classes)
         assertToggleOverrides(classes)
         assertUseSmsVerification(classes)
         // onGetCredential tests isAvailableOnDevice(int) in this build, so the routing applies.
@@ -286,6 +290,19 @@ class TruecallerSmokeTest {
         }
         assertForcedBoolean(gate, expected = false, label = "${gateClass.type}.${gate.name}() (featureInterstitialAd)")
 
+        // Ads V2 placements: the (AdPlacement, continuation) check returns Boolean.FALSE at once, which
+        // also drops the call log's "Upgrade for an ad-free experience" placeholder row.
+        val (placementClass, placement) = classes.singleMethod("Ads V2 placement check") { _, m ->
+            m.returnType == "Ljava/lang/Object;" && m.params().size == 2 && m.params().first() == AD_PLACEMENT &&
+                "featureAdsV2OnClList" in m.strings()
+        }
+        val placementInsns = placement.instructions()
+        val no = placementInsns.getOrNull(0)
+        check(no?.opcode == Opcode.SGET_OBJECT && no.field()?.definingClass == "Ljava/lang/Boolean;" && no.field()?.name == "FALSE" &&
+            placementInsns.getOrNull(1)?.opcode == Opcode.RETURN_OBJECT &&
+            (placementInsns[1] as OneRegisterInstruction).registerA == (no as OneRegisterInstruction).registerA
+        ) { "${placementClass.type}.${placement.name}(AdPlacement, ...) does not return Boolean.FALSE at once; got ${no?.opcode} ${no?.field()}" }
+
         // Only the app-open loading screen still finishes right after super.onCreate; the
         // interstitial activities, which deliver the pending action or reward, are untouched.
         for ((type, finishes) in listOf(
@@ -373,7 +390,7 @@ class TruecallerSmokeTest {
 
     private fun assertHiddenTabs(classes: List<ClassDef>) {
         // The bottom bar builder calls one helper per tab patch on the tab array right before
-        // filterNotNull; together they null PREMIUM, BLOCKING and FAMILY_PROTECTION_CONFIG.
+        // filterNotNull; together they null PREMIUM, BLOCKING, FAMILY_PROTECTION_CONFIG and MESSAGES.
         val (builderClass, builder) = classes.singleMethod("bottom bar builder") { _, m ->
             m.returnType == "V" && m.params() == listOf("Landroid/util/SparseIntArray;") &&
                 m.instructions().any { it.opcode == Opcode.SGET_OBJECT && it.field()?.definingClass == BOTTOM_BAR_BUTTON_TYPE && it.field()?.name == "CALLS" }
@@ -384,12 +401,12 @@ class TruecallerSmokeTest {
             it.opcode == Opcode.INVOKE_STATIC && it.call()?.returnType == "Ljava/util/List;" &&
                 it.call()?.parameterTypes?.map(CharSequence::toString) == listOf("[Ljava/lang/Object;")
         }
-        check(filter >= 2) { "$label has no filterNotNull call after the helpers" }
+        check(filter >= 3) { "$label has no filterNotNull call after the helpers" }
         val array = (insns[filter] as FiveRegisterInstruction).registerC
         val arrayType = insns.take(filter).last { it.opcode == Opcode.NEW_ARRAY && (it as TwoRegisterInstruction).registerA == array }
             .let { ((it as ReferenceInstruction).reference as TypeReference).type }
         val hidden = mutableSetOf<String>()
-        for (call in insns.subList(filter - 2, filter)) {
+        for (call in insns.subList(filter - 3, filter)) {
             val ref = call.call()
             check(call.opcode == Opcode.INVOKE_STATIC_RANGE && ref?.definingClass == builderClass.type &&
                 ref.parameterTypes.map(CharSequence::toString) == listOf(arrayType) &&
@@ -404,7 +421,68 @@ class TruecallerSmokeTest {
             hidden += helperInsns.filter { it.opcode == Opcode.SGET_OBJECT && it.field()?.definingClass == BOTTOM_BAR_BUTTON_TYPE }
                 .map { it.field()!!.name }
         }
-        check(hidden == setOf("PREMIUM", "BLOCKING", "FAMILY_PROTECTION_CONFIG")) { "$label hides $hidden" }
+        check(hidden == setOf("PREMIUM", "BLOCKING", "FAMILY_PROTECTION_CONFIG", "MESSAGES")) { "$label hides $hidden" }
+    }
+
+    private fun assertHideMessagesTab(classes: List<ClassDef>) {
+        val (builderClass, builder) = classes.singleMethod("bottom bar builder") { _, m ->
+            m.returnType == "V" && m.params() == listOf("Landroid/util/SparseIntArray;") &&
+                m.instructions().any { it.opcode == Opcode.SGET_OBJECT && it.field()?.definingClass == BOTTOM_BAR_BUTTON_TYPE && it.field()?.name == "CALLS" }
+        }
+        fun Instruction.isTabType(name: String) =
+            opcode == Opcode.SGET_OBJECT && field()?.definingClass == BOTTOM_BAR_BUTTON_TYPE && field()?.name == name
+
+        // The "default_tab_on_launch" getter returns CALLS at once.
+        val defaultTab = builderClass.methods.single {
+            it.returnType == BOTTOM_BAR_BUTTON_TYPE && it.parameterTypes.isEmpty() && "default_tab_on_launch" in it.strings()
+        }
+        val defaultInsns = defaultTab.instructions()
+        check(defaultInsns.getOrNull(0)?.isTabType("CALLS") == true && defaultInsns.getOrNull(1)?.opcode == Opcode.RETURN_OBJECT &&
+            (defaultInsns[1] as OneRegisterInstruction).registerA == (defaultInsns[0] as OneRegisterInstruction).registerA
+        ) { "${builderClass.type}.${defaultTab.name}() (default tab) does not return CALLS at once" }
+
+        // selectTab(type, Z) swaps MESSAGES for CALLS before its stock code.
+        val select = builderClass.methods.single {
+            it.returnType == "V" && it.params() == listOf(BOTTOM_BAR_BUTTON_TYPE, "Z") &&
+                it.instructions().any { insn -> insn.call()?.name == "setSelectedItemId" }
+        }
+        val selectLabel = "${builderClass.type}.${select.name}(BottomBarButtonType, Z)"
+        val selectInsns = select.instructions()
+        val p1 = select.implementation!!.registerCount - 2 // the type, then Z
+        check(selectInsns.getOrNull(0)?.isTabType("MESSAGES") == true) { "$selectLabel does not load MESSAGES first" }
+        val compare = selectInsns[1]
+        check(compare.opcode == Opcode.IF_NE && (compare as TwoRegisterInstruction).registerA == p1 &&
+            compare.registerB == (selectInsns[0] as OneRegisterInstruction).registerA && selectInsns.branchTarget(1) == 3
+        ) { "$selectLabel does not skip the swap for other tabs" }
+        check(selectInsns[2].isTabType("CALLS") && (selectInsns[2] as OneRegisterInstruction).registerA == p1) {
+            "$selectLabel does not replace MESSAGES with CALLS"
+        }
+        check(selectInsns.drop(3).any { it.call()?.name == "setSelectedItemId" }) { "$selectLabel lost its stock code" }
+
+        // Right after the BottomBarView cast, the builder passes the bar and the final tab list to a
+        // helper that hides the bar with fewer than two tabs and shows it otherwise.
+        val insns = builder.instructions()
+        val take = insns.indexOfFirst {
+            it.call()?.definingClass == "Lkotlin/collections/CollectionsKt;" &&
+                it.call()?.parameterTypes?.map(CharSequence::toString) == listOf("Ljava/lang/Iterable;", "I")
+        }
+        val cast = insns.indexOfFirst {
+            it.opcode == Opcode.CHECK_CAST && ((it as ReferenceInstruction).reference as TypeReference).type == BOTTOM_BAR_VIEW
+        }
+        check(take >= 0 && cast > take) { "bottom bar builder has no take() before its BottomBarView cast" }
+        val list = (insns[take + 1] as OneRegisterInstruction).registerA
+        val call = insns[cast + 1]
+        val ref = call.call()
+        check(call.opcode == Opcode.INVOKE_STATIC && ref?.definingClass == builderClass.type &&
+            ref.parameterTypes.map(CharSequence::toString) == listOf(BOTTOM_BAR_VIEW, "Ljava/util/List;") &&
+            (call as FiveRegisterInstruction).registerC == (insns[cast] as OneRegisterInstruction).registerA && call.registerD == list
+        ) { "bottom bar builder does not pass the bar and the tab list to a helper after the cast; got ${call.opcode} $ref" }
+        val helper = builderClass.method(ref.name, listOf(BOTTOM_BAR_VIEW, "Ljava/util/List;")).instructions()
+        check(helper.any { it.call()?.name == "size" && it.call()?.definingClass == "Ljava/util/List;" } &&
+            helper.any { it.opcode == Opcode.IF_LT } &&
+            helper.any { it.call()?.name == "setVisibility" && it.call()?.definingClass == "Landroid/view/View;" } &&
+            helper.any { it.opcode == Opcode.CONST_16 && (it as NarrowLiteralInstruction).narrowLiteral == 8 }
+        ) { "${builderClass.type}.${ref.name} does not set the bar GONE below two tabs" }
     }
 
     private fun assertToggleOverrides(classes: List<ClassDef>) {

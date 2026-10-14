@@ -1395,12 +1395,27 @@ object Constants {
     // CleverTapManager, AppsFlyerLib, TruecallerInit, PremiumFeature CALL_ASSISTANT /
     // FAMILY_SHARING, BottomBarButtonType PREMIUM / BLOCKING / FAMILY_PROTECTION_CONFIG) unchanged.
     // New in 26.40.5: a MessageList ad unit (AdPlacement MessageScreen.MessageList, business inbox
-    // list ads via ListAdConfig). It loads through the same placement pipeline as MessageBottom and
-    // adds no new ad view or AdsContainer / AdsContainerLight / AdsSwitchView user, so the bind
-    // hooks should cover it; not checked at runtime.
+    // list ads via ListAdConfig). It is an Ads V2 (Compose) placement, covered by Disable ads step 4
+    // below, not by the bind hooks; not checked at runtime.
     // 2026-10-14: GmsCore support no longer offers the Clone package name (#50): the main provider
     // authority is exactly "com.truecaller", the dex hard-codes content://com.truecaller, and the
     // com.truecaller.account type clashes, so a clone cannot install next to stock.
+    // 2026-10-14 (#53, 26.40.5, smoke test only, not runtime-tested):
+    //   - Disable ads step 4: the call log's "Truecaller Premium / Upgrade for an ad-free
+    //     experience" row is the Ads V2 call log list slot (AdPlacement CallLogScreen.ClList) drawing
+    //     its AdPlaceholderType.Premium backfill when no ad fills it; the ads module ignores Premium.
+    //     The Ads V2 placement check (Object return, (AdPlacement, continuation), exact string
+    //     "featureAdsV2OnClList", ar0.a here) returns Boolean.FALSE at once. All its callers (call log
+    //     list slot and ad positions, call log promo, message list, details view, caller ID, in-call,
+    //     PACS) then lay out and load nothing. The global Ads V2 switch (ar0.c) is left alone.
+    //   - Hide Messages tab (opt-in): hideBottomBarTabs now refuses only CALLS. The builder class's
+    //     "default_tab_on_launch" getter (()BottomBarButtonType) returns CALLS; its selectTab
+    //     ((BottomBarButtonType, Z)V calling setSelectedItemId) swaps MESSAGES for CALLS, so the
+    //     launch tab, SMS notification / deep-link intents (ARG_FRAGMENT_ORDINAL) and the back
+    //     button land on Calls (selecting a missing tab on a fresh start left the screen empty, and
+    //     back kept "returning" to the old default). A new helper after the builder's
+    //     check-cast to BottomBarView (kept) sets the bar GONE with fewer than two tabs, VISIBLE
+    //     otherwise; nothing else in the app changes its visibility.
     val COMPATIBILITY_TRUECALLER = Compatibility(
         name = "Truecaller",
         packageName = "com.truecaller",

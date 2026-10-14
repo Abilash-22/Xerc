@@ -16,8 +16,8 @@ private val MutableMethod.parameterList get() = parameterTypes.map(CharSequence:
 @Suppress("unused")
 val disableAdsPatch = bytecodePatch(
     name = "Disable ads",
-    description = "Hides banner and native ads and turns off interstitial and app-open ads, so " +
-        "actions such as Click to WhatsApp run at once.",
+    description = "Hides banner and native ads and the ad slots in the call log and inbox, and " +
+        "turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once.",
 ) {
     compatibleWith(COMPATIBILITY_TRUECALLER)
 
@@ -90,6 +90,20 @@ val disableAdsPatch = bytecodePatch(
             """
                 invoke-virtual/range {p0 .. p0}, Landroid/app/Activity;->finish()V
                 return-void
+            """,
+        )
+
+        // 4. Ads V2 placements (Compose screens, which do not use the ad views above): the
+        // placement check returns false at once, so no slot is laid out or loaded. This also
+        // removes the "Truecaller Premium / Upgrade for an ad-free experience" row the call log
+        // list shows when its slot is active but has no ad (#53); Enable Premium cannot hide it,
+        // because the ads module does not read Premium. It is a suspend function, so the boxed
+        // Boolean is returned directly.
+        AdsV2PlacementEnabledFingerprint.method.addInstructions(
+            0,
+            """
+                sget-object p0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
+                return-object p0
             """,
         )
     }
