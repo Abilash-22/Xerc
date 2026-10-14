@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**128** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
+> **[v1.15.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**53** apps&nbsp;&nbsp;•&nbsp;&nbsp;**133** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -58,6 +58,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-009688?style=flat-square" height="14" alt=""> | **Business Calendar 2** | 🚫 1 | `2.55.5` | APKM |
 | <img src="https://img.shields.io/badge/-%20-F44336?style=flat-square" height="14" alt=""> | **Castbox** | 🚫 1 | `11.26.1-260915290` | APKM |
 | <img src="https://img.shields.io/badge/-%20-262626?style=flat-square" height="14" alt=""> | **CREX** | 🚫 💎 2 | `26.10.06` | APKM |
+| <img src="https://img.shields.io/badge/-%20-009FE3?style=flat-square" height="14" alt=""> | **Duplila** | 🚫 💎 🔑 3 | `5.1` | APKM |
 | <img src="https://img.shields.io/badge/-%20-212121?style=flat-square" height="14" alt=""> | **Easy Homescreen** | 🚫 🛡️ 💎 🔕 🧩 6 | `1.10.28` | APKM |
 | <img src="https://img.shields.io/badge/-%20-00ACFF?style=flat-square" height="14" alt=""> | **EasyNotes** | 🚫 💎 2 | `1.3.63.0921` <sub>+1 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-2196F3?style=flat-square" height="14" alt=""> | **FairEmail** | 💎 1 | `1.2338` <sub>+1 older</sub> | APK |
@@ -67,6 +68,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-00985F?style=flat-square" height="14" alt=""> | **FotMob** | 💎 1 | `238.17794.20261012` <sub>+4 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-26A69A?style=flat-square" height="14" alt=""> | **Futbin** | 🚫 1 | `27.06` | APK |
 | <img src="https://img.shields.io/badge/-%20-101012?style=flat-square" height="14" alt=""> | **Hevy** | 🛡️ 💎 2 | `3.1.16` | APKM |
+| <img src="https://img.shields.io/badge/-%20-607D8B?style=flat-square" height="14" alt=""> | **Interval Timer** | 🚫 🛡️ 2 | `2.3.30` | APK |
 | <img src="https://img.shields.io/badge/-%20-1976D2?style=flat-square" height="14" alt=""> | **IPTV** | 🚫 💎 2 | `9.1.25` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **jetAudio** | 💎 1 | `13.1.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FEE500?style=flat-square" height="14" alt=""> | **KakaoTalk** | 🚫 🛡️ 💎 🧩 11 | `26.8.3` | APKM |
@@ -233,6 +235,18 @@ Verified on: `26.10.06`
 
 </details>
 <details>
+<summary><b>Duplila</b> &nbsp;·&nbsp; 3 patches &nbsp;·&nbsp; <code>com.duplila.screenshare</code></summary>
+
+Verified on: `5.1`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the banner ad and skips the ad consent form, which otherwise closes the app for free users who refuse consent. | ✅ |
+| 🔑 **Disable license check** | Skips the Play Store license check so the patched app starts. | ✅ |
+| 💎 **Enable Premium** | Unlocks Duplila Premium: no watermark, the higher mirroring resolution and the other premium-only actions. Premium is checked on the device only; the license check is disabled as well so the patched app starts. | ✅ |
+
+</details>
+<details>
 <summary><b>Easy Homescreen</b> &nbsp;·&nbsp; 6 patches &nbsp;·&nbsp; <code>easy.launcher</code></summary>
 
 Verified on: `1.10.28`
@@ -332,6 +346,17 @@ Verified on: `3.1.16`
 |---|---|:-:|
 | 🛡️ **Block telemetry & trackers** | Blocks Sentry crash reporting, Adjust and Branch attribution, Facebook app events and Amplitude ad-ID and legacy event uploads. Push notifications and purchases keep working. | ✅ |
 | 💎 **Unlock Pro** | Unlocks Hevy Pro features that run on your device's workout data (unlimited routines, custom exercises, advanced stats and graphs). Pro features Hevy's servers provide, like cloud limits and Hevy Coach, can stay locked. | ✅ |
+
+</details>
+<details>
+<summary><b>Interval Timer</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>cc.dreamspark.intervaltimer</code></summary>
+
+Verified on: `2.3.30`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Disables native and banner ads and hides the "Remove ads" upsell. | ✅ |
+| 🛡️ **Disable telemetry** | Disables Firebase Analytics, advertising ID collection and Crashlytics reports. | ✅ |
 
 </details>
 <details>

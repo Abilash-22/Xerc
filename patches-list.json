@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.14.0",
+  "version": "1.15.0-dev.1",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -512,6 +512,39 @@
     },
     {
       "name": "Disable ads",
+      "description": "Removes the banner ad and skips the ad consent form, which otherwise closes the app for free users who refuse consent.",
+      "default": true,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.duplila.screenshare",
+          "name": "Duplila",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#009FE3",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.1",
+              "versionCodes": {
+                "ARM64_V8A": 68,
+                "ARMEABI_V7A": 68,
+                "X86_64": 68,
+                "X86": 68
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable ads",
       "description": "Removes banner, native and app-open ads and skips the ad consent form.",
       "default": true,
       "dependencies": [],
@@ -667,6 +700,37 @@
                 "ARMEABI_V7A": 7006,
                 "X86_64": 7006,
                 "X86": 7006
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable ads",
+      "description": "Disables native and banner ads and hides the \"Remove ads\" upsell.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "cc.dreamspark.intervaltimer",
+          "name": "Interval Timer",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#607D8B",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2.3.30",
+              "versionCodes": {
+                "ARM64_V8A": 239030,
+                "ARMEABI_V7A": 239030,
+                "X86_64": 239030,
+                "X86": 239030
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1445,6 +1509,37 @@
       "dependencies": [],
       "compatiblePackages": [
         {
+          "packageName": "com.duplila.screenshare",
+          "name": "Duplila",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#009FE3",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.1",
+              "versionCodes": {
+                "ARM64_V8A": 68,
+                "ARMEABI_V7A": 68,
+                "X86_64": 68,
+                "X86": 68
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable license check",
+      "description": "Skips the Play Store license check so the patched app starts.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
           "packageName": "com.rawcam.app",
           "name": "Native Camera",
           "description": null,
@@ -1718,6 +1813,37 @@
                 "ARMEABI_V7A": 520,
                 "X86_64": 520,
                 "X86": 520
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Disable telemetry",
+      "description": "Disables Firebase Analytics, advertising ID collection and Crashlytics reports.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "cc.dreamspark.intervaltimer",
+          "name": "Interval Timer",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#607D8B",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "2.3.30",
+              "versionCodes": {
+                "ARM64_V8A": 239030,
+                "ARMEABI_V7A": 239030,
+                "X86_64": 239030,
+                "X86": 239030
               },
               "isExperimental": false,
               "minSdk": null,
@@ -2260,6 +2386,39 @@
                 "ARMEABI_V7A": 667,
                 "X86_64": 667,
                 "X86": 667
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Enable Premium",
+      "description": "Unlocks Duplila Premium: no watermark, the higher mirroring resolution and the other premium-only actions. Premium is checked on the device only; the license check is disabled as well so the patched app starts.",
+      "default": true,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.duplila.screenshare",
+          "name": "Duplila",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#009FE3",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "5.1",
+              "versionCodes": {
+                "ARM64_V8A": 68,
+                "ARMEABI_V7A": 68,
+                "X86_64": 68,
+                "X86": 68
               },
               "isExperimental": false,
               "minSdk": null,

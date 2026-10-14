@@ -1,3 +1,10 @@
+## [1.15.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0...v1.15.0-dev.1) (2026-10-14)
+
+### ✨ New Features
+
+* **duplila:** add Duplila - Mirror Screen 5.1 patches ([219078a](https://github.com/heval99/Heval-Morphe-Patches/commit/219078a6ec1a7a8326a0fce1609da515dbf59a79))
+* **intervaltimer:** add Interval Timer 2.3.30 patches ([a55847e](https://github.com/heval99/Heval-Morphe-Patches/commit/a55847e57943c41b562416eaf1b72875bb9f13bf))
+
 ## [1.14.0](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.13.0...v1.14.0) (2026-10-14)
 
 ### 🐛 Bug Fixes
