@@ -139,3 +139,15 @@ In queue order. Verdicts are first impressions; nothing has been triaged yet.
 | 16 | UniTV | not on Google Play | Full version | Off-Play IPTV service from a download site; skip |
 
 **Community note:** a Korean user worries about patching KakaoTalk, which handles payments and certificates in Korea. A re-signed KakaoTalk may break Kakao Pay and certificate features; consider a warning in the patch description or the README.
+
+## Open GitHub issues (2026-10-14)
+
+From [the issue tracker](https://github.com/heval99/Heval-Morphe-Patches/issues). Truecaller (shipped 2026-10-13) has four of the five, so it goes first.
+
+| Issue | App | Type | Notes |
+|---|---|---|---|
+| [#54](https://github.com/heval99/Heval-Morphe-Patches/issues/54) | Truecaller | Bug | Repeated "your premium expired" notifications, random freezes and crashes; after a clean install, spam calls are still not blocked |
+| [#52](https://github.com/heval99/Heval-Morphe-Patches/issues/52) | Truecaller | Bug | Spam Protection falls back from Max to Basic; "Servers can't be reached" toasts; Premium tab stuck loading; Frequently called contacts enabled with its setting hidden (`isFrequentlyCalledVisible` false, per a commenter); **T9 dialer search finds no saved contacts**; unasked contact-UI, fraud-protection and SMS-tab changes. Likely the server treating the patched app as non-premium or modified (shared cause with #54) plus separate client bugs (T9, frequently called) |
+| [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53) | Truecaller | Request | Hide the Blocking, Family invite and Premium tabs; block the tracking that flags the app as modified ("install from Play Store"). Owner replied "Looking into it" |
+| [#50](https://github.com/heval99/Heval-Morphe-Patches/issues/50) | Truecaller | Request | "Clone" option: a different package name so the patched app installs next to stock Truecaller (dual SIM). Check whether Morphe's universal "Change package name" patch works with our GmsCore/Spoof signature patches |
+| [#51](https://github.com/heval99/Heval-Morphe-Patches/issues/51) | Duplila - Mirror Screen | Request | `com.duplila.screenshare`, unlock premium (screen casting); triage |
