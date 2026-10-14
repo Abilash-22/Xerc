@@ -1,6 +1,7 @@
 package app.template.patches.truecaller.layout
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.StringComparisonType
 import app.morphe.patcher.fieldAccess
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.string
@@ -62,6 +63,16 @@ internal object DefaultTabFingerprint : Fingerprint(
     returnType = BOTTOM_BAR_BUTTON_TYPE,
     parameters = listOf(),
     filters = listOf(string("default_tab_on_launch")),
+)
+
+// toString() of the main Settings screen's state (a7a in 26.40.5), a Kotlin data class whose
+// isPremiumItemVisible / isWatchItemVisible / ... flags CategoriesFragment applies to its fixed
+// rows (item_premium, item_watch, ... plus their dividers). Only the stable prefix is matched.
+internal object CategoriesSettingsStateToStringFingerprint : Fingerprint(
+    name = "toString",
+    returnType = "Ljava/lang/String;",
+    parameters = listOf(),
+    filters = listOf(string("CategoriesSettingsState(", StringComparisonType.STARTS_WITH)),
 )
 
 // The builder class's selectTab(type, fromUser) (cp6.e in 26.40.5): every programmatic tab switch

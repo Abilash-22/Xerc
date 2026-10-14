@@ -1416,6 +1416,14 @@ object Constants {
     //     back kept "returning" to the old default). A new helper after the builder's
     //     check-cast to BottomBarView (kept) sets the bar GONE with fewer than two tabs, VISIBLE
     //     otherwise; nothing else in the app changes its visibility.
+    // 2026-10-14 (#52, 26.40.5, smoke test + CLI disassembly, not runtime-tested): Fix T9 contact search
+    //   (opt-in) clones the static RefreshT9MappingWorker helper ((Context)V with "RefreshT9MappingWorker.RebuildAll",
+    //   w6j.f here) as public morpheRefreshT9Incremental with Boolean.FALSE, called right after super.onCreate in
+    //   TruecallerInit; the unique job uses ExistingWorkPolicy.REPLACE, so launches do not stack.
+    // 2026-10-14 (#53, 26.40.5, smoke test + CLI disassembly, not runtime-tested): Hide Premium tab also hides the
+    //   Settings "Premium" row, and Hide Wear OS settings hides "Truecaller for Wear OS": every
+    //   CategoriesSettingsState constructor (a7a here, found by its toString prefix) stores false for
+    //   isPremiumItemVisible / isWatchItemVisible (fields mapped through toString's outlined append order).
     val COMPATIBILITY_TRUECALLER = Compatibility(
         name = "Truecaller",
         packageName = "com.truecaller",
