@@ -956,12 +956,19 @@ object Constants {
     // prior" exception; no "Ad" card (stock shows it at the top of Recommended); audio plays and
     // survives background/return; no interstitial; Enable Premium hides the paywall and the
     // Premium tab. 6.2.0 dropped: only the latest verified version is supported.
+    // 2026-10-14: updated to 6.3.0 (versionCode 899, merged bundle, same developer signer as
+    // 6.2.4); anchors unchanged: SimpleRadioBaseActivity.isPremium, the "iab_premium" IAB service
+    // (still ta/j), every listed GMA/MAX entry point and MobileAds static, and the AdsExperiment
+    // Boolean after "android_search_nativeads_show" (loader s2(), getter x2() as on 6.2.4). The app
+    // code differs from 6.2.4 only by renumbered lambdas and two Dagger injector classes.
+    // Emulator 2026-10-14 (6.3.0, fresh installs, both patches): no crash incl. after consent, no "Ad" card,
+    // no Premium tab or paywall, audio plays.
     val COMPATIBILITY_SIMPLERADIO = Compatibility(
         name = "Simple Radio",
         packageName = "com.streema.simpleradio",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xFF6D00,
-        targets = listOf(AppTarget(version = "6.2.4", versionCode = 895))
+        targets = listOf(AppTarget(version = "6.3.0", versionCode = 899))
     )
 
     // Verified 2026-09-29 against com.farproc.wifi.analyzer 3.10.5-L (versionCode 999,
