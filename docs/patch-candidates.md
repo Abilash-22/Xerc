@@ -83,7 +83,7 @@ Triaged 2026-10-12; status per row.
 | AZ Screen Recorder | `com.hecorat.screenrecorder.free` | **Blocked 2026-10-12** - full PairIP still ships on 6.9.9 (VMRunner, libpairipcore.so); see blocklist |
 | Spark Mail | `com.readdle.spark` | **Blocked 2026-10-12** - Premium/Plus/Pro are server-side (Readdle backend returns BillingInfo); see blocklist |
 | BlueMail | `me.bluemail.mail` | **Shipped 2026-10-12** - "Disable ads" (2.2.408; ads via react-native-google-mobile-ads). Premium/ad-free entitlement is server-side and not patched. Not runtime-tested (ARM-only libs, extractNativeLibs=false; stock also fails on the x86_64 emulator) |
-| PDF Reader | `pdf.pdfreader.viewer.editor.free` | **Pending 2026-10-12** - only APK found is an unverified Aptoide 2.1.6 (Play shows 2.1.5), signed by a self-signed "Jx Clarynx" cert that does not match the Play developer ("QR Code Scanner."). APKMirror and APKPure do not carry it. Waiting for the genuine Play build from the owner's phone |
+| PDF Reader | `pdf.pdfreader.viewer.editor.free` | **Pending 2026-10-12** - only APK found is an unverified Aptoide 2.1.6 (Play shows 2.1.5), signed by a self-signed "Jx Clarynx" cert that does not match the Play developer ("QR Code Scanner."). APKMirror and APKPure do not carry it. **2026-10-14: confirmed adware repack** (same signer and injected launcher-activity payload as the fake Futbin "27.5"); quarantined, never use it. Waiting for the genuine Play build from the owner's phone |
 | SmartWOD Timer | `net.smartwod.timer` | **Shipped 2026-10-12** - "Enable Premium" (RNIapModule.getAvailableItemsByType @ReactMethod hooked via `extensions/smartwod` to report lifetime (Premium+) and ad-free as owned; premium is decided in JS from react-native-iap results checking only productId) and "Disable ads" (1.46.9). Runtime-verified on a Play-certified emulator (Premium+ / Lifetime, no ads) |
 
 ## Recommended first batch
@@ -106,3 +106,36 @@ Tier 1 progress, all checked against the latest APKMirror builds:
 | JuiceSSH | Parked - purchases stored in an ORMLite `purchase` table, premium gate in obfuscated code |
 | Business Calendar 2 | **Patched 2026-10-11** - "Disable ads" (readable app code; `AdsUtil.showAdsForUser(Context)` gates the mediation SDK start and interstitials). Pro untouched |
 
+## Requested on Reddit (v1.14.0-dev.5 release post, 2026-10-14)
+
+From the comments on [the release post](https://www.reddit.com/r/MorpheApp/comments/1x54qjm/release_heval_morphe_patches_v1140dev5_new_apps/).
+In queue order. Verdicts are first impressions; nothing has been triaged yet.
+
+**Bug report (fix first)**
+
+| App | Package | Notes |
+|---|---|---|
+| AiScore | `com.onesports.score` | **Bug, 3 reports:** goal alerts never arrive on the patched app, even with every notification permission granted (FotMob works for the same users). Likely Firebase push rejecting the re-signed app, as with 365Scores/Sofascore (fixed there with Spoof signature / GmsCore support) |
+
+**App requests**
+
+| # | App | Package | Requested | Notes |
+|---|---|---|---|---|
+| 1 | Brevent | `me.piebridge.brevent` | Unlock all features / premium | Most upvoted request (7); owner replied "i will try" |
+| 2 | WeMuslim (Athan & Qibla) | `com.fyxtech.muslim` | Ads + analytics, premium, hide Premium tab and upgrade banners | Detailed request; promising if the entitlement check is local |
+| 3 | Interval Timer | `cc.dreamspark.intervaltimer` | Remove ads ("ads mess with the UI") | Simple ad app, likely an easy Tier 1 win |
+| 4 | Camera (Ocean Galaxy) | `com.oceangalaxy.camera.new` | Not specified | Probably ads + premium; triage |
+| 5 | Tennis app | `com.tennisrn` | Not specified | Triage |
+| 6 | `com.astrapaging.vff` | `com.astrapaging.vff` | Not specified | Triage; identify the app first |
+| 7 | Textpand | unknown | Not specified | Find the package first |
+| 8 | Moneycontrol | `com.divum.MoneyControl` | Not specified | Pro content is probably server-side; ads may be doable |
+| 9 | A Better Routeplanner | `com.iternio.abrpapp` | Not specified | Premium is probably server-side |
+| 10 | The Wall Street Journal (+ NYT, Washington Post, Financial Times, Guardian) | `wsj.reader_sp`, ... | Paywall / ads | Subscriptions are server-side; ad removal at most |
+| 11 | Ultimate Guitar, WiFi Map Pro, The Pioneer | various | Not specified | One user; triage |
+| 12 | Backdrops | `com.backdrops.wallpapers` | Newer patch | Already in another Morphe bundle, and wallpapers update regardless; low priority |
+| 13 | X-VPN | unknown | Premium | VPN premium is almost always server-side; likely skip |
+| 14 | Twitch | `tv.twitch.android.app` | Remove ads | Twitch ads are mostly server-inserted; commenters point to Xtra; likely skip |
+| 15 | Cronometer | `com.cronometer.android` | Not specified | Already on the blocklist (APKMirror 403, likely server-side) |
+| 16 | UniTV | not on Google Play | Full version | Off-Play IPTV service from a download site; skip |
+
+**Community note:** a Korean user worries about patching KakaoTalk, which handles payments and certificates in Korea. A re-signed KakaoTalk may break Kakao Pay and certificate features; consider a warning in the patch description or the README.
