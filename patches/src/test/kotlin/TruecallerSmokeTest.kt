@@ -82,11 +82,18 @@ class TruecallerSmokeTest {
         // absent, so CI stays green; locally it is present and the test really runs.
         assumeTrue(apk.exists(), "skipping: base.apk not present at ${apk.path}")
 
+        val allPatches = loadAllPatches(newestPatchBundle(root))
+        // No Clone package name option (#50): a com.truecaller clone cannot install next to stock.
+        val gmsCore = allPatches.single { p ->
+            p.name == "GmsCore support" && p.compatibility.orEmpty().any { it.packageName == PKG }
+        }
+        check("packageName" !in gmsCore.options.keys) { "Truecaller GmsCore support still offers the packageName option" }
+
         val classes = applyPatches(
             apk = apk,
             workDir = workDir,
             pkg = PKG,
-            version = "26.39.6",
+            version = "26.40.5",
             patchNames = setOf(
                 "Enable Premium",
                 "Disable ads",
@@ -102,7 +109,7 @@ class TruecallerSmokeTest {
                 "GmsCore support",
                 "Spoof signature",
             ),
-            allPatches = loadAllPatches(newestPatchBundle(root)),
+            allPatches = allPatches,
         )
         val byType = classes.associateBy { it.type }
 

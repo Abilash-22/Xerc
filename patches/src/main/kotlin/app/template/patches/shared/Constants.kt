@@ -1293,11 +1293,12 @@ object Constants {
     // Verified 2026-10-12 against com.truecaller 26.39.6 (versionCode 2639006, APKMirror bundle
     // merged; APKPure also ships a standalone APK). Fully R8-obfuscated outside kept model/worker
     // classes, so every anchor is a pref key, a kept type in the signature, or method shape:
-    //   - Enable Premium: the "premiumLevel" tier getter (returns PremiumTierType) -> GOLD; the
-    //     plain "isPremiumExpired" getter in the same class (not the "isInGracePeriod" one) ->
-    //     true; the static (PremiumFeatureStatus)Z gate that compares with INCLUDED -> true; the
-    //     (PremiumFeature, Z)Z feature check that reads "disabledPremiumFeatures" -> true (it is
-    //     the server kill-switch list *and* the availableFeatures INCLUDED lookup in one method);
+    //   - Enable Premium: the "premiumLevel" tier getter (returns PremiumTierType) -> GOLD;
+    //     isPremium() in the same class, i.e. !getBoolean("isPremiumExpired", true) (not the
+    //     getter that also reads "isInGracePeriod") -> true; the static (PremiumFeatureStatus)Z
+    //     gate that compares with INCLUDED -> true; the (PremiumFeature, Z)Z feature check that
+    //     reads "disabledPremiumFeatures" -> true (it is the server kill-switch list *and* the
+    //     availableFeatures INCLUDED lookup in one method);
     //     PremiumState's constructor (kept types ZLPremiumTierType;LProductKind;LPremiumScope;
     //     LInsuranceState;) gets isPremium = true and tier = GOLD; and the kept
     //     PremiumSubscriptionStatusNotificationWorker.doWork returns a work Result at once (Success
@@ -1317,9 +1318,9 @@ object Constants {
     //     ads.ui.AdsContainer / AdsContainerLight / AdsSwitchView that takes the banner holder,
     //     a native holder or AdLayoutTypeX sets the view GONE and returns; the holder types are
     //     read at patch time from AdsSwitchView's (holder, AdLayoutTypeX) method and the shared
-    //     layout-config parameter. Full-screen: AdInterstitialActivity, AdAppOpeningActivity and
-    //     adsrouter AdRouterInterstitialActivity finish right after super.onCreate. Rewarded ads
-    //     (WhoViewedMeAdActivity) are left alone: they gate a feature.
+    //     layout-config parameter. Full-screen: see the 2026-10-14 entry below. Rewarded ads
+    //     (WhoViewedMeAdActivity, and the rewarded flow through AdInterstitialActivity) are left
+    //     alone: they gate a feature.
     //   - Disable update prompts: the in-app update manager's suspend (Activity, UpdateTrigger,
     //     continuation) entry, scoped by its (Activity, UpdateTrigger)CompletableFuture sibling,
     //     returns Boolean.FALSE; every soft and HardUpgrade Play Core flow starts there. Also the
@@ -1372,12 +1373,29 @@ object Constants {
     //   crash. Everything past onboarding needs SMS registration, so the premium-sync fix, the
     //   interstitial change, the hidden tabs, the family button and the classic call log were NOT
     //   checked at runtime (smoke test + CLI disassembly only).
+    // 2026-10-14: updated to 26.40.5 (versionCode 2640005, merged APKMirror bundle, signer
+    // CN=truecaller SHA-1 0ac1169a...1f25e31 as above); anchors unchanged in shape and
+    // uniqueness, only R8 names moved: premium store qbx (W tier, Z isPremium, Y grace sibling),
+    // feature status jb9.c0, isFeatureAvailable a4x.c, sync writer x8x.e (still ends with the
+    // PremiumStatusUpdate event), PremiumState obx, worker Results o9q/m9q, toggle resolver fho.a
+    // (twins ezj.a / liq.a do not call getBoolean), interstitial gate cvk.e, Call Assistant su7.c,
+    // Scam Feed xq00.a, bottom bar builder cp6.g, update manager ybn, forced update qdk.a, OtpSmsApi
+    // lambda dl70.invoke; kept classes (ads.ui views, AdAppOpeningActivity, AppStartTracker,
+    // CleverTapManager, AppsFlyerLib, TruecallerInit, PremiumFeature CALL_ASSISTANT /
+    // FAMILY_SHARING, BottomBarButtonType PREMIUM / BLOCKING / FAMILY_PROTECTION_CONFIG) unchanged.
+    // New in 26.40.5: a MessageList ad unit (AdPlacement MessageScreen.MessageList, business inbox
+    // list ads via ListAdConfig). It loads through the same placement pipeline as MessageBottom and
+    // adds no new ad view or AdsContainer / AdsContainerLight / AdsSwitchView user, so the bind
+    // hooks should cover it; not checked at runtime.
+    // 2026-10-14: GmsCore support no longer offers the Clone package name (#50): the main provider
+    // authority is exactly "com.truecaller", the dex hard-codes content://com.truecaller, and the
+    // com.truecaller.account type clashes, so a clone cannot install next to stock.
     val COMPATIBILITY_TRUECALLER = Compatibility(
         name = "Truecaller",
         packageName = "com.truecaller",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x0087FF,
-        targets = listOf(AppTarget(version = "26.39.6", versionCode = 2639006))
+        targets = listOf(AppTarget(version = "26.40.5", versionCode = 2640005))
     )
 
     // Verified 2026-10-13 against com.kakao.talk 26.8.3 (versionCode 29260830, APKMirror bundle
