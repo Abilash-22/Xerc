@@ -1,3 +1,10 @@
+## [1.14.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.7...v1.14.0-dev.8) (2026-10-14)
+
+### 🐛 Bug Fixes
+
+* **simpleradio:** stop the crash on first launch; updated to version 6.2.4 ([d884624](https://github.com/heval99/Heval-Morphe-Patches/commit/d88462447164fa92bcc8b12414247f4c22c5a66a))
+* **tasker:** updated to version 6.6.20 ([3884316](https://github.com/heval99/Heval-Morphe-Patches/commit/38843164f7c8435aa63647d3730535b657d78955))
+
 ## [1.14.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2026-10-13)
 
 ### ✨ New Features

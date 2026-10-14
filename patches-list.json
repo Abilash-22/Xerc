@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.14.0-dev.7",
+  "version": "1.14.0-dev.8",
   "patches": [
     {
       "name": "Block marketing notifications",
@@ -1087,7 +1087,7 @@
     },
     {
       "name": "Disable ads",
-      "description": "Disables banner, interstitial, native and rewarded ads.",
+      "description": "Disables banner, interstitial, rewarded, app-open and native ads.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -1099,18 +1099,6 @@
           "appIconColor": "#FF6D00",
           "signatures": null,
           "targets": [
-            {
-              "version": "6.2.0",
-              "versionCodes": {
-                "ARM64_V8A": 872,
-                "ARMEABI_V7A": 872,
-                "X86_64": 872,
-                "X86": 872
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
             {
               "version": "6.2.4",
               "versionCodes": {
@@ -2075,12 +2063,12 @@
           "signatures": null,
           "targets": [
             {
-              "version": "6.6.18",
+              "version": "6.6.20",
               "versionCodes": {
-                "ARM64_V8A": 5443,
-                "ARMEABI_V7A": 5443,
-                "X86_64": 5443,
-                "X86": 5443
+                "ARM64_V8A": 5445,
+                "ARMEABI_V7A": 5445,
+                "X86_64": 5445,
+                "X86": 5445
               },
               "isExperimental": false,
               "minSdk": null,
@@ -2725,18 +2713,6 @@
           "appIconColor": "#FF6D00",
           "signatures": null,
           "targets": [
-            {
-              "version": "6.2.0",
-              "versionCodes": {
-                "ARM64_V8A": 872,
-                "ARMEABI_V7A": 872,
-                "X86_64": 872,
-                "X86": 872
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
             {
               "version": "6.2.4",
               "versionCodes": {

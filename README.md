@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.14.0-dev.7](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.7)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**122** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-13
+> **[v1.14.0-dev.8](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.14.0-dev.8)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**51** apps&nbsp;&nbsp;•&nbsp;&nbsp;**122** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-14
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -86,11 +86,11 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-9C27B0?style=flat-square" height="14" alt=""> | **Pocket Color Wheel** | 🚫 1 | `3.26` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF5722?style=flat-square" height="14" alt=""> | **Podcast Republic** | 🚫 1 | `9.17.0-260909124` | APK |
 | <img src="https://img.shields.io/badge/-%20-0088FF?style=flat-square" height="14" alt=""> | **Shazam** | 🛡️ 🧩 2 | `16.63.0-261008` <sub>+2 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **Simple Radio** | 🚫 💎 2 | `6.2.4` <sub>+1 older</sub> | APKM |
+| <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **Simple Radio** | 🚫 💎 2 | `6.2.4` | APKM |
 | <img src="https://img.shields.io/badge/-%20-333333?style=flat-square" height="14" alt=""> | **SmartWOD Timer** | 🚫 💎 2 | `1.46.9` | APKM |
 | <img src="https://img.shields.io/badge/-%20-384CF4?style=flat-square" height="14" alt=""> | **Sofascore** | 🚫 🛡️ 💎 🔕 🧩 7 | `26.09.28` | APKM |
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
-| <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.18` | APK |
+| <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.20` | APK |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` <sub>+1 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 9 | `26.39.6` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 💎 2 | `11.2.0` | APKM |
@@ -557,11 +557,11 @@ Verified on: `16.63.0-261008`, `16.62.1-261006`, `16.62.0-261001`
 <details>
 <summary><b>Simple Radio</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.streema.simpleradio</code></summary>
 
-Verified on: `6.2.4`, `6.2.0`
+Verified on: `6.2.4`
 
 | Patch | What it does | Default |
 |---|---|:-:|
-| 🚫 **Disable ads** | Disables banner, interstitial, native and rewarded ads. | ✅ |
+| 🚫 **Disable ads** | Disables banner, interstitial, rewarded, app-open and native ads. | ✅ |
 | 💎 **Enable Premium** | Unlocks Simple Radio Premium (ad-free listening) by forcing the local subscription checks to true. | ✅ |
 
 </details>
@@ -605,7 +605,7 @@ Verified on: `10.5.8`
 <details>
 <summary><b>Tasker</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>net.dinglisch.android.taskerm</code></summary>
 
-Verified on: `6.6.18`
+Verified on: `6.6.20`
 
 | Patch | What it does | Default |
 |---|---|:-:|
