@@ -709,9 +709,11 @@ they are **off by default**; enable them yourself and report anything odd.
 - **Something broke?** Open a
   [bug report](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose) with the app
   version, the patch bundle version and what you see.
-- **Want an app patched?** Open a
-  [feature request](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose) or email
-  hevalomevalo@gmail.com.
+- **Want an app patched?** Open a thread in the
+  [Requests discussions](https://github.com/heval99/Heval-Morphe-Patches/discussions/categories/requests)
+  (search first, and check the
+  [blocklist](https://github.com/heval99/Heval-Morphe-Patches/blob/dev/docs/patch-blocklist.md)
+  for apps that cannot be patched), or email hevalomevalo@gmail.com.
 
 ## 🤖 How the patches are made
 

@@ -103,6 +103,18 @@ Re-anchored and bytecode-verified on 2026-10-07:
   device fingerprinting and WebView overlays. Genuine builds (27.05, 27.06) are signed by
   O=FUTBIN (`1cf7ff75…e904`). The 27.5 target was removed on 2026-10-13. Always compare the
   signer of a downloaded APK with the developer's before verifying a target.
+- **apkcube `.apks` downloads are not uniform.** The OTT Navigator-clone bundle was signed with
+  a generic `CN=Android, OU=Android, O=Google Inc.` key (cert SHA-256 `97488e3619…f97af5`),
+  while the Flashscore 26.10.2 bundle kept LiveSport's signer and a valid Google Play source
+  stamp on every split (2026-10-14 audit). Check the signer and stamp of each apkcube file;
+  when they are generic, only dex inspection can authenticate it.
+- OTT Navigator (the real one) is `studio.scillarium.ottnavigator` (SIA Scillarium Studio),
+  **not** `com.ottnavigator.iptvnavigator`. The apkcube "OTT-Navigator-IPTV_1.0.0" is a
+  name-squatting Flutter clone (versionCode 1, AppLovin MAX + Meta AN + a PairIP licence
+  client); do not patch it. The real app was not analysed; its premium is sold as account
+  device slots through the OttNav Companion app, so expect it to be server-side. The
+  Companion itself (2.10, triaged 2026-10-13) is only a storefront with no local entitlement
+  and nothing worth patching.
 
 ## Patch limitations worth remembering
 
