@@ -1776,4 +1776,27 @@ object Constants {
         appIconColor = 0x000000, // Black WSJ logotype on a #F7F7F7 adaptive-icon background.
         targets = listOf(AppTarget(version = "6.43.0.33886", versionCode = 643003886))
     )
+
+    // Verified 2026-10-14 against me.piebridge.brevent 4.2.31.1 (versionCode 539, APKPure).
+    // Donationware: donors pay via Play or WeChat/Alipay ("Brefoil"), the server (jianyv.com,
+    // pinned by CON's trust manager) returns a token parsed into fields of the Application
+    // class, and every feature tier reads one count source: the no-arg int getter whose body
+    // holds the 1185657756 XOR mask (decompiled as ui/I.v() = (P() ? mask ^ H : 0) + x()).
+    // Tier gates compare v() + w() against 5 (dynamic GMS + suspend, Q.Y1()) and 3 (further
+    // settings, Q.z4()), both XOR-masked with the same constant. The patch forces that one
+    // getter to 10, lifting every tier; the getter is located structurally (no-arg ()I with
+    // the mask literal), so R8 letter-name rotation cannot break it, and a changed mask fails
+    // loudly.
+    // No PairIP or self-signature check; the adb-started server checks only the calling UID,
+    // so a re-signed build still activates. DONOR CAVEAT: the token parse ties validation to
+    // fields a re-signed build cannot produce, so genuine donors' tokens stop being consulted
+    // (the count is forced); donors who want their donation recognized should use the official
+    // build. Runtime test pending (needs adb activation on the emulator).
+    val COMPATIBILITY_BREVENT = Compatibility(
+        name = "Brevent",
+        packageName = "me.piebridge.brevent",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x0288D1,
+        targets = listOf(AppTarget(version = "4.2.31.1", versionCode = 539))
+    )
 }
