@@ -1876,4 +1876,34 @@ object Constants {
         appIconColor = 0x3C59AD, // Mid-point of the icon's blue-to-indigo background gradient.
         targets = listOf(AppTarget(version = "2.2.7", versionCode = 20207))
     )
+
+    // Verified 2026-10-15 against com.yahoo.mobile.client.android.sportacular 12.10.3
+    // (versionCode 11166823, APKMirror bundle merged; signer CN=Yahoo! mobile CA, O=Yahoo! Inc.,
+    // SHA-256 d3f1fb1b...614c, same as 12.9.2). No packer, PairIP or billing. App view/controller
+    // and Verizon Media player class names are kept; members and helper classes are R8-renamed.
+    // Disable ads: SportsAdCardView's typed setData (the view behind every ad card, the webview
+    // top pencil and the video-screen ad) sets GONE and returns before it builds or loads the ad
+    // view; the sponsored-moments config manager (found by its "stream_taboola_ad_enabled" and
+    // "sponsored_moments_use_gam_ads" keys) answers false from every public no-arg boolean getter
+    // (Taboola native pencil, Taboola stream ads, GAM pencils); SapiMediaItem.getAdTagUri returns
+    // null, so no IMA pre-roll is requested. MobileAds, the SponsoredMoments initializer and the
+    // generic config delegate are untouched. Not covered: ads inside web articles (server-side
+    // pages), the sponsor splash and sponsored comments.
+    // Hide betting promotions: BettingImageBannerCtrl's data method (the caller of
+    // SportsbookPromotionHelper.shouldShowBettingImageBanner) returns at once, so the BetMGM
+    // banner view stays GONE (it hides itself in its constructor) and neither promotion source is
+    // fetched. Odds, the Sportsbook hub and the six-pack betting prompt are untouched.
+    // YahooSportsSmokeTest asserts all four hooks. CLI (no -f) applies both patches and a full
+    // smali diff shows only the four target classes change. Emulator (morphe-test): stock shows
+    // ad cards (V) on home, scores, game, team and news and 19-57 IMA log lines around video;
+    // patched has every SportsAdCardView GONE, no ad containers, 0 IMA log lines, and videos
+    // play. No BetMGM banner appeared on either build, so Hide betting promotions is
+    // bytecode-verified only.
+    val COMPATIBILITY_YAHOO_SPORTS = Compatibility(
+        name = "Yahoo Sports",
+        packageName = "com.yahoo.mobile.client.android.sportacular",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x6001D2, // Yahoo purple.
+        targets = listOf(AppTarget(version = "12.10.3", versionCode = 11166823))
+    )
 }
