@@ -1906,4 +1906,24 @@ object Constants {
         appIconColor = 0x6001D2, // Yahoo purple.
         targets = listOf(AppTarget(version = "12.10.3", versionCode = 11166823))
     )
+
+    // Smoke-tested 2026-10-15 against com.pzolee.bluetoothscanner 1.9.3 (versionCode 93, APKPure
+    // single APK, the only source checked; signer CN=Zoltan Pallagi, SHA-256 62799dca...0e380).
+    // Launcher label "Bluetooth Scanner". The whole app, GMA included, is R8-renamed. Disable ads:
+    // MainActivity's MobileAds init-complete listener (1.9.3: ib0.a(q40)), the one place that loads
+    // both the banner and the interstitial, returns at once. It is found by the live interstitial
+    // unit "ca-app-pub-9043738977093939/5919566899" plus its (one param)V shape and its check-cast
+    // to the kept GMA AdView (the unit's only other holder, the no-arg reload after a dismissed
+    // interstitial, has neither). The banner AdView is GONE in the layout and only its onAdLoaded
+    // makes it VISIBLE; both interstitial shows are null-guarded. MobileAds.initialize is untouched.
+    // BluetoothFinderSmokeTest asserts the hook. CLI (no -f) changes only that class. Emulator:
+    // stock shows a live "Test Ad" banner; patched has myAdView GONE and no ad requests, and
+    // scanning, Settings and Filters work. The interstitial trigger was not reached at runtime.
+    val COMPATIBILITY_BLUETOOTH_FINDER = Compatibility(
+        name = "Bluetooth Scanner",
+        packageName = "com.pzolee.bluetoothscanner",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x1084F7, // The icon's Bluetooth blue (on black).
+        targets = listOf(AppTarget(version = "1.9.3", versionCode = 93))
+    )
 }
