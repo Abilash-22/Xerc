@@ -1949,4 +1949,41 @@ object Constants {
         appIconColor = 0x2E59A8, // Mid-point of the icon's blue gradient.
         targets = listOf(AppTarget(version = "4.8", versionCode = 74))
     )
+
+    // Smoke-tested 2026-10-15 against ru.wasiliysoft.ircodefindernec "14.17.0 build 206 InAPP"
+    // (versionCode 206, APKPure XAPK merged with APKEditor, arm64-v8a only). Signer: v3 lineage
+    // from a Play-generated key (bd76d6d6...4849) to CN=Vitaliy Vasilchenko, O=WasiliySoft, SHA-256
+    // 79131c22...c2c3 for SDK 33+ (Play app signing key upgrade); Play source stamp. No packer or
+    // shield. The app is R8-renamed; ads are Yandex Mobile Ads 8.3.0 (Google only through Yandex
+    // mediation), whose class and method names are kept. Disable ads:
+    //   - Banners: the banner helper's constructor (14.17.0: m6.<init>(String, LinearLayout, Z, I),
+    //     the only place a BannerAdView is built; found by that shape plus its
+    //     BannerAdSize$a.sticky and BannerAdView.<init> calls) sets the container GONE and returns
+    //     right after storing it, after the super call. That covers all four units
+    //     (R-M-10827245-1/2/3 on PagerFragment, SmartScanActivity, ScanActivity and
+    //     NotFoundIrServiceActivity). Its destroy method null-checks the banner and the job, and
+    //     the refresh coroutine is only launched from the skipped tail.
+    //   - Interstitial: the suspend loader (14.17.0: xd2.a(Activity, String, long, Continuation),
+    //     the only place an InterstitialAdLoader is built; found by its "InterstitialAdLoadResult"
+    //     log tag, the InterstitialAdLoader.<init> call and its (?, String, long, ?) shape) returns
+    //     kotlin.Unit at once, like its own load-failure path. Unit (14.17.0: lp5) is found by
+    //     its toString "kotlin.Unit"; null is the fallback. MainActivity's R-M-10827245-5 is never
+    //     loaded.
+    // The Yandex SDK init, the PREF_PREMIUM / billing logic and Play Integrity are untouched.
+    // CloudActivity sends a Play Integrity token with cloud catalogue requests, so the server
+    // may reject re-signed builds there; that is a signing effect, not caused by the patch.
+    // Not patched (optional later): AppMetrica telemetry, where both public static void
+    // AppMetricaLibraryAdapter.activate overloads and AppMetrica.activateReporter are clean
+    // returnEarly() targets. IrCodeFinderSmokeTest asserts both hooks. CLI (no -f) changes only m6
+    // and xd2. Emulator: stock shows Yandex "Test Ad" banners on the Remotes and Excluded tabs and on
+    // the no-IR notice; patched has ad_container GONE, no BannerAdView, and no crash across
+    // rotations. The scan screens need IR hardware and were not reached; the interstitial did not
+    // show on either build.
+    val COMPATIBILITY_IR_CODE_FINDER = Compatibility(
+        name = "IrCode Finder",
+        packageName = "ru.wasiliysoft.ircodefindernec",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x009688, // The icon's teal background.
+        targets = listOf(AppTarget(version = "14.17.0 build 206 InAPP", versionCode = 206))
+    )
 }
