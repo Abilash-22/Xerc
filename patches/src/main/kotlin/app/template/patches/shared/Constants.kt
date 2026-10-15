@@ -1837,30 +1837,4 @@ object Constants {
         targets = listOf(AppTarget(version = "14.6.2", versionCode = 637, isExperimental = true))
     )
 
-    // Added 2026-10-14 as the first Heval Controls app (runtime switches, see
-    // docs/heval-controls.md). Verified against com.linkedin.android 4.1.1261 (versionCode
-    // 216900, APKMirror bundle merged, arm64-v8a only; developer signer CN=Jaikumar Ramanathan,
-    // O=LinkedIn Corp, SHA-256 3b6a403c...0727); class names are kept, some members are
-    // R8-merged. "Heval Controls" adds the screen plus an in-app entry: a "Heval Controls" row
-    // appended to the home nav panel's footer list (below "Settings & Privacy"; the builder is
-    // found by the "urn:li:fsd_premiumUpsellSlot:COMMUNITY_PANEL_FOR_PAGES" string and the
-    // HomeNavPanelAccountSectionViewData constructor) whose listener, chosen in
-    // HomeNavPanelAccountSectionPresenter.attachViewData, opens the screen without LinkedIn's click
-    // tracking. Hide Puzzle Games (runtime, default on) answers null from
-    // HomeNavPanelTransformer.toHeaderViewData for SectionType.GAMES and skips the lix games entry
-    // in transform. The home feed is server-driven SDUI: "People you may know" and "Recommended
-    // for you" have no client-side type, so they are not gated yet. LinkedInSmokeTest asserts
-    // every hook. Run on the morphe-test emulator (API 35, logged in): the row opens the screen,
-    // Hide Puzzle Games hides and shows the row live, survives a force-stop and follows the
-    // global pause; the activity and provider refuse external starts. No dynamic launcher
-    // shortcut: LinkedIn replaces its own four with setDynamicShortcuts
-    // (ShortcutHelper.updateAppShortcuts).
-    val COMPATIBILITY_LINKEDIN = Compatibility(
-        name = "LinkedIn",
-        packageName = "com.linkedin.android",
-        apkFileType = ApkFileType.APKM,
-        appIconColor = 0x0A66C2, // LinkedIn blue "in" logo.
-        targets = listOf(AppTarget(version = "4.1.1261", versionCode = 216900))
-    )
-
 }

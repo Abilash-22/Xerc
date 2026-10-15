@@ -5,10 +5,11 @@ patch features on or off at runtime without patching again. A choice is a saved 
 the patched code reads, so a change takes effect at once, or after a restart for features read
 only at startup.
 
-Status (2026-10-14): the core framework is built and tested. LinkedIn 4.1.1261 is the first app:
-an in-app entry row in the home nav panel and one runtime feature, "Hide Puzzle Games"
-(`patches/.../linkedin/`, `extensions/linkedin/`). The design study, with alternatives and the
-HushMessenger analysis, is kept outside the repo; this page is the developer guide.
+Status (2026-10-15): the core framework is built and tested, but no app ships it. LinkedIn
+4.1.1261 was the first app (an in-app entry row in the home nav panel and runtime features). It
+was removed on 2026-10-15 after the test account was banned, so the LinkedIn names below are
+examples only. The design study, with alternatives and the HushMessenger analysis, is kept
+outside the repo; this page is the developer guide.
 
 ## Contents
 
