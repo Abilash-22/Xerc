@@ -2013,4 +2013,31 @@ object Constants {
         appIconColor = 0x111111, // The icon's near-black background (white glyph).
         targets = listOf(AppTarget(version = "v2.4.2", versionCode = 269))
     )
+
+    // Verified 2026-10-15 against mark.via.gp 7.3.3 (versionCode 20260823, single universal
+    // APK, no native libs; signer CN=Various Tu, C=CN, SHA-256 3df7f89d...a390, same on APKMirror
+    // and APKPure; Play developer Tu Yafeng). No packer or shield. Launcher label "Via". The
+    // app and the bundled Firebase SDK are R8-renamed (FirebaseAnalytics keeps its class name, but
+    // logEvent is a(String, Bundle) and setAnalyticsCollectionEnabled is stripped). Telemetry is
+    // Firebase Analytics only; the tracker's crash method logs locally and Crashlytics never starts
+    // (no FirebaseInitProvider). Disable telemetry: the tracker's event sink (7.3.3: t8/b.a, found
+    // by its (String, Map)V shape plus its call to FirebaseAnalytics' only (String, Bundle)V
+    // method) returns at once, and the manifest gets firebase_analytics_collection_deactivated =
+    // true for the automatic events. The tracker init (t8/f.i) is left alone, because the hub
+    // queues events until a tracker registers. The remote config fetch (c.viayoo.com/api/frontend),
+    // which carries identifiers, is deliberately left alone as functional (it drives app
+    // features), as are update/sync (app.viayoo.com), report-abuse and the ad-block filter list
+    // downloads. ViaSmokeTest asserts the sink and the manifest switch. CLI (no -f) rewrites only
+    // t8/b plus the manifest; apkanalyzer shows return-void first in the sink and the meta-data set
+    // to true. Emulator (FA verbose logging): stock logs 5 events (first_open, session_start,
+    // fetch_conf, channel_new_unknown, search_google); patched logs "App measurement deactivated via
+    // the manifest" and 0 events; browsing, search, bookmarks, settings and ad blocking work. The
+    // manifest edit re-encodes resources; the UI was checked in English only.
+    val COMPATIBILITY_VIA = Compatibility(
+        name = "Via",
+        packageName = "mark.via.gp",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0xFFB700, // The icon's largest stroke (amber; with red and blue, on white).
+        targets = listOf(AppTarget(version = "7.3.3", versionCode = 20260823))
+    )
 }
