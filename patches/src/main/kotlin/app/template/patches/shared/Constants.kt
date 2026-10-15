@@ -1850,4 +1850,30 @@ object Constants {
         targets = listOf(AppTarget(version = "14.6.2", versionCode = 637, isExperimental = true))
     )
 
+    // Verified 2026-10-15 against projekt.launcher 2.2.7 (versionCode 20207, APKMirror bundle
+    // merged with APKEditor; signer O=projekt, SHA-256 b83ad17c...f603, same bytes on APKPure).
+    // Launcher label "hyperion". No PairIP, packer or self-signature check; no ad SDKs (Firebase
+    // Analytics/Crashlytics only). App code is R8-renamed into hype/* and the premium-related
+    // strings are encrypted, so Enable Premium anchors on shape: the holder class is the one whose
+    // static (Context, String, String, String)String token signer calls SecretKeySpec.<init>,
+    // Mac.getInstance and Base64.encodeToString (the app's only Mac user) and whose <clinit> seeds
+    // the premium MutableStateFlow<Boolean> from Boolean.FALSE. Every premium reader collects that
+    // one flow. The patch seeds it TRUE, loads 1 into the boolean App.onCreate boxes with
+    // Boolean.valueOf before its cold-start write into the flow (found by the flow's
+    // sget-object + (Object, Object)Z compare-and-set shape), and makes the holder's static
+    // no-arg reset (the void that writes FALSE into the flow) return at once. The token signer,
+    // the shared StateFlow class, Firebase and the Launcher Key AIDL are untouched.
+    // HyperionSmokeTest asserts all three hooks. The CLI (no -f) rewrites exactly two classes
+    // (App and the holder), and apkanalyzer shows the TRUE seed, the return-void reset and
+    // const/4 1 before valueOf; a full stock-vs-patched smali diff confirms only those two classes
+    // change. Emulator (morphe-test, API 35): stock shows the "plus users" upgrade dialog on
+    // Typography; patched opens it with no badge or dialog, and premium survives a force-stop
+    // and a reboot. No crashes.
+    val COMPATIBILITY_HYPERION = Compatibility(
+        name = "Hyperion Launcher",
+        packageName = "projekt.launcher",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x3C59AD, // Mid-point of the icon's blue-to-indigo background gradient.
+        targets = listOf(AppTarget(version = "2.2.7", versionCode = 20207))
+    )
 }
