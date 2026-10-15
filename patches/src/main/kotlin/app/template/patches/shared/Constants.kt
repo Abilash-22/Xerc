@@ -1986,4 +1986,31 @@ object Constants {
         appIconColor = 0x009688, // The icon's teal background.
         targets = listOf(AppTarget(version = "14.17.0 build 206 InAPP", versionCode = 206))
     )
+
+    // Verified 2026-10-15 against app.prolauncher "v2.4.2" (versionCode 269, APKPure XAPK
+    // merged with APKEditor, arm64-v8a only). Signer: the Play app-signing key (CN=Android,
+    // O=Google Inc., SHA-256 07fd559f...6da7) with a Play source stamp, so there is no developer
+    // certificate to compare. No licence protection: no PairIP, LVL, Play Integrity or signature
+    // self-check. Enable Premium: isPro is computed from the RevenueCat entitlements
+    // "entitlement_id_pro" / "entitlement_id_pro_lifetime" (or the local 3-day trial) and kept in
+    // two places, each read by its own set of gates: (1) the IS_PRO SharedPreferences boolean,
+    // read through an obfuscated getter `getBoolean("IS_PRO", false) || trial` (~70 call sites:
+    // Interrupt switch, swipe gestures, app categories, the Pro/Pro Membership entries), and (2) the
+    // kept data class app.prolauncher.data.SubscriberInfo (isPro() / component1(), ~13 Compose
+    // readers). The first version forced only (2) and unlocked nothing at runtime. Both now return
+    // true: (1) found by the "IS_PRO" key plus shape (no-arg Z, SharedPreferences.getBoolean),
+    // (2) by the kept class name plus shape. RevenueCat and the stored pref are untouched.
+    // ProLauncherSmokeTest asserts all three methods. 2026-10-15: CLI build (no -f) decompile-
+    // checked (x9.u0.q, isPro, component1 = const/4 1; return); emulator-5554 re-signed stock vs
+    // patched: stock shows the Pro sheet for Interrupt, Swipe left and app categories; patched
+    // toggles Interrupt (3 apps), opens the swipe-gesture choices, adds a category, and the Pro
+    // item / Pro Membership row show the subscriber "Pro Member" sheet. Same after a cold start; no
+    // crashes.
+    val COMPATIBILITY_PRO_LAUNCHER = Compatibility(
+        name = "Pro Launcher",
+        packageName = "app.prolauncher",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x111111, // The icon's near-black background (white glyph).
+        targets = listOf(AppTarget(version = "v2.4.2", versionCode = 269))
+    )
 }
