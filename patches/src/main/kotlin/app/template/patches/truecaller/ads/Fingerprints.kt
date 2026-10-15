@@ -48,3 +48,15 @@ internal object AdsV2PlacementEnabledFingerprint : Fingerprint(
     parameters = listOf("Lcom/truecaller/ads/api/model/ad/AdPlacement;", "L"),
     filters = listOf(string("featureAdsV2OnClList")),
 )
+
+// The master "ads allowed" check, AdsAvailability.shouldShowAds() (R8 inlined it into the static
+// kt50.Y() in 26.40.5): true when the QA "qaForceAds" flag is set, otherwise only when the Premium
+// store's shouldShowAds (off with the NO_ADS feature) is on and the "adsDisabledUntil" time has
+// passed. Its callers are all ad gates (the ads loaders, the contacts list and classic call log ad
+// slots, TruecallerInit, ...). Only this method reads both strings. Not pinned to static: the check
+// used to be an instance method of the ads availability class and may move back.
+internal object AdsAllowedFingerprint : Fingerprint(
+    returnType = "Z",
+    parameters = listOf(),
+    strings = listOf("qaForceAds", "adsDisabledUntil"),
+)

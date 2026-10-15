@@ -309,6 +309,12 @@ class TruecallerSmokeTest {
             (placementInsns[1] as OneRegisterInstruction).registerA == (no as OneRegisterInstruction).registerA
         ) { "${placementClass.type}.${placement.name}(AdPlacement, ...) does not return Boolean.FALSE at once; got ${no?.opcode} ${no?.field()}" }
 
+        // The master "ads allowed" check (the only ()Z method reading both strings) returns false.
+        val (allowedClass, allowed) = classes.singleMethod("ads allowed check") { _, m ->
+            m.returnType == "Z" && m.parameterTypes.isEmpty() && m.strings().containsAll(listOf("qaForceAds", "adsDisabledUntil"))
+        }
+        assertForcedBoolean(allowed, expected = false, label = "${allowedClass.type}.${allowed.name}() (ads allowed)")
+
         // Only the app-open loading screen still finishes right after super.onCreate; the
         // interstitial activities, which deliver the pending action or reward, are untouched.
         for ((type, finishes) in listOf(
@@ -522,8 +528,9 @@ class TruecallerSmokeTest {
     }
 
     private fun assertToggleOverrides(classes: List<ClassDef>) {
-        // The SharedPreferences toggle resolver starts with one "key.equals(p1) -> return false"
+        // The SharedPreferences toggle resolver starts with one "key.equals(p1) -> return value"
         // block per override, each falling through to the next and finally to the stock code.
+        // Hide family button and Restore classic call log add one each, Disable ads four.
         val (cls, resolver) = classes.singleMethod("feature toggle resolver") { _, m ->
             m.returnType == "Z" && m.params() == listOf("Ljava/lang/String;", FEATURE_STATE) &&
                 m.instructions().any { it.call()?.definingClass == "Landroid/content/SharedPreferences;" && it.call()?.name == "getBoolean" }
@@ -531,8 +538,16 @@ class TruecallerSmokeTest {
         val label = "${cls.type}.${resolver.name}(String, FeatureState)"
         val insns = resolver.instructions()
         val keyRegister = resolver.implementation!!.registerCount - 2 // this + key + state
+        val expected = mapOf(
+            "featureFamilyProtect" to 0,
+            "featureCallLogRevamp" to 0,
+            "featureAdsOptimisationOnListView" to 1,
+            "featureAdsRestrictCampaignProcessing" to 1,
+            "featureConfigManagementSystem" to 0,
+            "featureEnableOfflineAds" to 0,
+        )
         val overrides = mutableMapOf<String, Int>()
-        for (block in 0 until 2) {
+        for (block in expected.keys.indices) {
             val start = block * 6
             val key = insns.getOrNull(start)?.stringOrNull() ?: error("$label: override block $block has no key")
             val equals = insns[start + 1]
@@ -545,7 +560,12 @@ class TruecallerSmokeTest {
             check(value.opcode == Opcode.CONST_4 && insns[start + 5].opcode == Opcode.RETURN) { "$label: $key does not return a constant" }
             overrides[key] = (value as NarrowLiteralInstruction).narrowLiteral
         }
-        check(overrides == mapOf("featureFamilyProtect" to 0, "featureCallLogRevamp" to 0)) { "$label overrides $overrides" }
+        check(overrides == expected) { "$label overrides $overrides, expected $expected" }
+        // Nothing past the override blocks is another override: the stock code follows.
+        val next = insns.getOrNull(expected.size * 6)
+        check(next?.opcode != Opcode.CONST_STRING || insns.getOrNull(expected.size * 6 + 1)?.call()?.name != "equals") {
+            "$label has more than ${expected.size} override blocks"
+        }
     }
 
     private fun assertUseSmsVerification(classes: List<ClassDef>) {

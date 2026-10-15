@@ -1424,6 +1424,19 @@ object Constants {
     //   Settings "Premium" row, and Hide Wear OS settings hides "Truecaller for Wear OS": every
     //   CategoriesSettingsState constructor (a7a here, found by its toString prefix) stores false for
     //   isPremiumItemVisible / isWatchItemVisible (fields mapped through toString's outlined append order).
+    // 2026-10-15 (#53, 26.40.5; smoke test + CLI decompile check; emulator: 2 logged-out cold starts,
+    //   no crash, no GMA init error; the Contacts-tab row and logged-in ad traffic were NOT checked at
+    //   runtime because Truecaller needs SMS registration): Disable ads step 5 forces the
+    //   master "ads allowed" check ()Z (strings "qaForceAds" + "adsDisabledUntil", static kt50.Y here,
+    //   inlined AdsAvailability.shouldShowAds) to false; step 6 overrides four toggles in the resolver
+    //   (fho.a): "featureAdsOptimisationOnListView" on (contacts yoc.<init> and classic call log g68.F
+    //   then ask kt50.Y instead of always adding the "Explore Truecaller Premium" slot),
+    //   "featureAdsRestrictCampaignProcessing" on (a30.a/b return null: no ads-segment-profile keywords
+    //   or launch prefetch), "featureConfigManagementSystem" off (no ads-config-engine sync) and
+    //   "featureEnableOfflineAds" off (no ads-router offline ads sync). All four keys are exact
+    //   const-strings read through fho.a. tagging5 (caller ID tags) is left alone. With kt50.Y false,
+    //   rewarded ads are off too (owner decision) and p10 skips GAM init when
+    //   featureDisableGamInitForPremium is on; the ad load paths still start GAM themselves.
     val COMPATIBILITY_TRUECALLER = Compatibility(
         name = "Truecaller",
         packageName = "com.truecaller",
