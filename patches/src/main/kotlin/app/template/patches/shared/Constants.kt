@@ -1926,4 +1926,27 @@ object Constants {
         appIconColor = 0x1084F7, // The icon's Bluetooth blue (on black).
         targets = listOf(AppTarget(version = "1.9.3", versionCode = 93))
     )
+
+    // Smoke-tested 2026-10-15 against com.macdom.ble.blescanner 4.8 (versionCode 74, single APK,
+    // same file on APKMirror and APKPure; signer CN=Ashok Domadiya, SHA-256 bdfa4f78...0a977).
+    // App class names are kept; ads use the next-gen GMA SDK. Disable ads: AdmobBanner (found by
+    // its live unit "ca-app-pub-9113721270828121/8819258755") loadBanner(Context, RelativeLayout)
+    // sets the container GONE and returns, which covers all 6 banner screens.
+    // AdmobInterstitial (live unit "ca-app-pub-9113721270828121/2787645901")
+    // loadInterstitialAds(Context) returns at once, and HomeActivity's no-arg caller of it
+    // (4.8: loadInterADS) returns before it creates the AdmobInterstitial, so the field stays null
+    // and showAd/showAdForHelp/showAdHistoryData open the radar, help or export screen directly.
+    // The show paths, MobileAds initialization, UMP consent and billing are untouched.
+    // BleScannerSmokeTest asserts all three hooks and the unchanged showInterstitialAds. CLI (no -f)
+    // changes only AdmobBanner, AdmobInterstitial and HomeActivity. Emulator (after answering the
+    // UMP form, which ads wait for): stock shows "Test Ad" banners in all six containers and 8
+    // /mads/gma requests; patched has every container GONE, 0 ad requests, and Radar and Help
+    // open at once.
+    val COMPATIBILITY_BLE_SCANNER = Compatibility(
+        name = "BLE Scanner",
+        packageName = "com.macdom.ble.blescanner",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x2E59A8, // Mid-point of the icon's blue gradient.
+        targets = listOf(AppTarget(version = "4.8", versionCode = 74))
+    )
 }
