@@ -1,3 +1,15 @@
+## [1.15.0-dev.11](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.10...v1.15.0-dev.11) (2026-10-15)
+
+### 🐛 Bug Fixes
+
+* **linkedin:** remove LinkedIn support ([f0044d8](https://github.com/heval99/Heval-Morphe-Patches/commit/f0044d84eb4961435ddf5a85f457d1baa929e181))
+
+### ✨ New Features
+
+* **moneycontrol:** add Moneycontrol 14.6.2 ad removal (experimental) ([38f1e84](https://github.com/heval99/Heval-Morphe-Patches/commit/38f1e846ea970d00d08f81e22d547cb532885414))
+* **truecaller:** add Fix T9 contact search and Hide Wear OS settings, hide the Settings Premium row ([374c23f](https://github.com/heval99/Heval-Morphe-Patches/commit/374c23fd9730b4ca78e49bf3488f27fb429a3cd3)), closes [#52](https://github.com/heval99/Heval-Morphe-Patches/issues/52) [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53)
+* **truecaller:** Disable ads also hides the contacts Premium row and stops ad syncs ([d5af7ff](https://github.com/heval99/Heval-Morphe-Patches/commit/d5af7ff5952594ac0a48ca03bd8f22b038309457)), closes [#53](https://github.com/heval99/Heval-Morphe-Patches/issues/53)
+
 ## [1.15.0-dev.10](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.9...v1.15.0-dev.10) (2026-10-14)
 
 ### ✨ New Features
