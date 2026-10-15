@@ -1,3 +1,14 @@
+## [1.15.0-dev.12](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.11...v1.15.0-dev.12) (2026-10-15)
+
+### ✨ New Features
+
+* **blescanner:** add BLE Scanner 4.8 Disable ads ([de9f93a](https://github.com/heval99/Heval-Morphe-Patches/commit/de9f93a4bc675b471494f093619ec0c48975979f))
+* **bluetoothfinder:** add Bluetooth Scanner 1.9.3 Disable ads ([88a7ec0](https://github.com/heval99/Heval-Morphe-Patches/commit/88a7ec0b0b9639f5853f5d6ef85de52d74b7402b))
+* **hyperion:** add Hyperion Launcher 2.2.7 Enable Premium ([bacd35b](https://github.com/heval99/Heval-Morphe-Patches/commit/bacd35b71ef833cd5b687f062e339dcd66eb2151))
+* **ircodefinder:** add IrCode Finder 14.17.0 (build 206) Disable ads ([5d0928e](https://github.com/heval99/Heval-Morphe-Patches/commit/5d0928e1972ed8c807a5fcb2f7a7049064fdb974))
+* **prolauncher:** add Pro Launcher 2.4.2 Enable Premium ([9b031eb](https://github.com/heval99/Heval-Morphe-Patches/commit/9b031eb55cc658a843c9f8ceb9b352f641507b46))
+* **yahoosports:** add Yahoo Sports 12.10.3 Disable ads and Hide betting promotions ([ee0b59d](https://github.com/heval99/Heval-Morphe-Patches/commit/ee0b59d7d98601e0e77691c60ce909b75f06db73))
+
 ## [1.15.0-dev.11](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0-dev.10...v1.15.0-dev.11) (2026-10-15)
 
 ### 🐛 Bug Fixes

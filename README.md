@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0-dev.11](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.11)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**58** apps&nbsp;&nbsp;•&nbsp;&nbsp;**146** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-15
+> **[v1.15.0-dev.12](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0-dev.12)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**64** apps&nbsp;&nbsp;•&nbsp;&nbsp;**153** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-15
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -51,8 +51,10 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-F44336?style=flat-square" height="14" alt=""> | **Alarm Clock Xtreme** | 🚫 1 | `26.06.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-00B0FF?style=flat-square" height="14" alt=""> | **Aqua Mail** | 💎 1 | `2.7.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2E7D32?style=flat-square" height="14" alt=""> | **BeSoccer** | 🚫 🔑 2 | `6.6.0` | APKM |
+| <img src="https://img.shields.io/badge/-%20-2E59A8?style=flat-square" height="14" alt=""> | **BLE Scanner** | 🚫 1 | `4.8` | APK |
 | <img src="https://img.shields.io/badge/-%20-2979FF?style=flat-square" height="14" alt=""> | **Bluecoins** | 💎 1 | `13.1.149` <sub>+1 older</sub> | APK |
 | <img src="https://img.shields.io/badge/-%20-006CEF?style=flat-square" height="14" alt=""> | **BlueMail** | 🚫 1 | `2.2.408` | APKM |
+| <img src="https://img.shields.io/badge/-%20-1084F7?style=flat-square" height="14" alt=""> | **Bluetooth Scanner** | 🚫 1 | `1.9.3` | APK |
 | <img src="https://img.shields.io/badge/-%20-FF0000?style=flat-square" height="14" alt=""> | **BoxBox** | 🚫 🛡️ 💎 3 | `5.4.17` <sub>+2 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF4500?style=flat-square" height="14" alt=""> | **Brave Browser** | 🚫 🛡️ 💎 🔕 🧪 4 | `1.97.56` <sub>+2 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-0288D1?style=flat-square" height="14" alt=""> | **Brevent** | 💎 1 | `4.2.31.1` | APK |
@@ -69,8 +71,10 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-00985F?style=flat-square" height="14" alt=""> | **FotMob** | 💎 1 | `238.17794.20261012` <sub>+4 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-26A69A?style=flat-square" height="14" alt=""> | **Futbin** | 🚫 1 | `27.06` | APK |
 | <img src="https://img.shields.io/badge/-%20-101012?style=flat-square" height="14" alt=""> | **Hevy** | 🛡️ 💎 2 | `3.2.0` | APKM |
+| <img src="https://img.shields.io/badge/-%20-3C59AD?style=flat-square" height="14" alt=""> | **Hyperion Launcher** | 💎 1 | `2.2.7` | APKM |
 | <img src="https://img.shields.io/badge/-%20-607D8B?style=flat-square" height="14" alt=""> | **Interval Timer** | 🚫 🛡️ 2 | `2.3.30` | APK |
 | <img src="https://img.shields.io/badge/-%20-1976D2?style=flat-square" height="14" alt=""> | **IPTV** | 🚫 💎 2 | `9.1.25` | APKM |
+| <img src="https://img.shields.io/badge/-%20-009688?style=flat-square" height="14" alt=""> | **IrCode Finder** | 🚫 1 | `14.17.0 build 206 InAPP` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **jetAudio** | 💎 1 | `13.1.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FEE500?style=flat-square" height="14" alt=""> | **KakaoTalk** | 🚫 🛡️ 💎 🧩 11 | `26.8.3` | APKM |
 | <img src="https://img.shields.io/badge/-%20-406C5C?style=flat-square" height="14" alt=""> | **LibrePods** | 💎 1 | `1.0.1-rc1-play` <sub>+1 older</sub> | APKM |
@@ -90,6 +94,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-3F51B5?style=flat-square" height="14" alt=""> | **Pi Music Player** | 🚫 💎 2 | `3.2.0.0_release_2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-9C27B0?style=flat-square" height="14" alt=""> | **Pocket Color Wheel** | 🚫 1 | `3.26` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF5722?style=flat-square" height="14" alt=""> | **Podcast Republic** | 🚫 1 | `9.17.0-260909124` | APK |
+| <img src="https://img.shields.io/badge/-%20-111111?style=flat-square" height="14" alt=""> | **Pro Launcher** | 💎 1 | `v2.4.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-0088FF?style=flat-square" height="14" alt=""> | **Shazam** | 🛡️ 🧩 2 | `16.63.0-261008` <sub>+2 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **Simple Radio** | 🚫 💎 2 | `6.3.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-333333?style=flat-square" height="14" alt=""> | **SmartWOD Timer** | 🚫 💎 2 | `1.46.9` | APKM |
@@ -104,6 +109,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-112D5A?style=flat-square" height="14" alt=""> | **VesselFinder** | 🚫 🔑 2 | `6.7.8` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Weather Underground** | 🚫 1 | `6.20.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-00ACC1?style=flat-square" height="14" alt=""> | **WiFi Analyzer** | 🚫 1 | `3.11.2` <sub>+1 older</sub> | APK |
+| <img src="https://img.shields.io/badge/-%20-6001D2?style=flat-square" height="14" alt=""> | **Yahoo Sports** | 🚫 💎 2 | `12.10.3` | APKM |
 
 ### 🔍 Patch details
 
@@ -164,6 +170,16 @@ Verified on: `6.6.0`
 
 </details>
 <details>
+<summary><b>BLE Scanner</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.macdom.ble.blescanner</code></summary>
+
+Verified on: `4.8`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the banner and interstitial ads. | ✅ |
+
+</details>
+<details>
 <summary><b>Bluecoins</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.rammigsoftware.bluecoins</code></summary>
 
 Verified on: `13.1.149`, `13.1.79`
@@ -181,6 +197,16 @@ Verified on: `2.2.408`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🚫 **Disable ads** | Disables banner, native, interstitial, rewarded and app-open ads. | ✅ |
+
+</details>
+<details>
+<summary><b>Bluetooth Scanner</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.pzolee.bluetoothscanner</code></summary>
+
+Verified on: `1.9.3`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the banner and interstitial ads. | ✅ |
 
 </details>
 <details>
@@ -366,6 +392,16 @@ Verified on: `3.2.0`
 
 </details>
 <details>
+<summary><b>Hyperion Launcher</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>projekt.launcher</code></summary>
+
+Verified on: `2.2.7`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 💎 **Enable Premium** | Unlocks Hyperion Premium features without a purchase or the Launcher Key app. | ✅ |
+
+</details>
+<details>
 <summary><b>Interval Timer</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>cc.dreamspark.intervaltimer</code></summary>
 
 Verified on: `2.3.30`
@@ -385,6 +421,16 @@ Verified on: `9.1.25`
 |---|---|:-:|
 | 🚫 **Disable ads** | Switches the app to its built-in no-ads provider, removing banner, interstitial and video pre-roll ads (Yandex, Wortise and mediated networks). | ✅ |
 | 💎 **Enable Premium** | Unlocks the Pro-only access control settings (parental PIN, locking playlist/EPG/proxy/import-export/recording settings, hiding playlist URLs) and suppresses the in-app review prompt. Start on boot and autoplay last channel are only implemented in the separate IPTV Pro app and stay unavailable. | ✅ |
+
+</details>
+<details>
+<summary><b>IrCode Finder</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>ru.wasiliysoft.ircodefindernec</code></summary>
+
+Verified on: `14.17.0 build 206 InAPP`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the banner and interstitial ads. | ✅ |
 
 </details>
 <details>
@@ -609,6 +655,16 @@ Verified on: `9.17.0-260909124`
 
 </details>
 <details>
+<summary><b>Pro Launcher</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>app.prolauncher</code></summary>
+
+Verified on: `v2.4.2`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 💎 **Enable Premium** | Unlocks Pro Launcher Pro features without a subscription. | ✅ |
+
+</details>
+<details>
 <summary><b>Shazam</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.shazam.android</code></summary>
 
 Verified on: `16.63.0-261008`, `16.62.1-261006`, `16.62.0-261001`
@@ -772,6 +828,17 @@ Verified on: `3.11.2`, `3.10.5-L`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🚫 **Disable ads** | Disables the banner and full-screen ads. | ✅ |
+
+</details>
+<details>
+<summary><b>Yahoo Sports</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.yahoo.mobile.client.android.sportacular</code></summary>
+
+Verified on: `12.10.3`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Hides ad cards on the home, scores, game, team and league screens, above articles and on video screens, turns off Taboola stream ads and removes video pre-roll ads. | ✅ |
+| 💎 **Hide betting promotions** | Hides the sportsbook promotion banner. | ✅ |
 
 </details>
 
