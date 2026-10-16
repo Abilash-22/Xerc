@@ -1877,6 +1877,61 @@ object Constants {
         targets = listOf(AppTarget(version = "2.2.7", versionCode = 20207))
     )
 
+    // Written 2026-10-15/16 against com.guardian 6.238.23405 (versionCode 23405), the STABLE
+    // build: an owner-supplied APKCube bundle merged into one APK. The bundle's base.apk is signed
+    // by Guardian (CN=Android, O=Guardian News and Media, SHA-256 4965429e...9e7d) with a Play
+    // stamp; the merged APK's own signature no longer verifies (expected after the merge). No
+    // packer, PairIP or app signature check. R8 renames the app's own classes in this build
+    // (com.guardian.* and com.theguardian.* included), so every anchor is a string, a kept
+    // library/Retrofit/app class name or a method shape.
+    // Disable article limit (scope: no limit wall, warm-up prompt or offline wall; the free
+    // sign-in gate is kept): GetMeterApiState, the only caller of the kept Retrofit
+    // RetrofitApi.message (cross-checked by "Failed to get metering message for articleId: "),
+    // returns None(shouldTrackArticleView=false) at entry (the None class is found by its
+    // toString), so no meter request is made and no article view is counted. GetMeteringStateImpl
+    // (the only (String, continuation) caller of it, cross-checked by the SignInWall and
+    // OfflineWall singletons and "sign_in_date_key") returns that None instead of the
+    // OfflineWall; its SignInWall branch is untouched.
+    // Disable ads: the single GMA load method (strings "preparing ad request: %s", "No consent
+    // given for google ads", "Forced ad failure"; AdManagerAdView second parameter) reports a
+    // LoadAdError to the view's AdListener and returns before the GMA request and the Amazon APS
+    // bid, like its own consent path; ShouldLoadAds (no-arg Z reading a RemoteSwitches$Companion$Key
+    // and isPremium()) answers false. MobileAds, isPremium and UserTier are untouched.
+    // GuardianSmokeTest asserts all four hooks.
+    // Disable telemetry (added 2026-10-16, same build): SdkManager's gate, the only concrete
+    // (Sdk)Z method that reads the Sdk's RemoteSwitches$Companion$Key field and calls isPremium()
+    // (the Sdk data class is found by its "Sdk(remoteSwitchKey=" toString), answers false, the
+    // app's own no-consent path: InitializeAvailableSdks deinitialises every SDK and Comscore,
+    // Nielsen, Adjust, Braze, Permutive, Confiant, APS and Teads never start (Braze marketing
+    // pushes and in-app messages go too). The Ophan uploader ((NativeAppSubmission)V with
+    // "https://ophan.theguardian.com/mob" and "Ophan submission failed") returns at once, so the
+    // worker drops the queued events. In the kept FirebaseAnalytics class the only instance (Z)V
+    // (setAnalyticsCollectionEnabled) loads false first and the only (Bundle, String)V (logEvent)
+    // returns at once; in Crashlytics (R8-renamed, found by getInstance's "FirebaseCrashlytics
+    // component is not present.") the only instance (Z)V loads false first and the only
+    // (String)V (log) returns at once. The push "received" beacon (the (Object)Object method
+    // with the mobile-events notification/received URL) returns Boolean.FALSE before the request;
+    // the notification is shown before it runs. The manifest gains
+    // firebase_analytics_collection_deactivated=true. FCM, Remote Config, Sourcepoint, the
+    // consent check and AcquisitionEventsService are untouched. GuardianSmokeTest asserts every
+    // hook and the meta-data.
+    // Decompile-checked 2026-10-16: a CLI build (no -f) with all three patches, every hooked
+    // method and the manifest flag match. Resource names come out renamed (e.g. appBar).
+    // Emulator 2026-10-16 (stock control, same test key): cold starts, onboarding, Settings and
+    // Advanced Settings all render; FA logs "deactivated via the manifest", Adjust stays
+    // disabled. The Sourcepoint consent screen shows on fresh installs of both builds; the
+    // server decides (pv-data msgId 1511924). A WebView SIGSEGV in libmonochrome_64 at the same
+    // pc hits stock too (environment). The emulator gets no ads and stock showed no meter
+    // wall in about 11 articles, so ad removal and the article limit are verified in bytecode
+    // only. FCM fails with the same 403 on stock (environment).
+    val COMPATIBILITY_GUARDIAN = Compatibility(
+        name = "The Guardian",
+        packageName = "com.guardian",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x052962, // Guardian navy.
+        targets = listOf(AppTarget(version = "6.238.23405", versionCode = 23405))
+    )
+
     // Verified 2026-10-15 against com.yahoo.mobile.client.android.sportacular 12.10.3
     // (versionCode 11166823, APKMirror bundle merged; signer CN=Yahoo! mobile CA, O=Yahoo! Inc.,
     // SHA-256 d3f1fb1b...614c, same as 12.9.2). No packer, PairIP or billing. App view/controller

@@ -35,6 +35,7 @@ test + decompile-verify.
 | Alarm Clock Xtreme | `com.alarmclock.xtreme.free`? | ? | Ads + PRO via Play Billing; not covered by any bundle. Package from secondary sources only - verify before starting |
 | Radio Garden | `com.jonathanpuckey.radiogarden`? | ? | Fits the Simple Radio / Podcast Republic cluster; IAP removes marketing messages. Package from secondary sources only (`radio.garden` looks wrong) - verify before starting |
 | UEFA Champions League app | `com.uefa.ucl` | ? | Football-adjacent (Sofascore/FotMob/Livescore cluster); needs a triage for ad SDK vs sponsor content. Uncovered 2026-10-06 |
+| The Guardian | `com.guardian` | 6.238.23405 | **Shipped 2026-10-16** (pending push) - "Disable ads" (GMA load short-circuit, ShouldLoadAds false), "Disable article limit" (no meter request, offline wall becomes None; the free sign-in gate is kept), "Disable telemetry" (SDK manager gate off, Ophan uploader, Firebase Analytics/Crashlytics, push received-beacon, FA manifest flag). Stable 6.238.23405 (versionCode 23405). Decompile-verified; emulator-verified for stability, consent and telemetry log lines. Ads and the article limit are bytecode-only, because the emulator gets no ads and no meter wall |
 
 ## Tier 3 - simple Pro unlocks
 
