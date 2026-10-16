@@ -2040,4 +2040,63 @@ object Constants {
         appIconColor = 0xFFB700, // The icon's largest stroke (amber; with red and blue, on white).
         targets = listOf(AppTarget(version = "7.3.3", versionCode = 20260823))
     )
+
+    // Added 2026-10-16 against ro.rcsrds.digisport 1.1.15 (versionCode 75, single universal APK;
+    // signer CN=DigiSport, O=RCS&RDS, L=Bucharest, C=RO, SHA-256 014322fe...80c2853). Launcher label
+    // "DigiSport". App code (ro.rcsrds.digisport.*) and its player library (ro.rcsrds.lib.player.*)
+    // are not obfuscated, so every anchor is a readable class + method name with its full signature.
+    // Disable ads: AdMobManager.loadAd hides the container and returns, requestAd / putAd return at
+    // once (the app's only AdRequest / AdView.loadAd); VHSectionAd.bind sets the ad row GONE with
+    // a 0 layout height; UiLivePreroll.getEnable answers false (no live "Reclama" pre-roll);
+    // ArticleApiPayloads.getMVideoPreroll answers "" (no article/VOD pre-roll in GetArticleVod);
+    // ExtensionServiceKt.initImaAds answers null, so media3 plays any item that still carries an
+    // ad tag without ads (PlayerService.onCreate ignores the result; every mImaPreRoll reader
+    // null-checks). MobileAds (never called by the app) and SatiManager (analytics) are untouched.
+    // Disable ads also returns a new empty ArrayList from the four server
+    // "ads" list getters (ApiArticleData/ApiEpgData.getAds, listingArticles.Data.getAdsList,
+    // APIResultsResponseData.getAds), answers false from GetArticleDetailsLiveTab1.adConstraints
+    // (<ad-api> elements), null from GetArticleDetailsWidgets.addAdWidget and returns early from
+    // SyncEpgRepositoryBase.addBanner. Hide betting odds: UIResultsMatch.getBet answers null (the
+    // odds block @id/nas goes GONE). Disable telemetry: manifest Firebase switches (Analytics and
+    // Performance deactivated, Crashlytics off), FirebaseCrashlytics/FirebasePerformance collection
+    // setters forced off, Crashlytics recordException/log/sendUnsentReports, CxenseSdk.pushEvents
+    // and FirebaseAnalytics.logEvent return early; FCM is untouched. Disable update prompts:
+    // MainActivityBase.checkUpdate returns early. Skip ad consent form: GoogleConsentUmp
+    // .loadConsentInfo posts SUCCESS and returns before any UMP call, and
+    // IncludeSettingsUserDataAdsBindingImpl.executeBindings first sets its root (mboundView0) GONE,
+    // hiding the then buttonless "Publicitate" block in Settings / GDPR details. Hide sponsored articles:
+    // listing and widget cards with a non-blank ApiArticle.getSponsored are skipped / become
+    // spacing. Hide promotions: "widgetCross" cards become spacing and get no heading, and
+    // HomeViewModel.getExclusiveVideo returns early. Verified 2026-10-16: DigiSportSmokeTest
+    // (all eight patches); CLI (no -f) applies all eight and changes exactly the 23 hooked
+    // classes plus the three manifest meta-data (the manifest edit re-encodes resources.arsc; no
+    // visible effect); emulator, two cold starts, no crash: the UMP form, the Temu test-ad rows in
+    // the home feed, articles and ProgramTV (no gaps left) and the Settings "Publicitate" block
+    // are gone, an article video plays, and logcat shows "App measurement deactivated via the
+    // manifest" and Performance off. Not seen on the emulator: betting odds (none shown by stock
+    // either), a "Reclama" pre-roll (no ad fill), sponsored / cross-promo cards, the Home
+    // "Exclusive online" bar and a Play update prompt.
+    val COMPATIBILITY_DIGISPORT = Compatibility(
+        name = "Digi Sport",
+        packageName = "ro.rcsrds.digisport",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x1D56A8, // The icon's blue gradient (mid-tone).
+        targets = listOf(AppTarget(version = "1.1.15", versionCode = 75))
+    )
+
+    // Same app, used only by "Disable live stream ads", so Morphe Manager flags it as experimental
+    // (2026-10-16, 1.1.15 / versionCode 75). UiLiveDai.getEnable answers false, so live channels
+    // are built from the plain stream (UiLiveStream.getMUrl) instead of the IMA DAI ssai:// item,
+    // and ExtensionServiceKt.updateAdViewForDai returns at once. The plain stream is only fetched
+    // when the channel config carries a livestream URL, so a DAI-only channel would not play.
+    // Smoke- and decompile-verified; the emulator run passed (no crash) but live playback could not
+    // be checked: LiveTv is geo-blocked to the DIGI network ("LIVE stream-ul este disponibil doar
+    // din reteaua DIGI") for the stock app too. Stays experimental until a DIGI-network user confirms.
+    val COMPATIBILITY_DIGISPORT_EXPERIMENTAL = Compatibility(
+        name = "Digi Sport",
+        packageName = "ro.rcsrds.digisport",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0x1D56A8,
+        targets = listOf(AppTarget(version = "1.1.15", versionCode = 75, isExperimental = true))
+    )
 }
