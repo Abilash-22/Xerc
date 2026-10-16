@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.15.0](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.15.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**64** apps&nbsp;&nbsp;•&nbsp;&nbsp;**153** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-16
+> **[v1.16.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.16.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**65** apps&nbsp;&nbsp;•&nbsp;&nbsp;**154** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-16
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -107,6 +107,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **TV Smarters Player Expert** | 🚫 💎 2 | `11.2.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-112D5A?style=flat-square" height="14" alt=""> | **VesselFinder** | 🚫 🔑 2 | `6.7.8` | APKM |
+| <img src="https://img.shields.io/badge/-%20-FFB700?style=flat-square" height="14" alt=""> | **Via** | 🛡️ 1 | `7.3.3` | APK |
 | <img src="https://img.shields.io/badge/-%20-1565C0?style=flat-square" height="14" alt=""> | **Weather Underground** | 🚫 1 | `6.20.1` | APK |
 | <img src="https://img.shields.io/badge/-%20-00ACC1?style=flat-square" height="14" alt=""> | **WiFi Analyzer** | 🚫 1 | `3.11.2` <sub>+1 older</sub> | APK |
 | <img src="https://img.shields.io/badge/-%20-6001D2?style=flat-square" height="14" alt=""> | **Yahoo Sports** | 🚫 💎 2 | `12.10.3` | APKM |
@@ -808,6 +809,16 @@ Verified on: `6.7.8`
 |---|---|:-:|
 | 🚫 **Disable ads** | Removes the banner ad at the bottom of the map and stops the ad SDK from starting. | ✅ |
 | 🔑 **Disable license check** | Skips the Play Store license check so the patched app starts. | ✅ |
+
+</details>
+<details>
+<summary><b>Via</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>mark.via.gp</code></summary>
+
+Verified on: `7.3.3`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🛡️ **Disable telemetry** | Stops Firebase Analytics events. | ✅ |
 
 </details>
 <details>

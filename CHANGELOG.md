@@ -1,3 +1,9 @@
+## [1.16.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.15.0...v1.16.0-dev.1) (2026-10-16)
+
+### ✨ New Features
+
+* **via:** add Via 7.3.3 Disable telemetry ([cbdac5e](https://github.com/heval99/Heval-Morphe-Patches/commit/cbdac5ea7be803a2ae5e71cb71e3642ac3f3c5d8))
+
 ## [1.15.0](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.14.0...v1.15.0) (2026-10-16)
 
 ### 🐛 Bug Fixes
