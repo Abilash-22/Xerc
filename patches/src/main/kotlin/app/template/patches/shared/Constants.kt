@@ -1414,8 +1414,15 @@ object Constants {
     //     launch tab, SMS notification / deep-link intents (ARG_FRAGMENT_ORDINAL) and the back
     //     button land on Calls (selecting a missing tab on a fresh start left the screen empty, and
     //     back kept "returning" to the old default). A new helper after the builder's
-    //     check-cast to BottomBarView (kept) sets the bar GONE with fewer than two tabs, VISIBLE
-    //     otherwise; nothing else in the app changes its visibility.
+    //     check-cast to BottomBarView (kept) collapses the bar with fewer than two tabs (see below).
+    // 2026-10-16 (#61, 26.40.5; smoke test + CLI decompile check with the reporter's 14 patches, all
+    //   Applied; not runtime-tested, because the Calls screen needs SMS registration): Hide Messages tab
+    //   no longer sets the bar GONE. TruecallerInit is edge to edge and only the bar (Material
+    //   BottomNavigationView inset listener, bottom padding += nav bar inset) pads for the navigation
+    //   bar; the coordinator with the Calls pill and FAB ends at the bar's top (barrier), so a GONE
+    //   bar put them behind 3-button navigation. The helper keeps the bar VISIBLE, sets its children
+    //   (the tab menu) GONE and its minimum height to 0, saved in a new public Integer field on
+    //   BottomBarView (morpheSavedMinHeight) and restored when two or more tabs come back.
     // 2026-10-14 (#52, 26.40.5, smoke test + CLI disassembly, not runtime-tested): Fix T9 contact search
     //   (opt-in) clones the static RefreshT9MappingWorker helper ((Context)V with "RefreshT9MappingWorker.RebuildAll",
     //   w6j.f here) as public morpheRefreshT9Incremental with Boolean.FALSE, called right after super.onCreate in
