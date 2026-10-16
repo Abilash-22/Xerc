@@ -1,3 +1,9 @@
+## [1.16.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.16.0-dev.2...v1.16.0-dev.3) (2026-10-16)
+
+### 🐛 Bug Fixes
+
+* **truecaller:** keep the navigation bar space when only Calls is left ([27b9ddd](https://github.com/heval99/Heval-Morphe-Patches/commit/27b9ddd75989caea7a292d9525d7e0e9bb588133)), closes [#61](https://github.com/heval99/Heval-Morphe-Patches/issues/61)
+
 ## [1.16.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.16.0-dev.1...v1.16.0-dev.2) (2026-10-16)
 
 ### ✨ New Features

@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.16.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.16.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**67** apps&nbsp;&nbsp;•&nbsp;&nbsp;**165** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-16
+> **[v1.16.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.16.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**67** apps&nbsp;&nbsp;•&nbsp;&nbsp;**165** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-16
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -504,7 +504,7 @@ Verified on: `26.40.5`
 | 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. | ➖ |
 | 🧩 **Hide Assistant tab** | Turns off the Call Assistant feature, which removes the Assistant tab. | ➖ |
 | 🧩 **Hide Blocking tab** | Removes the Blocking tab from the bottom bar. Spam blocking keeps working. | ➖ |
-| 🧩 **Hide Messages tab** | Removes the Messages tab from the bottom bar and always opens Calls. SMS notifications still open their conversation. When Calls is the only tab left, the bottom bar is hidden. | ➖ |
+| 🧩 **Hide Messages tab** | Removes the Messages tab from the bottom bar and always opens Calls. SMS notifications still open their conversation. When Calls is the only tab left, the bottom bar shrinks to the height of the system navigation bar. | ➖ |
 | 💎 **Hide Premium tab** | Removes the Premium tab from the bottom bar and the Premium entry from the Settings screen. | ➖ |
 | 🧩 **Hide Scam feed** | Turns off the Scam Feed, which removes its tab and menu entry and stops its notifications. | ➖ |
 | 🧩 **Hide Wear OS settings** | Removes the "Truecaller for Wear OS" entry from the Settings screen. | ✅ |
