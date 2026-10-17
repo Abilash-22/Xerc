@@ -75,9 +75,41 @@ object Constants {
             // need a real server token), update/review prompts (no Play Core, no custom update
             // screen), odds/betting, paywall and survey/popup surfaces (server-driven). The older
             // targets were dropped: the new patches were only verified on 26.09.28.
+            // 2026-10-17: updated to version 26.10.05 (versionCode 261005002; signer CN=Sofa Score,
+            // cert SHA-256 ecd3a2c9...9f841, SHA-1 unchanged). Every existing anchor stayed unique;
+            // only R8 names moved. 26.09.28 was dropped (latest verified version only). Changes:
+            //   - Shared GmsCore support: ensurePlayServicesAvailable is a(Context)V here (R8 dropped
+            //     the version parameter), so the old (Context, int) fingerprint never matched; it now
+            //     matches (Context), (Context, int) and (int, Context) and fails when missed.
+            //   - New "Hide betting content" (off by default, like Flashscore's), anchored on
+            //     preference keys plus shape: the static (Context, SharedPreferences)Z odds decision
+            //     ("PREF_PROVIDER_ODDS_ENABLE"; 11 methods hold the key, only this one has the
+            //     shape) -> false; EventHeadFlags getAdditionalOdds /
+            //     getAdditionalOddsComparison / getRecommendedPrematchOdds (kept model) -> false; the
+            //     static (Context)String Bet365 open-account link (URL prefix) -> null (both callers
+            //     null-check); the static (Context)Z "PREF_PROMOTIONS_ENABLE" -> false; the static
+            //     (Context)Z "ODDS_PROVIDERS_DISABLED" -> true (hides the dead odds settings row).
+            //     This supersedes the "odds/betting" rejection above for these client-side gates.
+            //   - Disable ads: getHasServerAds() false made the one-time "Active subscription"
+            //     upgrade sheet open for everyone. Its modal-queue predicate (found through the
+            //     "Active subscription" modal's <clinit> and the "PR_XAIST" key) now reads
+            //     hasServerAds as true, so the sheet is never queued.
+            //   - New "Disable rating prompts": the "Rating Info" modal predicate reads
+            //     "ask_review_v3" as false, so the rating dialog is never queued (the modal queue
+            //     never waits for a dismiss). This supersedes the "review prompts" rejection above:
+            //     the dialog is the app's own (Play's review API isn't bundled).
+            //   - The unused FacebookInitProviderFingerprint was removed.
+            // Decompile-checked 2026-10-17 (CLI, no -f, all 10 patches Applied; every hook above,
+            // the ServiceCheck return-void and the extension's "sign-in and notifications" text
+            // match). Emulator 2026-10-17 (morphe-play, MicroG RE installed, stock control with the
+            // same test key): patched cold-starts x2 with no crash; no upgrade sheet; the list and
+            // match-page test banners are gone; the bet365 1X2 "Ad" odds block and 18+ text are
+            // gone, there is no Odds tab, and Settings > Odds is hidden; no MicroG warning;
+            // the C2DM register reaches MicroG RE with no error (no token logged). The battery
+            // dialog didn't show (StartActivity finishes first; a known gap of the check).
             AppTarget(
-                version = "26.09.28",
-                versionCode = 260928002
+                version = "26.10.05",
+                versionCode = 261005002
             )
         )
     )
