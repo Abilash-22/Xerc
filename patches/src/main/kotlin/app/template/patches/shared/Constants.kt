@@ -2464,4 +2464,47 @@ object Constants {
         appIconColor = 0x001AA3, // The adaptive icon's blue background.
         targets = listOf(AppTarget(version = "4.3.2", versionCode = 2075))
     )
+
+    // Written 2026-10-17 against com.bleacherreport.android.teamstream 11.12.0.33 (versionCode
+    // 54053, APKMirror bundle), developer signer CN=Sam Parnell, OU=Bleacher Report (cert SHA-256
+    // 60baa405...a4f0). The app (com.bleacherreport.phoenix) and its Kotlin runtime are R8-renamed
+    // but keep .source names and toString strings; Unit and Result.failure are copied from the
+    // patched methods' own code, never hard-coded. Launch tasks are found by the task id string in
+    // their config's <clinit>, the LaunchTask base by its "...launchtaskmanager.LaunchTask" cast
+    // message and ExecutionResult.Success by "Success(taskId=".
+    //   - Disable ads: AdConfigInteractorImpl ("getFeaturesAdConfig() " + "Returning hardcoded ad
+    //     config") answers Result.failure(AdConfigException) at entry; AdContentInserterImpl
+    //     (AdContentInserterImpl.kt, "content"/"ads"/"channelAdUnit") gets an empty ad list and no
+    //     alerted ad; AdsManagerImpl loadAd ("Ad Unit is missing in ") returns at once, loadSplashAd
+    //     ("loadSplashAd() ad=") answers its "Ad Unit is missing" failure and the Amazon DTB start
+    //     ("Amazon Services SDK could not be started") returns Unit; AdSetupLaunchTask and
+    //     SplashAdLaunchTask answer Success(taskId). Rule 9: every MobileAds static void returns at
+    //     once (initialize and registerWebView mandatory), putPublisherFirstPartyIdEnabled is false.
+    //     Video ads are server-stitched (SSAI) into the streams and are not patched.
+    //   - Disable telemetry: MParticleLaunchTask (mParticle and its Apptentive kit),
+    //     DatadogLaunchTask and ComScoreLaunchTask answer Success; every comScore Analytics static
+    //     void returns at once; Crashlytics DataCollectionArbiter ("firebase_crashlytics_collection_
+    //     enabled manifest flag") answers false; the 3 Branch reads of "bnc_tracking_state" are
+    //     forced to true (tracking disabled; the SDK still starts); Beam PersistentEventQueue.add
+    //     ("EnrichedEventQueue.add(): exception") and EventQueueMonitor ("onTaskExecution skipped,
+    //     mode is ") return Unit; CanonicalEventInteractorImpl ("br-braze-event-forwarding", 2 args)
+    //     returns Unit, so no Braze custom events. Braze init/push, OneTrust consent, IsdkLaunchTask
+    //     and Prism/PSM are not touched.
+    //   - Hide betting content: the ChannelItemsMapper.kt Stats mapper answers null for the
+    //     StatsItemType betting/odds/line/prop types (Stats found by "Stats(type="); the
+    //     OddsStateMapper.kt and TrendingBetsStateMapper.kt module mappers answer null; the Scores
+    //     model ("Scores(calendarNavigation=") stores no bettingLink / bettingDisclaimer.
+    // BleacherReportSmokeTest asserts every hook. Decompile check passed. Emulator (morphe-play)
+    // 2026-10-17, stock re-signed vs all three patches: no crash, consent still shown, home / Scores
+    // / gamecast / alerts / article / NFL channel render; stock showed native ads and empty ad gaps,
+    // patched none; no Datadog / comScore / Branch / DoubleClick traffic; Braze push token
+    // registered on the patched build. Betting removal not seen on screen: no game tested showed
+    // odds in stock either. ANRs on both builds came from the emulator's software video decode.
+    val COMPATIBILITY_BLEACHER_REPORT = Compatibility(
+        name = "Bleacher Report",
+        packageName = "com.bleacherreport.android.teamstream",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x1A1A1A, // The adaptive icon's background colour.
+        targets = listOf(AppTarget(version = "11.12.0.33", versionCode = 54053))
+    )
 }
