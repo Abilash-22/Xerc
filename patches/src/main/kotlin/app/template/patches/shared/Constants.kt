@@ -2358,4 +2358,41 @@ object Constants {
         appIconColor = 0x000000, // The adaptive icon's black background.
         targets = listOf(AppTarget(version = "8.33.0", versionCode = 113758))
     )
+
+    // Verified 2026-10-17 against lequipe.fr 10.69.1 (versionCode 1616) in bytecode only (smoke
+    // test + decompile check; no emulator run yet).
+    // Source: an apkcube .apks (base + split_config.arm64_v8a, so arm64-v8a only) merged with
+    // APKEditor. The apkcube splits are signed by the developer (CN=Xavier Debbasch, OU=Airweb,
+    // SHA-256 6d9f086b...6e59, plus a Google Play source stamp); the merge breaks that signature.
+    // No packer or PairIP.
+    // Disable ads: every native ad goes through Google Mobile Ads / Ad Manager. The banner slots
+    // call AdManagerAdView.loadAd(AdManagerAdRequest) and the bidding interstitial calls
+    // AdManagerInterstitialAd.load from R8-renamed coroutines, so the patch anchors on the GMA
+    // library classes only: every concrete void load / loadAd / loadAds on BaseAdView, AdLoader,
+    // AdManagerAdView, AdManagerInterstitialAd, InterstitialAd, RewardedAd,
+    // RewardedInterstitialAd and AppOpenAd returns at once (the app's two loads and the mediation
+    // adapter's BaseAdView / InterstitialAd loads are mandatory), and the patch fails if any GMA
+    // load call in the APK resolves to an unpatched method or the app stops calling the two Ad
+    // Manager loads. Rule 9: all MobileAds static voids return at once (registerWebView, which
+    // fr.lequipe.ads.a calls, is mandatory) and putPublisherFirstPartyIdEnabled answers false.
+    // Teads (TeadsAdapter) and Equativ (SASGMAMediation*Adapter) only fill through GMA mediation
+    // and Prebid / Amazon bid into the Ad Manager request, so they are covered. The ad listeners
+    // get no callback, so a slot that reserves space before loading may stay blank.
+    // Known limitations: Taboola Classic widgets (sponsored content, TBLClassicUnit) are not
+    // covered, nor are ads inside L'Équipe's web/PWA pages. The paywall (Piano/Purchasely) is
+    // server-side and untouched. LequipeSmokeTest asserts every hook.
+    // Decompile-checked 2026-10-17 (CLI, no -f): the 9 GMA classes above change, every load and
+    // MobileAds static void starts with return-void, putPublisherFirstPartyIdEnabled returns 0,
+    // and the app's banner and interstitial call sites still call the patched loads.
+    // Emulator 2026-10-17: not runnable here. The app is arm64-only React Native, and on the x86_64
+    // emulator SoLoader never finds its arm64 libs, so stock and patched both crash at start with the
+    // same AssertionError (environment, not the patch). The target is EXPERIMENTAL until it is
+    // checked on an arm64 device: ads gone, no empty boxes, no crash.
+    val COMPATIBILITY_LEQUIPE = Compatibility(
+        name = "L'Équipe",
+        packageName = "lequipe.fr",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x0A1E32,
+        targets = listOf(AppTarget(version = "10.69.1", versionCode = 1616, isExperimental = true))
+    )
 }
