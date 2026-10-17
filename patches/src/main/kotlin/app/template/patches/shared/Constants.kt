@@ -1745,12 +1745,20 @@ object Constants {
     // interstitial over 12 tab switches. The pinned floating score starts the Premium service
     // with no ad; no crashes. The menu's "CREX PREMIUM" row opens a login sheet. Live/Upcoming
     // tabs and the quiz were not reached.
+    // 2026-10-17: updated to version 26.10.07 (versionCode 668, APKMirror universal bundle,
+    // merged). Signer CN=Purushotam Rawat, cert SHA-256 b9e623fa...ea07 (the same as 26.10.06).
+    // Every anchor is unchanged and the anchored method bodies are identical. 26.10.06 dropped
+    // (latest verified version only). CLI decompile-checked (30 hooks, nothing dropped). Emulator
+    // 2026-10-17 (stock control): stock shows GMA test banners, native cards on Series and a
+    // PubMatic ad in the Live list; patched shows none with no gaps, and ad network events drop from
+    // 277 to 3; no crash. A plain re-signed build gets no Firebase 403, so no notification fix is
+    // needed (no FCM token line was seen either way).
     val COMPATIBILITY_CREX = Compatibility(
         name = "CREX",
         packageName = "in.cricketexchange.app.cricketexchange",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x262626,
-        targets = listOf(AppTarget(version = "26.10.06", versionCode = 667))
+        targets = listOf(AppTarget(version = "26.10.07", versionCode = 668))
     )
 
     // Added 2026-10-14 from the Reddit request queue ("the ads mess with the UI"). Verified
