@@ -2306,4 +2306,56 @@ object Constants {
         appIconColor = 0x283167, // The adaptive icon's navy background.
         targets = listOf(AppTarget(version = "9.18.3", versionCode = 405213))
     )
+
+    // Written 2026-10-17 against com.eurosport 8.33.0 (versionCode 113758, APKMirror
+    // bundle merged). Signer CN=Unknown, OU=Eurosport, O=Eurosport, L=Issy, C=fr, SHA-256
+    // 03428013...9a17, plus a v3.1 Google (CN=Android) signer for SDK 33+, SHA-256 cabdcdfd...09a1.
+    // The app is R8-renamed almost everywhere, so its models are found by their toString()
+    // output and the methods by shape; the Storyteller, Teads, Comscore, New Relic, AppsFlyer and
+    // Apptentive SDKs keep their class names. EurosportSmokeTest asserts every hook. A CLI build
+    // (no -f) applies all three patches and changes the 13 hooked classes; a dexdump of the
+    // SdkConfig, PlayerModel, Settings, StorytellerEventTrackingOptions and setModules hooks
+    // matches, and the string values are unchanged after the manifest edit (aapt2 diff of every
+    // string, plurals and array entry, rule 12).
+    // Limitation: ads inserted into live and premium streams (AdSparx SSAI) and video
+    // entitlement / DRM are server-side and not touched.
+    //   - Disable ads: the SdkConfig model ("SdkConfig(sdk=") constructor stores enabled = false
+    //     for GOOGLE_AD and TEADS (matched by the Sdk enum's name()), so the ad view factory makes
+    //     a 0x0 view; the only static (1 arg) AdPlaceholderModel factory ("AdPlaceholderModel(
+    //     content=", in the class with "Unsupported provider: ") answers null; PlayerModel
+    //     ("PlayerModel(isLive=") stores showAds (the field toString prints after "showAds=")
+    //     as false; Storyteller Settings (both constructors) store AdSource.NoAds (the enum
+    //     with NoAds / IntegratingApp / Storyteller); StorytellerClipsAdConfiguration
+    //     getBottomBannerEnabled / getPreRollEnabled answer false; Storyteller.setModules gets an
+    //     empty list (the patch fails if a non-ads StorytellerModule exists; the app registers
+    //     only StorytellerGamModule); the app's TeadsAdPlacementMedia creator (load()V) returns
+    //     at once. MobileAds and MobileAdsInitProvider are not touched.
+    //   - Disable telemetry: SdkConfig stores enabled = false for ADOBE, APPSFLYER, CHARTBEAT,
+    //     PERMUTIVE, MUX and MEDIAMELON (STORYTELLER keeps the server value; both blocks can be
+    //     applied together); com.comscore.Analytics.start(Context) and its static notify*
+    //     methods, NewRelic.start(Context), the AppsFlyerLib subclass's start / logEvent /
+    //     logSession / logAdRevenue and Apptentive register / engage return at once;
+    //     StorytellerEventTrackingOptions(ZZZZZZList) stores false for enableStorytellerTracking,
+    //     enableUserActivityTracking, enableAdTracking and enableFullVideoAnalytics (registers
+    //     taken from the field stores); the manifest gains firebase_analytics_collection_
+    //     deactivated=true, google_analytics_adid_collection_enabled=false and
+    //     firebase_crashlytics_collection_enabled=false. Firebase Messaging, Remote Config and
+    //     Batch are untouched. AppsFlyer deep links may stop.
+    //   - Hide partner promotions (off by default): the only static (1 arg) WatchBannerUi
+    //     factory ("WatchBannerUi(label=") answers null, which also hides the HBO Max /
+    //     discovery+ links to the event.
+    // Decompile-checked 2026-10-17 (CLI, no -f; jadx confirms the SdkConfig blocks clear the
+    // ad/telemetry vendors and never STORYTELLER; the string table is unchanged). Emulator
+    // 2026-10-17 (stock control): 2 cold starts, no crash with Comscore/New Relic/Apptentive
+    // stubbed; the home-feed "ADVERTISEMENT" card is gone and the feed closes up; a free clip
+    // plays without pre-roll (stock showed none at that moment either); no
+    // Comscore/NewRelic/Teads/Permutive/Chartbeat/Mux log lines. Not seen on either build:
+    // Storyteller stories (the carousel didn't render) and the discovery+/HBO Max watch banner.
+    val COMPATIBILITY_EUROSPORT = Compatibility(
+        name = "Eurosport",
+        packageName = "com.eurosport",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x000000, // The adaptive icon's black background.
+        targets = listOf(AppTarget(version = "8.33.0", versionCode = 113758))
+    )
 }
