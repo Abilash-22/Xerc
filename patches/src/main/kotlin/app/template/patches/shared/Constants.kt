@@ -2427,4 +2427,41 @@ object Constants {
         appIconColor = 0x0A1E32,
         targets = listOf(AppTarget(version = "10.69.1", versionCode = 1616, isExperimental = true))
     )
+
+    // Written 2026-10-17 against de.transfermarkt.v2 4.3.2 (versionCode 2075, Play bundle merged).
+    // Signed with the Play App Signing key, cert SHA-256 69932f3c...4f08 (the merge breaks the
+    // signature). The app is a Cordova + Ionic Angular web app in assets/www; the native plugins
+    // keep their class names. A shared extension (extensions/transfermarkt) checks each WebView
+    // request's host against a suffix blocklist and answers an empty 200 script on a match, because
+    // the app's CMP / Adobe / SDG loaders only continue on script.onload. The hook goes at the start
+    // of every concrete shouldInterceptRequest(WebView, WebResourceRequest) on Cordova's
+    // SystemWebViewClient and its subclasses (4.3.2: the base class and the live client,
+    // IonicWebViewEngine$ServerClient); InAppBrowser's client is not touched. Transfermarkt's own
+    // hosts, Bitmovin, YouTube, Twitter and the Sourcepoint consent dialog are never blocked.
+    //   - Disable ads: the admob-plus webview-ad lambda that calls MobileAds.registerWebView and logs
+    //     "Integrated the WebView API for Ads in " returns at once; rule 9: every MobileAds static
+    //     void returns at once (initialize and registerWebView mandatory; the web app never calls
+    //     admob-plus start, and AdMob.execute is not touched); ad hosts (Ströer SDG, Yieldlove,
+    //     Adscale, DoubleClick/GPT/AdSense, Outbrain, oddsserve) are blocked. A raw-resource step
+    //     (no resource table re-encode, rule 12) hides <app-adtags>/<app-odd-banner> with a style
+    //     before index.html's </head>, makes the main.<hash>.js AdtagService refreshAds /
+    //     refreshSingleAds / appendAdtags / loadInterstitial (each the only definition with a
+    //     parameter list) return at once, and empties the Outbrain feature's allow list.
+    //     setGTM / adobeInit are not stubbed (dataLayer / tmAnalytics must exist).
+    //   - Disable telemetry: Google Tag Manager / Analytics, Adobe (adobedtm, omtrdc, demdex), m6r
+    //     and INFOnline hosts are blocked; cordova-plugin-idfa's getInfo (AdvertisingIdClient call +
+    //     "aaid"/"trackingLimited") answers {aaid:"", trackingLimited:true}. No Firebase Analytics.
+    // Consent (Sourcepoint), billing, login and push (OneSignal) are untouched.
+    // TransfermarktSmokeTest asserts every hook and asset edit. Decompile check passed. Emulator
+    // (morphe-play, arm64 under translation) 2026-10-17, stock re-signed vs both patches: no crash,
+    // consent dialog still shown, home / article / match / player pages render with no ad frames or
+    // gaps (stock showed banners), back button works. Push: neither run logged a token or a
+    // Firebase error, so re-signed push is undetermined (same in stock).
+    val COMPATIBILITY_TRANSFERMARKT = Compatibility(
+        name = "Transfermarkt",
+        packageName = "de.transfermarkt.v2",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x001AA3, // The adaptive icon's blue background.
+        targets = listOf(AppTarget(version = "4.3.2", versionCode = 2075))
+    )
 }
