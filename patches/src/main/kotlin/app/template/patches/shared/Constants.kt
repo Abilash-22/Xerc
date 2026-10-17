@@ -314,12 +314,19 @@ object Constants {
     // the same six callers. Only the latest verified version is supported.
     // Emulator 2026-10-14 (10.3.1): no banner, interstitial or gap (stock shows a test banner and an
     // interstitial); no crash. The bookmaker "Match odds" sponsor card (AD tag) is an app widget and stays.
+    // 2026-10-17: updated to version 10.3.2 (versionCode 2230, APKMirror universal APK, same signer
+    // CN=Sebastian/O=Cloeme, cert SHA-256 82bf3a1c...2ebb). The manifest, SDKs and betting code are
+    // unchanged; AdsRemovalSettings.areAdsDisabled()Z is still unique with the same six callers.
+    // 10.3.1 dropped (latest verified version only). Smoke-tested and decompile-checked 2026-10-17
+    // (CLI, no -f: only areAdsDisabled changes, to return true). Emulator 2026-10-17 (stock control):
+    // stock shows a Disney+ test banner, a bet365 test banner and an interstitial; patched shows
+    // none and no gap; the bet365 "Match odds" widget stays; no crash in 2 cold starts.
     val COMPATIBILITY_LIVESCORE = Compatibility(
         name = "Livescore",
         packageName = "com.livescore",
         apkFileType = ApkFileType.APK,
         appIconColor = 0xC8102E,
-        targets = listOf(AppTarget(version = "10.3.1", versionCode = 2226))
+        targets = listOf(AppTarget(version = "10.3.2", versionCode = 2230))
     )
 
     // Verified 2026-08-20 against FishBuddy v11.0.84 (universal, Android 7.0+).
