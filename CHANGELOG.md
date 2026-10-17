@@ -1,3 +1,10 @@
+## [1.17.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2026-10-17)
+
+### ✨ New Features
+
+* **bleacherreport:** add Bleacher Report 11.12.0.33 Disable ads, Disable telemetry and Hide betting content ([18422ac](https://github.com/heval99/Heval-Morphe-Patches/commit/18422acb154addb5b21117cfb04c398c68361ed2))
+* **transfermarkt:** add Transfermarkt 4.3.2 Disable ads and Disable telemetry ([679e41c](https://github.com/heval99/Heval-Morphe-Patches/commit/679e41c1881ec33f153c7ccb8fb7799a9c4980c4))
+
 ## [1.17.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.16.0...v1.17.0-dev.1) (2026-10-17)
 
 ### 🐛 Bug Fixes

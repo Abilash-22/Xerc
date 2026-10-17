@@ -40,13 +40,13 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.17.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**71** apps&nbsp;&nbsp;•&nbsp;&nbsp;**177** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-17
+> **[v1.17.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**73** apps&nbsp;&nbsp;•&nbsp;&nbsp;**182** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-17
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
 ⚽ Sports & scores · 📰 News & finance · 💬 Messaging, email & calls · 🎵 Music, podcasts & radio · 📺 Video & TV · 📚 Books & reading · 🏋️ Health & fitness · 🗺️ Maps, weather & outdoors · 📝 Productivity & notes · 🌐 Browsers · 🏠 Launchers · 🛠️ Tools & utilities
 
-#### ⚽ Sports & scores <sub>17 apps</sub>
+#### ⚽ Sports & scores <sub>19 apps</sub>
 
 | | App | Patches | Latest verified | Type |
 |:-:|---|---|---|:-:|
@@ -54,6 +54,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-F1FF00?style=flat-square" height="14" alt=""> | **433** | 🚫 🛡️ 🧪 2 | `2.3.548` | APKM |
 | <img src="https://img.shields.io/badge/-%20-00C853?style=flat-square" height="14" alt=""> | **AiScore** | 💎 🧩 2 | `4.3.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2E7D32?style=flat-square" height="14" alt=""> | **BeSoccer** | 🚫 🔑 2 | `6.6.0` | APKM |
+| <img src="https://img.shields.io/badge/-%20-1A1A1A?style=flat-square" height="14" alt=""> | **Bleacher Report** | 🚫 🛡️ 🧩 3 | `11.12.0.33` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF0000?style=flat-square" height="14" alt=""> | **BoxBox** | 🚫 🛡️ 💎 3 | `5.4.17` <sub>+2 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-262626?style=flat-square" height="14" alt=""> | **CREX** | 🚫 💎 2 | `26.10.07` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1D56A8?style=flat-square" height="14" alt=""> | **Digi Sport** | 🚫 🛡️ 💎 🔕 🧩 🧪 8 | `1.1.15` | APK |
@@ -66,6 +67,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-0D47A1?style=flat-square" height="14" alt=""> | **OneCricket** | 🚫 1 | `26.08.01` | APKM |
 | <img src="https://img.shields.io/badge/-%20-00C853?style=flat-square" height="14" alt=""> | **OneFootball** | 🚫 1 | `15.146.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-384CF4?style=flat-square" height="14" alt=""> | **Sofascore** | 🚫 🛡️ 💎 🔕 🧩 9 | `26.10.05` | APKM |
+| <img src="https://img.shields.io/badge/-%20-001AA3?style=flat-square" height="14" alt=""> | **Transfermarkt** | 🚫 🛡️ 2 | `4.3.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-6001D2?style=flat-square" height="14" alt=""> | **Yahoo Sports** | 🚫 💎 2 | `12.10.3` | APKM |
 
 #### 📰 News & finance <sub>5 apps</sub>
@@ -229,6 +231,18 @@ Verified on: `6.6.0`
 
 </details>
 <details>
+<summary><b>Bleacher Report</b> &nbsp;·&nbsp; 3 patches &nbsp;·&nbsp; <code>com.bleacherreport.android.teamstream</code></summary>
+
+Verified on: `11.12.0.33`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the ads in feeds and articles, the banner ads and the splash ad, and stops the Google and Amazon ad SDKs from starting. Ads inside videos are part of the stream and stay. | ✅ |
+| 🛡️ **Disable telemetry** | Turns off mParticle analytics (which also removes the Apptentive surveys and rating prompts), Datadog, comScore, Crashlytics crash reports, Branch attribution tracking, the Beam event reporting and the event forwarding to Braze. | ✅ |
+| 🧩 **Hide betting content** | Hides odds and betting content: the betting, odds, line and player prop blocks on game pages, the odds and trending bets modules in feeds, and the betting link and disclaimer on the Scores screen. | ➖ |
+
+</details>
+<details>
 <summary><b>BoxBox</b> &nbsp;·&nbsp; 3 patches &nbsp;·&nbsp; <code>club.boxbox.android</code></summary>
 
 Verified on: `5.4.17`, `5.4.16`, `5.4.9`
@@ -371,6 +385,17 @@ Verified on: `26.10.05`
 | 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. | ➖ |
 | 🧩 **Hide betting content** | Hides odds, bookmaker links and betting offers: odds in lists and match pages, the Odds tabs, Bet365 sign-up links and the promotions for streaming, tickets and betting. | ➖ |
 | 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. | ➖ |
+
+</details>
+<details>
+<summary><b>Transfermarkt</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>de.transfermarkt.v2</code></summary>
+
+Verified on: `4.3.2`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Removes the banner, in-article and interstitial ads, the betting odds banners and the Outbrain recommendations. | ✅ |
+| 🛡️ **Disable telemetry** | Blocks Google Analytics and Tag Manager, Adobe Analytics, INFOnline and m6r tracking, and hides the advertising ID from the web app. | ✅ |
 
 </details>
 <details>
