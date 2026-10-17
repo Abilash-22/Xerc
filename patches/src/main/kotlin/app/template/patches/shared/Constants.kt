@@ -875,12 +875,18 @@ object Constants {
     // this emulator (pause timeout on stock too), so the screens with ads, the squad-builder panel
     // and interstitials were NOT checked at runtime. Only 27.06 is supported now (owner request).
     // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
+    // 2026-10-17: updated to version 27.08 (versionCode 7008, APKPure single universal APK; not on
+    // APKMirror). Signer O=FUTBIN, 1cf7ff75...e904 (genuine, no injected dex or new components).
+    // Every anchor is unchanged and unique (R8 renames only: nk4->bt4, tm7->rz7, jw8->tb9); the new
+    // Club Import screens add no ad paths. 27.06 dropped (latest verified version only).
+    // Smoke-tested and CLI decompile-checked on 27.08 (every hook, nothing dropped). Not runtime-
+    // tested, same as 27.06: on the emulator the app doesn't get past its first screen.
     val COMPATIBILITY_FUTBIN = Compatibility(
         name = "Futbin",
         packageName = "com.futbin",
         apkFileType = ApkFileType.APK,
         appIconColor = 0x26A69A,
-        targets = listOf(AppTarget(version = "27.06", versionCode = 7006))
+        targets = listOf(AppTarget(version = "27.08", versionCode = 7008))
     )
 
     // Verified 2026-09-27 against com.pocketcolorwheel.PCW 3.26 (versionCode 57,
