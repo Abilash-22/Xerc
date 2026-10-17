@@ -755,14 +755,21 @@ object Constants {
     // 2026-10-12 APK-finder audit: only distributed as a split bundle (APKMirror BUNDLE /
     // APKPure-Uptodown XAPK), so apkFileType is APKM; any "universal APK" note below is outdated.
     // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
+    // 2026-10-17: updated to version 15.146.0 (versionCode 1045009496, APKMirror bundle arm64-v8a +
+    // armeabi-v7a, merged). Signer CN=Appsolute, OU=SD, SHA-256 5099231f...56ab (the same cert as the
+    // 15.145.0 file), with a Play source stamp. Every GMA anchor is unchanged and unique.
+    // 15.142.0 and 15.145.0 dropped (latest verified version only). Smoke-tested and CLI
+    // decompile-checked (all 27 GMA hooks, nothing dropped). Emulator 2026-10-17: not usable.
+    // Stock and patched both crash at start in native code (JuceInvocationHandler, the same pc)
+    // under ARM translation, so ads and push were not checked at runtime. Airship registered a
+    // channel on both re-signed builds; whether Firebase push needs Spoof signature is still open.
     val COMPATIBILITY_ONEFOOTBALL = Compatibility(
         name = "OneFootball",
         packageName = "de.motain.iliga",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x00C853,
         targets = listOf(
-            AppTarget(version = "15.142.0", versionCode = 1044958885),
-            AppTarget(version = "15.145.0", versionCode = 1044999406)
+            AppTarget(version = "15.146.0", versionCode = 1045009496)
         )
     )
 
