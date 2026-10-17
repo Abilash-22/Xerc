@@ -2266,4 +2266,44 @@ object Constants {
         appIconColor = 0xF1FF00,
         targets = listOf(AppTarget(version = "2.3.548", versionCode = 868, isExperimental = true))
     )
+
+    // Written 2026-10-17 against com.mail.mobile.android.mail 9.18.3 (versionCode
+    // 405213, APKMirror bundle merged). Signer CN=Raimund Rix, OU=Mobile & Media Services, O=1&1
+    // Mail & Media GmbH, SHA-256 07ada088...dfbe, the same as on APKMirror. The app classes are not
+    // R8-renamed, but the remote-config models are still found by their toString() output and
+    // the methods by name plus shape (concrete only).
+    //   - Disable ads: AdvertisingIdentityConfig ("AdvertisingIdentityConfig(isId5Enabled=")
+    //     answers false from isAdEnabled, isGoogleInboxAdEnabled, isGoogleBannerEnabled,
+    //     isHtmlBannerEnabled, isEndlessIbaEnabled, isMetaNativeIBAsEnabled,
+    //     isMetaNativeBannerEnabled, isAdsInCustomFoldersEnabled and isId5Enabled (the patch fails
+    //     if one is missing); isUnifiedInboxAdsEnabled is inverted and left alone.
+    //     InterstitialAdConfig.isEnabled ("InterstitialAdConfig(isEnabled=") answers false, and
+    //     AdTracker.send (the (String)V with the "AdTracker: url is null or invalid" and
+    //     "AdTracker failed" logs), which only sends ad pixels, returns at once. The paid ad-free
+    //     state (PayMailManager / BillingAdFreeStateProvider), the News userlevel field and the
+    //     MobileAds statics are not touched. The server's inbox promo cards go away too.
+    //   - Disable telemetry: Tracking2Config.isTracking2Enabled ("Tracking2Config(batchSize=")
+    //     and AppMonConfig.isAppMonEnabled ("AppMonConfig(isAppMonEnabled=") answer false;
+    //     TrackingPermissions(ZZZZZ) ("TrackingPermissions(isBrainTrackingAllowed=") sets Brain,
+    //     Reach (INFOnline) and Trop false at entry, the registers taken from their iput-boolean
+    //     stores (p1..p3 here); SentryAPI.start (the instance (1 arg)V calling SentryAndroid.init;
+    //     the manifest has io.sentry.auto-init=false) returns at once. FCM push is untouched.
+    //   - Disable rating prompts: InAppRatingManager.canRequestInAppReviewFlow()Z (reads the
+    //     clock) answers false; it gates the only Play review request, after a mail is sent.
+    //   - Hide upsells: Swipe2UpsellFeature.isEnabledByConfig (the ()Z returning
+    //     isSwipe2UpsellEnabled) answers false, so swiping ads away no longer opens the upgrade
+    //     sheet. IapUpsellingFeature is not touched: it also gates the Settings "Upgrade" row and
+    //     the drawer's Premium item.
+    // Decompile-checked 2026-10-17 (CLI, no -f: every hook, nothing dropped, ad-free entitlement
+    // and IapUpselling untouched, resources byte-identical). Emulator 2026-10-17, logged out
+    // (stock control): 2 cold starts each, no crash; the start screen and login load. The inbox
+    // ads, promo cards, rating prompt and upsell sheet sit behind a login, so those effects are
+    // verified in bytecode only.
+    val COMPATIBILITY_MAILCOM = Compatibility(
+        name = "mail.com",
+        packageName = "com.mail.mobile.android.mail",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x283167, // The adaptive icon's navy background.
+        targets = listOf(AppTarget(version = "9.18.3", versionCode = 405213))
+    )
 }
