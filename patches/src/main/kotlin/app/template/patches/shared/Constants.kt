@@ -2161,4 +2161,70 @@ object Constants {
         appIconColor = 0x1D56A8,
         targets = listOf(AppTarget(version = "1.1.15", versionCode = 75, isExperimental = true))
     )
+
+    // Smoke-tested 2026-10-17 against com.football433 2.3.548 (versionCode 868, APKPure XAPK
+    // merged, arm64-v8a only; APKMirror has no listing). Signer: the Play app-signing key
+    // (CN=Android, O=Google Inc., SHA-256 87a49808...b2d0) with a Play source stamp
+    // (2026-09-30), so there is no developer certificate to compare. Launcher label
+    // "433 Football". A Flutter app: the UI is Dart (libapp.so); the Java plugins are R8-renamed,
+    // so every anchor is a method-channel string, a kept SDK class/method name or a method shape.
+    // Disable ads: AdMob / Ad Manager ads come only from the google_mobile_ads plugin (Dart in this
+    // build uses loadBannerAd, loadAdManagerBannerAd and loadRewardedInterstitialAd). The
+    // AdInstanceManager is found by its onAdFailedToLoad event method ("adId", "eventName",
+    // "onAdFailedToLoad", "loadAdError"; (int, FlutterLoadAdError)V) and trackAd ("Ad for
+    // following adId already exists: %d"), whose first parameter is FlutterAd. In
+    // GoogleMobileAdsPlugin.onMethodCall (the (MethodCall, Result)V with every load* string) each
+    // of the 9 load cases calls trackAd(ad, adId) and then the ad's no-arg load; those 9 calls
+    // resolve to 8 load methods (the fluid ad inherits the Ad Manager banner's) and cover all 9
+    // concrete FlutterAd classes. Each load now calls a new manager helper (morpheFailLoad(I)V)
+    // that builds FlutterLoadAdError(3 = NO_FILL, "com.google.android.gms.ads", "Ad blocked",
+    // null) and passes it to onAdFailedToLoad, and returns before any ad view or SDK call. The
+    // plugin codec writes the null ResponseInfo as null; the platform-view factory returns an
+    // empty View for an ad without a view; show and immersive-mode calls null-check the ad.
+    // MobileAds.initialize (and with it Liftoff/Vungle adapter init, which loads no ads) and
+    // the unused preloader (MobileAds#startPreloading is absent from libapp.so) are untouched.
+    // Rewarded interstitials fail to load like every other ad. Football433SmokeTest asserts the
+    // helper and every load prologue.
+    // Decompile-checked 2026-10-17 (CLI, no -f): the helper, all 8 load prologues (+5
+    // instructions each, nothing dropped) and the untouched onMethodCall/initialize match.
+    // Emulator 2026-10-17 (stock control, same test key, ARM translation): stock shows the Home
+    // carousel ad, the Matches "Sponsored" card and banner, and match-overview/line-ups banners;
+    // patched shows none of them and leaves no ad box (a little extra spacing on the match
+    // overview), no ad log lines in 60 s idle (so no retry loop), no crash in either build. The
+    // wallpaper "Download [AD]" button: stock plays a rewarded ad first; patched downloads at
+    // once. That is the app's own reaction to the failed load, not a patched reward path.
+    val COMPATIBILITY_FOOTBALL433 = Compatibility(
+        name = "433",
+        packageName = "com.football433",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0xF1FF00, // The adaptive icon's neon yellow background.
+        targets = listOf(AppTarget(version = "2.3.548", versionCode = 868))
+    )
+
+    // Same app, used only by "Disable telemetry", so Morphe Manager flags it as experimental
+    // (2026-10-17, 2.3.548 / versionCode 868; smoke- and decompile-checked, effect not visible on
+    // the emulator, see below). The manifest gains
+    // io.sentry.enabled=false: Dart starts Sentry Android through JNI, the SDK applies the manifest
+    // before Dart's options callback (which never calls setEnabled) and Sentry.init stops when
+    // disabled; Dart's envelopes go through the native SDK. UXCam: the flutter_uxcam
+    // startWithConfiguration handler ((Map, Result)V with "userAppKey" and
+    // "enableMultiSessionRecord") answers false at once, and every static void UXCam.start*
+    // returns at once. Airship: AirshipConfigOptions$Builder.getAnalyticsEnabled answers false
+    // (push and channel registration stay; event-triggered in-app automations stop). Branch: both
+    // flutter_branch_sdk readers of the "branchAttributionLevel" argument (init and
+    // setConsumerProtectionAttributionLevel) get "NONE" (tracking disabled, deterministic deep
+    // links only; share links may come out in long form). Not covered: Segment and the app's own
+    // analytics.prod.by433.com collector, both sent by Dart over HTTP with keys from
+    // flutter_assets/env/.env.prod (blanking them could make Dart throw). Firebase Analytics is
+    // not bundled: the GMA measurement client disables itself, so no Firebase flag is set.
+    // Decompile-checked 2026-10-17 (every hook and the one-line manifest change). On the emulator
+    // neither stock nor patched logged Sentry, UXCam or Branch lines, so the effect can't be told
+    // apart there; Airship push work still runs, as intended. Stays experimental.
+    val COMPATIBILITY_FOOTBALL433_EXPERIMENTAL = Compatibility(
+        name = "433",
+        packageName = "com.football433",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0xF1FF00,
+        targets = listOf(AppTarget(version = "2.3.548", versionCode = 868, isExperimental = true))
+    )
 }
