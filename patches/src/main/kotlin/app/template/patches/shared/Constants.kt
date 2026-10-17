@@ -291,13 +291,24 @@ object Constants {
     // "Clone" option renames the package, which Spoof signature does not follow (it spoofs
     // com.scores365 only), so keep Clone off when notifications matter.
     // 2026-10-14: Disable ads also neutralises the other MobileAds statics (rule 9).
+    // 2026-10-17: updated to version 14.9.7 (versionCode 1497, APKMirror bundle arm64-v8a +
+    // armeabi-v7a 480-640dpi, merged; signer CN=Roe Aharoni, O=365 Scores, SHA-1 47f994bd...f1a1,
+    // the same key, with a Play source stamp). Every anchor is unchanged and unique; only R8 names
+    // moved (the GMS common holder is now common/a; the ServiceCheck (int, Context) shape still
+    // matches). 14.9.6 dropped (latest verified version only). CLI decompile-checked (every hook,
+    // nothing dropped). Emulator 2026-10-17 (morphe-play with MicroG RE, stock control on the same
+    // test key): no crash in 2 cold starts; the InMobi banners, in-list ad rows and sponsored
+    // match creative are gone with no gap; the stock re-signed build gets Firebase Installations
+    // 403 API_KEY_ANDROID_APP_BLOCKED (push broken) while the patched one initialises Firebase
+    // without it; following a match works. The battery-optimisation dialog leaks from the
+    // finishing Splash (known GmsCore-check gap; no crash).
     val COMPATIBILITY_365SCORES = Compatibility(
         name = "365Scores",
         packageName = "com.scores365",
         apkFileType = ApkFileType.APKM,
         appIconColor = 0xFFC107,
         targets = listOf(
-            AppTarget(version = "14.9.6", versionCode = 1496)
+            AppTarget(version = "14.9.7", versionCode = 1497)
         )
     )
 
