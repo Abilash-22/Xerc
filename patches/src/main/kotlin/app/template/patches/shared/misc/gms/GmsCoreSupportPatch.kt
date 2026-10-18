@@ -95,6 +95,8 @@ private val SIGNATURE_SHA1_REGEX = Regex("^[0-9a-f]{40}$")
  * @param allowClone Whether to offer the "Package name" option (original or `<package>.morphe`
  *        clone). When false the option is not registered and the original package is always kept,
  *        for apps whose clone cannot install next to the stock app.
+ * @param extraDescription An app-specific sentence appended to the patch description, for example
+ *        which of the app's features need it.
  * @param executeBlock Additional app-specific bytecode changes.
  */
 fun gmsCoreSupportPatch(
@@ -106,6 +108,7 @@ fun gmsCoreSupportPatch(
     default: Boolean = true,
     dependencies: Set<Patch<*>> = emptySet(),
     allowClone: Boolean = true,
+    extraDescription: String? = null,
     executeBlock: BytecodePatchContext.() -> Unit = {},
 ): BytecodePatch {
     require(PACKAGE_NAME_REGEX.matches(fromPackageName)) { "Invalid package name: $fromPackageName" }
@@ -141,7 +144,8 @@ fun gmsCoreSupportPatch(
     return bytecodePatch(
         name = "GmsCore support",
         description = "Makes Google sign-in and Google APIs work in the patched app by using " +
-            "MicroG RE instead of Google Play services. Requires MicroG RE to be installed.",
+            "MicroG RE instead of Google Play services. Requires MicroG RE to be installed." +
+            (extraDescription?.let { " $it" } ?: ""),
         default = default,
     ) {
         compatibleWith(compatibility)

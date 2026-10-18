@@ -1464,6 +1464,33 @@ object Constants {
     // 2026-10-14: GmsCore support no longer offers the Clone package name (#50): the main provider
     // authority is exactly "com.truecaller", the dex hard-codes content://com.truecaller, and the
     // com.truecaller.account type clashes, so a clone cannot install next to stock.
+    // 2026-10-18: GmsCore support and Spoof signature are on by default (owner): Google sign-in,
+    // Drive backup and push need them on a re-signed build.
+    // 2026-10-18 (#52/#53, 26.40.5; smoke test + CLI disassembly with the default set + Hide business
+    //   media, no -f, all Applied):
+    //   - Disable ads overrides "featureAdsOnOfferHub" off in the resolver: no "Recommended Offers"
+    //     row (OfferHubActivity, ads-router offer feed) and no offer hub deep link.
+    //   - Hide business media (opt-in): the BusinessDetailsModel constructor (toString prefix
+    //     "BusinessDetailsModel(description=" + ", brandMedia=") gets a new empty ArrayList as
+    //     brandMedia; the static BusinessDetailsScreen (strings "BusinessDetailsScreen" +
+    //     "BusinessDesTitle") clears its Function2 video thumbnail slot. Verified campaign cards: 7
+    //     toggles off (featureBizVerifiedCampaigns, ...ForOutgoingCalls, ...InRevampedInCallUi,
+    //     ...sCarouselACS, ...sDetailsView, ...sCarouselDetailsView, ...sDV3), because each surface
+    //     ORs its own toggle with the master. featureBizPACSFeaturesRevamp can still enqueue a
+    //     campaign prefetch (no display). Message ID campaigns are left alone.
+    //   - Disable telemetry: every getBoolean("featureCleverTap") outside com.truecaller.qa reads
+    //     false (SDK init, second gate, CRM push handler, CleverTapRefreshWorkAction). Firebase in
+    //     bytecode, not the manifest: the measurement config's Boolean get(String) answers TRUE for
+    //     firebase_analytics_collection_deactivated and FALSE for
+    //     google_analytics_adid_collection_enabled; the Crashlytics arbiter (key + "Crashlytics
+    //     automatic data collection ") ()Z getters return false; the Sessions manifest override
+    //     returns FALSE.
+    //   - tagging5 (GET /v1/tags, the caller-ID tag catalogue) is not ads and stays.
+    //   - Backup (Google Drive via Google sign-in) has no client-side fix: it needs GmsCore support
+    //     and MicroG RE.
+    //   - Rule 12 (GmsCore support, default on): 5 strings lose their surrounding quotes and
+    //     string/Dismiss + string/dismiss come back as string_0x7f14030a / string_0x7f140dc9 (same
+    //     IDs, no by-name lookup found); no control characters lost.
     // 2026-10-14 (#53, 26.40.5, smoke test only, not runtime-tested):
     //   - Disable ads step 4: the call log's "Truecaller Premium / Upgrade for an ad-free
     //     experience" row is the Ads V2 call log list slot (AdPlacement CallLogScreen.ClList) drawing

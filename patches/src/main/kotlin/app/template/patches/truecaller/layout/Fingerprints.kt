@@ -5,6 +5,7 @@ import app.morphe.patcher.StringComparisonType
 import app.morphe.patcher.fieldAccess
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.string
+import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
 internal const val BOTTOM_BAR_BUTTON_TYPE = "Lcom/truecaller/bottombar/BottomBarButtonType;"
@@ -84,4 +85,33 @@ internal object SelectTabFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf(BOTTOM_BAR_BUTTON_TYPE, "Z"),
     filters = listOf(methodCall(name = "setSelectedItemId", parameters = listOf("I"))),
+)
+
+// toString() of the business contact details model (q27 in 26.40.5), a Kotlin data class holding
+// the description, tcId, business number, contact type, display name and brandMedia (the
+// ArrayList of brand images the details screen shows in its media carousel). Only the stable
+// prefix and the brandMedia label are matched.
+internal object BusinessDetailsModelToStringFingerprint : Fingerprint(
+    name = "toString",
+    returnType = "Ljava/lang/String;",
+    parameters = listOf(),
+    filters = listOf(
+        string("BusinessDetailsModel(description=", StringComparisonType.STARTS_WITH),
+        string(", brandMedia="),
+    ),
+)
+
+// The Compose BusinessDetailsScreen (static n27.a in 26.40.5): (modifier, model, onMediaClick,
+// onVideoClick, videoThumbnail, composer, changed). It lays out the media carousel (brand images
+// plus, when the nullable Function2 slot is set, the "BusinessVideoThumbnail" promo video item)
+// only when brandMedia is not empty or the video slot is set, then the "BusinessDesTitle" /
+// "BusinessDescription" texts. The website and call/message/save/block buttons are not part of it.
+internal object BusinessDetailsScreenFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf(
+        "L", "L", "Lkotlin/jvm/functions/Function1;", "Lkotlin/jvm/functions/Function0;",
+        "Lkotlin/jvm/functions/Function2;", "L", "I",
+    ),
+    strings = listOf("BusinessDetailsScreen", "BusinessDesTitle"),
+    custom = { method, _ -> AccessFlags.STATIC.isSet(method.accessFlags) },
 )
