@@ -3,6 +3,7 @@ package app.template.patches.shared
 import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
+import app.morphe.patcher.patch.SupportedAbi
 
 object Constants {
     private const val FLASHSCORE_SOURCE_NOTE = "Download the .apks from apkcube.com"
@@ -2498,6 +2499,52 @@ object Constants {
         apkFileType = ApkFileType.APKM,
         appIconColor = 0x7542E5, // The icon's purple.
         targets = listOf(AppTarget(version = "158.0", versionCode = 402802337))
+    )
+
+    // Written 2026-10-18 against org.mozilla.firefox 158.0 (versionCode 2016189054 for x86_64 and
+    // 2016189050 for arm64-v8a, APKMirror standalone APKs), signer CN=Release Engineering,
+    // O=Mozilla Corporation (cert SHA-256 a78b62a5...9b04). Fenix is built with -dontobfuscate and
+    // GeckoView keeps its API, but R8 inlines single-caller getters and narrows signatures, so
+    // anchors are class + name + parameters, never a fixed return type.
+    //   - Disable telemetry: every Glean PingUploader that builds HttpStatus answers HttpStatus(200)
+    //     at once (pings are dropped as sent); Settings telemetry / daily usage ping / marketing /
+    //     experimentation getters are false; Adjust initSdk/enable/trackEvent/trackThirdPartySharing
+    //     /gdprForgetMe return; SentryService.initIfNeeded returns and every CrashReporterService
+    //     report overload (Sentry, Socorro) sends nothing; Nimbus.fetchExperiments returns.
+    //   - Hide sponsored content: contile / Pocket sponsored stories / sponsored suggestions getters
+    //     and isPocketSponsoredStoriesFeatureEnabled are false; MacTopSitesProvider.getTopSites
+    //     answers EmptyList. Non-sponsored suggestions stay.
+    //   - Enable about:config: GeckoRuntimeSettings$Builder.aboutConfigEnabled(Z) gets true.
+    //   - Unlock secret settings: getShowSecretDebugMenuThisSession is true and FeatureFlags
+    //     customExtensionCollectionFeature is stored true after its <clinit> store.
+    //   - Hide promotional prompts: NimbusMessagingStorage.getNextMessage(String, List) is null,
+    //     microsurveys off, MessageNotificationWorker succeeds at once, HomeActivity.onCreate's
+    //     isDefaultBrowser result is true, the onboarding filter lambda drops the default-browser
+    //     card (proved at patch time through OnboardingCardType and the WhenMappings switch) and
+    //     the sync sign-in page, ContinuousOnboardingFeature.start returns, ShowReviewPromptBinding
+    //     .onState returns Unit. Sign-in in the menu and settings is untouched.
+    //   - Keep background tabs loaded (default off, experimental): ServiceAllocator$InstanceInfo
+    //     .setPriorityLevel raises IDLE to BACKGROUND for content processes; tab reload cover on.
+    // FirefoxSmokeTest passes; CLI applies all six without -f on both ABIs; the decompile check
+    // found exactly the 18 intended classes changed. Emulator (morphe-play, API 35, x86_64)
+    // 2026-10-18, re-signed stock vs patched: no crash; no default-browser card or system prompt
+    // (stock showed both), no sponsored shortcuts (stock: adidas, Trip.com), about:config opens,
+    // Secret Settings / Install extension from file / custom collection shown, Data collection
+    // toggles off, no Nimbus fetch in logcat, uBlock Origin installs from AMO and blocks. With
+    // the tabs patch, background tab processes sat at adj 0-100 in the foreground (stock not
+    // measured). Sponsored stories and sponsored suggestions did not appear on stock in that run,
+    // so those two steps are bytecode-only. Re-signing may break Send Tab and web push.
+    val COMPATIBILITY_FIREFOX = Compatibility(
+        name = "Firefox",
+        packageName = "org.mozilla.firefox",
+        apkFileType = ApkFileType.APK,
+        appIconColor = 0xFF7139, // The icon's orange.
+        targets = listOf(
+            AppTarget(
+                version = "158.0",
+                versionCodes = mapOf(SupportedAbi.X86_64 to 2016189054, SupportedAbi.ARM64_V8A to 2016189050),
+            )
+        )
     )
 
     // Written 2026-10-17 against com.bleacherreport.android.teamstream 11.12.0.33 (versionCode
