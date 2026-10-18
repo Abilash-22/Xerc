@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.17.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**75** apps&nbsp;&nbsp;•&nbsp;&nbsp;**193** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-18
+> **[v1.17.0-dev.4](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.0-dev.4)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**75** apps&nbsp;&nbsp;•&nbsp;&nbsp;**198** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-18
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -60,7 +60,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-1D56A8?style=flat-square" height="14" alt=""> | **Digi Sport** | 🚫 🛡️ 💎 🔕 🧩 🧪 8 | `1.1.15` | APK |
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **Eurosport** | 🚫 🛡️ 💎 3 | `8.33.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-1E88E5?style=flat-square" height="14" alt=""> | **Flashscore** | 🚫 🛡️ 🔕 🧩 6 | `26.10.2` | APKS |
-| <img src="https://img.shields.io/badge/-%20-00985F?style=flat-square" height="14" alt=""> | **FotMob** | 💎 1 | `238.17794.20261012` <sub>+4 older</sub> | APKM |
+| <img src="https://img.shields.io/badge/-%20-00985F?style=flat-square" height="14" alt=""> | **FotMob** | 💎 🧩 3 | `238.17794.20261012` <sub>+4 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-26A69A?style=flat-square" height="14" alt=""> | **Futbin** | 🚫 1 | `27.08` | APK |
 | <img src="https://img.shields.io/badge/-%20-0A1E32?style=flat-square" height="14" alt=""> | **L'Équipe** | 🚫 🧪 1 | `10.69.1` | APKM |
 | <img src="https://img.shields.io/badge/-%20-C8102E?style=flat-square" height="14" alt=""> | **Livescore** | 🚫 1 | `10.3.2` | APK |
@@ -91,7 +91,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-06C755?style=flat-square" height="14" alt=""> | **LINE** | 🚫 🔕 🧩 17 | `26.15.1` | APKM |
 | <img src="https://img.shields.io/badge/-%20-283167?style=flat-square" height="14" alt=""> | **mail.com** | 🚫 🛡️ 🔕 🧩 4 | `9.18.3` | APKM |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` <sub>+1 older</sub> | APKM |
-| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 16 | `26.40.5` | APKM |
+| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 17 | `26.40.5` | APKM |
 
 #### 🎵 Music, podcasts & radio <sub>7 apps</sub>
 
@@ -101,7 +101,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **jetAudio** | 💎 1 | `13.1.2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-3F51B5?style=flat-square" height="14" alt=""> | **Pi Music Player** | 🚫 💎 2 | `3.2.0.0_release_2` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF5722?style=flat-square" height="14" alt=""> | **Podcast Republic** | 🚫 1 | `9.17.0-260909124` | APK |
-| <img src="https://img.shields.io/badge/-%20-0088FF?style=flat-square" height="14" alt=""> | **Shazam** | 🛡️ 🧩 2 | `16.63.0-261008` <sub>+2 older</sub> | APKM |
+| <img src="https://img.shields.io/badge/-%20-0088FF?style=flat-square" height="14" alt=""> | **Shazam** | 🛡️ 🧩 4 | `16.63.0-261008` <sub>+2 older</sub> | APKM |
 | <img src="https://img.shields.io/badge/-%20-FF6D00?style=flat-square" height="14" alt=""> | **Simple Radio** | 🚫 💎 2 | `6.3.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-000000?style=flat-square" height="14" alt=""> | **SoundHound** | 🚫 1 | `10.5.8` | APK |
 
@@ -312,13 +312,15 @@ Verified on: `26.10.2`
 
 </details>
 <details>
-<summary><b>FotMob</b> &nbsp;·&nbsp; 1 patch &nbsp;·&nbsp; <code>com.mobilefootie.wc2010</code></summary>
+<summary><b>FotMob</b> &nbsp;·&nbsp; 3 patches &nbsp;·&nbsp; <code>com.mobilefootie.wc2010</code></summary>
 
 Verified on: `238.17794.20261012`, `238.17666.20260928`, `237.17536.20260911`, `236.17398.20260827`, `236.17338.20260822`
 
 | Patch | What it does | Default |
 |---|---|:-:|
 | 💎 **Enable FotMob+** | Removes ads and the FotMob+ paywall. On 238 and newer it also unlocks the exclusive app icons (More > FotMob+). The membership screen still shows no subscription; early access is managed by FotMob. | ✅ |
+| 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. FotMob's Sign in with Google needs it. FotMob's automatic sign-in at first start is skipped, because MicroG RE would show it as an account chooser; use the Sign in with Google button instead. | ➖ |
+| 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. | ➖ |
 
 </details>
 <details>
@@ -569,27 +571,28 @@ Verified on: `4.87`, `4.85`
 
 </details>
 <details>
-<summary><b>Truecaller</b> &nbsp;·&nbsp; 16 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
+<summary><b>Truecaller</b> &nbsp;·&nbsp; 17 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
 
 Verified on: `26.40.5`
 
 | Patch | What it does | Default |
 |---|---|:-:|
-| 🚫 **Disable ads** | Hides banner and native ads and the ad slots in the call log and inbox, and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once. Also turns off the remaining ad checks (including rewarded ads), the ad campaign and ad config syncs, and the "Explore Truecaller Premium" row in the contacts list. | ✅ |
-| 🛡️ **Disable telemetry** | Turns off the app start tracker, CleverTap event tracking and AppsFlyer attribution. | ✅ |
+| 🚫 **Disable ads** | Hides banner and native ads and the ad slots in the call log and inbox, and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once. Also turns off the remaining ad checks (including rewarded ads), the ad campaign and ad config syncs, the "Explore Truecaller Premium" row in the contacts list and the "Recommended Offers" (Offer Hub) entry. | ✅ |
+| 🛡️ **Disable telemetry** | Turns off the app start tracker, CleverTap (event tracking, its SDK start, profile refresh and CleverTap marketing pushes), AppsFlyer attribution, Firebase Analytics (including advertising ID collection), Crashlytics crash reports and Firebase Sessions. | ✅ |
 | 🔕 **Disable update prompts** | Stops the Google Play in-app update prompts and the app's own "update required" page, so the app does not block you from using the patched version. | ✅ |
 | 💎 **Enable Premium** | Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Call Assistant, family sharing, Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are not unlocked. | ✅ |
 | 🧩 **Fix T9 contact search** | Builds Truecaller's T9 dialer search index for new contacts each time the app opens, instead of waiting for the 12-hour background job. Helps when T9 finds no saved contacts after a fresh install. | ➖ |
-| 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. | ➖ |
+| 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. Truecaller's Google sign-in and Google Drive backup need it. | ✅ |
 | 🧩 **Hide Assistant tab** | Turns off the Call Assistant feature, which removes the Assistant tab. | ➖ |
 | 🧩 **Hide Blocking tab** | Removes the Blocking tab from the bottom bar. Spam blocking keeps working. | ➖ |
 | 🧩 **Hide Messages tab** | Removes the Messages tab from the bottom bar and always opens Calls. SMS notifications still open their conversation. When Calls is the only tab left, the bottom bar shrinks to the height of the system navigation bar. | ➖ |
 | 💎 **Hide Premium tab** | Removes the Premium tab from the bottom bar and the Premium entry from the Settings screen. | ➖ |
 | 🧩 **Hide Scam feed** | Turns off the Scam Feed, which removes its tab and menu entry and stops its notifications. | ➖ |
 | 🧩 **Hide Wear OS settings** | Removes the "Truecaller for Wear OS" entry from the Settings screen. | ✅ |
+| 🧩 **Hide business media** | Hides the brand images and promo video on business contact details, and the verified business campaign cards in contact details and on the in-call and after-call screens. The description, website and call, message, save and block buttons stay. | ➖ |
 | 🧩 **Hide family button** | Turns off Family Protect, which removes the family button at the top of the home screen and its onboarding and notifications. | ➖ |
-| 🧩 **Restore classic call log** | Experimental: turns off the redesigned call log, which brings back the classic call log and its "Frequently called" setting. | ➖ |
-| 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. | ➖ |
+| 🧩 **Restore classic call log** | Experimental: turns off the redesigned call log, which brings back the classic call log and its "Frequently called" setting. Swipe right to call and swipe left for SMS stay available. | ➖ |
+| 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. | ✅ |
 | 🧩 **Use SMS for verification codes** | Reads the phone verification code from the SMS inbox instead of Google's SMS Retriever, for devices without Google Play services or with MicroG. Phone verification can still fail on modified builds, because Truecaller's servers check the app. | ➖ |
 
 </details>
@@ -638,14 +641,16 @@ Verified on: `9.17.0-260909124`
 
 </details>
 <details>
-<summary><b>Shazam</b> &nbsp;·&nbsp; 2 patches &nbsp;·&nbsp; <code>com.shazam.android</code></summary>
+<summary><b>Shazam</b> &nbsp;·&nbsp; 4 patches &nbsp;·&nbsp; <code>com.shazam.android</code></summary>
 
 Verified on: `16.63.0-261008`, `16.62.1-261006`, `16.62.0-261001`
 
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🛡️ **Disable telemetry** | Disables Firebase Analytics event logging and Crashlytics crash reporting. | ✅ |
+| 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. Shazam's Sign in with Google needs it. Shazam's automatic sign-in attempts are skipped, because MicroG RE would show them as an account chooser; use the Sign in with Google button instead. | ➖ |
 | 🧩 **Open in Morphe YouTube apps** | Makes "Open in YouTube Music" and "Open in YouTube" open the Morphe-patched apps when they are installed, falling back to the stock apps otherwise. | ✅ |
+| 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. Also connects Shazam to Spotify through Spotify's login page instead of the Spotify app, which rejects the patched app (use email/password or email code; Google and Apple login don't work there). | ✅ |
 
 </details>
 <details>
