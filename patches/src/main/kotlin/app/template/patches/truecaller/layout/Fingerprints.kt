@@ -10,6 +10,7 @@ import com.android.tools.smali.dexlib2.Opcode
 
 internal const val BOTTOM_BAR_BUTTON_TYPE = "Lcom/truecaller/bottombar/BottomBarButtonType;"
 internal const val BOTTOM_BAR_VIEW = "Lcom/truecaller/bottombar/BottomBarView;"
+internal const val RECYCLER_VIEW = "Landroidx/recyclerview/widget/RecyclerView;"
 
 // Feature toggles are read as isEnabled("<key>", default state) in small R8-renamed getters. The
 // keys are exact-matched: both are prefixes of other toggles ("featureCallAssistantNumberSync",
@@ -85,6 +86,22 @@ internal object SelectTabFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf(BOTTOM_BAR_BUTTON_TYPE, "Z"),
     filters = listOf(methodCall(name = "setSelectedItemId", parameters = listOf("I"))),
+)
+
+// The classic call lists' shared RecyclerView setup (g68.I() in 26.40.5, called by the call history
+// tab and the dialer's list): adapter, layout manager, scroll listener, then, unless
+// "featureFavouriteContacts" is on, the swipe-to-call/SMS helper as touch listener and item
+// decoration, then setItemAnimator(null) and setHasFixedSize(true). Only the kept RecyclerView method names are
+// matched, not the obfuscated argument types; the patch checks the guard and the swipe helper.
+internal object CallLogSwipeSetupFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf(),
+    filters = listOf(
+        methodCall(definingClass = RECYCLER_VIEW, name = "addOnItemTouchListener"),
+        methodCall(definingClass = RECYCLER_VIEW, name = "addItemDecoration"),
+        methodCall(definingClass = RECYCLER_VIEW, name = "setItemAnimator"),
+        methodCall(definingClass = RECYCLER_VIEW, name = "setHasFixedSize"),
+    ),
 )
 
 // toString() of the business contact details model (q27 in 26.40.5), a Kotlin data class holding

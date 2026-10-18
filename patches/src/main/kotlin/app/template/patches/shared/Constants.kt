@@ -1488,6 +1488,14 @@ object Constants {
     //   - tagging5 (GET /v1/tags, the caller-ID tag catalogue) is not ads and stays.
     //   - Backup (Google Drive via Google sign-in) has no client-side fix: it needs GmsCore support
     //     and MicroG RE.
+    //   - Restore classic call log (experimental, opt-in) also keeps the classic list's swipe actions
+    //     (right = call, left = SMS): the classic lists' shared RecyclerView setup (the one ()V method
+    //     calling addOnItemTouchListener -> addItemDecoration -> setItemAnimator -> setHasFixedSize in
+    //     that order) attached the swipe helper (checked by its "ItemEvent.SWIPE_START" event) only
+    //     while "featureFavouriteContacts" was off; the read's result is forced to 0 before its
+    //     if-nez. The toggle itself is not overridden, so the Favourites UI is unchanged. The
+    //     redesigned (Compose) call log has no row swipe in stock 26.40.5 (its swipe-to-delete is
+    //     coded but switched off), which explains the Reddit report; not runtime-tested.
     //   - Rule 12 (GmsCore support, default on): 5 strings lose their surrounding quotes and
     //     string/Dismiss + string/dismiss come back as string_0x7f14030a / string_0x7f140dc9 (same
     //     IDs, no by-name lookup found); no control characters lost.

@@ -1,4 +1,5 @@
 import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Format
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
@@ -34,6 +35,7 @@ private const val ADS_SWITCH_VIEW = "Lcom/truecaller/ads/ui/AdsSwitchView;"
 private const val AD_LAYOUT_TYPE = "Lcom/truecaller/ads/AdLayoutTypeX;"
 private const val BOTTOM_BAR_BUTTON_TYPE = "Lcom/truecaller/bottombar/BottomBarButtonType;"
 private const val BOTTOM_BAR_VIEW = "Lcom/truecaller/bottombar/BottomBarView;"
+private const val RECYCLER_VIEW = "Landroidx/recyclerview/widget/RecyclerView;"
 private const val AD_PLACEMENT = "Lcom/truecaller/ads/api/model/ad/AdPlacement;"
 private const val FEATURE_STATE = "Lcom/truecaller/featuretoggles/FeatureState;"
 private const val T9_REBUILD_ALL_KEY = "RefreshT9MappingWorker.RebuildAll"
@@ -133,6 +135,7 @@ class TruecallerSmokeTest {
         assertHideMessagesTab(classes)
         assertHiddenSettingsRows(classes)
         assertToggleOverrides(classes)
+        assertClassicCallLogSwipe(classes, byType)
         assertUseSmsVerification(classes)
         assertFixT9ContactSearch(classes, byType)
         assertHideBusinessMedia(classes)
@@ -696,6 +699,47 @@ class TruecallerSmokeTest {
         check(next?.opcode != Opcode.CONST_STRING || insns.getOrNull(expected.size * 6 + 1)?.call()?.name != "equals") {
             "$label has more than ${expected.size} override blocks"
         }
+    }
+
+    private fun assertClassicCallLogSwipe(classes: List<ClassDef>, byType: Map<String, ClassDef>) {
+        // "featureCallLogRevamp" is checked in assertToggleOverrides. The classic lists' RecyclerView
+        // setup reads "featureFavouriteContacts" and, with it on, skipped the swipe helper; the
+        // result is now replaced with false right before that branch.
+        val calls = listOf("addOnItemTouchListener", "addItemDecoration", "setItemAnimator", "setHasFixedSize")
+        fun List<Instruction>.recyclerCall(name: String) =
+            indexOfFirst { it.call()?.definingClass == RECYCLER_VIEW && it.call()?.name == name }
+        val (cls, setup) = classes.singleMethod("call log RecyclerView setup") { _, m ->
+            m.returnType == "V" && m.parameterTypes.isEmpty() && m.implementation != null &&
+                m.instructions().let { insns -> calls.map { insns.recyclerCall(it) } }.let { it.all { index -> index >= 0 } && it == it.sorted() }
+        }
+        val label = "${cls.type}.${setup.name}()"
+        val insns = setup.instructions()
+        val touch = insns.recyclerCall("addOnItemTouchListener")
+        val decoration = insns.recyclerCall("addItemDecoration")
+
+        // The touch listener is the swipe helper (it fires ItemEvent.SWIPE_START).
+        val listener = (insns[touch] as FiveRegisterInstruction).registerD
+        val cast = insns.take(touch).last { it.opcode == Opcode.CHECK_CAST && (it as OneRegisterInstruction).registerA == listener }
+        val helperType = ((cast as ReferenceInstruction).reference as TypeReference).type
+        val helper = byType[helperType] ?: error("$label: swipe helper $helperType not found")
+        check(helper.methods.any { "ItemEvent.SWIPE_START" in it.strings() }) { "$label: $helperType does not fire ItemEvent.SWIPE_START" }
+
+        // invoke ...()Z, move-result vX, const vX 0, if-nez vX past the item decoration. 21t/22t are
+        // the if-* formats.
+        val branches = (0 until touch).filter { insns[it].opcode.format in setOf(Format.Format21t, Format.Format22t) }
+        check(branches.size == 1) { "$label has ${branches.size} branches before its touch listener" }
+        val guard = branches.single()
+        val register = (insns[guard] as OneRegisterInstruction).registerA
+        val forced = insns[guard - 1]
+        check(insns[guard].opcode == Opcode.IF_NEZ && (forced.opcode == Opcode.CONST_4 || forced.opcode == Opcode.CONST_16) &&
+            (forced as OneRegisterInstruction).registerA == register && (forced as NarrowLiteralInstruction).narrowLiteral == 0
+        ) { "$label does not force v$register to 0 before its if-nez; got ${forced.opcode}" }
+        val moveResult = insns[guard - 2]
+        val toggle = insns[guard - 3].call()
+        check(moveResult.opcode == Opcode.MOVE_RESULT && (moveResult as OneRegisterInstruction).registerA == register &&
+            toggle?.returnType == "Z" && toggle.parameterTypes.isEmpty()
+        ) { "$label: the forced register is not the result of a ()Z toggle read; got ${moveResult.opcode} $toggle" }
+        check(insns.branchTarget(guard) > decoration) { "$label: the swipe guard no longer skips the item decoration" }
     }
 
     private fun assertUseSmsVerification(classes: List<ClassDef>) {
