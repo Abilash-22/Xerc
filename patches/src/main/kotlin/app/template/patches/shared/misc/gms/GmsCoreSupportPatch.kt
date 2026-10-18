@@ -191,11 +191,14 @@ fun gmsCoreSupportPatch(
             googlePlayUtility?.returnEarly(0)
             // Same rule for the ensurePlayServicesAvailable helper: optional, but a void method
             // holding its message means the library has it, so a miss fails instead of no-opping
-            // (the old shape missed it in Sofascore and 365Scores without a sound).
+            // (the old shape missed it in Sofascore and 365Scores without a sound). Constructors
+            // do not count: when R8 drops the helper, the message can survive in the
+            // GooglePlayServicesNotAvailableException(int) constructor (Shazam 16.63.0, thrown
+            // only by ProviderInstaller), and there is nothing to return early from.
             val serviceCheck = ServiceCheckFingerprint.methodOrNull
             if (serviceCheck == null && classDefByStrings(SERVICE_CHECK_MESSAGE).any { classDef ->
                     classDef.methods.any { method ->
-                        method.returnType == "V" && method.implementation?.instructions?.any {
+                        method.returnType == "V" && method.name != "<init>" && method.implementation?.instructions?.any {
                             ((it as? ReferenceInstruction)?.reference as? StringReference)?.string == SERVICE_CHECK_MESSAGE
                         } == true
                     }

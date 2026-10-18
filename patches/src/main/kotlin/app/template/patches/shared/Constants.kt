@@ -1136,6 +1136,16 @@ object Constants {
     // test + CLI without -f, and on the emulator with Morphe YouTube 21.20.405 / YT Music
     // 9.18.50 + MicroG RE the rows open the Morphe apps (START pkg=app.morphe.android.*).
     // Shazam ships as a bundle only (requiredSplitTypes base__abi,base__density).
+    // 2026-10-18 (issue #62): "Spoof signature" (on by default; original cert CN=Tony Miller, O=Shazam
+    // Entertainment Ltd., SHA-1 b804e188301813b5d8d47d0bb2280607c16fd8b6, from the APKMirror
+    // 16.63.0-261008 bundle) fixes account sign-in on the patched app and also makes the bundled
+    // Spotify Auth SDK's SpotifyNativeAuthUtil.startAuthActivity() return false, so Spotify login
+    // uses the SDK's WebView page (the Spotify app rejects the re-signed caller). "GmsCore support"
+    // (off; launcher SplashActivity.onCreate) for Google sign-in/FCM; it also makes the sign-in use
+    // case (found by "prefkey_should_attempt_silent_sign_in" + (Context, String, Z, continuation))
+    // return false when silent, so MicroG RE shows no uninvited chooser on the Library tab or the
+    // login screen. Rule 12: 0 of 19,925 string values changed. Smoke + CLI (no -f) verified on
+    // 16.63.0 only.
     val COMPATIBILITY_SHAZAM = Compatibility(
         name = "Shazam",
         packageName = "com.shazam.android",
