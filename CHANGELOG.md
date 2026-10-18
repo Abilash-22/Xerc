@@ -1,3 +1,10 @@
+## [1.17.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2026-10-18)
+
+### ✨ New Features
+
+* **firefox:** add Firefox 158.0 Disable telemetry, Hide sponsored content, Enable about:config, Unlock secret settings, Hide promotional prompts and Keep background tabs loaded ([dcbca41](https://github.com/heval99/Heval-Morphe-Patches/commit/dcbca417b58101ffd97057530ed97fe2346a35c6))
+* **firefoxfocus:** add Firefox Focus 158.0 Add-on support, Enable about:config, Disable telemetry, Disable rating prompts and Hide promotional prompts ([1063f7c](https://github.com/heval99/Heval-Morphe-Patches/commit/1063f7c30cdceb3d55316bd4fec29822dc91cdf6))
+
 ## [1.17.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2026-10-17)
 
 ### ✨ New Features

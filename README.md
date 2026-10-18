@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.17.0-dev.2](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**73** apps&nbsp;&nbsp;•&nbsp;&nbsp;**182** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-17
+> **[v1.17.0-dev.3](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**75** apps&nbsp;&nbsp;•&nbsp;&nbsp;**193** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-18
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -149,11 +149,13 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-FFC107?style=flat-square" height="14" alt=""> | **#Notepad** | 🚫 💎 2 | `5.4.3.19019` | APKM |
 | <img src="https://img.shields.io/badge/-%20-4CAF50?style=flat-square" height="14" alt=""> | **Tasker** | 💎 1 | `6.6.20` | APK |
 
-#### 🌐 Browsers <sub>2 apps</sub>
+#### 🌐 Browsers <sub>4 apps</sub>
 
 | | App | Patches | Latest verified | Type |
 |:-:|---|---|---|:-:|
 | <img src="https://img.shields.io/badge/-%20-FF4500?style=flat-square" height="14" alt=""> | **Brave Browser** | 🚫 🛡️ 💎 🔕 🧪 4 | `1.97.56` <sub>+2 older</sub> | APKM |
+| <img src="https://img.shields.io/badge/-%20-FF7139?style=flat-square" height="14" alt=""> | **Firefox** | 🛡️ 🔕 🧩 6 | `158.0` | APK |
+| <img src="https://img.shields.io/badge/-%20-7542E5?style=flat-square" height="14" alt=""> | **Firefox Focus** | 🛡️ 🔕 🧩 5 | `158.0` | APKM |
 | <img src="https://img.shields.io/badge/-%20-FFB700?style=flat-square" height="14" alt=""> | **Via** | 🛡️ 1 | `7.3.3` | APK |
 
 #### 🏠 Launchers <sub>3 apps</sub>
@@ -899,6 +901,35 @@ Verified on: `1.97.56`, `1.96.61`, `1.95.104`
 | 🚫 **Disable ads** 🧪 | Experimental: hides sponsored new tab images (including full-page takeovers) and the "Earn BAT for viewing ads" Rewards signup popup. | ➖ |
 | 🛡️ **Disable telemetry** 🧪 | Experimental: turns off P3A analytics and the usage ping on every start (overriding the in-app switches), stops crash report uploads and drops the install-referrer attribution code. | ➖ |
 | 🔕 **Hide promotional prompts** 🧪 | Experimental: stops the recurring "Set Brave as default browser" dialog, the "Rate Brave" dialog and card, retention and Rewards promo notifications, the search widget promo and the VPN card in Settings. | ➖ |
+
+</details>
+<details>
+<summary><b>Firefox</b> &nbsp;·&nbsp; 6 patches &nbsp;·&nbsp; <code>org.mozilla.firefox</code></summary>
+
+Verified on: `158.0`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🛡️ **Disable telemetry** | Stops Glean telemetry uploads (including the pings that ignore the in-app switch), the daily usage ping, Adjust marketing attribution, Sentry and Socorro crash report uploads and Nimbus experiment downloads. Crashes still show the local crash screen. | ✅ |
+| 🧩 **Enable about:config** | Opens about:config in release builds, where Firefox normally blocks it. | ✅ |
+| 🔕 **Hide promotional prompts** | Stops Firefox's own promotions: in-app messages and their notifications, microsurveys, the "Set as default browser" prompts (at start, in onboarding and in the follow-up onboarding days), the onboarding sign-in page and the rating prompt. Sign-in, Set as default browser and Rate on Google Play in settings keep working. | ✅ |
+| 🧩 **Hide sponsored content** | Hides the sponsored shortcuts on the home screen, sponsored stories and sponsored Firefox Suggest results in the address bar. Regular stories, shortcuts and suggestions stay. | ✅ |
+| 🧩 **Keep background tabs loaded** | Experimental: keeps the content processes of background tabs at background priority instead of letting them drop to idle, so Android is less likely to kill them and tabs reload less often. Raises memory use, and cannot stop Android from killing the whole app. Shows the last screenshot of a tab while it reloads. | ➖ |
+| 🧩 **Unlock secret settings** | Reveals the hidden debug menu without tapping the Firefox logo five times: Secret Settings, Install add-on from file, the custom add-on collection, Nimbus experiments, the Sync debug menu and Gecko logs. | ✅ |
+
+</details>
+<details>
+<summary><b>Firefox Focus</b> &nbsp;·&nbsp; 5 patches &nbsp;·&nbsp; <code>org.mozilla.focus</code></summary>
+
+Verified on: `158.0`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🧩 **Add-on support** | Adds an Extensions menu to install and manage uBlock Origin, Violentmonkey and Tampermonkey, and shows their popups. Add-ons run in private mode, like every Focus tab; their data survives Erase. Installed add-ons are checked for updates from addons.mozilla.org at most once a day. | ✅ |
+| 🔕 **Disable rating prompts** | Stops the Google Play rating request that opens after a few app starts, and the Play Store page it opens when that request fails. | ✅ |
+| 🛡️ **Disable telemetry** | Stops the daily usage ping, even when its setting is turned on, and Nimbus experiment downloads. The other Glean telemetry is already off in Firefox Focus. Crash reports are still sent only when you choose to send them. | ✅ |
+| 🧩 **Enable about:config** | Enables about:config, the page for viewing and changing the browser engine's preferences. Type about:config in the address bar to open it. | ✅ |
+| 🔕 **Hide promotional prompts** | Hides the search widget promotion that opens after erasing your history and the tip bubbles ("Start browsing", tracking protection, erase tabs, privacy settings). | ✅ |
 
 </details>
 <details>
