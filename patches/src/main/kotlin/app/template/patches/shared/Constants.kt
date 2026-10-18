@@ -2465,6 +2465,41 @@ object Constants {
         targets = listOf(AppTarget(version = "4.3.2", versionCode = 2075))
     )
 
+    // Written 2026-10-18 against org.mozilla.focus 158.0 (versionCode 402802337 for both the
+    // x86_64 and arm64-v8a builds, APKMirror bundles), signer CN=Release Engineering, O=Mozilla
+    // Corporation (cert SHA-256 6203a473...4ffc). Focus is built with -dontobfuscate and GeckoView
+    // keeps its whole API, so class and method names are stable anchors.
+    //   - Add-on support (extensions/firefoxfocus): WebExtensionController.setPromptDelegate wraps
+    //     the delegate (stock Focus never answers install prompts, so installs hung); installs the
+    //     manager starts are allowed with private browsing, anything else asks. FocusApplication
+    //     .onCreate tracks the foreground Activity. WebExtensionBrowserMenuBuilder's constructor
+    //     forces showAddonsInMenu and swaps onAddonsManagerTapped for the manager (install
+    //     uBlock Origin / Violentmonkey / Tampermonkey from AMO, settings, enable, update, remove).
+    //     WebExtension$Action.openPopup shows popups in a GeckoView dialog. Installed add-ons are
+    //     checked for updates on addons.mozilla.org at most once a day.
+    //   - Enable about:config: GeckoRuntime.create(Context, GeckoRuntimeSettings) sets it first.
+    //   - Disable telemetry: Glean is already off in Focus; the usage-reporting service and ping
+    //     never start or send, the Daily usage ping setting defaults to off, Nimbus.fetchExperiments
+    //     returns at once. Crash reports are untouched (Focus asks before each one).
+    //   - Disable rating prompts: the inlined review step in MainActivity.onCreate ("Pending" /
+    //     "ReviewNeeded" / "Reviewed") always reads "Pending".
+    //   - Hide promotional prompts: Onboarding isCfrEnabled / isPromoteSearchWidgetDialogEnabled
+    //     delegate reads are false (tips and the search-widget promo after erase).
+    // FirefoxFocusSmokeTest and FirefoxFocusAddonsSmokeTest pass; CLI applies all five without -f
+    // and the disassembly shows each change. Emulator (morphe-play, API 35, x86_64) 2026-10-18,
+    // re-signed stock vs patched: no crash; uBlock Origin 1.75.0 and Violentmonkey 2.49.0
+    // install from the manager, uBO blocks on canyoublockit.com and its popup renders, a Greasy
+    // Fork userscript installs through Violentmonkey's confirm tab and runs, add-ons and scripts
+    // survive Erase and two relaunches, about:config opens, Daily usage ping shows off. uBO's
+    // "More" pane is empty, the same as in Firefox itself. Rating/promo patches bytecode-only.
+    val COMPATIBILITY_FIREFOX_FOCUS = Compatibility(
+        name = "Firefox Focus",
+        packageName = "org.mozilla.focus",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x7542E5, // The icon's purple.
+        targets = listOf(AppTarget(version = "158.0", versionCode = 402802337))
+    )
+
     // Written 2026-10-17 against com.bleacherreport.android.teamstream 11.12.0.33 (versionCode
     // 54053, APKMirror bundle), developer signer CN=Sam Parnell, OU=Bleacher Report (cert SHA-256
     // 60baa405...a4f0). The app (com.bleacherreport.phoenix) and its Kotlin runtime are R8-renamed

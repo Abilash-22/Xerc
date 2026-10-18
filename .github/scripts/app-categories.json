@@ -118,7 +118,8 @@
       "emoji": "🌐",
       "packages": [
         "com.brave.browser",
-        "mark.via.gp"
+        "mark.via.gp",
+        "org.mozilla.focus"
       ]
     },
     {

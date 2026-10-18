@@ -59,6 +59,20 @@ fun MutableMethod.addInstructionChecked(index: Int, smaliInstruction: String) =
 fun MutableMethod.addInstructionChecked(smaliInstruction: String) =
     checkedInsert("addInstruction", smaliInstruction, single = true) { addInstruction(smaliInstruction) }
 
+/**
+ * Throws unless the instruction at [index] exists and is no branch or switch target. Code inserted
+ * at [index] goes in front of that instruction, but its labels stay on it, so a jump there would
+ * skip the inserted code (e.g. a value forced right after the instruction that produced it).
+ * [what] names the insertion in the error.
+ */
+fun MutableMethod.requireNoBranchTargetAt(index: Int, what: String) {
+    val labels = implementation?.instructions?.getOrNull(index)?.location?.labels
+        ?: throw PatchException("${signature()}: $what: there is no instruction $index to insert before")
+    if (labels.isNotEmpty()) {
+        throw PatchException("${signature()}: $what: instruction $index is a branch target, a jump there would skip the insert")
+    }
+}
+
 private inline fun MutableMethod.checkedInsert(
     api: String,
     smali: String,
