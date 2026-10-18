@@ -148,6 +148,23 @@ object Constants {
     // not re-checked for this step (no APK at hand). Emulator (238.17794): no paywall, the
     // membership screen shows the 12-icon picker, switching to Barcelona changed the launcher
     // alias and switching back restored it, no crashes. The staff check is not runtime-testable.
+    // 2026-10-18, 238.17794.20261012 (issue #64): "GmsCore support" (default off, no clone option:
+    // the widget providers com.fotmob.widget.logos/.images are outside the package name) hooks the
+    // manifest launch activity MainActivityWrapper.onCreate(Bundle) and rewrites the GMS/c2dm
+    // constants and manifest entries for MicroG RE, so Sign in with Google (androidx.credentials Play
+    // services provider -> Firebase Auth) can work on a re-signed build. "Spoof signature" routes
+    // every getPackageInfo call (incl. Firebase's cert-hash helper) through the extension with the
+    // original CN=Christer Nordvik certificate (SHA-1 5546e6c4b0c1f31b9e5a953a89a8bb6f25a2ad6f).
+    // FotMobSmokeTest and a CLI patch + apkanalyzer check pass; rule-12 string diff: only
+    // sw player_yellow_card loses its literal surrounding quotes. Facebook native-app login is not
+    // covered by the spoof (the Facebook app reads the real certificate).
+    // GmsCore support also skips the onboarding auto sign-in: in the OnboardingStartActivity
+    // coroutine (found by its "Did not find any existing Google accounts" / "User seemingly
+    // dismissed the automatic Google sign-in" log prefixes) it throws androidx's
+    // NoCredentialException (TYPE_NO_CREDENTIAL constructor) right after the
+    // google_server_client_id read, inside the try block whose NoCredentialException handler runs
+    // (the stock no-account path), because MicroG RE ignores filterByAuthorizedAccounts and showed
+    // its chooser uninvited at first start. The Sign in with Google button paths are unchanged.
     val COMPATIBILITY_FOTMOB = Compatibility(
         name = "FotMob",
         packageName = "com.mobilefootie.wc2010",
