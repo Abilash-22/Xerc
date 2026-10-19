@@ -1259,6 +1259,20 @@ object Constants {
     // 2026-10-19: older targets 16.62.1-261006, 16.62.0-261001 dropped (latest version only,
     // owner); ShazamSmokeTest runs against 16.63.0-261008, the only version the 2026-10-18
     // patches were verified on.
+    // 2026-10-19 (issue #62, reporter's video): Spotify's login page no longer works in the SDK
+    // 1.2.3 WebView dialog (the email step resets, Facebook lands on the account page instead of
+    // redirecting with ?code=, Google refuses WebViews). Spoof signature's Spotify part now hooks
+    // WebViewAuthHandler.start to open the login in a browser tab (default browser if it supports
+    // Custom Tabs, else the first that does, else any browser, never com.spotify.music) through
+    // the shazam extension's SpotifyBrowserLoginPatch; the manifest gains the exported
+    // SpotifyRedirectReceiverActivity for shazam-spotifyoauth://spotifylogincallback, which brings
+    // the SDK LoginActivity back (CLEAR_TOP|SINGLE_TOP) and hands the redirect (or a cancel when
+    // the tab is closed) to the SDK's own completion listener. The WebView dialog stays as the
+    // fallback when no browser exists. Smoke test + CLI (no -f, smali + manifest checked, rule 12:
+    // 0 of 19,925 strings changed). Emulator (Chrome, via the shazam://spotifyconnect deep link):
+    // Custom Tab on accounts.spotify.com, Back clears the tab and LoginActivity with Shazam's
+    // "Connection failed" toast, an ?error= redirect clears the task back to MainActivity; no
+    // crash. A real login (code exchange) was not tested: it needs a Spotify account.
     val COMPATIBILITY_SHAZAM = Compatibility(
         name = "Shazam",
         packageName = "com.shazam.android",
