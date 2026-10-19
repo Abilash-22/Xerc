@@ -86,8 +86,8 @@ not the story.
 |---|---|---|
 | Saphe Link | `my.saphelink` | Removed 2026-10-07 at the owner's request. Last verified 6.6.0. |
 | LinkedIn | `com.linkedin.android` | Removed 2026-10-15 at the owner's request: the logged-in test account was banned while patched builds were being tested. Last verified 4.1.1261 (Heval Controls with a nav panel entry and Hide Puzzle Games, shipped in v1.15.0-dev.10). The unreleased work (Hide promoted posts, Hide suggested people, Hide Premium upsells, Open links externally, Disable telemetry, debug probe) is archived on the local branch `wip/linkedin-final`. Do not restart without the owner; account bans are a risk for users too. |
-| KakaoTalk | `com.kakao.talk` | Removed by the owner 2026-10-21; patches were on dev since v1.14.0 (KakaoTalk 26.8.3, 11 patches). The code is in git history at `edf5481`. Not to be re-added unless the owner asks. |
-| LINE | `jp.naver.line.android` | Removed by the owner 2026-10-21; patches were on dev since v1.14.0 (LINE 26.15.1, 17 patches). The code is in git history at `edf5481`; the local branch `wip/line` is obsolete. Not to be re-added unless the owner asks. |
+| KakaoTalk | `com.kakao.talk` | Removed by the owner 2026-10-19; patches were on dev since v1.14.0 (KakaoTalk 26.8.3, 11 patches). The code is in git history at `edf5481`. Not to be re-added unless the owner asks. |
+| LINE | `jp.naver.line.android` | Removed by the owner 2026-10-19; patches were on dev since v1.14.0 (LINE 26.15.1, 17 patches). The code is in git history at `edf5481`; the local branch `wip/line` is obsolete. Not to be re-added unless the owner asks. |
 
 ## Known fingerprint drift (re-anchor later, app stays supported)
 
