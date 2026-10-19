@@ -2018,6 +2018,54 @@ object Constants {
         targets = listOf(AppTarget(version = "4.2.31.1", versionCode = 539))
     )
 
+    // Added 2026-10-14 from the Reddit request queue (ads, analytics, upgrade banners); restored
+    // 2026-10-19 with a native-encryption bypass. Verified against com.fyxtech.muslim 3.5.4
+    // (versionCode 149, apkcube bundle merged, arm64-v8a only, developer signer CN=athan O=yalla,
+    // SHA-256 5d8c442d...ee0c; first written for 3.5.0). Premium membership is server-side
+    // (protobuf membership state and privileges from the server) and is not faked. Disable ads
+    // answers "has AUTHORITY_TYPE_NO_ADS" (that privilege only) in the single class implementing
+    // the kept router interface IWalletExport, for its (AuthorityType)Z and StateFlow forms: every
+    // ad placement, the splash ad and the feed ad units consult it. In 3.5.4 the (AuthorityType)Z
+    // form has no local register, so it is cloned with the library's
+    // cloneMutableAndPreserveParameters first. The open-page ad gate (the instance
+    // (LocResourceOpenPageUiModel)Z that reads "ad_new_user_first_show_days", inline in 3.5.0,
+    // through a static ()Z helper in 3.5.4) answers false, so the launcher never waits on the ad
+    // platform. BaseAdView/AdLoader/InterstitialAd/AppOpenAd loads are no-ops. Rewarded ads (SSV,
+    // the free path to make-up prayers, golds and point rewards) and MobileAds.initialize are
+    // deliberately kept; AppLovin/Pangle/Unity/Meta are GMA mediation adapters only. Disable
+    // telemetry: Firebase Analytics/Crashlytics manifest switches, the (String, Bundle) logEvent of
+    // the measurement client FirebaseAnalytics holds (its field type; 3.5.4 inlines
+    // FirebaseAnalytics.logEvent into the callers), AppMeasurementSdk logs, the concrete
+    // AppsFlyerLib subclass (start/log*/init; setCustomerIdAndLogSession only where the SDK still
+    // has it) and Adjust initSdk/trackEvent/trackAdRevenue. Hide premium banners:
+    // InfoStreamUnit.hasMembershipInfo() answers false (home-feed membership card) and the Me
+    // screen's VipCardView is kept GONE.
+    //
+    // Re-signing used to kill the app: AthanEncryption.<clinit> loads libagora-ey.so, the native
+    // library rejects the changed signing certificate, KvInitializer dies in a background thread
+    // with NoClassDefFoundError, and the process exits. "Fix native encryption check" skips that
+    // initializer and replaces every Java call to its String getters with the values dumped from
+    // the developer-signed build through the JNI methods. The library is never loaded. The k27
+    // PKCS#8 RSA private key for the Yami mini-program signature check is deliberately omitted;
+    // its call site returns an empty key, so Yami fails closed. The core app (prayer times, Qibla,
+    // Quran/Hadith, ad and telemetry hooks) does not use it.
+    // Disable ads, Disable telemetry and Hide premium banners depend on the bypass patch.
+    // Native anti-debug markers (TracerPid/frida in libagora-ey.so, ptrace in libapminsightb.so)
+    // are SDK self-protection and are not touched; on the Java side the signing cert is only
+    // reported (Facebook app events, the app's SecModel log), never enforced.
+    // WeMuslimSmokeTest asserts every hook plus the bypass. The full Morphe build was
+    // emulator-tested 2026-10-19: the app starts, the consent flow is accepted, the home screen
+    // renders with all navigation, the Quran opens, there are no AndroidRuntime or libc fatal
+    // errors, and the ad and telemetry SDKs log no activity. The Yami mini-program (the path whose
+    // RSA key is deliberately empty) was not exercised; it fails closed.
+    val COMPATIBILITY_WEMUSLIM = Compatibility(
+        name = "WeMuslim",
+        packageName = "com.fyxtech.muslim",
+        apkFileType = ApkFileType.APKM,
+        appIconColor = 0x00A63B,
+        targets = listOf(AppTarget(version = "3.5.4", versionCode = 149))
+    )
+
     // Added 2026-10-14 from the Reddit request queue: ads only. Pro and paywalled content are
     // server-side (entitlements and isPremium arrive from the server). Verified against
     // com.divum.MoneyControl 14.6.2 (versionCode 637, APKMirror bundle merged, arm64-v8a only,
