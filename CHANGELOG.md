@@ -1,3 +1,13 @@
+## [1.17.1-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.17.0...v1.17.1-dev.1) (2026-10-19)
+
+### 🐛 Bug Fixes
+
+* **ads:** make Disable ads block what it promises in Castbox, Podcast Republic, Pi Music Player, BeSoccer, Expert Player and Moneycontrol ([40ac9d3](https://github.com/heval99/Heval-Morphe-Patches/commit/40ac9d3c3d730801d6ae3b39c01b3f3a219e7242))
+* fail loudly on drift and harden GmsCore support ([7dd00a6](https://github.com/heval99/Heval-Morphe-Patches/commit/7dd00a6284a765eb924d40017e33cf3baf28ef32))
+* **kakaotalk,line:** remove KakaoTalk and LINE support ([dd9dd18](https://github.com/heval99/Heval-Morphe-Patches/commit/dd9dd188ef4adbfb5597f779b4adff9d2100c2ab))
+* keep only the latest verified version per app and correct the patch notes ([d0f5354](https://github.com/heval99/Heval-Morphe-Patches/commit/d0f5354314601b483cdf0007ded73092668f1ad6))
+* **sofascore,shazam,brave,truecaller:** complete the telemetry, Web Discovery and server-backed premium gates ([8708913](https://github.com/heval99/Heval-Morphe-Patches/commit/8708913a197aba881423f7352f16847619762762))
+
 ## [1.17.0](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.16.0...v1.17.0) (2026-10-19)
 
 ### 🐛 Bug Fixes
