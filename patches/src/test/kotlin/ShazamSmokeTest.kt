@@ -16,6 +16,7 @@ import java.io.File
 private const val PKG = "com.shazam.android"
 private const val FIREBASE_ANALYTICS = "Lcom/google/firebase/analytics/FirebaseAnalytics;"
 private const val CRASHLYTICS = "Lcom/google/firebase/crashlytics/FirebaseCrashlytics;"
+private const val CRASHLYTICS_COLLECTION_KEY = "firebase_crashlytics_collection_enabled"
 private const val OPEN_IN_EXTENSION = "Lapp/template/extension/shazam/OpenInMorpheAppsPatch;"
 private const val STREAMING_PROVIDER_TO_STRING = "StreamingProvider(streamingProviderId="
 private const val STRING = "Ljava/lang/String;"
@@ -69,6 +70,27 @@ class ShazamSmokeTest {
             expected = false,
             label = "FirebaseCrashlytics.isCrashlyticsCollectionEnabled()",
         )
+
+        // The data-collection arbiter (public in this build; found like the patch, by the
+        // SharedPreferences key its class reads) reports automatic collection as off, so no
+        // crash report is sent even through the readers that bypass the public getter.
+        val arbiterGetters = classes
+            .filter { cls -> cls.methods.any { m -> m.instructions().any { it.stringOrNull() == CRASHLYTICS_COLLECTION_KEY } } }
+            .flatMap { cls -> cls.methods }
+            .filter { it.implementation != null && it.returnType == "Z" && it.parameterTypes.isEmpty() }
+        check(arbiterGetters.isNotEmpty()) {
+            "no ()Z getter on the class reading \"$CRASHLYTICS_COLLECTION_KEY\" was found"
+        }
+        check(arbiterGetters.any { it.name == "isAutomaticDataCollectionEnabled" }) {
+            "the Crashlytics arbiter's isAutomaticDataCollectionEnabled() was not found"
+        }
+        arbiterGetters.forEach { method ->
+            assertForcedBoolean(
+                method,
+                expected = false,
+                label = "${method.definingClass}.${method.name}() (Crashlytics data collection arbiter)",
+            )
+        }
 
         // Every concrete recordException/log overload neutered.
         val reporting = crashlytics.methods.filter { method ->

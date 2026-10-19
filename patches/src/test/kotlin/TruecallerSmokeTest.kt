@@ -167,8 +167,10 @@ class TruecallerSmokeTest {
         }
         assertForcedBoolean(gate, expected = true, label = "${gateClass.type}.${gate.name}(PremiumFeatureStatus)")
 
-        // 4. isFeatureAvailable(feature, refresh): true at once, except CALL_ASSISTANT and
-        // FAMILY_SHARING, which branch to the untouched stock check.
+        // 4. isFeatureAvailable(feature, refresh): true at once for the device-checked features;
+        // CALL_ASSISTANT and FAMILY_SHARING (both only work through Truecaller's servers) return
+        // false at once, so the premium UI does not offer them as unlocked. The stock check
+        // (with the server's kill-switch list) stays below the early returns, unreached.
         val (featureClass, feature) = classes.singleMethod("feature availability check") { _, m ->
             m.returnType == "Z" && m.params() == listOf(PREMIUM_FEATURE, "Z") && "disabledPremiumFeatures" in m.strings()
         }
@@ -185,14 +187,20 @@ class TruecallerSmokeTest {
                 branch.registerB == (get as OneRegisterInstruction).registerA) {
                 "$featureLabel does not compare p1 with PremiumFeature.$constant"
             }
-            check(featureInsns.branchTarget(index + 1) == 6) { "$featureLabel: the $constant branch does not reach the stock check" }
+            // Both server-backed branches reach the false return at 6, before the stock code.
+            check(featureInsns.branchTarget(index + 1) == 6) { "$featureLabel: the $constant branch does not reach the server-backed false return" }
         }
         val forced = featureInsns.getOrNull(4)
         check(forced?.opcode == Opcode.CONST_4 && (forced as NarrowLiteralInstruction).narrowLiteral == 1 &&
             featureInsns.getOrNull(5)?.opcode == Opcode.RETURN &&
             (featureInsns[5] as OneRegisterInstruction).registerA == (forced as OneRegisterInstruction).registerA
         ) { "$featureLabel does not return true for the other features" }
-        check(featureInsns.drop(6).any { it.stringOrNull() == "disabledPremiumFeatures" }) { "$featureLabel lost its stock check" }
+        val unavailable = featureInsns.getOrNull(6)
+        check(unavailable?.opcode == Opcode.CONST_4 && (unavailable as NarrowLiteralInstruction).narrowLiteral == 0 &&
+            featureInsns.getOrNull(7)?.opcode == Opcode.RETURN &&
+            (featureInsns[7] as OneRegisterInstruction).registerA == (unavailable as OneRegisterInstruction).registerA
+        ) { "$featureLabel does not return false for the server-backed features" }
+        check(featureInsns.drop(8).any { it.stringOrNull() == "disabledPremiumFeatures" }) { "$featureLabel lost its stock check" }
 
         // 5. PremiumState constructor: const/16 p1, 0x1 and sget-object p2, GOLD before anything else.
         val stateClass = classes.single { cls -> cls.methods.any { m -> m.strings().any { it.startsWith("PremiumState(isPremium=") } } }
