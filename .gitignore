@@ -159,5 +159,17 @@ Crashlogs/
 # Local request queue (never commit)
 docs/request-queue.local.md
 
+# Local research report, kept out of releases (never commit)
+docs/HUSH_MORPHE_RESEARCH.local.md
+
+# Local patch-ecosystem research report, kept out of releases (never commit)
+docs/PATCH_ECOSYSTEM_RESEARCH.local.md
+
+# Local Morphe-ecosystem research report, kept out of releases (never commit)
+docs/MORPHE_ECOSYSTEM_RESEARCH.local.md
+
+# Morphe-ecosystem recommendations backlog (never commit)
+docs/MORPHE_ECOSYSTEM_RECOMMENDATIONS.local.md
+
 # Release checksum file, generated during the semantic-release publish step
 SHA256SUMS.txt
