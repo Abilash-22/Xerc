@@ -1723,6 +1723,22 @@ object Constants {
     //   const-strings read through fho.a. tagging5 (caller ID tags) is left alone. With kt50.Y false,
     //   rewarded ads are off too (owner decision) and p10 skips GAM init when
     //   featureDisableGamInitForPremium is on; the ad load paths still start GAM themselves.
+    // 2026-10-19 (26.40.5; smoke test + CLI disassembly with the default set, no -f, all Applied;
+    //   not runtime-tested): Disable contact upload (default on).
+    //   - The two methods that hold the selection "data_type = ? AND data_phonebook_id NOT NULL AND
+    //     data8 = ?" and pass it to ContentResolver.query (the FetchImContactsWorkAction branch of
+    //     jc.a, messenger GetUsers lookup; ContactsPremiumStatusFetchWorkAction z5s.p, Premium
+    //     presence lookup) now query with " AND 0" appended, so they read no numbers. The patch
+    //     requires exactly 2. With no numbers, jc returns Success (o9q) and z5s.p returns Unit,
+    //     which its work action (x6c) turns into Success, so WorkManager does not retry.
+    //   - "featureCallAssistantNumberSync" off in the resolver (fho.a): the should-sync check
+    //     (wv7.d) is false and the work action returns Success before wv7.c builds the
+    //     SetWhitelistNumbersRequestDto (api/v1/users/setWhitelistNumbers). The patch fails if the
+    //     DTO class or a resolver read of the key is gone.
+    //   - "featureContactEditorNameSuggestion" off: NameSuggestion.isVisible is false, the editor
+    //     hides the checkbox, and both save paths (lec, z20) enqueue the upload only when it is
+    //     visible and checked. MOBILE_CLIENT and SURVEY suggestions, local contacts, T9, caller ID
+    //     (/v2/search, /v2/bulk), backup and PhonebookSyncWorker are untouched.
     val COMPATIBILITY_TRUECALLER = Compatibility(
         name = "Truecaller",
         packageName = "com.truecaller",
