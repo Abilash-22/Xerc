@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.17.1-dev.1](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.17.1-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**73** apps&nbsp;&nbsp;•&nbsp;&nbsp;**170** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-19
+> **[v1.18.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/releases/tag/v1.18.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;**74** apps&nbsp;&nbsp;•&nbsp;&nbsp;**175** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-10-20
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -89,7 +89,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-2196F3?style=flat-square" height="14" alt=""> | **FairEmail** | 💎 1 | `1.2338` | APK |
 | <img src="https://img.shields.io/badge/-%20-283167?style=flat-square" height="14" alt=""> | **mail.com** | 🚫 🛡️ 🔕 🧩 4 | `9.18.3` | APKM |
 | <img src="https://img.shields.io/badge/-%20-5C6BC0?style=flat-square" height="14" alt=""> | **Textra** | 💎 1 | `4.87` | APKM |
-| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 17 | `26.40.5` | APKM |
+| <img src="https://img.shields.io/badge/-%20-0087FF?style=flat-square" height="14" alt=""> | **Truecaller** | 🚫 🛡️ 💎 🔕 🧩 18 | `26.40.5` | APKM |
 
 #### 🎵 Music, podcasts & radio <sub>7 apps</sub>
 
@@ -164,7 +164,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-3C59AD?style=flat-square" height="14" alt=""> | **Hyperion Launcher** | 💎 1 | `2.2.7` | APKM |
 | <img src="https://img.shields.io/badge/-%20-111111?style=flat-square" height="14" alt=""> | **Pro Launcher** | 💎 1 | `v2.4.2` | APKM |
 
-#### 🛠️ Tools & utilities <sub>10 apps</sub>
+#### 🛠️ Tools & utilities <sub>11 apps</sub>
 
 | | App | Patches | Latest verified | Type |
 |:-:|---|---|---|:-:|
@@ -177,6 +177,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 | <img src="https://img.shields.io/badge/-%20-D0BCFF?style=flat-square" height="14" alt=""> | **Native Camera** | 💎 🔑 2 | `1.4.4` | APKM |
 | <img src="https://img.shields.io/badge/-%20-9C27B0?style=flat-square" height="14" alt=""> | **Pocket Color Wheel** | 🚫 1 | `3.26` | APKM |
 | <img src="https://img.shields.io/badge/-%20-2962FF?style=flat-square" height="14" alt=""> | **Unified Remote** | 💎 1 | `3.25.1` | APK |
+| <img src="https://img.shields.io/badge/-%20-00A63B?style=flat-square" height="14" alt=""> | **WeMuslim** | 🚫 🛡️ 💎 🧩 4 | `3.5.4` | APKM |
 | <img src="https://img.shields.io/badge/-%20-00ACC1?style=flat-square" height="14" alt=""> | **WiFi Analyzer** | 🚫 1 | `3.11.2` | APK |
 
 ### 🔍 Patch details
@@ -523,13 +524,14 @@ Verified on: `4.87`
 
 </details>
 <details>
-<summary><b>Truecaller</b> &nbsp;·&nbsp; 17 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
+<summary><b>Truecaller</b> &nbsp;·&nbsp; 18 patches &nbsp;·&nbsp; <code>com.truecaller</code></summary>
 
 Verified on: `26.40.5`
 
 | Patch | What it does | Default |
 |---|---|:-:|
 | 🚫 **Disable ads** | Hides banner and native ads and the ad slots in the call log and inbox, and turns off interstitial and app-open ads, so actions such as Click to WhatsApp run at once. Also turns off the remaining ad checks (including rewarded ads), the ad campaign and ad config syncs, the "Explore Truecaller Premium" row in the contacts list and the "Recommended Offers" (Offer Hub) entry. | ✅ |
+| 🧩 **Disable contact upload** | Stops Truecaller from sending your saved contacts' numbers to its servers (chat contact discovery, friends' Premium status and the Call Assistant whitelist) and hides the contact editor's name suggestion upload. Contacts, dialer search and caller ID keep working. Truecaller Chat no longer finds which of your contacts use it, and with the Call Assistant your saved contacts are no longer whitelisted. | ✅ |
 | 🛡️ **Disable telemetry** | Turns off the app start tracker, CleverTap (event tracking, its SDK start, profile refresh and CleverTap marketing pushes), AppsFlyer attribution, Firebase Analytics (including advertising ID collection), Crashlytics crash reports and Firebase Sessions. | ✅ |
 | 🔕 **Disable update prompts** | Stops the Google Play in-app update prompts and the app's own "update required" page, so the app does not block you from using the patched version. | ✅ |
 | 💎 **Enable Premium** | Unlocks the Premium interface and the Premium features that are checked on the device. Features backed by Truecaller's servers (Call Assistant, family sharing, Who viewed / searched for me data, Identify AI, cloud call recording, fraud insurance, the verified badge) are reported as unavailable. | ✅ |
@@ -602,7 +604,7 @@ Verified on: `16.63.0-261008`
 | 🛡️ **Disable telemetry** | Disables Firebase Analytics event logging and Crashlytics crash reporting. | ✅ |
 | 🧩 **GmsCore support** | Makes Google sign-in and Google APIs work in the patched app by using MicroG RE instead of Google Play services. Requires MicroG RE to be installed. Shazam's Sign in with Google needs it. Shazam's automatic sign-in attempts are skipped, because MicroG RE would show them as an account chooser; use the Sign in with Google button instead. | ➖ |
 | 🧩 **Open in Morphe YouTube apps** | Makes "Open in YouTube Music" and "Open in YouTube" open the Morphe-patched apps when they are installed, falling back to the stock apps otherwise. | ✅ |
-| 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. Also connects Shazam to Spotify through Spotify's login page instead of the Spotify app, which rejects the patched app (use email/password or email code; Google and Apple login don't work there). | ✅ |
+| 🧩 **Spoof signature** | Makes the app report its original signing certificate to itself, so Firebase and Google APIs restricted to the original app keep working. Also connects Shazam to Spotify through Spotify's login page in a browser tab instead of the Spotify app, which rejects the patched app. | ✅ |
 
 </details>
 <details>
@@ -1030,6 +1032,19 @@ Verified on: `3.25.1`
 | Patch | What it does | Default |
 |---|---|:-:|
 | 💎 **Enable Pro** | Unlocks Unified Remote Full by forcing the local license status check. | ✅ |
+
+</details>
+<details>
+<summary><b>WeMuslim</b> &nbsp;·&nbsp; 4 patches &nbsp;·&nbsp; <code>com.fyxtech.muslim</code></summary>
+
+Verified on: `3.5.4`
+
+| Patch | What it does | Default |
+|---|---|:-:|
+| 🚫 **Disable ads** | Disables banner, native, interstitial and splash (app-open) ads and skips the splash ad wait. Opt-in rewarded ads keep working for make-up prayers and rewards. | ✅ |
+| 🛡️ **Disable telemetry** | Disables Firebase Analytics, Crashlytics reports and AppsFlyer and Adjust attribution. | ✅ |
+| 🧩 **Fix native encryption check** | Makes the app start after re-signing. The stock libagora-ey.so refuses to load in a re-signed build, so its storage-key getters are replaced with the values from the developer-signed APK. The library is never loaded. | ✅ |
+| 💎 **Hide premium banners** | Hides the membership card on the Me screen and the membership offer cards in the home feed. | ✅ |
 
 </details>
 <details>

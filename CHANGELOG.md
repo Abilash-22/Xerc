@@ -1,3 +1,14 @@
+## [1.18.0-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.17.1-dev.1...v1.18.0-dev.1) (2026-10-20)
+
+### 🐛 Bug Fixes
+
+* **shazam:** open the Spotify login in a browser tab ([7075b7f](https://github.com/heval99/Heval-Morphe-Patches/commit/7075b7fe3815148b016ba8ac435f6020b90ba7a2)), closes [#62](https://github.com/heval99/Heval-Morphe-Patches/issues/62)
+
+### ✨ New Features
+
+* **truecaller:** add Disable contact upload ([94b5eca](https://github.com/heval99/Heval-Morphe-Patches/commit/94b5ecaec85fcf23ac97302f4ea6ebf4b03231cb))
+* **wemuslim:** add WeMuslim 3.5.4 support ([ef5b416](https://github.com/heval99/Heval-Morphe-Patches/commit/ef5b416ccd58b78a643e9d8fae74388a48013822))
+
 ## [1.17.1-dev.1](https://github.com/heval99/Heval-Morphe-Patches/compare/v1.17.0...v1.17.1-dev.1) (2026-10-19)
 
 ### 🐛 Bug Fixes
