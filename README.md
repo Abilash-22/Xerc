@@ -18,7 +18,8 @@
 
 Custom [Morphe](https://morphe.software) patches by heval99 for apps I use: ad removal,
 telemetry blocking and premium/licence unlocks for sports, music, notes, email, maps and
-utility apps.
+utility apps. 
+
 
 ## 🚀 Quick start
 
