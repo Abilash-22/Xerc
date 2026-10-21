@@ -35,3 +35,19 @@ internal object HomeTabClickFingerprint : Fingerprint(
         string("lastOpenedFragmentV3"),
     ),
 )
+
+internal const val HOME_CARDS_ADAPTER =
+    "Lin/cricketexchange/app/cricketexchange/matches/HomeHomeTabFragmentNew\$HomeCardsAdapter;"
+
+// HomeCardsAdapter.J() (v26.10.07): rebuilds the "For you" list's group-type list (a List<Integer>,
+// field I in this version) on every getGroupCount(). It clears the list, adds one entry pair per
+// series, then appends the fixed sections. Anchored on List.clear() followed by the "#CWTFV#" key.
+internal object ForYouGroupListFingerprint : Fingerprint(
+    definingClass = HOME_CARDS_ADAPTER,
+    returnType = "V",
+    parameters = listOf(),
+    filters = listOf(
+        methodCall(definingClass = "Ljava/util/List;", name = "clear"),
+        string("#CWTFV#"),
+    ),
+)
