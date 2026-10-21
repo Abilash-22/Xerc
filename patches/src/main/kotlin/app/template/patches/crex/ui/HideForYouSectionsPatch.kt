@@ -40,6 +40,7 @@ val hideForYouSectionsPatch = bytecodePatch(
         // J() ends with `return-void` after appending the fixed sections (v0-v6 are free there).
         // Remove the unwanted types so no group, header or child row is ever created for them.
         // Each type appears at most once and List.remove(Object) drops the first match.
+        // Adding for commit
         val last = method.implementation!!.instructions.count() - 1
         if (method.getInstruction(last).opcode != Opcode.RETURN_VOID) {
             throw PatchException("Group list builder does not end in return-void")
