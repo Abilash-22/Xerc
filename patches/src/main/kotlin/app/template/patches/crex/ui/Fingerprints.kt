@@ -51,3 +51,42 @@ internal object ForYouGroupListFingerprint : Fingerprint(
         string("#CWTFV#"),
     ),
 )
+
+internal const val HOME_ACTIVITY = "Lin/cricketexchange/app/cricketexchange/activities/HomeActivity;"
+
+// HomeActivity.oc() (v26.10.07): shows the red "NEW" label (TextView 0x7f0a1be0) over the bottom
+// nav with a scale-in animation. Anchored on the pref it reads, "social_badge_intro_time".
+internal object NewBadgeFingerprint : Fingerprint(
+    definingClass = HOME_ACTIVITY,
+    returnType = "V",
+    parameters = listOf(),
+    filters = listOf(
+        string("social_badge_intro_time"),
+    ),
+)
+
+// HomeActivity.Eb(Boolean) (v26.10.07): sets the visibility of the red dot (view 0x7f0a0077) from a
+// Boolean and the "is_home_visited" pref. Another method reads that pref too, but only this one
+// takes a Boolean.
+internal object RedDotFingerprint : Fingerprint(
+    definingClass = HOME_ACTIVITY,
+    returnType = "V",
+    parameters = listOf("Ljava/lang/Boolean;"),
+    filters = listOf(
+        string("is_home_visited"),
+    ),
+)
+
+internal const val LIVE_MATCH_ACTIVITY = "Lin/cricketexchange/app/cricketexchange/activities/LiveMatchActivity;"
+
+// LiveMatchActivity.onCreate (v26.10.07). Reads the "is_discussions_enabled" pref and stores the
+// result in a boolean field (c2 in this version) that gates the Discussions tab and the Discuss
+// button. The patch finds that field from the first boolean store after the pref read.
+internal object MatchDiscussionsFlagFingerprint : Fingerprint(
+    definingClass = LIVE_MATCH_ACTIVITY,
+    returnType = "V",
+    parameters = listOf("Landroid/os/Bundle;"),
+    filters = listOf(
+        string("is_discussions_enabled"),
+    ),
+)
