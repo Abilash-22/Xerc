@@ -7,9 +7,10 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.template.patches.shared.Constants.COMPATIBILITY_CREX
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
+
+private const val EXTENSION = "Lapp/template/extension/crexnav/CrexNav;"
 
 @Suppress("unused")
 val matchesOnlyNavigationPatch = bytecodePatch(
@@ -20,6 +21,8 @@ val matchesOnlyNavigationPatch = bytecodePatch(
             "are hidden, not removed, because HomeActivity looks them up by index."
 ) {
     compatibleWith(COMPATIBILITY_CREX)
+
+    extendWith("extensions/crexnav.mpe")
 
     execute {
         val fingerprint = HomeCreateFingerprint
@@ -45,26 +48,16 @@ val matchesOnlyNavigationPatch = bytecodePatch(
         if (videosSget < 0) throw PatchException("HomeTabs.VIDEOS check before \"Default Videos\" not found")
         method.addInstructions(videosSget + 1, "const-string v0, \"MATCHES\"")
 
-        // 2. Hide the bar. getMenu() is `invoke-virtual {bar}`, `move-result-object vM`, then the
-        //    Menu is stored in a field. Right before the call, vM is free (the very next
-        //    instruction overwrites it), so it carries the GONE constant. It must differ from the
-        //    bar's register and fit in 4 bits for invoke-virtual; both are checked.
+        // 2. Hide the bar. getMenu() is `invoke-virtual {bar}`; right before it the bar's register
+        //    holds the view, so hand it to the extension (no scratch register needed; the app
+        //    reuses that register for the Menu right after).
         val getMenu = method.getInstruction(getMenuIndex)
-        val moveResult = method.getInstruction(getMenuIndex + 1)
-        if (getMenu !is FiveRegisterInstruction || moveResult.opcode != Opcode.MOVE_RESULT_OBJECT) {
-            throw PatchException("Expected getMenu() followed by move-result-object")
-        }
-        val bar = getMenu.registerC
-        val temp = (moveResult as OneRegisterInstruction).registerA
-        if (temp == bar || temp > 15 || bar > 15) {
-            throw PatchException("No free register to hide the bottom bar (bar=v$bar, result=v$temp)")
+        if (getMenu !is FiveRegisterInstruction) {
+            throw PatchException("Expected getMenu() to be an invoke instruction")
         }
         method.addInstructions(
             getMenuIndex,
-            """
-                const/16 v$temp, 0x8
-                invoke-virtual {v$bar, v$temp}, Landroid/view/View;->setVisibility(I)V
-            """.trimIndent()
+            "invoke-static {v${getMenu.registerC}}, $EXTENSION->hide(Landroid/view/View;)V"
         )
     }
 }
