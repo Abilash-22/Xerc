@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/Abilash-22/Xerc/compare/v1.1.0...v1.1.1) (2026-11-05)
+
+### 🐛 Bug Fixes
+
+* added missing file ([03e43f8](https://github.com/Abilash-22/Xerc/commit/03e43f8d6e0f931e5b0240b203c05cc75bb4763b))
+
 ## [1.1.0](https://github.com/Abilash-22/Xerc/compare/v1.0.3...v1.1.0) (2026-11-05)
 
 ### ✨ New Features
