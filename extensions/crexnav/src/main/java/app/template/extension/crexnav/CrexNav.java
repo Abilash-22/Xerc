@@ -40,7 +40,10 @@ public final class CrexNav {
     private static final int ID_FOR_YOU = 0x7f0a0456;   // was Social
     private static final int ID_UPCOMING = 0x7f0a1d79;  // was Videos
     private static final int ID_FINISHED = 0x7f0a1846;  // was Series
-    private static final int[] IDS = {ID_LIVE, ID_FOR_YOU, ID_UPCOMING, ID_FINISHED};
+    private static final int[] KNOWN = {ID_LIVE, ID_FOR_YOU, ID_UPCOMING, ID_FINISHED};
+    // Item id for each tab index. Filled in setupMenu in the bar's own left-to-right order, so
+    // the labels always read Live, For you, Upcoming, Finished whatever order the menu has.
+    private static int[] idForIndex = KNOWN.clone();
     private static final String[] TITLES = {"Live", "For you", "Upcoming", "Finished"};
 
     private static final String TAB_LAYOUT = "com.google.android.material.tabs.TabLayout";
@@ -60,23 +63,32 @@ public final class CrexNav {
     /** Re-labels the four visible items and hides every other one (Matches). */
     public static void setupMenu(Menu menu) {
         try {
+            int[] order = new int[KNOWN.length];
+            int next = 0;
             for (int i = 0; i < menu.size(); i++) {
                 MenuItem item = menu.getItem(i);
-                int index = indexOf(item.getItemId());
-                if (index < 0) {
+                if (!isKnown(item.getItemId()) || next >= order.length) {
                     item.setVisible(false);
                     continue;
                 }
+                int index = next++;
+                order[index] = item.getItemId();
                 item.setVisible(true);
                 item.setTitle(TITLES[index]);
                 item.setIcon(new BitmapDrawable(Resources.getSystem(), icon(index)));
             }
+            if (next == order.length) idForIndex = order;
         } catch (Throwable ignored) {
         }
     }
 
+    private static boolean isKnown(int id) {
+        for (int known : KNOWN) if (known == id) return true;
+        return false;
+    }
+
     private static int indexOf(int id) {
-        for (int i = 0; i < IDS.length; i++) if (IDS[i] == id) return i;
+        for (int i = 0; i < idForIndex.length; i++) if (idForIndex[i] == id) return i;
         return -1;
     }
 
@@ -138,7 +150,23 @@ public final class CrexNav {
 
             // Show the tab the screen opened on as the selected bottom item.
             int selected = (Integer) tabs.getClass().getMethod("getSelectedTabPosition").invoke(tabs);
-            highlight(tabs, selected < 0 ? 0 : selected);
+            final int start = selected < 0 ? 0 : selected;
+            highlight(tabs, start);
+            // The app selects its own (hidden) Matches item while it starts up; set ours again.
+            final View anchor = tabs;
+            Runnable again = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        int now = (Integer) anchor.getClass()
+                                .getMethod("getSelectedTabPosition").invoke(anchor);
+                        highlight(anchor, now < 0 ? start : now);
+                    } catch (Throwable ignored) {
+                    }
+                }
+            };
+            tabs.postDelayed(again, 400);
+            tabs.postDelayed(again, 1500);
         } catch (Throwable ignored) {
         }
     }
@@ -153,18 +181,50 @@ public final class CrexNav {
             if (tabs == null) return;
             Object tab = tabs.getClass().getMethod("getTabAt", int.class).invoke(tabs, index);
             if (tab != null) tab.getClass().getMethod("select").invoke(tab);
+
+            // Also move the pager itself, in case the tab selection alone does not carry it.
+            View pager = findPager(activity.getWindow().getDecorView());
+            if (pager != null) {
+                int current = (Integer) pager.getClass().getMethod("getCurrentItem").invoke(pager);
+                if (current != index) {
+                    pager.getClass().getMethod("setCurrentItem", int.class, boolean.class)
+                            .invoke(pager, index, true);
+                }
+            }
         } catch (Throwable ignored) {
         }
     }
 
+    // The Matches pager is the ViewPager2 that holds exactly four pages.
+    private static View findPager(View root) {
+        if (isInstanceOf(root, "androidx.viewpager2.widget.ViewPager2")) {
+            try {
+                Object adapter = root.getClass().getMethod("getAdapter").invoke(root);
+                if (adapter != null) {
+                    int count = (Integer) adapter.getClass().getMethod("getItemCount").invoke(adapter);
+                    if (count == 4) return root;
+                }
+            } catch (Throwable ignored) {
+            }
+        }
+        if (root instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) root;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                View found = findPager(group.getChildAt(i));
+                if (found != null) return found;
+            }
+        }
+        return null;
+    }
+
     /** Marks the bottom item for a tab position as selected (swipes, programmatic changes). */
     private static void highlight(View anyView, int position) {
-        if (syncing || position < 0 || position >= IDS.length || anyView == null) return;
+        if (syncing || position < 0 || position >= idForIndex.length || anyView == null) return;
         syncing = true;
         try {
             View bar = findByClass(anyView.getRootView(), NAV_BAR_VIEW);
             if (bar != null) {
-                bar.getClass().getMethod("setSelectedItemId", int.class).invoke(bar, IDS[position]);
+                bar.getClass().getMethod("setSelectedItemId", int.class).invoke(bar, idForIndex[position]);
             }
         } catch (Throwable ignored) {
         } finally {
