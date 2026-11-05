@@ -16,7 +16,10 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 @Suppress("unused")
 val enablePremiumPatch = bytecodePatch(
     name = "Enable Premium",
-    description = "Unlocks Premium and removes ads. FanCode streams stay locked."
+    description = "Treats the CREX Premium subscription as active on this device, which removes " +
+            "ads (including in the floating score) wherever the app checks the plan. The " +
+            "CREX Premium menu entry still asks you to sign in and shows no plan, and " +
+            "server-checked content such as FanCode live streams stays locked."
 ) {
     compatibleWith(COMPATIBILITY_CREX)
 

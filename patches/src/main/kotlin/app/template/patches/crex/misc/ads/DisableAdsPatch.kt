@@ -50,7 +50,10 @@ private fun BytecodePatchContext.neuter(owner: String, label: String, predicate:
 @Suppress("unused")
 val disableAdsPatch = bytecodePatch(
     name = "Disable ads",
-    description = "Removes all ads. Rewarded videos no longer give rewards."
+    description = "Blocks every Google Mobile Ads load (banner, native, interstitial, rewarded, " +
+            "app-open and the networks mediated through it), CREX's own Parth house ads and " +
+            "Meta Audience Network banners. Rewarded videos never load, so their rewards are not " +
+            "granted; use with Enable Premium, which makes the app hide its ad slots."
 ) {
     compatibleWith(COMPATIBILITY_CREX)
 
