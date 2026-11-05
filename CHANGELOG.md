@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/Abilash-22/Xerc/compare/v1.0.0...v1.0.1) (2026-11-05)
+
+### 🐛 Bug Fixes
+
+* patch failure fix ([e353ac7](https://github.com/Abilash-22/Xerc/commit/e353ac72ba09c67dfaca4e26610c2431f28a47c3))
+
 ## 1.0.0 (2026-11-05)
 
 ### ⚠ BREAKING CHANGES
