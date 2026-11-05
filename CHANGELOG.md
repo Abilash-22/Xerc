@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/Abilash-22/Xerc/compare/v1.0.2...v1.0.3) (2026-11-05)
+
+### 🐛 Bug Fixes
+
+* remove bottom navigation ([564006f](https://github.com/Abilash-22/Xerc/commit/564006f7d881f473082d52189c38c956c08cb056))
+
 ## [1.0.2](https://github.com/Abilash-22/Xerc/compare/v1.0.1...v1.0.2) (2026-11-05)
 
 ### 🐛 Bug Fixes

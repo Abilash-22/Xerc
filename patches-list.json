@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "patches": [
     {
       "name": "Disable ads",
@@ -333,8 +333,8 @@
       "options": []
     },
     {
-      "name": "Matches tabs in bottom navigation",
-      "description": "UI only. The Matches screen's top tabs (Live, For you, Upcoming, Finished) move into the bottom navigation bar and the top tab strip is hidden. The Matches item and the Settings item are gone from the bar; the Menu screen is reached through the top-right three-line button, which stays visible. The app always opens on Matches. The original Home, Social, Videos and Series items are reused for the four tabs (not removed) because HomeActivity looks them up by index.",
+      "name": "Matches only (hide bottom navigation)",
+      "description": "UI only. Hides the whole bottom navigation bar so the app stays on Matches, with the Live, For you, Upcoming and Finished tabs at the top (swipe or tap). The Menu screen is reached through the top-right three-line button. The bar's items are hidden, not removed, because HomeActivity looks them up by index.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [

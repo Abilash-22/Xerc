@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.2](https://github.com/Abilash-22/Xerc/releases/tag/v1.0.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**1** apps&nbsp;&nbsp;•&nbsp;&nbsp;**11** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-11-05
+> **[v1.0.3](https://github.com/Abilash-22/Xerc/releases/tag/v1.0.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**1** apps&nbsp;&nbsp;•&nbsp;&nbsp;**11** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-11-05
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -73,7 +73,7 @@ Verified on: `26.10.09`
 | 🧩 **Hide Matches extras** | Phase 1.1: removes the Trending Videos block (and its All Videos button) from the Matches Live tab, and the red NEW label and red dot over the bottom navigation. | ✅ |
 | 🧩 **Hide match Discussions** | Phase 1.1: removes the Discussions tab and the floating Discuss button from the match screen by switching off the flag the app already uses when discussions are disabled for a match. | ✅ |
 | 🧩 **Hide match tabs** | Phase 1.1: match screen keeps Info, Commentary, Scorecard and Points Table. Fantasy and Graphs are removed from the tab list. The Live tab (Match Summary on finished matches) and the Series Stats tab are kept in the pager but made invisible and moved last, because the rest of the screen calls into their fragments without null checks. | ✅ |
-| 🧩 **Matches tabs in bottom navigation** | UI only. The Matches screen's top tabs (Live, For you, Upcoming, Finished) move into the bottom navigation bar and the top tab strip is hidden. The Matches item and the Settings item are gone from the bar; the Menu screen is reached through the top-right three-line button, which stays visible. The app always opens on Matches. The original Home, Social, Videos and Series items are reused for the four tabs (not removed) because HomeActivity looks them up by index. | ✅ |
+| 🧩 **Matches only (hide bottom navigation)** | UI only. Hides the whole bottom navigation bar so the app stays on Matches, with the Live, For you, Upcoming and Finished tabs at the top (swipe or tap). The Menu screen is reached through the top-right three-line button. The bar's items are hidden, not removed, because HomeActivity looks them up by index. | ✅ |
 
 </details>
 
