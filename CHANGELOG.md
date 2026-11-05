@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/Abilash-22/Xerc/compare/v1.0.1...v1.0.2) (2026-11-05)
+
+### 🐛 Bug Fixes
+
+* tap fix ([056c7e1](https://github.com/Abilash-22/Xerc/commit/056c7e149b3433f16126a4033d83947da42926b0))
+
 ## [1.0.1](https://github.com/Abilash-22/Xerc/compare/v1.0.0...v1.0.1) (2026-11-05)
 
 ### 🐛 Bug Fixes
