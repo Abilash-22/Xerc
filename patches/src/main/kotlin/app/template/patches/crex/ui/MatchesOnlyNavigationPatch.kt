@@ -40,16 +40,7 @@ val matchesOnlyNavigationPatch = bytecodePatch(
         val getMenuIndex = fingerprint.instructionMatches.first().index
         val stringIndex = fingerprint.instructionMatches.last().index
 
-        // 1. Wire the Matches TabLayout to the bar once HomeActivity is created (hides the strip
-        //    and keeps the selected bottom item in sync with swipes). Done first: it sits at the
-        //    end of the method, so the inserts below cannot shift it. p0 is `this`.
-        val last = method.implementation!!.instructions.count() - 1
-        if (method.getInstruction(last).opcode != Opcode.RETURN_VOID) {
-            throw PatchException("HomeActivity.onCreate does not end in return-void")
-        }
-        method.addInstructions(last, "invoke-static {p0}, $EXTENSION->install(Landroid/app/Activity;)V")
-
-        // 2. Launch tab. The restore block ends at a label followed by
+        // 1. Launch tab. The restore block ends at a label followed by
         //    `sget-object vX, HomeTabs->VIDEOS`; v0 holds the tab name there. Overwrite it with
         //    "MATCHES" right after that sget (inserting after, not at, the labelled instruction
         //    so the branches into the label still run it). The app therefore always stays on
@@ -67,7 +58,7 @@ val matchesOnlyNavigationPatch = bytecodePatch(
         if (videosSget < 0) throw PatchException("HomeTabs.VIDEOS check before \"Default Videos\" not found")
         method.addInstructions(videosSget + 1, "const-string v0, \"MATCHES\"")
 
-        // 3. Re-label Home/Social/Videos/Series as Live/For you/Upcoming/Finished (with icons) and
+        // 2. Re-label Home/Social/Videos/Series as Live/For you/Upcoming/Finished (with icons) and
         //    hide the rest (Matches). getMenu() -> move-result-object -> iput-object (Menu field).
         val store = method.getInstruction(getMenuIndex + 2)
         val storeRef = (store as? ReferenceInstruction)?.reference as? FieldReference
@@ -75,12 +66,19 @@ val matchesOnlyNavigationPatch = bytecodePatch(
             throw PatchException("Expected the Menu field store after getMenu(), found ${store.opcode}")
         }
         val menu = (store as OneRegisterInstruction).registerA
+        //    The same spot also installs the Matches TabLayout hook (hides the strip and keeps
+        //    the selected bottom item in sync with swipes). It only registers a layout listener
+        //    on the window, so it needs no views yet and does not depend on how onCreate ends.
+        //    p0 is `this`.
         method.addInstructions(
             getMenuIndex + 3,
-            "invoke-static {v$menu}, $EXTENSION->setupMenu(Landroid/view/Menu;)V"
+            """
+                invoke-static {v$menu}, $EXTENSION->setupMenu(Landroid/view/Menu;)V
+                invoke-static {p0}, $EXTENSION->install(Landroid/app/Activity;)V
+            """.trimIndent()
         )
 
-        // 4. Tapping one of the four items selects the matching Matches tab instead of switching
+        // 3. Tapping one of the four items selects the matching Matches tab instead of switching
         //    the app's tab; returning true makes the bar show it as selected. Hb has .locals 6
         //    and v0 is unused at its first instruction.
         HomeTabClickFingerprint.method.addInstructions(
@@ -95,7 +93,7 @@ val matchesOnlyNavigationPatch = bytecodePatch(
             """.trimIndent()
         )
 
-        // 5. ed(String) renames the Series tab after the current series (the "ZIM-WvsIN" label).
+        // 4. ed(String) renames the Series tab after the current series (the "ZIM-WvsIN" label).
         //    Find it by its two resource ids rather than its obfuscatable name, and stop it so
         //    the item stays "Finished".
         val titleSetter = fingerprint.classDef.methods.firstOrNull { candidate ->
