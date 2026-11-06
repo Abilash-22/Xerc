@@ -22,18 +22,6 @@ internal object HomeCreateFingerprint : Fingerprint(
     ),
 )
 
-// HomeActivity.Hb(MenuItem): the bottom-nav item-selected handler (reached through the synthetic
-// o0 listener -> G8 -> Hb). Returns true when it handled the tab. Unique by its
-// MenuItem parameter + "lastOpenedFragmentV3" (the pref it saves the chosen tab under).
-internal object HomeTabClickFingerprint : Fingerprint(
-    definingClass = "Lin/cricketexchange/app/cricketexchange/activities/HomeActivity;",
-    returnType = "Z",
-    parameters = listOf("Landroid/view/MenuItem;"),
-    filters = listOf(
-        string("lastOpenedFragmentV3"),
-    ),
-)
-
 internal const val HOME_CARDS_ADAPTER =
     "Lin/cricketexchange/app/cricketexchange/matches/HomeHomeTabFragmentNew\$HomeCardsAdapter;"
 
