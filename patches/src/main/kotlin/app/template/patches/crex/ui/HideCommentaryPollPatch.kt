@@ -9,13 +9,15 @@ private const val COMMENTARY_ADAPTER = "Lin/cricketexchange/app/cricketexchange/
 private const val POLLS_VIEW_HOLDER =
     "Lin/cricketexchange/app/cricketexchange/stories/viewholder/components/PollsViewHolder;"
 private const val RECYCLER_VIEW_HOLDER = "Landroidx/recyclerview/widget/RecyclerView\$ViewHolder;"
+private const val POLLS_ADAPTER = "Lin/cricketexchange/app/cricketexchange/polls/PollsView\$PollsAdapter;"
 
 @Suppress("unused")
 val hideCommentaryPollPatch = bytecodePatch(
     name = "Hide Commentary poll",
     description = "Phase 1.1: collapses the poll cards (Who will win ...) in the Commentary tab. " +
             "The rows are bound with a PollsViewHolder; they are hidden and given zero height " +
-            "instead of being bound."
+            "instead of being bound, and the paths that would otherwise touch the never-bound " +
+            "poll (live payload updates and the poll's inner list) are guarded."
 ) {
     compatibleWith(COMPATIBILITY_CREX)
 
@@ -45,6 +47,49 @@ val hideCommentaryPollPatch = bytecodePatch(
                 :crex_poll_done
                 return-void
                 :crex_not_poll
+                nop
+            """.trimIndent()
+        )
+
+        // Skipping the bind above leaves PollsViewHolder.h (the previous PollData) null. The
+        // app's payload overload onBindViewHolder(holder, position, payloads) then reaches
+        // PollsViewHolder.n(Component) on live updates, which reads h.d() -> NullPointerException
+        // (seen only on matches whose commentary carries a poll row, e.g. a live WBBL match).
+        // That overload has .locals 2, so v0 is free at its first instruction.
+        val payloadBind = mutableClassDefBy(COMMENTARY_ADAPTER).methods.singleOrNull { method ->
+            method.name == "onBindViewHolder" && method.returnType == "V" &&
+                method.parameterTypes.map { it.toString() } ==
+                listOf(RECYCLER_VIEW_HOLDER, "I", "Ljava/util/List;")
+        } ?: throw PatchException("Commentary adapter payload onBindViewHolder not found")
+
+        payloadBind.addInstructions(
+            0,
+            """
+                instance-of v0, p1, $POLLS_VIEW_HOLDER
+                if-eqz v0, :crex_not_poll_payload
+                return-void
+                :crex_not_poll_payload
+                nop
+            """.trimIndent()
+        )
+
+        // The hidden row's PollsView never receives its PollData, but its inner RecyclerView can
+        // still be prefetched. getItemCount() swallows the null with a catch and answers 2, so
+        // the inner adapter then binds the question row and reads PollData.a on null (second
+        // crash seen in the log). With no poll set, report no items instead. getItemCount has
+        // .locals 2, so v0 is free at its first instruction.
+        val itemCount = mutableClassDefBy(POLLS_ADAPTER).methods.singleOrNull { method ->
+            method.name == "getItemCount" && method.returnType == "I" && method.parameterTypes.isEmpty()
+        } ?: throw PatchException("PollsAdapter getItemCount not found")
+
+        itemCount.addInstructions(
+            0,
+            """
+                iget-object v0, p0, $POLLS_ADAPTER->a:Lin/cricketexchange/app/cricketexchange/polls/PollsView${'$'}PollData;
+                if-nez v0, :crex_has_poll
+                const/4 v0, 0x0
+                return v0
+                :crex_has_poll
                 nop
             """.trimIndent()
         )
