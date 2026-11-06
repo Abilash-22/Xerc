@@ -1,3 +1,9 @@
+## [1.1.2](https://github.com/Abilash-22/Xerc/compare/v1.1.1...v1.1.2) (2026-11-06)
+
+### 🐛 Bug Fixes
+
+* hide commentary crash ([3c65cda](https://github.com/Abilash-22/Xerc/commit/3c65cda6439bf760b32ed1f8e64114d783253fb6))
+
 ## [1.1.1](https://github.com/Abilash-22/Xerc/compare/v1.1.0...v1.1.1) (2026-11-05)
 
 ### 🐛 Bug Fixes

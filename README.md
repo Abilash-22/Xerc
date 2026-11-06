@@ -40,7 +40,7 @@ versions may work but aren't guaranteed; if an app update breaks a patch,
 [open an issue](https://github.com/heval99/Heval-Morphe-Patches/issues/new/choose).
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.1](https://github.com/Abilash-22/Xerc/releases/tag/v1.1.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**1** apps&nbsp;&nbsp;•&nbsp;&nbsp;**11** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-11-05
+> **[v1.1.2](https://github.com/Abilash-22/Xerc/releases/tag/v1.1.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;**1** apps&nbsp;&nbsp;•&nbsp;&nbsp;**11** patches&nbsp;&nbsp;•&nbsp;&nbsp;updated 2026-11-06
 
 🚫 ads&nbsp;&nbsp;🛡️ telemetry / tracking&nbsp;&nbsp;💎 premium / pro&nbsp;&nbsp;🔑 license check&nbsp;&nbsp;🔕 prompts / notifications&nbsp;&nbsp;🧪 experimental
 
@@ -65,7 +65,7 @@ Verified on: `26.10.09`
 |---|---|:-:|
 | 🚫 **Disable ads** | Blocks every Google Mobile Ads load (banner, native, interstitial, rewarded, app-open and the networks mediated through it), CREX's own Parth house ads and Meta Audience Network banners. Rewarded videos never load, so their rewards are not granted; use with Enable Premium, which makes the app hide its ad slots. | ✅ |
 | 💎 **Enable Premium** | Treats the CREX Premium subscription as active on this device, which removes ads (including in the floating score) wherever the app checks the plan. The CREX Premium menu entry still asks you to sign in and shows no plan, and server-checked content such as FanCode live streams stays locked. | ✅ |
-| 🧩 **Hide Commentary poll** | Phase 1.1: collapses the poll cards (Who will win ...) in the Commentary tab. The rows are bound with a PollsViewHolder; they are hidden and given zero height instead of being bound. | ✅ |
+| 🧩 **Hide Commentary poll** | Phase 1.1: collapses the poll cards (Who will win ...) in the Commentary tab. The rows are bound with a PollsViewHolder; they are hidden and given zero height instead of being bound, and the paths that would otherwise touch the never-bound poll (live payload updates and the poll's inner list) are guarded. | ✅ |
 | 🧩 **Hide For you extras** | Removes the Featured Series, More, Play Games and bottom search sections from the For you tab. The series and match list, the Follow card and the Fixtures button are not touched. | ✅ |
 | 🧩 **Hide Info sections** | Phase 1.1: removes the Who will win poll, Series Stats, Team Comparison, Avg Scores on Venue, Recent Matches on Venue and Points Table sections from the match screen's Info tab, using the app's own state for matches that have no data for them. Venue Stats, weather, squads, umpires and the other sections are not touched. | ✅ |
 | 🧩 **Hide Live tab poll, weather and head to head** | Phase 1.1: removes the Who will win poll, the Weather Conditions card and the Head to Head row from the match screen's Live tab (the pre-match list). The preview video and Top Headlines are not touched. | ✅ |
