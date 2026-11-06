@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/Abilash-22/Xerc/compare/v1.1.2...v1.1.3) (2026-11-06)
+
+### 🐛 Bug Fixes
+
+* removed unused code ([4ce7f6d](https://github.com/Abilash-22/Xerc/commit/4ce7f6dcd2a5d2c12c8a1dd7d835f3a40f805737))
+
 ## [1.1.2](https://github.com/Abilash-22/Xerc/compare/v1.1.1...v1.1.2) (2026-11-06)
 
 ### 🐛 Bug Fixes

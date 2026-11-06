@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-06T12:33:27",
-  "description": "## [1.1.2](https://github.com/Abilash-22/Xerc/compare/v1.1.1...v1.1.2) (2026-11-06)\n\n### 🐛 Bug Fixes\n\n* hide commentary crash ([3c65cda](https://github.com/Abilash-22/Xerc/commit/3c65cda6439bf760b32ed1f8e64114d783253fb6))",
-  "download_url": "https://github.com/Abilash-22/Xerc/releases/download/v1.1.2/patches-1.1.2.mpp",
+  "created_at": "2026-11-06T13:04:22",
+  "description": "## [1.1.3](https://github.com/Abilash-22/Xerc/compare/v1.1.2...v1.1.3) (2026-11-06)\n\n### 🐛 Bug Fixes\n\n* removed unused code ([4ce7f6d](https://github.com/Abilash-22/Xerc/commit/4ce7f6dcd2a5d2c12c8a1dd7d835f3a40f805737))",
+  "download_url": "https://github.com/Abilash-22/Xerc/releases/download/v1.1.3/patches-1.1.3.mpp",
   "signature_download_url": "",
-  "version": "1.1.2"
+  "version": "1.1.3"
 }
